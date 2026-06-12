@@ -2,8 +2,8 @@
 # Docs: https://jupyterbook.org/customize/config.html
 
 title: "Generative AI with Amazon Bedrock"
-author: "Devharsh Trivedi, PhD, CISSP, Lecturer, Department of Computer Science, Bowie State University (ORCID 0000-0001-6374-7249)"
-logo: _static/repo-images/MLU-NEW-logo.png
+author: "Devharsh Trivedi, PhD, CISSP<br>Lecturer, Department of Computer Science<br>Bowie State University<br>ORCID 0000-0001-6374-7249"
+logo: _static/MLU-NEW-logo.png
 copyright: "2026"
 
 # Short description used in social cards and metadata
@@ -53,7 +53,7 @@ bibtex_bibfiles:
 
 # HTML / theme options
 html:
-  favicon: _static/repo-images/MLU-NEW-logo.png
+  favicon: _static/MLU-NEW-logo.png
   use_issues_button: true
   use_repository_button: true
   use_edit_page_button: false
@@ -62,6 +62,7 @@ html:
   extra_footer: |
     <div>
       Adapted from the AWS Machine Learning University Generative AI curriculum.
+      <br>
       Course content licensed under the terms in the source repository.
     </div>
 
