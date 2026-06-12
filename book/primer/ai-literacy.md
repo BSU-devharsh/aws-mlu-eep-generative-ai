@@ -131,6 +131,71 @@ rung adds capability and, with it, the need for stronger safeguards (Part 3 and
 the responsible-AI module).
 ```
 
+### The six levels of self-driving (SAE)
+
+Self-driving capability is not all-or-nothing. The **Society of Automotive
+Engineers (SAE)** defines six levels (0 to 5) in its J3016 standard, and they are
+the industry's common vocabulary. They also make a useful analogy for AI autonomy
+in general, how much the system does versus how much a human must supervise.
+
+```{list-table}
+:header-rows: 1
+:widths: 14 26 60
+
+* - Level
+  - Name
+  - Who does the driving
+* - **0**
+  - No automation
+  - The human does all driving; the car may only warn (e.g. blind-spot alerts).
+* - **1**
+  - Driver assistance
+  - AI handles *either* steering *or* speed (not both); the human stays fully
+    engaged.
+* - **2**
+  - Partial automation
+  - AI controls *both* steering and speed (e.g. adaptive cruise plus lane
+    centering), but the human must constantly monitor and be ready to take over
+    instantly. **Most of today's "self-driving" cars are here.**
+* - **3**
+  - Conditional automation
+  - Under specific conditions (e.g. a clear highway) the car drives itself and the
+    human can disengage, but must take over when the system requests it.
+* - **4**
+  - High automation
+  - The car drives itself fully within a defined **Operational Design Domain
+    (ODD)** and needs no human takeover there, though it may not work in extreme
+    conditions.
+* - **5**
+  - Full automation
+  - The car handles all driving in all conditions with no human input; no steering
+    wheel or pedals needed, all occupants are passengers.
+```
+
+**How AI powers the shift.** Recent progress moved self-driving away from rigid,
+rule-based programming toward learned behavior, the same trend this book describes
+for language:
+
+- **Neural networks and computer vision** let vehicles perceive and spatially
+  reason about the world, mimicking human sight (the deep-learning ideas from
+  {doc}`ai-and-tools-reference`).
+- **Training, not coding.** Instead of writing millions of lines of rules for every
+  scenario, automakers **train** models on vast real-world driving data, exactly
+  the foundation-model shift from {doc}`../module-1/02-foundation-models-and-llms`.
+- **Next-generation reasoning.** End-to-end architectures and **chain-of-thought**
+  style reasoning (see {doc}`../module-1/04-advanced-prompting-techniques`) let a
+  car analyze its environment and reason through unforeseen situations in real
+  time, rather than only matching pre-programmed cases.
+
+```{admonition} Verification note
+:class: note
+The six SAE levels (J3016) are an established industry standard. That today's
+mainstream driver-assistance systems are generally **Level 2**, and that the field
+is moving toward higher levels with AI-based perception and reasoning, reflects the
+current state of the industry; specific vehicles, brands, and regulatory approvals
+change, so confirm any specific claim against current sources before citing it.
+```
+
 ## Part 2: Chat management and prompts
 
 ### Deleting chats
@@ -169,6 +234,45 @@ None of the major consumer tools has a perfect prompt library, so people improvi
 A simple, durable habit is to maintain your own prompt file (a plain text or
 Markdown document) with your most effective, reusable prompts. It is portable
 across tools and never breaks when a vendor changes its UI.
+
+#### Reusing a prompt: turn it into a saved assistant
+
+Bookmarking a chat saves the *conversation*; the more powerful move is to save the
+*prompt itself* as a reusable assistant so you can run it on demand without pasting
+anything. Each major tool has its own mechanism:
+
+```{list-table}
+:header-rows: 1
+:widths: 20 24 56
+
+* - Tool
+  - Feature
+  - How to reuse a prompt with it
+* - **ChatGPT**
+  - **Custom GPTs** (and **Custom Instructions**)
+  - Build a Custom GPT (Explore GPTs -> Create), paste your refined prompt as its
+    instructions, optionally attach reference files, and save. Launch it anytime
+    from the sidebar, no re-pasting. Use **Custom Instructions** for standing
+    preferences that apply to every chat.
+* - **Gemini**
+  - **Gems**
+  - Create a **Gem** (a saved custom assistant), put your prompt and persona in its
+    instructions, and reuse it from the Gems list. Good for a fixed role you call
+    repeatedly.
+* - **Claude**
+  - **Projects** and **Skills**
+  - Use a **Project** to bundle standing instructions plus reference files the
+    model reads on every chat in it. Use **Skills** (reusable instruction folders,
+    each a `SKILL.md` with steps and resources) to package a repeatable task the
+    assistant can invoke on demand.
+```
+
+The pattern is the same everywhere: take a prompt you have refined until it works,
+then save it as a **Custom GPT (ChatGPT)**, a **Gem (Gemini)**, or a **Project /
+Skill (Claude)**, so the quality is reproducible and one update improves every
+future use. For a deeper, tool-agnostic version of this workflow, see
+{doc}`practical-ai-workflow`; the workspace features are summarized again under
+"Workspaces for reusable context" below.
 
 ### Organizing your chats
 

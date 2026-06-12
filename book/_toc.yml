@@ -7,6 +7,7 @@ parts:
     chapters:
       - file: primer/ai-literacy
       - file: primer/ai-and-tools-reference
+      - file: primer/tokens-and-embeddings
       - file: primer/ten-ai-skills-2025
       - file: primer/practical-ai-workflow
       - file: primer/make-america-ai-ready
@@ -60,4 +61,5 @@ parts:
   - caption: Back matter
     chapters:
       - file: list-of-figures
+      - file: about-author
       - file: references

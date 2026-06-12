@@ -132,6 +132,21 @@ SageMaker.
 spanning text and multimodal understanding and generation, positioned for strong
 price-performance.
 
+**AWS DeepRacer** is a hands-on way to learn **reinforcement learning (RL)** through
+autonomous driving. It centers on a 1/18th-scale, fully autonomous race car that
+learns to drive a track by trial and error, plus a 3D racing simulator, and a
+global racing league for friendly competition. You define a reward function,
+train an RL model in simulation, and then evaluate it (in the simulator or on a
+physical car). It exists to make an abstract technique, RL, concrete and fun,
+which is why it is popular in classrooms and corporate upskilling. DeepRacer
+connects directly to this book's themes: it is a small, safe example of the
+**autonomous-agent** and **self-driving** ideas in {doc}`ai-literacy`, and the
+reward-and-reasoning loop echoes the agentic patterns in
+{doc}`../module-3/04-agents`. See the AWS DeepRacer product page
+(<https://aws.amazon.com/deepracer/>) and the "DeepRacer on AWS" solution overview
+(<https://docs.aws.amazon.com/solutions/latest/deepracer-on-aws/solution-overview.html>)
+for current details.
+
 ### Other foundation-model families
 
 **Qwen** is a family of open and commercial large language (and multimodal) models
@@ -139,6 +154,54 @@ developed by Alibaba. **DeepSeek** is a family of models from the Chinese AI lab
 the same name, noted for strong reasoning models released openly. Both are
 examples of the rapidly growing ecosystem of capable models beyond the
 best-known US providers.
+
+### Model hubs and local runtimes: Hugging Face, Kaggle, Ollama
+
+These three platforms are where the open-source AI community finds models, data,
+and the means to run them. They exist because not everyone wants to (or should)
+depend solely on closed, paid APIs, open tooling makes AI reproducible,
+inspectable, and runnable on your own terms.
+
+```{list-table}
+:header-rows: 1
+:widths: 16 84
+
+* - Platform
+  - What it is, why it exists, and how it works
+* - **Hugging Face**
+  - The de facto **hub for open models, datasets, and demos**. It hosts hundreds of
+    thousands of pre-trained models (LLMs, vision, audio) and datasets, plus the
+    widely used `transformers` and `datasets` Python libraries and "Spaces" for
+    hosting live demos. It exists to make state-of-the-art models **shareable and
+    reusable** instead of locked inside one company. You download a model or dataset
+    with a few lines of code and run or fine-tune it. **Use it** when you want an
+    open model, a public dataset, or to publish your own.
+* - **Kaggle**
+  - A **data-science community and competition platform** (owned by Google). It
+    offers public **datasets**, free cloud **notebooks** (with GPU/TPU time),
+    **competitions** with prizes, and learning courses. It exists to let people
+    **practice, learn, and benchmark** data and ML skills on real problems with
+    shared infrastructure. You work in a browser notebook against a dataset, often
+    competing on a leaderboard. **Use it** to learn by doing, find datasets, get
+    free compute for experiments, or benchmark an approach.
+* - **Ollama**
+  - A tool for **running open LLMs locally** on your own computer. It packages a
+    model and its settings so you can pull and chat with one via a single command
+    (`ollama run llama3`), with no cloud account. It exists for **privacy, offline
+    use, and cost control**, your prompts never leave your machine. It works by
+    downloading quantized model files and serving them through a local API. **Use
+    it** when data must stay on-device, when you want to experiment without API
+    costs, or to build apps against a local model.
+```
+
+```{admonition} How they fit together
+:class: tip
+A common open-source workflow: find a model on **Hugging Face**, prototype and
+train against a dataset using free **Kaggle** notebooks, then run the finished
+model privately on your laptop with **Ollama**. They are complementary, a hub, a
+practice/compute platform, and a local runtime, and contrast with managed services
+like Amazon Bedrock, which trade that hands-on control for convenience and scale.
+```
 
 ### Programming languages and data tools
 
