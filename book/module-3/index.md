@@ -11,7 +11,7 @@ LLM-powered applications, running on Amazon Bedrock models.
 :header-rows: 1
 :widths: 8 42 50
 
-* - #
+* - No.
   - Chapter
   - What you will build toward
 * - 1

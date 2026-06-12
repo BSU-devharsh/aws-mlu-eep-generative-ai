@@ -156,7 +156,7 @@ in general, how much the system does versus how much a human must supervise.
   - Partial automation
   - AI controls *both* steering and speed (e.g. adaptive cruise plus lane
     centering), but the human must constantly monitor and be ready to take over
-    instantly. **Most of today's "self-driving" cars are here.**
+    instantly. **As of 2026, most mainstream "self-driving" cars are here.**
 * - **3**
   - Conditional automation
   - Under specific conditions (e.g. a clear highway) the car drives itself and the
@@ -182,10 +182,12 @@ for language:
 - **Training, not coding.** Instead of writing millions of lines of rules for every
   scenario, automakers **train** models on vast real-world driving data, exactly
   the foundation-model shift from {doc}`../module-1/02-foundation-models-and-llms`.
-- **Next-generation reasoning.** End-to-end architectures and **chain-of-thought**
-  style reasoning (see {doc}`../module-1/04-advanced-prompting-techniques`) let a
-  car analyze its environment and reason through unforeseen situations in real
-  time, rather than only matching pre-programmed cases.
+- **Next-generation planning and reasoning.** End-to-end architectures and
+  multi-stage perception-and-planning systems let a car interpret its environment
+  and plan through unforeseen situations in real time, rather than only matching
+  pre-programmed cases. (These planning architectures are related in spirit to,
+  but distinct from, the LLM chain-of-thought prompting in
+  {doc}`../module-1/04-advanced-prompting-techniques`.)
 
 ```{admonition} Verification note
 :class: note

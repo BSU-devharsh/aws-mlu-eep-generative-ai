@@ -154,7 +154,7 @@ response, so prompt design is also cost design. Practical levers:
   "be concise" or "answer in less than 50 words."
 - **Shorten or combine** prompts where possible.
 - **Test cheaper models**; a smaller LLM is often good enough for simple tasks.
-- Remember the rule of thumb: ~1 token per 4 characters, ~100 tokens per 75 words.
+- Remember the rule of thumb: ~1 token per 4 characters of English text, ~100 tokens per 75 words.
 
 Two further inference strategies reduce cost and latency:
 

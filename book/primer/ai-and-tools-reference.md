@@ -93,6 +93,16 @@ A simple decision process:
 5. **Test and iterate.** Evaluate a couple of candidate models on your own
    examples before committing.
 
+```{figure} ../_static/choose-model-flowchart.svg
+:alt: A five-step decision flowchart for choosing a model and effort level: match the modality, match difficulty to effort, weigh cost and context, respect privacy and compliance, then test and iterate, looping back to raise the effort when the model makes errors.
+:width: 80%
+:align: center
+
+Choosing the right model and effort level as a decision flow. Steps run top to
+bottom; the dashed loop returns to step 2 to raise the effort whenever the model
+makes reasoning errors.
+```
+
 ## Tools and platforms
 
 These products fall into a few groups: AI assistants and app builders, AWS AI
@@ -275,7 +285,7 @@ vectors.
 
 A **vector database** is built to store embeddings and find the most similar ones
 to a query vector quickly. This **similarity search** is what powers semantic
-search, recommendations, and **retrieval augmented generation (RAG)**, where an
+search, recommendations, and **retrieval-augmented generation (RAG)**, where an
 application retrieves relevant documents and feeds them to an LLM (covered in
 Module 3). Where a relational database answers "which rows exactly match these
 fields," a vector database answers "which items mean roughly the same thing."
@@ -317,11 +327,13 @@ apps. Examples in this space include:
   as Claude, GPT, or DeepSeek, and is operated through messaging apps. It uses a
   **skills** system in which each skill is a directory containing a `SKILL.md`
   file with instructions, and it can run long-lived background "claw" agents that
-  periodically check a task list and act. It became one of the fastest-growing
-  open-source projects on record.
+  periodically check a task list and act. It attracted substantial attention in
+  the open-source AI community.
 - **Claude Cowork**, a desktop mode of the Claude app that lets a Claude agent
   work with files on your computer and automate multi-step tasks (the environment
-  this book was assembled in).
+  this book was assembled in). Cowork is a current Anthropic product; see the
+  Claude Help Center (<https://support.anthropic.com/>) for availability and setup,
+  which change over time.
 - **ChatGPT Codex**, OpenAI's coding-focused agent that can read a codebase, write
   and edit code, run commands, and complete software-engineering tasks.
 
@@ -360,8 +372,9 @@ A common framing describes three stages of AI capability:
 
 The progression runs ANI to AGI to ASI: **AGI** is the human-level milestone that
 would have to be reached before any move toward the beyond-human **ASI**. Today's
-systems, however capable, remain firmly in the **ANI** category: they are powerful
-but specialized, not generally intelligent. When (or whether) AGI will be achieved
+systems are most often classified as **ANI**: powerful but specialized, not
+generally intelligent, though the boundary between advanced general-purpose models
+and AGI is increasingly debated. When (or whether) AGI will be achieved
 is a matter of active and genuine debate among experts, with predictions ranging
 from a few years to many decades, and some doubting it will arrive on any
 predictable timeline at all. These remain open questions rather than settled
@@ -385,7 +398,7 @@ facts.
   AI; we are in the ANI era.
 ```{admonition} About this chapter
 :class: seealso
-Written by Devharsh Trivedi, PhD, CISSP, Department of Computer Science,
+Written by Devharsh Trivedi, Ph.D., CISSP, Department of Computer Science,
 Bowie State University. ORCID: <https://orcid.org/0000-0001-6374-7249>. OpenClaw
 details were verified against the project's documentation and reporting; other
 descriptions reflect standard, vendor-documented capabilities and should be

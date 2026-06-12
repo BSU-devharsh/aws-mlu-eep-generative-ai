@@ -1,8 +1,8 @@
 ---
-title: "Ten AI Skills for 2025"
+title: "Ten Essential AI Skills"
 ---
 
-# Ten AI Skills for 2025
+# Ten Essential AI Skills
 
 The generative-AI job market rewards a specific cluster of skills. This chapter
 explains ten of the most in-demand ones, what each is, when to use it, the tools
@@ -24,7 +24,7 @@ book build.
 :header-rows: 1
 :widths: 4 26 40 30
 
-* - #
+* - No.
   - Skill
   - What it is
   - Representative tools
@@ -115,10 +115,12 @@ response = llm.invoke(prompt.format(report_text="Q3 revenue fell 8% ..."))
 
 ## 2. AI Agents
 
-**What it is:** AI that completes tasks end to end rather than just answering.
-**When to use it:** automating jobs you would hand to an intern, lead generation,
-research, scheduling. **Tools:** OpenAI Agents, CrewAI, LangGraph, LangChain.
-Covered in {doc}`../module-3/04-agents`.
+**What it is:** an AI **tool-using executor**, it carries out a task end to end by
+calling tools and APIs, rather than just answering. (Contrast with *Agentic AI*
+below, which adds planning and self-evaluation on top.) **When to use it:**
+automating jobs you would hand to an intern, lead generation, research,
+scheduling. **Tools:** OpenAI Agents, CrewAI, LangGraph, LangChain. Covered in
+{doc}`../module-3/04-agents`.
 
 ```python
 # A minimal LangChain agent with tools (calculator + search).
@@ -147,9 +149,12 @@ def automate(new_files):
 
 ## 4. Agentic AI
 
-**What it is:** AI that plans, adapts, and self-corrects instead of following a
-fixed script. **When to use it:** complex, multi-step tasks like research, ops, or
-QA where flexibility beats rigid workflows. **Tools:** OpenAI o1, Claude,
+**What it is:** a **planner + executor + self-evaluator**, it plans an approach,
+executes it (often using agents and tools), evaluates its own results, and
+self-corrects, instead of following a fixed script. Where an *AI agent* (skill 2)
+mainly *executes*, agentic AI also *plans* and *critiques*. **When to use it:**
+complex, multi-step tasks like research, ops, or QA where flexibility beats rigid
+workflows. **Tools:** OpenAI o1, Claude,
 Reflexion, DSPy. This builds on agents (skill 2) with reasoning and self-critique;
 see the reasoning techniques in {doc}`../module-1/04-advanced-prompting-techniques`
 and effort/extended-thinking in {doc}`ai-and-tools-reference`.
@@ -171,8 +176,9 @@ def agentic_solve(task, max_iters=3):
 **What it is:** AI that works across text, images, audio, and code in one flow.
 **When to use it:** turning a rough idea into a full campaign, copy, visuals,
 video, voiceover. **Tools:** Gemini, Claude 3.5 Sonnet, OpenAI Vision, Stable
-Audio. Covered in {doc}`../module-1/05-multimodal-prompting` and
-{doc}`../module-3/05-multimodal-applications`.
+Audio. Covered in Module 1's {doc}`../module-1/05-multimodal-prompting` and
+Module 3's {doc}`../module-3/05-multimodal-applications` (each module numbers its
+chapters independently, so both are a "Chapter 5" within their own module).
 
 ```python
 # Send an image plus a question to a multimodal model on Bedrock.
@@ -300,6 +306,85 @@ Treat the upper-left region (high impact, low effort) as your first targets and
 the lower-right (low impact, high effort) as the last. Replace the example numbers
 with your own ratings for your role; the point is the prioritization method, not
 the specific values.
+```
+
+## Update: the in-demand AI skills for 2026
+
+A year on, the emphasis shifted from experimenting with tools to **building
+integrated, autonomous systems** and applying **human judgment** to them. The
+following 2026 list is synthesized from two widely shared summaries (a Gemini AI
+roundup and an industry list by Elizaveta Zabrodskaya); it overlaps with the 2025
+list above but raises agents, governance, and proof-of-skill to the top.
+
+```{list-table}
+:header-rows: 1
+:widths: 6 30 64
+
+* - No.
+  - 2026 skill
+  - What it means
+* - 1
+  - **Agentic AI & orchestration**
+  - Building and coordinating autonomous agents that hand off multi-step work to
+    each other and use tools with little human direction. ({doc}`../module-3/04-agents`)
+* - 2
+  - **Advanced / systems prompt engineering**
+  - Designing reliable multi-step prompt *systems* and chains (for example
+    Role-Task-Context-Reasoning), not one-off questions.
+    ({doc}`../module-1/04-advanced-prompting-techniques`)
+* - 3
+  - **Retrieval-Augmented Generation (RAG)**
+  - Connecting LLMs to private/enterprise data and vector databases to cut
+    hallucinations and give factual, context-specific answers.
+    ({doc}`../module-3/03-retrieval-augmented-generation`)
+* - 4
+  - **Workflow automation & integration**
+  - Using low-code/no-code platforms (Zapier, n8n, Make) to wire AI into everyday
+    business apps and automate repetitive tasks.
+* - 5
+  - **AI tool stacking & model specialization**
+  - Choosing the right model for each job and linking tools into a unified,
+    AI-native system. ({doc}`ai-and-tools-reference`)
+* - 6
+  - **Vibe / no-code coding**
+  - Building working apps and databases from natural language with tools like
+    Cursor, Replit, or Lovable.
+* - 7
+  - **AI ethics, governance & safety**
+  - Auditing AI for data leaks, bias, copyright, and regulatory compliance; writing
+    usage playbooks. ({doc}`../module-2/02-foundations-of-responsible-ai`)
+* - 8
+  - **AI-powered content generation**
+  - Scaling multimedia content (scripts, AI voices, avatar video, shorts) through
+    end-to-end automated pipelines.
+* - 9
+  - **LLM observability, evaluation & QA**
+  - Monitoring cost, quality, and impact; testing outputs for safety and accuracy
+    on edge cases. ({doc}`../module-2/01-evaluating-llms`)
+* - 10
+  - **Human-AI collaboration & critical thinking**
+  - Fact-checking, editing, and "translating" complex AI for non-technical
+    stakeholders, the adaptive skills that AI cannot replace.
+```
+
+```{admonition} The 2026 throughline: prove it by building
+:class: tip
+The recurring career advice in these 2026 lists is that **employers reward
+hands-on proof and business outcomes, not familiarity**. Pick one skill, spend a
+short, focused effort building a concrete artifact (a 3-agent workflow, a RAG
+assistant over 10 company PDFs, a 5-prompt content chain, an evaluation report on
+20 edge cases), and show the measurable result. This book's labs are designed to
+give you exactly those build opportunities.
+```
+
+```{admonition} Sources (2026 list)
+:class: seealso
+Synthesized with credit from a Gemini AI "top AI skills 2026" summary and from
+"AI Skills in Demand 2026: The 10 Skills Companies Actually Want" by Elizaveta
+Zabrodskaya
+(<https://www.linkedin.com/pulse/ai-skills-demand-2026-10-companies-actually-want-zabrodskaya-91qof/>).
+Skill lists and market data change quickly; treat specific figures as
+illustrative and verify against current sources.
 ```
 
 ## Key takeaways

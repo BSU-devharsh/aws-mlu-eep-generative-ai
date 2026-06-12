@@ -153,7 +153,7 @@ On Amazon Bedrock, multimodal capability shows up in two complementary places.
 Multimodal generative models accept images alongside text for tasks like visual
 question answering and captioning. Multimodal **embedding** models (in the Titan
 family) turn images and text into a shared vector space, which is exactly what
-powers the retrieval use cases above and the retrieval augmented generation you
+powers the retrieval use cases above and the retrieval-augmented generation you
 will build in Module 3.
 ```
 

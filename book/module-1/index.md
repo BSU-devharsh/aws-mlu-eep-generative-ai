@@ -14,7 +14,7 @@ model that can generate new content, and progressively sharpen the picture:
 :header-rows: 1
 :widths: 8 40 52
 
-* - #
+* - No.
   - Chapter
   - What you will learn
 * - 1

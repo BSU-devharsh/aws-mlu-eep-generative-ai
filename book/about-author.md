@@ -4,7 +4,7 @@ title: "About the Author and Selected Publications"
 
 # About the Author and Selected Publications
 
-**Devharsh Trivedi, PhD, CISSP** is a faculty member in the Department of Computer
+**Devharsh Trivedi, Ph.D., CISSP** is a faculty member in the Department of Computer
 Science at Bowie State University. His research spans privacy-preserving machine
 learning, applied cryptography, security analytics, and computer-science
 pedagogy. ORCID: <https://orcid.org/0000-0001-6374-7249>.
@@ -80,7 +80,7 @@ sources for the version of record.
 
 ## Theses
 
-21. D. Trivedi. *Towards Efficient Security Analytics.* PhD thesis, 2024.
+21. D. Trivedi. *Towards Efficient Security Analytics.* Ph.D. thesis, 2024.
 22. D. Trivedi. *Performance Evaluation and Security of Image Reconstruction
     Application in Magnetic Resonance Imaging Machines.* Nirma Institute of
     Technology, 2016.

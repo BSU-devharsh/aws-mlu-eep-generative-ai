@@ -90,7 +90,7 @@ These are often confused but differ:
 
 ```{admonition} Worked example: explainability via citations
 :class: note
-In a retrieval augmented generation (RAG) workflow, the model can return
+In a retrieval-augmented generation (RAG) workflow, the model can return
 **citations and source attributions**, the exact passages it used to compose an
 answer. Amazon Bedrock Knowledge Bases surface these citations, turning an opaque
 answer into an auditable one. You will build RAG yourself in Module 3.

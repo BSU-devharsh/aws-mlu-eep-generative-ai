@@ -21,3 +21,38 @@ a.nf-btn {
   border: 1px solid #154360;
 }
 a.nf-btn:hover { background-color: #154360; }
+
+/* Distinguish notebook input (code) and output cells with [IN]/[OUT] badges */
+div.cell_input {
+  border-left: 4px solid #2874A6;
+  padding-left: 10px;
+  margin-top: 0.8rem;
+}
+div.cell_input::before {
+  content: "[ IN ]";
+  display: inline-block;
+  background-color: #2874A6;
+  color: #ffffff;
+  font: 700 0.7rem/1 Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+div.cell_output {
+  border-left: 4px solid #1E8449;
+  padding-left: 10px;
+  margin-top: 2px;
+  background-color: #F4FBF6;
+}
+div.cell_output::before {
+  content: "[ OUT ]";
+  display: inline-block;
+  background-color: #1E8449;
+  color: #ffffff;
+  font: 700 0.7rem/1 Helvetica, Arial, sans-serif;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}

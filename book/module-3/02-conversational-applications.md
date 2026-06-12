@@ -118,7 +118,7 @@ documents. But this runs straight into the LLM limitations from Module 1:
 reliability and bias, the **context-window limit** (for instance, an early Nova Pro
 release allowed up to 300,000 tokens), compute and memory cost, and potential
 copyright issues. Feeding entire documents does not scale, which is exactly the
-motivation for retrieval augmented generation in the next chapter.
+motivation for retrieval-augmented generation in the next chapter.
 
 ```{admonition} AWS in practice
 :class: note
@@ -147,4 +147,4 @@ and retrieval remain essential for cost control even as raw context windows grow
 - Long conversations need **window** or **summary** memory; stuffing whole
   documents into the prompt does not scale, motivating RAG.
 
-Next, we ground models in external data with retrieval augmented generation.
+Next, we ground models in external data with retrieval-augmented generation.

@@ -12,7 +12,7 @@ This repository also includes an **online textbook** built with
 a continuous, readable course with theory, worked examples, AWS service
 explanations, recent developments, and links to the runnable lab notebooks. It
 adds an **AI Literacy Primer** (AI literacy and responsible use, an AI and tools
-reference, the ten AI skills for 2025, a practical AI workflow, and alignment with
+reference, the ten essential AI skills, a practical AI workflow, and alignment with
 the U.S. Department of Labor "Make America AI-Ready" framework), and full chapters
 for all three modules.
 
@@ -36,7 +36,7 @@ The lab notebooks are rendered for reading but **not executed** during the book
 build (they require AWS credentials and Amazon Bedrock access). Run them in an
 environment such as Amazon SageMaker with the `conda_python3` kernel.
 
-Book author: Devharsh Trivedi, PhD, CISSP, Department of Computer
+Book author: Devharsh Trivedi, Ph.D., CISSP, Department of Computer
 Science, Bowie State University (ORCID
 [0000-0001-6374-7249](https://orcid.org/0000-0001-6374-7249)). See
 [`CITATION.cff`](CITATION.cff).

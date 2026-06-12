@@ -15,7 +15,8 @@ to handle the bulk of their routine work.
 This workflow is adapted from a public LinkedIn post by Dan Martell (founder,
 author of *Buy Back Your Time*). The original frames the goal as having AI do
 "92% of the work." Treat that figure as motivational shorthand, not a measured
-benchmark. The steps below are summarized and connected to the concepts in this
+benchmark; no peer-reviewed evidence supports a specific percentage. The steps
+below are summarized and connected to the concepts in this
 book; the commentary is original. Always keep sensitive data out of consumer AI
 tools (see {doc}`ai-literacy`).
 ```

@@ -22,7 +22,7 @@ LangChain. Read each chapter first, then work the corresponding lab.
   - Ch. 2: building interactive chatbots.
 * - 3a
   - {doc}`labs/Lab-3/lab3a-retrieval_augmented_generation`
-  - Ch. 3: retrieval augmented generation.
+  - Ch. 3: retrieval-augmented generation.
 * - 3b
   - {doc}`labs/Lab-3/lab3b-multimodal_rag`
   - Ch. 3: multimodal RAG.
@@ -38,6 +38,25 @@ LangChain. Read each chapter first, then work the corresponding lab.
 * - 5c
   - {doc}`labs/Lab-5/lab5c-multimodal_agents`
   - Ch. 5: multimodal agents.
+```
+
+```{admonition} Expected error: "AccessDeniedException" (model access not enabled)
+:class: warning
+Some lab cells may display an error like:
+
+    AccessDeniedException: An error occurred (AccessDeniedException) when calling
+    the InvokeModel operation: Model access is denied due to IAM user or service
+    role is not authorized to perform the required AWS Marketplace actions
+    (aws-marketplace:ViewSubscriptions, aws-marketplace:Subscribe) to enable
+    access to this model.
+
+This is **not a bug in the lab code**. It means your AWS account or IAM role has
+not enabled access to that specific foundation model in Amazon Bedrock. To fix it:
+go to the **Amazon Bedrock console -> Model access**, request or enable the model,
+make sure your role has the `aws-marketplace:ViewSubscriptions` and
+`aws-marketplace:Subscribe` permissions, and re-run the cell after a few minutes.
+Model availability and the exact permissions required vary by AWS Region and
+account, so consult the Amazon Bedrock documentation for your setup.
 ```
 
 ```{admonition} Running the labs

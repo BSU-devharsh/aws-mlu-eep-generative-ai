@@ -1,14 +1,14 @@
 ---
-title: "Retrieval Augmented Generation"
+title: "Retrieval-Augmented Generation"
 ---
 
-# Chapter 3: Retrieval Augmented Generation
+# Chapter 3: Retrieval-Augmented Generation
 
 ## Why it matters
 
 Chapter 2 ended with a problem: you cannot fit all your knowledge into a prompt,
 and even if you could, the model's training data is frozen and may be wrong.
-**Retrieval Augmented Generation (RAG)** is the dominant solution. It grounds a
+**Retrieval-Augmented Generation (RAG)** is the dominant solution. It grounds a
 model in external, up-to-date data by retrieving the relevant pieces and feeding
 them into the prompt, no training required. This chapter covers grounding, the
 RAG workflow and architecture, the vector databases and chunking that make it
@@ -53,7 +53,7 @@ re-evaluation for drift.
   - Ask "Is it a good time to buy a company's stock?"
 ```
 
-## Retrieval Augmented Generation
+## Retrieval-Augmented Generation
 
 RAG is an **in-context learning** technique that gives an LLM knowledge beyond its
 training, with no training or fine-tuning. It has three steps:

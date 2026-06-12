@@ -238,7 +238,7 @@ the ABET *Criteria for Accrediting Computing Programs*.
 :header-rows: 1
 :widths: 8 52 40
 
-* - #
+* - No.
   - ABET CAC student outcome (summarized)
   - Where this book supports it
 * - 1

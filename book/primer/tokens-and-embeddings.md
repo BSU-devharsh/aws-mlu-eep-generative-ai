@@ -7,7 +7,7 @@ title: "Tokens and Embeddings"
 Two concepts underpin almost everything in this book: **tokens** (how models read
 and write) and **embeddings** (how models represent meaning as numbers). They are
 worth understanding in their own right because they explain context limits,
-billing, semantic search, and retrieval augmented generation. This chapter
+billing, semantic search, and retrieval-augmented generation. This chapter
 explains both in detail with worked examples, visualizations, and runnable Python.
 
 ```{admonition} Where these appear elsewhere
@@ -15,7 +15,7 @@ explains both in detail with worked examples, visualizations, and runnable Pytho
 Tokens are introduced in {doc}`../module-1/02-foundation-models-and-llms` (the
 context window) and {doc}`../module-1/03-prompt-engineering` (cost). Embeddings
 power {doc}`../module-3/03-retrieval-augmented-generation`. This chapter is the
-deep dive both point back to.
+deep dive that both chapters point back to.
 ```
 
 ## Part 1: Tokens
@@ -101,7 +101,7 @@ plt.tight_layout(); plt.show()
 
 - **Context window.** A model's limit (for example, hundreds of thousands of
   tokens) is measured in tokens, not words or characters. Input that exceeds it is
-  truncated or must be chunked, the motivation for retrieval augmented generation.
+  truncated or must be chunked, the motivation for retrieval-augmented generation.
 - **Cost and latency.** APIs bill per token (input plus output), so shorter prompts
   and capped responses cost less and return faster. Counting tokens before sending
   is the simplest cost control.
@@ -193,7 +193,9 @@ plt.tight_layout(); plt.show()
 :class: tip
 With real embeddings, "king / queen / prince" would form one cluster, the fruits
 another, and the vehicles a third, with the gaps between clusters reflecting how
-unrelated the groups are. Distance on the plot approximates difference in meaning.
+unrelated the groups are. Distance on the plot approximates difference in meaning. (This particular
+example uses random vectors solely to demonstrate the plotting mechanics, so the
+clusters it shows are not meaningful.)
 ```
 
 ### Getting real embeddings on Amazon Bedrock
@@ -230,7 +232,7 @@ This is the heart of **semantic search** and **RAG**: embed your documents once,
 embed each query, and return the documents whose vectors are closest. Unlike
 keyword search, it matches *meaning*, so "return something" finds "return policy"
 and "return items within two weeks" even with different words. A **vector
-database** (Part of {doc}`ai-and-tools-reference`) stores these vectors and does
+database** (see the {doc}`ai-and-tools-reference` chapter) stores these vectors and does
 the nearest-neighbor search efficiently at scale.
 
 ## How tokens and embeddings relate
@@ -266,7 +268,7 @@ about *comparing* meaning.
 
 ## Key takeaways
 
-- A **token** is the subword unit models read and write; ~4 characters or ~0.75
+- A **token** is the subword unit models read and write; ~4 characters of English or ~0.75
   words each. Tokens define the **context window** and **billing**, so count them.
 - Tokenizers use **subword (BPE)** encoding, so rare words split into pieces and
   token count is not word count.

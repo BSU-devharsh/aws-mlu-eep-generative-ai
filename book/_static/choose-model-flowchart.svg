@@ -1,0 +1,77 @@
+<svg viewBox="0 0 760 810" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cmTitle cmDesc" font-family="Helvetica, Arial, sans-serif">
+  <title id="cmTitle">How to choose the right model and effort level</title>
+  <desc id="cmDesc">A five-step decision flow: match the modality, match difficulty to effort, weigh cost and context, respect privacy, then test and iterate, with a loop back to adjust effort when the model makes errors.</desc>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#1A5276"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#D68910"/>
+    </marker>
+  </defs>
+
+  <!-- vertical connectors -->
+  <g stroke="#1A5276" stroke-width="2.5" fill="none">
+    <line x1="380" y1="64"  x2="380" y2="84"  marker-end="url(#arrow)"/>
+    <line x1="380" y1="181" x2="380" y2="209" marker-end="url(#arrow)"/>
+    <line x1="380" y1="306" x2="380" y2="334" marker-end="url(#arrow)"/>
+    <line x1="380" y1="431" x2="380" y2="459" marker-end="url(#arrow)"/>
+    <line x1="380" y1="556" x2="380" y2="584" marker-end="url(#arrow)"/>
+    <line x1="380" y1="681" x2="380" y2="703" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- iterate loop: step 5 back up to step 2 -->
+  <path d="M590,633 H672 V258 H592" fill="none" stroke="#D68910" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrowAmber)"/>
+  <text x="686" y="448" fill="#B9770E" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(90 686 448)">errors? raise the effort</text>
+
+  <!-- START pill -->
+  <rect x="250" y="20" width="260" height="44" rx="22" fill="#154360"/>
+  <text x="380" y="47" fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle">Choose a model + effort</text>
+
+  <!-- step card template -->
+  <!-- 1 -->
+  <g>
+    <rect x="170" y="86" width="420" height="95" rx="10" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+    <circle cx="208" cy="133" r="19" fill="#154360"/>
+    <text x="208" y="139" fill="#ffffff" font-size="18" font-weight="700" text-anchor="middle">1</text>
+    <text x="244" y="126" fill="#0E2D44" font-size="16" font-weight="700">Match the modality</text>
+    <text x="244" y="150" fill="#34495E" font-size="12.5">Text, image, or audio?</text>
+  </g>
+  <!-- 2 -->
+  <g>
+    <rect x="170" y="211" width="420" height="95" rx="10" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+    <circle cx="208" cy="258" r="19" fill="#154360"/>
+    <text x="208" y="264" fill="#ffffff" font-size="18" font-weight="700" text-anchor="middle">2</text>
+    <text x="244" y="251" fill="#0E2D44" font-size="16" font-weight="700">Match difficulty to effort</text>
+    <text x="244" y="275" fill="#34495E" font-size="12.5">Start low, raise if needed</text>
+  </g>
+  <!-- 3 -->
+  <g>
+    <rect x="170" y="336" width="420" height="95" rx="10" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+    <circle cx="208" cy="383" r="19" fill="#154360"/>
+    <text x="208" y="389" fill="#ffffff" font-size="18" font-weight="700" text-anchor="middle">3</text>
+    <text x="244" y="376" fill="#0E2D44" font-size="16" font-weight="700">Weigh cost &amp; context</text>
+    <text x="244" y="400" fill="#34495E" font-size="12.5">Smaller is often enough</text>
+  </g>
+  <!-- 4 -->
+  <g>
+    <rect x="170" y="461" width="420" height="95" rx="10" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+    <circle cx="208" cy="508" r="19" fill="#154360"/>
+    <text x="208" y="514" fill="#ffffff" font-size="18" font-weight="700" text-anchor="middle">4</text>
+    <text x="244" y="501" fill="#0E2D44" font-size="16" font-weight="700">Respect privacy &amp; compliance</text>
+    <text x="244" y="525" fill="#34495E" font-size="12.5">Regulated data? Use an enterprise tier or Bedrock</text>
+  </g>
+  <!-- 5 -->
+  <g>
+    <rect x="170" y="586" width="420" height="95" rx="10" fill="#FDF3E3" stroke="#D68910" stroke-width="1.5"/>
+    <circle cx="208" cy="633" r="19" fill="#B9770E"/>
+    <text x="208" y="639" fill="#ffffff" font-size="18" font-weight="700" text-anchor="middle">5</text>
+    <text x="244" y="626" fill="#7E5109" font-size="16" font-weight="700">Test &amp; iterate</text>
+    <text x="244" y="650" fill="#7E5109" font-size="12.5">Compare candidates on your examples</text>
+  </g>
+
+  <!-- END pill -->
+  <rect x="296" y="703" width="168" height="44" rx="22" fill="#1E8449"/>
+  <text x="380" y="730" fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle">Deploy</text>
+</svg>

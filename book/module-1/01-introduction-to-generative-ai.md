@@ -163,7 +163,7 @@ repeatedly:
 - **Titan Embeddings** translates text into numerical vectors, *embeddings*, that
   capture the semantic meaning of the text. Embeddings are the backbone of search
   and personalization, and they reappear in {doc}`05-multimodal-prompting` and in
-  Module 3's chapter on retrieval augmented generation.
+  Module 3's chapter on retrieval-augmented generation.
 
 ### Common Bedrock use cases
 

@@ -196,7 +196,7 @@ that data.
 Anything beyond that length is invisible to the model. For example, an early
 Titan Premier model had a 30,000-token limit at release. Inputs longer than the
 window must be truncated, chunked, or retrieved selectively, which is one
-motivation for retrieval augmented generation in Module 3.
+motivation for retrieval-augmented generation in Module 3.
 
 **Copyright and intellectual property.** Training data may include sensitive or
 copyrighted material, and a model can generate content resembling someone's
