@@ -51,12 +51,6 @@ explanation followed by a set of labs.
   - Build production-style generative AI applications.
 ```
 
-```{note}
-Module 1 is fully built out in this edition. Modules 2 and 3 are added in
-subsequent build batches and will appear in the table of contents as they are
-completed.
-```
-
 ## How to read each chapter
 
 Every chapter follows the same rhythm so you always know where you are:

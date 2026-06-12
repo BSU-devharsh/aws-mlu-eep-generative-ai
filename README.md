@@ -36,7 +36,7 @@ The lab notebooks are rendered for reading but **not executed** during the book
 build (they require AWS credentials and Amazon Bedrock access). Run them in an
 environment such as Amazon SageMaker with the `conda_python3` kernel.
 
-Book author: Devharsh Trivedi, PhD, CISSP, Lecturer, Department of Computer
+Book author: Devharsh Trivedi, PhD, CISSP, Department of Computer
 Science, Bowie State University (ORCID
 [0000-0001-6374-7249](https://orcid.org/0000-0001-6374-7249)). See
 [`CITATION.cff`](CITATION.cff).

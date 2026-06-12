@@ -241,7 +241,7 @@ They are different stages of the pipeline, do not confuse them:
 :header-rows: 1
 :widths: 20 40 40
 
-* - 
+* - Aspect
   - Tokens
   - Embeddings
 * - **What**

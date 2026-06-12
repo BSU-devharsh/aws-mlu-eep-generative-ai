@@ -227,6 +227,91 @@ features) only after confirming them against current primary sources; this book
 deliberately avoids inventing such specifics.
 ```
 
+## Mapping to ABET student outcomes
+
+For programs seeking or maintaining **ABET** accreditation, this book's activities
+support all six **Computing Accreditation Commission (CAC) student outcomes**. The
+outcome statements below are summarized; confirm the exact current wording against
+the ABET *Criteria for Accrediting Computing Programs*.
+
+```{list-table}
+:header-rows: 1
+:widths: 8 52 40
+
+* - #
+  - ABET CAC student outcome (summarized)
+  - Where this book supports it
+* - 1
+  - Analyze a complex computing problem and apply principles of computing to
+    identify solutions.
+  - Prompt-engineering and advanced-prompting chapters; RAG and agent design.
+* - 2
+  - Design, implement, and evaluate a computing-based solution to meet
+    requirements.
+  - The Module 1-3 labs (Bedrock apps, chatbots, RAG, agents) and worked examples.
+* - 3
+  - Communicate effectively in a variety of professional contexts.
+  - "In the news," worked examples, and the writing/summarization use cases.
+* - 4
+  - Recognize professional responsibilities and make informed judgments based on
+    legal and ethical principles.
+  - Module 2 (responsible AI, evaluation, security and safety) and the AI Literacy
+    primer (PII, FERPA, HIPAA).
+* - 5
+  - Function effectively as a member or leader of a team.
+  - Team-oriented lab and project use (e.g., shared prompt libraries, evaluation
+    work teams in {doc}`../module-2/01-evaluating-llms`).
+* - 6
+  - Apply computer science theory and software development fundamentals to produce
+    computing-based solutions.
+  - Foundation-model and transformer theory ({doc}`../module-1/02-foundation-models-and-llms`),
+    tokens and embeddings, and the runnable labs.
+```
+
+## Mapping to Bloom's taxonomy
+
+The book is structured so learners move up the six levels of the revised **Bloom's
+taxonomy**, from recall to creation. Each chapter's "Key takeaways," worked
+examples, and labs target progressively higher levels.
+
+```{list-table}
+:header-rows: 1
+:widths: 18 38 44
+
+* - Bloom level
+  - Cognitive activity
+  - How the book targets it
+* - **Remember**
+  - Recall facts and terms.
+  - Definitions, the AI and tools reference, and "Key takeaways" summaries.
+* - **Understand**
+  - Explain ideas and concepts.
+  - The theory sections and "How these connect" callouts throughout.
+* - **Apply**
+  - Use knowledge in new situations.
+  - Worked examples and the hands-on Bedrock labs.
+* - **Analyze**
+  - Draw connections and compare.
+  - Comparison tables (fine-tuning vs. RAG, Q&A vs. conversation) and the
+    evaluation chapter.
+* - **Evaluate**
+  - Justify a decision or judge quality.
+  - Model-selection guidance, responsible-AI risk assessment, and LLM evaluation.
+* - **Create**
+  - Produce original work.
+  - Capstone labs: building chatbots, RAG systems, agents, and multimodal
+    applications.
+```
+
+```{admonition} For course and grant proposals
+:class: tip
+Together, the ABET and Bloom mappings let you show that the curriculum is both
+**accreditation-aligned** (ABET CAC outcomes 1-6) and **pedagogically scaffolded**
+(Bloom's six levels), alongside the DOL AI-literacy framework alignment above.
+Verify ABET outcome wording and any accreditation specifics against current ABET
+documents before submission.
+```
+
 ## Key takeaways
 
 - The DOL **Make America AI-Ready** initiative defines a **5-pillar AI literacy

@@ -385,7 +385,7 @@ facts.
   AI; we are in the ANI era.
 ```{admonition} About this chapter
 :class: seealso
-Written by Devharsh Trivedi, PhD, CISSP, Lecturer, Department of Computer Science,
+Written by Devharsh Trivedi, PhD, CISSP, Department of Computer Science,
 Bowie State University. ORCID: <https://orcid.org/0000-0001-6374-7249>. OpenClaw
 details were verified against the project's documentation and reporting; other
 descriptions reflect standard, vendor-documented capabilities and should be

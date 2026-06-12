@@ -36,7 +36,7 @@ re-evaluation for drift.
 :header-rows: 1
 :widths: 22 39 39
 
-* - 
+* - Aspect
   - Fine-tuning
   - RAG
 * - **Rationale**

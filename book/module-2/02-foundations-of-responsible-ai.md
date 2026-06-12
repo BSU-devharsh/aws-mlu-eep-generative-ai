@@ -150,6 +150,78 @@ oversight, strong disclaimers, and tight guardrails before launch, the technique
 of Chapter 4.
 ```
 
+## The NIST AI Risk Management Framework 1.0
+
+The likelihood-and-severity approach above comes from the **NIST AI Risk
+Management Framework (AI RMF 1.0)**, a voluntary framework published by the U.S.
+National Institute of Standards and Technology in January 2023 to help
+organizations manage the risks of AI systems. It is worth knowing in its own right
+because it has become a common reference point for responsible-AI governance.
+
+### Characteristics of trustworthy AI
+
+The framework defines AI risk as a function of the **likelihood** of an event and
+the **magnitude (severity) of its impact**, and it organizes "trustworthiness"
+into seven characteristics. They map closely onto this module's dimensions:
+
+```{list-table}
+:header-rows: 1
+:widths: 42 58
+
+* - NIST trustworthiness characteristic
+  - Related dimension in this book
+* - Valid and reliable
+  - Veracity and robustness ({doc}`03-dimensions-of-responsible-ai`)
+* - Safe
+  - Safety
+* - Secure and resilient
+  - Privacy and security; robustness
+* - Accountable and transparent
+  - Transparency; governance
+* - Explainable and interpretable
+  - Explainability
+* - Privacy-enhanced
+  - Privacy and security
+* - Fair, with harmful bias managed
+  - Fairness
+```
+
+### The four core functions
+
+The AI RMF organizes practice into four functions, which align with the
+design-build-operate lifecycle above:
+
+```{list-table}
+:header-rows: 1
+:widths: 20 80
+
+* - Function
+  - What it covers
+* - **Govern**
+  - A culture of risk management: policies, accountability, roles, and oversight
+    that cut across the other three functions.
+* - **Map**
+  - Establish context and identify risks: the use case, stakeholders, and where
+    harms could arise (the "define and identify" steps above).
+* - **Measure**
+  - Analyze, assess, and track risks using quantitative and qualitative methods
+    (the evaluation of {doc}`01-evaluating-llms` and the likelihood x severity
+    rating).
+* - **Manage**
+  - Prioritize and act on risks: allocate resources, apply mitigations
+    (guardrails, oversight), and monitor over time.
+```
+
+```{admonition} Why it matters here
+:class: note
+Using the AI RMF as scaffolding means the responsible-AI work in this module,
+evaluation, the dimensions, and the security-and-safety techniques, lines up with
+a recognized national framework, which is exactly what auditors, funders, and
+regulators increasingly expect. Consult the official framework
+(<https://www.nist.gov/itl/ai-risk-management-framework>) for the authoritative
+text; details and companion profiles are periodically updated.
+```
+
 ## In the news
 
 Responsible AI has moved from voluntary principle to emerging regulation, with
