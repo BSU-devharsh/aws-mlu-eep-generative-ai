@@ -77,9 +77,28 @@ repository:
   branch: main
 
 sphinx:
+  extra_extensions:
+    - notfound.extension
   config:
     html_show_copyright: true
     html_last_updated_fmt: "%b %d, %Y"
     bibtex_reference_style: author_year
     html_css_files:
       - custom.css
+    # Custom 404 page (sphinx-notfound-page).
+    # The prefix must match the GitHub Pages project subpath so the 404's own
+    # assets and links resolve correctly when served from any URL depth.
+    notfound_urls_prefix: "/aws-mlu-eep-generative-ai/"
+    notfound_context:
+      title: "Page Not Found (404)"
+      body: |
+        <h1>Page not found</h1>
+        <p>Sorry, the page you were looking for does not exist. It may have been
+        moved, renamed, or never existed. Here is where you can go next:</p>
+        <p>
+          <a class="nf-btn" href="/aws-mlu-eep-generative-ai/">📖 Book homepage</a>
+          &nbsp;
+          <a class="nf-btn" href="https://github.com/BSU-devharsh/aws-mlu-eep-generative-ai">💻 GitHub repository</a>
+        </p>
+        <p>You can also use the search box or the table of contents in the sidebar
+        to find what you need.</p>

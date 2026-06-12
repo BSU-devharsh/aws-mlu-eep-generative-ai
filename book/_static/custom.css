@@ -7,3 +7,17 @@ div.admonition p.admonition-title { font-weight: 700; }
 
 /* Constrain very wide tables for readability */
 table.docutils { font-size: 0.92rem; }
+
+/* Custom 404 page buttons */
+a.nf-btn {
+  display: inline-block;
+  margin: 0.4rem 0.4rem 0.4rem 0;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  background-color: #1A5276;
+  color: #ffffff !important;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #154360;
+}
+a.nf-btn:hover { background-color: #154360; }

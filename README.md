@@ -5,6 +5,8 @@ Welcome to our Generative AI Learning Path! This repository contains educational
 
 ## 📖 Online Textbook (Jupyter Book)
 
+**🌐 Read it live:** https://bsu-devharsh.github.io/aws-mlu-eep-generative-ai/intro.html
+
 This repository also includes an **online textbook** built with
 [Jupyter Book](https://jupyterbook.org) that reorganizes the lessons and labs into
 a continuous, readable course with theory, worked examples, AWS service

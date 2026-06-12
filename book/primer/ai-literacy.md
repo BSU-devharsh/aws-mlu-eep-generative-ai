@@ -54,6 +54,83 @@ images, audio, or video. Keeping this nesting straight prevents most beginner
 confusion.
 ```
 
+**What is NLP?** **Natural Language Processing** is the field of AI concerned with
+getting computers to understand and produce human language. It covers tasks such
+as translation, summarization, sentiment analysis, and question answering. LLMs
+are the current state of the art in NLP, but NLP is the broader, older discipline;
+an LLM is one (very powerful) way of doing NLP.
+
+### Single-modality AI: the basic input-to-output tasks
+
+Before "multimodal," it helps to know the common **single-modality** tasks, named
+by what goes in and what comes out. Each is a specialized model (or an LLM applied
+to one job):
+
+```{list-table}
+:header-rows: 1
+:widths: 26 30 44
+
+* - Task
+  - In -> Out
+  - What it does / examples
+* - **Text-to-text**
+  - text -> text
+  - The core LLM task: translation, summarization, answering, rewriting.
+* - **Text-to-speech (TTS)**
+  - text -> audio
+  - Reads text aloud in a synthetic voice (voiceovers, screen readers, voice
+    assistants).
+* - **Speech-to-text (STT / ASR)**
+  - audio -> text
+  - Transcribes spoken audio into text (dictation, captions, meeting notes). Also
+    called automatic speech recognition.
+* - **Image-to-text**
+  - image -> text
+  - Describes or reads an image: captioning, alt-text, and OCR (extracting printed
+    text from a photo or scan).
+```
+
+A **multimodal** model simply combines several of these abilities in one system,
+so it can, for example, look at an image and discuss it in text, or take voice in
+and speak back out. Single-modality tasks are the building blocks;
+{doc}`../module-1/05-multimodal-prompting` shows how they are combined.
+
+### Chatbots, agents, and autonomous systems
+
+These terms describe increasingly capable, increasingly independent AI systems.
+Knowing the ladder prevents a lot of hype-driven confusion:
+
+- **Chatbots** are conversational interfaces. A modern chatbot is an LLM wrapped in
+  a chat interface that holds a back-and-forth conversation (ChatGPT, customer
+  support bots). It **responds**; it does not act on its own.
+- **Agentic AI / AI agents** go a step further: the AI **plans and takes actions**
+  to complete a multi-step task, using tools (search, code, APIs) and reacting to
+  results, rather than just replying. Agents are covered in depth in
+  {doc}`../module-3/04-agents`.
+- **Fully autonomous agents** operate with little or no human intervention,
+  pursuing goals, self-correcting, and running over long periods. Greater autonomy
+  means greater capability but also greater risk, which is exactly why the
+  responsible-AI practices in this book matter.
+
+**Where physical machines come in.** The same ideas extend from software into the
+physical world, where AI controls hardware and the stakes rise because mistakes
+have real-world consequences:
+
+- **Self-driving (driverless) cars** use AI, computer vision, and sensor fusion to
+  perceive the road and drive with reduced or no human input. They are a form of
+  autonomous agent operating a vehicle.
+- **Drones and robots** apply the same perception-and-control AI to flying or
+  moving machines, for delivery, inspection, mapping, or manufacturing.
+
+```{admonition} The autonomy ladder
+:class: note
+A useful way to hold these together: a **chatbot** talks, an **agent** acts within
+software, an **autonomous agent** acts on its own over time, and a **robot, drone,
+or self-driving car** is an autonomous agent that acts in the physical world. Each
+rung adds capability and, with it, the need for stronger safeguards (Part 3 and
+the responsible-AI module).
+```
+
 ## Part 2: Chat management and prompts
 
 ### Deleting chats
@@ -92,6 +169,103 @@ None of the major consumer tools has a perfect prompt library, so people improvi
 A simple, durable habit is to maintain your own prompt file (a plain text or
 Markdown document) with your most effective, reusable prompts. It is portable
 across tools and never breaks when a vendor changes its UI.
+
+### Organizing your chats
+
+As your history grows, a flat list becomes unusable. The major tools offer the
+same basic housekeeping, even if the buttons differ:
+
+- **Rename** a conversation to something descriptive instead of the auto-generated
+  title.
+- **Pin or star** the conversations you return to so they stay at the top.
+- **Archive** chats you want out of the active list but do not want to delete.
+- **Group related work into a workspace** (see "Workspaces for reusable context"
+  below).
+
+A few minutes of naming and archiving each week keeps your history searchable and
+makes it far easier to find, and to safely delete, the right conversations.
+
+### Finding past conversations
+
+All three major assistants now let you **search your chat history** by keyword,
+so you can recover a prompt or answer without scrolling. If your tool's search is
+weak, this is another argument for the personal prompt file above: anything you
+keep in your own document is searchable with tools you control. When you cannot
+find a past chat, check whether it was an **archived** or **temporary** chat (the
+latter is never saved, see below).
+
+### Temporary and private chats
+
+Most assistants offer a **temporary** or **incognito** mode (for example, ChatGPT's
+**Temporary Chat**) for a conversation that is **not saved to your history and is
+not used to build memory or, where you have opted out, to train models**. Use it
+for one-off, sensitive, or experimental prompts you do not want retained. Two
+caveats: temporary chats still pass through the provider's systems and may be kept
+briefly for safety, and because they are not saved, you cannot return to them
+later, so copy anything you want to keep before you close the window.
+
+### Memory and personalization
+
+Newer assistants can **remember** information across conversations rather than
+treating each chat as a blank slate:
+
+- **ChatGPT** has a **Memory** feature that saves facts it infers about you (your
+  name, preferences, recurring tools) and reuses them. You can view, edit, or
+  delete individual memories, or turn the feature off, in settings.
+- **Claude** offers **memory** and document-shaped **Projects** that carry context
+  across chats within a project.
+- **Gemini** offers **Gems** (saved, persona-shaped custom assistants with standing
+  instructions) and personalization tied to your Google account.
+
+Memory is convenient but is a privacy surface: review what your assistant has
+stored periodically, and remember that **anything in memory may influence future
+answers and may persist until you remove it**. For sensitive work, use a temporary
+chat (which bypasses memory) or turn memory off.
+
+### Workspaces for reusable context
+
+Beyond single chats, the major tools provide **workspaces** that bundle standing
+instructions and reference files so every conversation in them starts with the
+same context:
+
+```{list-table}
+:header-rows: 1
+:widths: 26 74
+
+* - Tool
+  - Workspace feature
+* - **ChatGPT**
+  - **Projects** (group chats and files) and **Custom GPTs** (reusable assistants
+    with their own instructions and knowledge).
+* - **Claude**
+  - **Projects** (add files the model reads on every chat in the project).
+* - **Gemini**
+  - **Gems** (custom assistants with persistent instructions).
+```
+
+These are the consumer-facing version of the prompt-template and master-prompt
+ideas in {doc}`practical-ai-workflow`: set the context once, reuse it everywhere.
+Keep the same data-protection rules in mind, do not load regulated or sensitive
+files into a consumer workspace (see Part 3).
+
+### Exporting your data
+
+You can usually **export your data** (your conversations and account information)
+from the assistant's settings, often labeled "Export data" or "Download your
+data." This is useful for keeping your own backup of valuable chats, for moving
+prompts into your personal prompt file, and for exercising data-access rights.
+Treat the exported archive like any sensitive document: it contains everything you
+ever typed, so store it securely and delete it when no longer needed.
+
+### Sharing chats safely
+
+Most tools can create a **shareable link** to a conversation. Two rules keep this
+safe: first, a shared link usually makes that chat viewable by **anyone who has
+the link**, so never share a conversation that contains personal, confidential, or
+regulated information; second, sharing typically captures a **snapshot**, later
+messages may or may not appear, so re-check what the link actually exposes before
+you send it. When in doubt, copy the specific text you want to share rather than
+the whole conversation.
 
 ## Part 3: Sensitive data, PII, FERPA, and HIPAA
 
