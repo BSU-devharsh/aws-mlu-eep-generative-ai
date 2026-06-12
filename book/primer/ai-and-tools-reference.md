@@ -29,6 +29,57 @@ and image generators are all foundation models. This is the central idea of
 {doc}`../module-1/01-introduction-to-generative-ai` and
 {doc}`../module-1/02-foundation-models-and-llms`.
 
+### Foundation models vs. frontier models
+
+A useful distinction sits *within* the foundation-model category. **Foundation
+models** are broadly trained, general-purpose systems (most major LLMs) that serve
+as a base for many applications. **Frontier models** are the cutting edge, the
+most advanced, largest-compute foundation models that push the limits of
+capability at any given moment. In short: **all frontier models are foundation
+models, but not all foundation models are on the frontier.**
+
+```{list-table}
+:header-rows: 1
+:widths: 18 41 41
+
+* - Feature
+  - Foundation models
+  - Frontier models
+* - **Definition**
+  - General-purpose AI trained on massive data to be adapted for downstream tasks
+    (text, vision, code).
+  - The most advanced subset of foundation models, pushing the limits of compute,
+    scale, and reasoning.
+* - **Examples**
+  - Smaller or efficiency-tier models (for example, Llama, GPT-4o mini, Mistral).
+  - The largest, most capable models of the moment (for example, top-tier GPT,
+    Claude, and Gemini releases).
+* - **Primary use cases**
+  - Broad enterprise integration, task automation, and day-to-day operations.
+  - Advanced problem-solving, complex logic, scientific discovery, and strategic
+    innovation.
+* - **Cost & complexity**
+  - Lower to moderate cost; well supported by stable APIs, docs, and tooling.
+  - High training and operating costs; can be unpredictable and may need advanced
+    governance or red-teaming.
+* - **Evolution rate**
+  - Stable; updates are scheduled and predictable.
+  - Rapid; new breakthroughs continually reset the industry standard.
+```
+
+**How to choose.** Organizations usually balance both. Foundation models offer
+stable, cost-effective, lower-risk solutions for routine workflows, while frontier
+models earn their cost on complex, high-value tasks where superior reasoning and
+multimodality provide a competitive edge.
+
+```{admonition} A note on the examples
+:class: warning
+Which specific models count as "frontier" versus everyday foundation models
+changes constantly, today's frontier model is next year's baseline. Treat the
+named examples as illustrative of the *tier*, not a current ranking, and check
+each provider's latest lineup before deciding.
+```
+
 ### Effort levels (low, medium, high, and beyond)
 
 Newer reasoning-capable models expose a **reasoning effort** setting that trades
