@@ -58,6 +58,9 @@ parts:
           - file: module-3/labs/Lab-5/lab5a-personalization
           - file: module-3/labs/Lab-5/lab5b-troubleshooting
           - file: module-3/labs/Lab-5/lab5c-multimodal_agents
+  - caption: Appendices
+    chapters:
+      - file: appendix-serverless-backend
   - caption: Back matter
     chapters:
       - file: list-of-figures
