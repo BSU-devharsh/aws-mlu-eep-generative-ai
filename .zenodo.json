@@ -1,0 +1,30 @@
+{
+  "title": "Generative AI with Amazon Bedrock: An Online Textbook",
+  "upload_type": "publication",
+  "publication_type": "book",
+  "description": "An open-source online textbook on Generative AI, Large Language Models, and building applications with Amazon Bedrock, adapted and expanded from the AWS Machine Learning University Generative AI curriculum. It includes an AI Literacy Primer (AI literacy and responsible use, an AI and tools reference, tokens and embeddings, ten essential AI skills, a practical AI workflow) with alignment to the U.S. Department of Labor 'Make America AI-Ready' framework, the NIST AI Risk Management Framework 1.0, ABET student outcomes, and Bloom's taxonomy; and three full modules (Fundamentals of Generative AI, Responsible Generative AI, and Building Applications with Foundation Models) with hands-on Amazon Bedrock lab notebooks.",
+  "version": "June 2026",
+  "language": "eng",
+  "access_right": "open",
+  "license": "cc-by-sa-4.0",
+  "creators": [
+    {
+      "name": "Trivedi, Devharsh",
+      "affiliation": "Department of Computer Science, Bowie State University",
+      "orcid": "0000-0001-6374-7249"
+    }
+  ],
+  "keywords": [
+    "generative AI",
+    "large language models",
+    "Amazon Bedrock",
+    "prompt engineering",
+    "retrieval-augmented generation",
+    "responsible AI",
+    "AI literacy",
+    "AI education",
+    "ABET",
+    "NIST AI RMF"
+  ],
+  "notes": "Adapted from the AWS Machine Learning University Generative AI curriculum. Documentation licensed under CC-BY-SA-4.0; sample code under MIT-0."
+}
