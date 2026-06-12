@@ -1,0 +1,84 @@
+# Jupyter Book configuration
+# Docs: https://jupyterbook.org/customize/config.html
+
+title: "Generative AI with Amazon Bedrock"
+author: "Devharsh Trivedi, PhD, CISSP, Lecturer, Department of Computer Science, Bowie State University (ORCID 0000-0001-6374-7249)"
+logo: _static/repo-images/MLU-NEW-logo.png
+copyright: "2026"
+
+# Short description used in social cards and metadata
+description: >-
+  An online textbook on Generative AI, Large Language Models, and building
+  applications with Amazon Bedrock. Adapted from the AWS Machine Learning
+  University Early Talent (EEP) Generative AI curriculum.
+
+# Files present in the book tree but not part of the table of contents.
+# These ship alongside the notebooks (READMEs, utilities, requirements) but are
+# not standalone pages, so they are excluded from the build.
+exclude_patterns:
+  - "**/labs/**/README.md"
+  - "**/labs/**/requirements.txt"
+  - "**/labs/mlu_utils/**"
+  - _build
+  - Thumbs.db
+  - .DS_Store
+  - "**.ipynb_checkpoints"
+
+# Do not execute the lab notebooks at build time.
+# The labs require AWS credentials and Amazon Bedrock access, so they are
+# rendered as-is rather than run on the build server.
+execute:
+  execute_notebooks: "off"
+  timeout: 120
+  allow_errors: true
+
+# Parse and render settings
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+    - tasklist
+
+# Bibliography
+bibtex_bibfiles:
+  - references.bib
+
+# HTML / theme options
+html:
+  favicon: _static/repo-images/MLU-NEW-logo.png
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: false
+  home_page_in_navbar: true
+  baseurl: "/aws-mlu-eep-generative-ai/"
+  extra_footer: |
+    <div>
+      Adapted from the AWS Machine Learning University Generative AI curriculum.
+      Course content licensed under the terms in the source repository.
+    </div>
+
+# Launch buttons (Binder / Colab) are disabled because the labs need
+# Amazon Bedrock access that those services do not provide by default.
+launch_buttons:
+  notebook_interface: "classic"
+
+repository:
+  url: https://github.com/BSU-devharsh/aws-mlu-eep-generative-ai
+  path_to_book: book
+  branch: main
+
+sphinx:
+  config:
+    html_show_copyright: true
+    html_last_updated_fmt: "%b %d, %Y"
+    bibtex_reference_style: author_year
+    html_css_files:
+      - custom.css

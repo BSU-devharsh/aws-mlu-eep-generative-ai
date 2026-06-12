@@ -1,0 +1,9 @@
+/* Light custom styling for the textbook */
+.bd-content h1 { font-weight: 700; }
+.bd-content h2 { margin-top: 1.6rem; }
+
+/* Make admonition titles a touch more prominent */
+div.admonition p.admonition-title { font-weight: 700; }
+
+/* Constrain very wide tables for readability */
+table.docutils { font-size: 0.92rem; }

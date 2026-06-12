@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this textbook, please cite it as below."
+title: "Generative AI with Amazon Bedrock: An Online Textbook"
+abstract: >-
+  An open-source online textbook on Generative AI, Large Language Models, and
+  building applications with Amazon Bedrock, adapted from the AWS Machine Learning
+  University Generative AI curriculum. Aligned with the U.S. Department of Labor
+  "Make America AI-Ready" AI literacy framework.
+type: book
+authors:
+  - family-names: "Trivedi"
+    given-names: "Devharsh"
+    orcid: "https://orcid.org/0000-0001-6374-7249"
+    affiliation: "Department of Computer Science, Bowie State University"
+    name-suffix: "PhD, CISSP"
+keywords:
+  - generative AI
+  - large language models
+  - Amazon Bedrock
+  - prompt engineering
+  - retrieval augmented generation
+  - responsible AI
+  - AI literacy
+license: CC-BY-SA-4.0
+date-released: "2026-06-11"
+url: "https://github.com/BSU-devharsh/aws-mlu-eep-generative-ai"
+references:
+  - type: generic
+    title: "AWS Machine Learning University: Generative AI Curriculum (source material)"
+    authors:
+      - name: "Amazon Web Services"
+    license: CC-BY-SA-4.0
+    notes: "Original lessons and lab notebooks; documentation under CC-BY-SA-4.0, sample code under MIT-0."

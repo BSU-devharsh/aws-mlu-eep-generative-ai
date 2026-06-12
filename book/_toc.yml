@@ -1,0 +1,63 @@
+# Table of contents
+# Docs: https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: intro
+parts:
+  - caption: Primer - AI Literacy
+    chapters:
+      - file: primer/ai-literacy
+      - file: primer/ai-and-tools-reference
+      - file: primer/ten-ai-skills-2025
+      - file: primer/practical-ai-workflow
+      - file: primer/make-america-ai-ready
+  - caption: Module 1 - Fundamentals of Generative AI
+    chapters:
+      - file: module-1/index
+      - file: module-1/01-introduction-to-generative-ai
+      - file: module-1/02-foundation-models-and-llms
+      - file: module-1/03-prompt-engineering
+      - file: module-1/04-advanced-prompting-techniques
+      - file: module-1/05-multimodal-prompting
+      - file: module-1/labs-overview
+        sections:
+          - file: module-1/labs/Lab-2/lab2a-introduction-to-amazon-bedrock
+          - file: module-1/labs/Lab-2/lab2b-chat_amazon_bedrock
+          - file: module-1/labs/Lab-3/lab3-prompt-engineering
+          - file: module-1/labs/Lab-4/lab4a-Self-consistency
+          - file: module-1/labs/Lab-4/lab4b-Tree-of-Thought
+          - file: module-1/labs/Lab-5/Lab5-Multimodal
+  - caption: Module 2 - Responsible Generative AI
+    chapters:
+      - file: module-2/index
+      - file: module-2/01-evaluating-llms
+      - file: module-2/02-foundations-of-responsible-ai
+      - file: module-2/03-dimensions-of-responsible-ai
+      - file: module-2/04-improving-security-and-safety
+      - file: module-2/labs-overview
+        sections:
+          - file: module-2/labs/Lab-2/lab2-data_protection
+          - file: module-2/labs/Lab-3/lab3-robustness
+          - file: module-2/labs/Lab-4/lab4b-watermarking
+          - file: module-2/labs/Lab-4/lab4c-debiasing
+  - caption: Module 3 - Building Applications with Foundation Models
+    chapters:
+      - file: module-3/index
+      - file: module-3/01-langchain-modules
+      - file: module-3/02-conversational-applications
+      - file: module-3/03-retrieval-augmented-generation
+      - file: module-3/04-agents
+      - file: module-3/05-multimodal-applications
+      - file: module-3/labs-overview
+        sections:
+          - file: module-3/labs/Lab-1/lab1-langchain_modules
+          - file: module-3/labs/Lab-2/lab2-chatbots
+          - file: module-3/labs/Lab-3/lab3a-retrieval_augmented_generation
+          - file: module-3/labs/Lab-3/lab3b-multimodal_rag
+          - file: module-3/labs/Lab-4/lab4_agents
+          - file: module-3/labs/Lab-5/lab5a-personalization
+          - file: module-3/labs/Lab-5/lab5b-troubleshooting
+          - file: module-3/labs/Lab-5/lab5c-multimodal_agents
+  - caption: Back matter
+    chapters:
+      - file: list-of-figures
+      - file: references
