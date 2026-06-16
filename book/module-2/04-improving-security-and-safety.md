@@ -140,6 +140,63 @@ ethical_principle = ConstitutionalPrinciple(
 )
 ```
 
+## AI for security, and security for AI
+
+Security and generative AI meet in two directions, and it is worth holding them
+apart:
+
+- **AI for security** uses ML to *defend* (and, in the wrong hands, to *attack*).
+  On defense, models power anomaly detection in logs and networks, malware
+  classification, and LLM-assisted triage of alerts and threat intelligence. On
+  offense, generative models lower the barrier to phishing at scale, voice and
+  video **deepfakes**, and rapid exploit or malware drafting.
+- **Security for AI** protects the models themselves, so they do not become the
+  weakest link. This is where the responsible-AI dimensions of this module become
+  concrete attacks to defend against.
+
+### Adversarial machine learning
+
+Beyond the prompt-level jailbreaks earlier in this chapter, models face a broader
+family of **adversarial ML** threats:
+
+- **Evasion / adversarial examples:** inputs perturbed to cause misclassification.
+- **Data and model poisoning:** corrupting training data or weights to implant
+  flaws or backdoors.
+- **Model extraction:** querying a model enough to clone its behavior.
+- **Membership inference:** probing whether a specific record was in the training
+  data (a privacy attack).
+
+### The OWASP Top 10 for LLM Applications
+
+The OWASP **Top 10 for LLM Applications** is a useful checklist when securing a
+generative-AI app. Its risks include **prompt injection**, **sensitive
+information disclosure**, **supply-chain** weaknesses, **data and model
+poisoning**, **improper output handling**, **excessive agency** (over-privileged
+agents and tools), **system-prompt leakage**, **vector and embedding** weaknesses
+(relevant to RAG in Module 3), **misinformation**, and **unbounded consumption**.
+Each maps onto a defense already in this module: guardrails and input/output
+validation, least-privilege tools and human-in-the-loop for agents, provenance
+for the model supply chain, and treating model output as untrusted.
+
+### Privacy-preserving machine learning
+
+When models must learn from sensitive data, privacy-preserving techniques keep the
+data protected: **federated** and **split learning** (train without centralizing
+raw data), **differential privacy** (bound how much any record influences the
+model, limiting memorization and membership inference), **secure aggregation**,
+and **homomorphic encryption** (compute on encrypted data). These reinforce the
+**privacy and security** dimension of {doc}`03-dimensions-of-responsible-ai`.
+
+```{admonition} Further reading: the cybersecurity companion
+:class: seealso
+For a deeper treatment of these AI-security topics, see the companion open-access
+textbook *Cybersecurity: Theory, Practice, and Ethics* by Devharsh Trivedi
+(CC BY 4.0, <https://book.com.puter.tips/>), especially its chapters on emerging
+threats (offensive and defensive AI, adversarial ML, the OWASP LLM Top 10,
+privacy-preserving ML) and on intrusion detection (ML-based anomaly detection and
+UEBA).
+```
+
 ## In the news
 
 Safety tooling has become a product category. Major providers now ship managed
