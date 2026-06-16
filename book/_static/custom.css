@@ -22,6 +22,13 @@ a.nf-btn {
 }
 a.nf-btn:hover { background-color: #154360; }
 
+/* Shrink the decorative MLU "Activity" / "Challenge" logos in notebooks */
+img[src*="activity"], img[src*="challenge"],
+img[alt="Activity"], img[alt="Challenge"] {
+  max-width: 80px !important;
+  height: auto !important;
+}
+
 /* Distinguish notebook input (code) and output cells with [IN]/[OUT] badges */
 div.cell_input {
   border-left: 4px solid #2874A6;

@@ -36,6 +36,7 @@ code{ font-family:'DejaVu Sans Mono',monospace;font-size:8pt;}
 table{border-collapse:collapse;width:100%;font-size:8.5pt;page-break-inside:avoid;} th,td{border:1px solid #bbb;padding:3px 5px;vertical-align:top;text-align:left;} th{background:#eaf2f8;}
 .admonition{border-left:4px solid #2874A6;background:#f7fbfd;padding:5px 9px;margin:8px 0;page-break-inside:avoid;} .admonition-title{font-weight:bold;color:#1A5276;}
 img{max-width:100%;} a{color:#1A5276;text-decoration:none;}
+img[src*="activity"],img[src*="challenge"],img[alt="Activity"],img[alt="Challenge"]{max-width:70px !important;height:auto !important;}
 .cell_input { border-left:4px solid #2874A6; padding-left:8px; margin-top:8px; }
 .cell_input::before { content:"[ IN ]"; display:inline-block; background:#2874A6; color:#fff; font:700 8pt Helvetica,Arial,sans-serif; letter-spacing:1px; padding:2px 7px; border-radius:3px; margin-bottom:3px; }
 .cell_output { border-left:4px solid #1E8449; padding-left:8px; margin-top:2px; background:#F4FBF6; }

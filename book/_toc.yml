@@ -7,6 +7,7 @@ parts:
     chapters:
       - file: primer/ai-literacy
       - file: primer/ai-and-tools-reference
+      - file: primer/aws-ai-services
       - file: primer/tokens-and-embeddings
       - file: primer/ten-ai-skills-2025
       - file: primer/practical-ai-workflow
