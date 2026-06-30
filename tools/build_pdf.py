@@ -51,6 +51,8 @@ for i in range(start, min(end,len(ORDER))):
     m=re.search(r'<article\b[^>]*>(.*?)</article>', html, re.S)
     body=m.group(1) if m else ""
     body=re.sub(r'<script\b.*?</script>','',body,flags=re.S)
+    # drop web-only elements (e.g., visitor flag counter) from the PDF
+    body=re.sub(r'<div[^>]*class="[^"]*web-only[^"]*"[^>]*>.*?</div>','',body,flags=re.S)
     body=re.sub(r'<a class="headerlink".*?</a>','',body,flags=re.S)
     # add italic captions under images that have non-empty alt text
     def _cap(m):

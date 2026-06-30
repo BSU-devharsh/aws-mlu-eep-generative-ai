@@ -78,3 +78,10 @@ vocabulary and mental model that make the lab code easy to follow.
 ```
 
 Let's begin with the fundamentals.
+
+---
+
+<div class="web-only" style="text-align: center; margin-top: 2rem;">
+<p><strong>Readers around the world</strong></p>
+<a href="https://info.flagcounter.com/YObD"><img src="https://s01.flagcounter.com/countxl/YObD/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_12/viewers_3/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</div>

@@ -22,6 +22,9 @@ a.nf-btn {
 }
 a.nf-btn:hover { background-color: #154360; }
 
+/* Web-only elements (e.g., visitor flag counter) hidden when printing */
+@media print { .web-only { display: none !important; } }
+
 /* Shrink the decorative MLU "Activity" / "Challenge" logos in notebooks */
 img[src*="activity"], img[src*="challenge"],
 img[alt="Activity"], img[alt="Challenge"] {
