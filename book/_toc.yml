@@ -61,6 +61,7 @@ parts:
           - file: module-3/labs/Lab-5/lab5c-multimodal_agents
   - caption: Appendices
     chapters:
+      - file: appendix-traditional-ml
       - file: appendix-serverless-backend
   - caption: Back matter
     chapters:

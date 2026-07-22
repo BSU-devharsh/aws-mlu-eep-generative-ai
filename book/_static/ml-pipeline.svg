@@ -1,0 +1,59 @@
+<svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mlpTitle mlpDesc" font-family="Helvetica, Arial, sans-serif">
+  <title id="mlpTitle">The supervised machine learning pipeline</title>
+  <desc id="mlpDesc">A left-to-right pipeline: raw data, exploratory data analysis, feature engineering, train model, evaluate, and check fairness before deployment, with a feedback arrow from evaluate back to feature engineering.</desc>
+  <defs>
+    <marker id="mlp-arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#1A5276"/>
+    </marker>
+    <marker id="mlp-arrow-amber" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#D68910"/>
+    </marker>
+  </defs>
+
+  <!-- boxes -->
+  <g font-size="12.5" font-weight="700" text-anchor="middle">
+    <g>
+      <rect x="10" y="70" width="118" height="52" rx="8" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+      <text x="69" y="92" fill="#0E2D44">Raw data</text>
+      <text x="69" y="108" fill="#34495E" font-size="10" font-weight="400">rows &amp; columns</text>
+    </g>
+    <g>
+      <rect x="152" y="70" width="118" height="52" rx="8" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+      <text x="211" y="92" fill="#0E2D44">EDA</text>
+      <text x="211" y="108" fill="#34495E" font-size="10" font-weight="400">explore &amp; clean</text>
+    </g>
+    <g>
+      <rect x="294" y="70" width="128" height="52" rx="8" fill="#EAF2F8" stroke="#2874A6" stroke-width="1.5"/>
+      <text x="358" y="92" fill="#0E2D44">Feature</text>
+      <text x="358" y="108" fill="#34495E" font-size="10" font-weight="400">impute, scale, encode</text>
+    </g>
+    <g>
+      <rect x="446" y="70" width="118" height="52" rx="8" fill="#D6EAF8" stroke="#2874A6" stroke-width="1.5"/>
+      <text x="505" y="92" fill="#0E2D44">Train model</text>
+      <text x="505" y="108" fill="#34495E" font-size="10" font-weight="400">fit on train set</text>
+    </g>
+    <g>
+      <rect x="588" y="70" width="118" height="52" rx="8" fill="#D6EAF8" stroke="#2874A6" stroke-width="1.5"/>
+      <text x="647" y="92" fill="#0E2D44">Evaluate</text>
+      <text x="647" y="108" fill="#34495E" font-size="10" font-weight="400">metrics on test</text>
+    </g>
+    <g>
+      <rect x="730" y="70" width="120" height="52" rx="8" fill="#FDF3E3" stroke="#D68910" stroke-width="1.5"/>
+      <text x="790" y="92" fill="#7E5109">Check fairness</text>
+      <text x="790" y="108" fill="#7E5109" font-size="10" font-weight="400">per-group gaps</text>
+    </g>
+  </g>
+
+  <!-- forward arrows -->
+  <g stroke="#1A5276" stroke-width="2" fill="none">
+    <line x1="128" y1="96" x2="150" y2="96" marker-end="url(#mlp-arrow)"/>
+    <line x1="270" y1="96" x2="292" y2="96" marker-end="url(#mlp-arrow)"/>
+    <line x1="422" y1="96" x2="444" y2="96" marker-end="url(#mlp-arrow)"/>
+    <line x1="564" y1="96" x2="586" y2="96" marker-end="url(#mlp-arrow)"/>
+    <line x1="706" y1="96" x2="728" y2="96" marker-end="url(#mlp-arrow)"/>
+  </g>
+
+  <!-- feedback loop: Evaluate back to Feature -->
+  <path d="M647,122 V162 H358 V124" fill="none" stroke="#D68910" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#mlp-arrow-amber)"/>
+  <text x="502" y="177" fill="#B9770E" font-size="11" font-weight="700" text-anchor="middle">iterate: improve features if metrics are poor</text>
+</svg>
