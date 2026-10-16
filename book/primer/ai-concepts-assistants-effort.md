@@ -593,11 +593,35 @@ is why the labs in this book can use them.
 
 ### Google: Gemini and Gemma
 
-**Gemini** is both Google's assistant app and its model family. On October 13,
-2026 Google made **Gemini 4 Argon**, its newest frontier model, generally
-available to Google AI Pro and Ultra subscribers in the Gemini app and AI Mode
-in Search, and to developers through the Gemini API and AI Studio
-([Google, Gemini 4 Argon](https://blog.google/intl/en-in/products/introducing-gemini-4-argon/)).
+**Gemini** is both Google's assistant app and its model family. Its flagship is
+**Gemini 4 Argon**, the first model of the Gemini 4 generation. Google first
+offered it to select cybersecurity partners on September 30, 2026 and made it
+generally available on October 13, 2026, to developers through the
+Gemini API and AI Studio and to Google AI Pro and Ultra subscribers in the Gemini
+app and AI Mode in Search
+([Google, Gemini 4 Argon](https://blog.google/intl/en-in/products/introducing-gemini-4-argon/);
+[Reuters via Khaleej Times](https://www.khaleejtimes.com/business/google-announces-gemini-4-flagship-ai-model-after-months-of-delays-2)).
+The essentials:
+
+- **Context.** One combined limit of 1 million tokens covers input and output
+  together ([Google, Gemini 4 Argon model card](https://deepmind.google/models/model-cards/gemini-4-argon/)).
+- **Thinking.** Argon reasons before it answers, and developers choose how much
+  with a thinking level that defaults to medium, the Gemini version of the
+  effort settings in Part 3
+  ([Gemini thinking](https://ai.google.dev/gemini-api/docs/thinking)).
+- **Price.** Through November 30, 2026 the API charges 2 dollars per million
+  input tokens and 10 dollars per million output tokens, thinking included. From
+  December 1, 2026 both prices double, to 4 and 20 dollars
+  ([Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing)).
+- **What Google emphasizes.** Google highlights knowledge work, agentic coding,
+  very long documents and video, 3D and visual coding, and safety behavior such
+  as pausing for human confirmation before irreversible steps. These are the
+  vendor's own claims; the head-to-head comparison at the end of this part shows
+  how independent tests see it.
+- **Where it is not.** Gemini models are not offered on Amazon Bedrock, so the
+  Bedrock labs in this book cannot call Argon
+  ([AWS, Bedrock model cards](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html)).
+
 **Gemini 3.8 Flash** (September 2026) is the faster everyday model, and smaller
 Flash-Lite models serve low-cost uses
 ([Gemini API models](https://ai.google.dev/gemini-api/docs/models)). The Gemini
@@ -802,6 +826,122 @@ agent's own reports about what it did {cite}`trivedi2026verifiable`.
   Comet's agent from shopping in password-protected parts of Amazon's site for
   its users, an early legal test of agents acting on people's behalf
   ([GeekWire](https://www.geekwire.com/2026/judge-blocks-perplexitys-ai-bot-from-shopping-on-amazon-in-early-test-of-agentic-commerce/)).
+
+### Head to head: Gemini 4 Argon and Claude Opus 5.5
+
+Gemini 4 Argon and Claude Opus 5.5 arrived within weeks of each other, Opus 5.5
+on September 22, 2026 and Argon on September 30 for partners and October 13 for
+everyone, and they are the two flagships most often compared this fall
+([Anthropic, Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5)). The
+comparison is also a lesson in reading benchmarks, because the answer depends on
+who ran the test and how.
+
+```{list-table} Gemini 4 Argon and Claude Opus 5.5 compared (mid-October 2026)
+:header-rows: 1
+:widths: 34 20 20 26
+
+* - Measure
+  - Gemini 4 Argon
+  - Claude Opus 5.5
+  - Who measured it
+* - Artificial Analysis Intelligence Index v4.3.2
+  - 53
+  - **58**
+  - Artificial Analysis (independent)
+* - Terminal-Bench 4.0, independent run
+  - 57%
+  - **60%**
+  - Artificial Analysis
+* - Terminal-Bench 4.0, as reported by the vendors
+  - 57.4%
+  - **66.4%**
+  - Google model card; Anthropic
+* - AutomationBench, Artificial Analysis version
+  - **78%**
+  - 70%
+  - Artificial Analysis
+* - Vals Index (knowledge work)
+  - **68.90%**
+  - 66.97%
+  - Vals AI (independent)
+* - DeepSWE v1.1 (agentic coding)
+  - **77.9%**
+  - 74.2%
+  - Google model card
+* - Vibe Code Bench (building apps)
+  - **91.9%**
+  - 90.3%
+  - Google model card; Vals AI
+* - GraphWalks, 256K to 1M tokens (long context, F1)
+  - **84.2%**
+  - 66.8%
+  - Google model card
+* - Context window
+  - 1M tokens, input and output combined
+  - 1M tokens
+  - Google; Anthropic
+* - API price per million input and output tokens
+  - 2 and 10 dollars through November 30, 2026; 4 and 20 dollars from
+    December 1
+  - 4 and 20 dollars
+  - Google; Anthropic
+* - Wait before the first answer token in testing
+  - 44.7 seconds (high thinking)
+  - 684 seconds (max effort)
+  - Artificial Analysis
+```
+
+Sources for the table:
+[Artificial Analysis comparison](https://artificialanalysis.ai/models/comparisons/gemini-4-argon-vs-claude-opus-5-5);
+[Google, Gemini 4 Argon model card](https://deepmind.google/models/model-cards/gemini-4-argon/);
+[Anthropic, Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5);
+[Vals AI, Gemini 4 Argon](https://www.vals.ai/models/google_gemini-4-argon);
+[Vals AI, Claude Opus 5.5](https://www.vals.ai/models/anthropic_claude-opus-5-5);
+[Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing);
+[Claude models overview](https://platform.claude.com/docs/en/models/overview).
+Bold marks the higher figure in each row.
+
+Four lessons come out of this table:
+
+1. **Who ran the test matters.** On Terminal-Bench 4.0, which measures getting
+   real work done in a command-line terminal, Opus 5.5 scored 66.4 percent in
+   Anthropic's own run at its xhigh effort setting, the figure Google's model
+   card also lists, but 60 percent when Artificial Analysis ran the test
+   itself. Argon's score was nearly the same in both, 57.4 and 57 percent.
+2. **Each vendor shows its best side.** Google's model card leads with tests
+   Argon wins, such as DeepSWE, Vibe Code Bench and long-context retrieval,
+   while Anthropic's announcement compares Opus 5.5 with OpenAI's and its own
+   models and leaves Argon out. On the independent Artificial Analysis
+   comparison page, Argon scored higher on only one of the 10 tests listed,
+   AutomationBench.
+3. **Effort settings change both scores and waiting time.** Artificial Analysis
+   tested Opus 5.5 at max effort and Argon at its high thinking level. The two
+   generated text at about the same speed, roughly 100 tokens per second, but
+   Opus 5.5 thought for more than 11 minutes before its first answer token,
+   compared with about 45 seconds for Argon. That is Part 3 in action: more
+   effort bought a higher score at the cost of a much longer wait.
+4. **Price depends on the date and the task.** Argon's list price is half of
+   Opus 5.5's through November 30, 2026 and the same afterward. What a task
+   really costs also depends on how many tokens each model spends: Vals AI
+   reported about 15.68 dollars per test run on its index for Argon and 32.14
+   dollars for Opus 5.5. Small leads deserve caution too; Vals AI gives each
+   index score a margin of about one point, so a two-point gap is narrow.
+
+**Which should you choose?** There is no single winner, so match the model to
+the work:
+
+- **Gemini 4 Argon** is attractive for high-volume or cost-sensitive work while
+  its introductory price lasts, for very long documents and video, for the
+  knowledge-work and app-building tasks where it led above, and for teams that
+  already work in Google's tools.
+- **Claude Opus 5.5** is attractive for the hardest reasoning and for agentic
+  coding in a terminal, where it led in both the vendor and the independent
+  runs, and for work where it led the independent index. It is also the one of
+  the two you can use in this book's labs, because it is available on Amazon
+  Bedrock and Gemini is not.
+- **For either one**, run a small evaluation on your own tasks before you
+  commit, as {doc}`../module-2/01-evaluating-llms` recommends; a benchmark lead
+  of a few points rarely predicts which model will do better on your work.
 
 ## Part 3: Effort levels, explained in detail
 
@@ -1212,6 +1352,15 @@ a correct answer. Research has documented overthinking on easy problems and
 tasks where longer reasoning lowers accuracy.
 ```
 
+```{admonition} Q10. Claude Opus 5.5 scores 66.4 percent on Terminal-Bench 4.0 in one table and 60 percent in another. Which number is wrong?
+:class: dropdown
+Probably neither. The 66.4 percent comes from Anthropic's own run at the xhigh
+effort setting, and the 60 percent from Artificial Analysis running the test
+independently with its own setup. Benchmark scores depend on who runs them, the
+effort or thinking setting, the test harness and timeouts, so always note the
+source and conditions before comparing models.
+```
+
 ## Key takeaways
 
 - **AI contains ML, which contains deep learning**; generative AI, foundation
@@ -1227,6 +1376,9 @@ tasks where longer reasoning lowers accuracy.
 - Separate the **company**, the **model** and the **app**. Most flagship models
   are closed; open-weight models vary widely in license, and open weights are
   not the same as open source.
+- Flagships such as **Gemini 4 Argon** and **Claude Opus 5.5** trade leads
+  depending on the test, the tester and the effort setting; check who measured a
+  score, and evaluate on your own tasks.
 - An **effort level** sets how much work a model does on a request, mostly
   thinking, tool calls and self-checking. It is a **behavioral signal, not a
   token budget**, and it does not change what the model knows.
