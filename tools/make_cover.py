@@ -32,10 +32,10 @@ body {{ margin:0; font-family: Helvetica, Arial, sans-serif; color:#1a1a1a; }}
 </div>
 <div class="body">
   <div class="author">Devharsh Trivedi, Ph.D., CISSP</div>
-  <div class="aff">Department of Computer Science<br/>Bowie State University</div>
+  <div class="aff">Department of Mathematics, Engineering and Computer Science<br/>LaGuardia Community College, The City University of New York (CUNY)</div>
   <div class="aff">ORCID: 0000-0001-6374-7249</div>
   <div class="meta">
-    <span class="badge">Version June 2026</span><br/><br/>
+    <span class="badge">Version October 2026</span><br/><br/>
     <b>Includes:</b> an AI Literacy Primer, tokens &amp; embeddings, the ten AI skills,
     a practical AI workflow, and alignment with the U.S. DOL "Make America AI-Ready"
     framework, the NIST AI RMF 1.0, ABET student outcomes, and Bloom's taxonomy.<br/><br/>
