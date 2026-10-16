@@ -11,7 +11,7 @@ authors:
   - family-names: "Trivedi"
     given-names: "Devharsh"
     orcid: "https://orcid.org/0000-0001-6374-7249"
-    affiliation: "Department of Computer Science, Bowie State University"
+    affiliation: "Department of Mathematics, Engineering and Computer Science, LaGuardia Community College, The City University of New York (CUNY)"
     name-suffix: "Ph.D., CISSP"
 keywords:
   - generative AI
@@ -22,7 +22,9 @@ keywords:
   - responsible AI
   - AI literacy
 license: CC-BY-SA-4.0
-date-released: "2026-06-11"
+version: "October 2026"
+doi: "10.5281/zenodo.20652882"
+date-released: "2026-10-16"
 url: "https://github.com/BSU-devharsh/aws-mlu-eep-generative-ai"
 references:
   - type: generic
