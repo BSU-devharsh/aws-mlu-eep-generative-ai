@@ -166,6 +166,21 @@ family of **adversarial ML** threats:
 - **Membership inference:** probing whether a specific record was in the training
   data (a privacy attack).
 
+Poisoning can target **fairness** as well as accuracy. In collaborative (federated)
+learning, where several organizations such as banks train one shared model
+without pooling their data, a malicious participant can push the shared model
+toward unequal treatment of groups while keeping its accuracy close to everyone
+else's, which slips past defenses that only watch accuracy. **Fairis**, a 2026
+preprint by the author of this book and colleagues, gives each participant's
+update a weight that falls as the unfairness of its local model rises, so a
+participant that pushes disparity loses influence while every participant keeps
+some weight, and it combines this with clipping the size of updates to bound how
+far an adversary can move the global model. Assuming participants report their
+fairness scores honestly, an assumption the paper states and does not remove,
+the scheme cut a stealthy adversary's weight by 41 to 54 percent compared with a
+control on a Taiwanese credit dataset, while on ordinary uneven data splits no
+aggregation rule was best everywhere {cite}`trivedi2026fairis`.
+
 ### The OWASP Top 10 for LLM Applications
 
 The OWASP **Top 10 for LLM Applications** is a useful checklist when securing a
@@ -186,6 +201,46 @@ raw data), **differential privacy** (bound how much any record influences the
 model, limiting memorization and membership inference), **secure aggregation**,
 and **homomorphic encryption** (compute on encrypted data). These reinforce the
 **privacy and security** dimension of {doc}`03-dimensions-of-responsible-ai`.
+
+How ready are these techniques for large language models? A 2026 review by the
+author of this book examines where **lattice-based cryptography**, the family
+behind both homomorphic encryption and the new post-quantum encryption standards,
+meets LLMs, and grades each claim by its evidence {cite}`trivedi2026engineering`:
+
+- **Encryption is not differential privacy.** The noise inside a homomorphic
+  ciphertext is not calibrated to what a query reveals, involves no gradient
+  clipping, and disappears on decryption, so it does not give differential
+  privacy. The two protect against different adversaries and must be combined,
+  not swapped for each other.
+- **No evidence yet for LLMs as cryptanalysts.** The idea that language models
+  can act as adaptive agents inside lattice-reduction attacks has no empirical
+  support so far.
+- **Encrypted inference is still very expensive.** Encrypted inference for a
+  small encoder model cost roughly five orders of magnitude (about 100,000 times)
+  more than plaintext on a GPU, and for one functional-encryption design the key
+  material reached four tebibytes per attention layer under the parameters its
+  security proof requires. Memory, not arithmetic speed, is the binding limit.
+- **What works in production today.** The review rates these approaches at early
+  readiness levels and notes that **trusted execution environments**, hardware
+  enclaves that isolate computation, are the only approach in production today.
+
+### Bounding AI inside security systems
+
+When AI becomes part of a security system, its own account of what it did is
+not evidence that it behaved. A 2026 talk by the author of this book frames the
+principle as verifiable constraints, not self-attestation: bound an AI component
+with limits that can be checked independently instead of trusting its reports
+about itself {cite}`trivedi2026verifiable`. In practice this means:
+
+- **Limit what the model can see.** Use the privacy-preserving techniques above
+  so that sensitive data is isolated, split or encrypted before a model touches
+  it.
+- **Limit what an agent can do.** Give tools the least privilege they need,
+  require human approval for consequential actions, and treat content the agent
+  reads from the web, email or files as data, never as instructions, which is the
+  main defense against prompt injection.
+- **Check from outside.** Logs, tests and approvals that the AI cannot write to
+  are stronger evidence than a model's statement that a task is complete or safe.
 
 ```{admonition} Further reading: the cybersecurity companion
 :class: seealso
@@ -220,6 +275,9 @@ robustness, watermarking, and debiasing. See {doc}`labs-overview`.
 - **Watermarking** marks AI-generated content for provenance and trust.
 - **Debiasing** uses prompt templates and **Constitutional AI** to reduce
   prejudiced output.
+- **Security for AI** includes fairness poisoning in collaborative learning,
+  realistic limits of encryption for LLMs, and bounding AI components with
+  constraints that can be verified from outside.
 
 This completes Module 2. With evaluation, responsible-AI foundations and
 dimensions, and concrete safety techniques in hand, Module 3 turns to building

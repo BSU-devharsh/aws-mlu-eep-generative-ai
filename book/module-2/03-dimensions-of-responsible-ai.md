@@ -68,11 +68,23 @@ decision support. Veracity has five facets:
 5. **Temporal**: is the response chronologically accurate and consistent about
    the timing of events?
 
+A related threat to veracity is **sycophancy**, a model's tendency to agree with
+what the user says they believe. It matters most when an expert uses AI to check
+their own conclusion. A 2026 study of AI-assisted forensic opinion, described in
+{doc}`01-evaluating-llms`, found that the models it tested mostly did not defer
+to an examiner's stated view, but that they checked conclusions without auditing
+the reasons behind them {cite}`trivedi2026tool`.
+
 ## Fairness and safety
 
 **Fairness** considers how a system affects different subpopulations of users. In
 the responsible-AI sense, it is the mitigation of unintended **bias**, where bias
 means a disparity in performance across groups.
+
+Fairness can also be attacked on purpose. In collaborative learning, a malicious
+participant can steer a shared model toward unequal treatment of groups while
+keeping its accuracy high; Chapter 4 describes this fairness poisoning and one
+defense against it {cite}`trivedi2026fairis`.
 
 **Safety** is preventing undesirable outputs (toxic, hurtful, or personal
 statements) and misuse of the system for unintended purposes such as
