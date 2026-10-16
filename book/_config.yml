@@ -2,7 +2,7 @@
 # Docs: https://jupyterbook.org/customize/config.html
 
 title: "Generative AI with Amazon Bedrock"
-author: "Devharsh Trivedi, Ph.D., CISSP<br>Department of Computer Science<br>Bowie State University<br>ORCID 0000-0001-6374-7249"
+author: "Devharsh Trivedi, Ph.D., CISSP<br>Department of Mathematics, Engineering and Computer Science<br>LaGuardia Community College, The City University of New York (CUNY)<br>ORCID 0000-0001-6374-7249"
 logo: _static/MLU-NEW-logo.png
 copyright: "2026"
 
@@ -85,6 +85,14 @@ sphinx:
     bibtex_reference_style: author_year
     html_css_files:
       - custom.css
+      - sidebar-toggle-fix.css
+    # Repairs the "Toggle primary sidebar" button, which does nothing in the shipped theme.
+    # sphinx-book-theme and pydata-sphinx-theme bind their handlers with
+    # querySelector(".primary-toggle"), which takes the first match. This build renders two:
+    # the navbar icon, which is hidden at every width, and the button readers actually click.
+    # The handlers land on the hidden one. See the comments in both _static files.
+    html_js_files:
+      - sidebar-toggle-fix.js
     # Custom 404 page (sphinx-notfound-page).
     # The prefix must match the GitHub Pages project subpath so the 404's own
     # assets and links resolve correctly when served from any URL depth.

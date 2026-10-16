@@ -1,9 +1,27 @@
 # List of Figures
 
-This list catalogs the main diagrams and illustrations that appear in the book's
-lab notebooks, grouped by module. Most figures are embedded in the hands-on labs;
-open the linked lab page to view a figure in context. (Decorative logos and
-interface chrome are omitted.)
+This list catalogs the main diagrams and illustrations that appear in the book,
+grouped by part. Most figures are embedded in the hands-on labs; open the linked
+page to view a figure in context. (Decorative logos and interface chrome are
+omitted.)
+
+## Primer: AI Literacy
+
+```{list-table}
+:header-rows: 1
+:widths: 20 80
+
+* - Location
+  - Figure
+* - {doc}`primer/ai-and-tools-reference`
+  - Decision flowchart for choosing a model and effort level.
+* - {doc}`primer/ai-concepts-assistants-effort`
+  - Map of how AI, machine learning, deep learning, NLP, generative AI, LLMs,
+    foundation models, frontier models, agentic AI, AGI and superintelligence
+    relate.
+* - {doc}`primer/ai-concepts-assistants-effort`
+  - What changes inside a model at low, medium and high or maximum effort.
+```
 
 ## Module 1: Fundamentals of Generative AI
 
@@ -58,10 +76,22 @@ interface chrome are omitted.)
     document pages).
 ```
 
+## Appendix
+
+```{list-table}
+:header-rows: 1
+:widths: 20 80
+
+* - Location
+  - Figure
+* - {doc}`appendix-traditional-ml`
+  - Traditional machine learning pipeline, from raw data to fairness checks.
+```
+
 ```{admonition} Note
 :class: note
 Additional generated images and intermediate diagrams appear within individual lab
 notebooks as you run them. The labs are the primary home for the book's figures;
-the explanatory chapters use tables and worked examples in place of static images
-so they render cleanly on every device.
+most explanatory chapters use tables and worked examples, and the few diagrams
+they include are drawn as SVG so they render cleanly on every device.
 ```

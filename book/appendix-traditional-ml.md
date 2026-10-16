@@ -29,7 +29,7 @@ data, engineer features, train a model, evaluate it, and check it for fairness,
 looping back to improve features whenever the metrics disappoint.
 
 ```{figure} _static/ml-pipeline.svg
-:alt: A left-to-right pipeline diagram: raw data, EDA, feature engineering, train model, evaluate, and check fairness, with a dashed feedback arrow from evaluate back to feature engineering.
+:alt: A left-to-right pipeline diagram with the stages raw data, EDA, feature engineering, train model, evaluate, and check fairness, with a dashed feedback arrow from evaluate back to feature engineering.
 :width: 100%
 :align: center
 
