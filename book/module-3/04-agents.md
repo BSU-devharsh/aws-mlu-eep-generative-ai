@@ -102,6 +102,12 @@ Agents are powerful but not free:
   back to Module 2).
 - They can make **simple tasks unnecessarily complex**; not every problem needs an
   agent.
+- Their **own reports are not proof**. An agent's statement that it finished a
+  task or stayed within its permissions should be backed by limits and checks it
+  cannot change: least-privilege tools, human approval for consequential actions,
+  and treating fetched content as data rather than instructions. This is the
+  principle of verifiable constraints rather than self-attestation
+  {cite}`trivedi2026verifiable`.
 
 ```{admonition} AWS in practice
 :class: note
