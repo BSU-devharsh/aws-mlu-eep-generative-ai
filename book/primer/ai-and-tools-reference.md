@@ -112,6 +112,10 @@ Higher effort generally means the model produces more internal reasoning before
 answering, which improves accuracy on hard problems but increases latency and
 token cost. Choose the lowest level that reliably solves your task.
 
+For a fuller explanation of what effort changes inside the model, the exact
+settings each major provider offers, and why higher effort uses up your plan's
+limits faster, see {doc}`ai-concepts-assistants-effort`.
+
 ### Adaptive and extended thinking
 
 **Extended thinking** (sometimes called a reasoning or "thinking" mode) lets a
@@ -145,7 +149,7 @@ A simple decision process:
    examples before committing.
 
 ```{figure} ../_static/choose-model-flowchart.svg
-:alt: A five-step decision flowchart for choosing a model and effort level: match the modality, match difficulty to effort, weigh cost and context, respect privacy and compliance, then test and iterate, looping back to raise the effort when the model makes errors.
+:alt: A five-step decision flowchart for choosing a model and effort level. The steps are match the modality, match difficulty to effort, weigh cost and context, respect privacy and compliance, then test and iterate, looping back to raise the effort when the model makes errors.
 :width: 80%
 :align: center
 
@@ -193,20 +197,33 @@ SageMaker.
 spanning text and multimodal understanding and generation, positioned for strong
 price-performance.
 
-**AWS DeepRacer** is a hands-on way to learn **reinforcement learning (RL)** through
-autonomous driving. It centers on a 1/18th-scale, fully autonomous race car that
-learns to drive a track by trial and error, plus a 3D racing simulator, and a
-global racing league for friendly competition. You define a reward function,
-train an RL model in simulation, and then evaluate it (in the simulator or on a
-physical car). It exists to make an abstract technique, RL, concrete and fun,
-which is why it is popular in classrooms and corporate upskilling. DeepRacer
-connects directly to this book's themes: it is a small, safe example of the
-**autonomous-agent** and **self-driving** ideas in {doc}`ai-literacy`, and the
-reward-and-reasoning loop echoes the agentic patterns in
-{doc}`../module-3/04-agents`. See the AWS DeepRacer product page
-(<https://aws.amazon.com/deepracer/>) and the "DeepRacer on AWS" solution overview
+**AWS DeepRacer** began as a hosted AWS service for learning **reinforcement
+learning (RL)** through autonomous driving, built around a 1/18th-scale, fully
+autonomous race car that learns to drive a track by trial and error, a 3D racing
+simulator, and a racing league for friendly competition. As of December 15, 2025,
+AWS DeepRacer is no longer available as a service in the AWS Console, and the
+physical DeepRacer cars are no longer sold on Amazon
+(<https://aws.amazon.com/deepracer/faqs/>).
+
+It continues as **DeepRacer on AWS**, an open-source solution that you deploy in
+your own AWS account from an AWS CloudFormation template. It uses Amazon
+SageMaker AI to train RL models, lets you write a custom reward function, and
+lets you evaluate models in the DeepRacer simulator, run virtual, community and
+physical races, and deploy trained models to existing DeepRacer cars. The
+learning loop is the same as before: you define a reward function, train an RL
+model in simulation, and then evaluate it in the simulator or on a physical car.
+Because deploying the solution creates AWS resources that are billed to your
+account, check the cost guidance in its documentation before you start.
+
+DeepRacer made an abstract technique, RL, concrete and fun, which is why it
+became popular in classrooms and corporate upskilling. It connects directly to
+this book's themes: it is a small, safe example of the **autonomous-agent** and
+**self-driving** ideas in {doc}`ai-literacy`, and the reward-and-reasoning loop
+echoes the agentic patterns in {doc}`../module-3/04-agents`. See the DeepRacer on
+AWS solution overview
 (<https://docs.aws.amazon.com/solutions/latest/deepracer-on-aws/solution-overview.html>)
-for current details.
+and its source code (<https://github.com/aws-solutions/deepracer-on-aws>) for
+current details.
 
 ### Other foundation-model families
 
@@ -431,6 +448,10 @@ from a few years to many decades, and some doubting it will arrive on any
 predictable timeline at all. These remain open questions rather than settled
 facts.
 
+{doc}`ai-concepts-assistants-effort` places these terms on a single map alongside
+AI, machine learning, deep learning, NLP, LLMs, frontier models, and agentic AI,
+and explains how companies use the word *superintelligence* today.
+
 ## Key takeaways
 
 - A **foundation model** is broadly pre-trained and adapted to many tasks;
@@ -447,11 +468,15 @@ facts.
   modern AI; **agentic AI** wraps models in goal-pursuing loops.
 - **ANI to AGI to ASI** describes narrow (today), human-level, and beyond-human
   AI; we are in the ANI era.
+
 ```{admonition} About this chapter
 :class: seealso
-Written by Devharsh Trivedi, Ph.D., CISSP, Department of Computer Science,
-Bowie State University. ORCID: <https://orcid.org/0000-0001-6374-7249>. OpenClaw
-details were verified against the project's documentation and reporting; other
-descriptions reflect standard, vendor-documented capabilities and should be
-confirmed against current product documentation.
+Written by Devharsh Trivedi, Ph.D., CISSP, Department of Mathematics,
+Engineering and Computer Science, LaGuardia Community College, The City
+University of New York (CUNY). ORCID: <https://orcid.org/0000-0001-6374-7249>.
+OpenClaw details were verified against the project's documentation and
+reporting, and the DeepRacer entry against the AWS DeepRacer FAQs and the
+DeepRacer on AWS documentation; other descriptions reflect standard,
+vendor-documented capabilities and should be confirmed against current product
+documentation.
 ```
