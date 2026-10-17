@@ -541,8 +541,8 @@ conversational generative AI to a mass audience
 ([OpenAI, Introducing ChatGPT](https://openai.com/index/chatgpt/)). In
 October 2026 OpenAI's lineup centers on the GPT-6 generation: **GPT-6 Astra**,
 which OpenAI calls its most intelligent model and rolled out first to a limited
-set of organizations in early September 2026 before opening it to paid ChatGPT
-plans, and the cheaper **GPT-6 Sol** (since updated to **GPT-6.1 Sol**) and
+set of organizations in early September 2026 before opening it to ChatGPT
+Plus, Pro, Business and Enterprise users, and the cheaper **GPT-6 Sol** (since updated to **GPT-6.1 Sol**) and
 **GPT-6 Luna** for everyday work
 ([OpenAI, GPT-6 Astra](https://openai.com/index/gpt-6-astra/);
 [OpenAI, GPT-6 Sol and Luna](https://openai.com/index/introducing-gpt-6-sol-and-luna/)).
@@ -552,13 +552,37 @@ and the models you get depend on the plan
 agent, available in the ChatGPT apps, a command-line tool, an IDE extension and
 the cloud ([OpenAI, Codex docs](https://learn.chatgpt.com/docs)).
 
+The two GPT-6 models you will see compared most often are:
+
+- **GPT-6 Astra**, OpenAI's most capable model, aimed at complex reasoning,
+  coding, computer use and research. It costs 10 dollars per million input
+  tokens and 50 dollars per million output tokens. OpenAI says it meets the
+  Critical threshold for cybersecurity under its Preparedness Framework, so for
+  now it refuses some advanced security tasks
+  ([OpenAI, GPT-6 Astra](https://openai.com/index/gpt-6-astra/)).
+- **GPT-6.1 Sol**, introduced on September 29, 2026, the cheaper model for
+  everyday professional work, at 2 dollars per million input tokens and 10
+  dollars per million output tokens. OpenAI reports that it matches Astra on one
+  coding test and approaches it on a document test at roughly one fifth of the
+  cost ([OpenAI, Introducing GPT-6.1 Sol](https://openai.com/index/introducing-gpt-6-1-sol/)).
+
+Both have a context window of 1,050,000 tokens, of which up to 922,000 can be
+input, can write up to 128,000 tokens in one response, have a knowledge cutoff of
+April 30, 2026, and offer reasoning effort from low to max. Prompts longer than
+272,000 input tokens cost more: twice the input rate and one and a half times
+the output rate for the whole request
+([OpenAI, GPT-6 Astra model page](https://developers.openai.com/api/docs/models/gpt-6-astra);
+[OpenAI, GPT-6.1 Sol model page](https://developers.openai.com/api/docs/models/gpt-6.1-sol)).
+
 OpenAI's flagship models are closed (you cannot download the weights), but in
 August 2025 it released **gpt-oss-120b** and **gpt-oss-20b**, open-weight
 reasoning models under the Apache 2.0 license; the smaller one runs within 16 GB
 of memory ([OpenAI, gpt-oss](https://openai.com/index/introducing-gpt-oss/)).
 Since September 8, 2026, GPT-6 Astra has also been generally available on
-**Amazon Bedrock**
-([AWS What's New](https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-astra-on-amazon-bedrock/)).
+**Amazon Bedrock**, and the Bedrock catalog lists GPT-6.1 Sol, GPT-6 Sol and
+GPT-6 Luna as well
+([AWS What's New](https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-astra-on-amazon-bedrock/);
+[AWS, Bedrock model cards](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html)).
 
 ### Anthropic: Claude
 
@@ -614,7 +638,7 @@ The essentials:
   December 1, 2026 both prices double, to 4 and 20 dollars
   ([Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing)).
 - **What Google emphasizes.** Google highlights knowledge work, agentic coding,
-  very long documents and video, 3D and visual coding, and safety behavior such
+  very long documents, 3D and visual coding, and safety behavior such
   as pausing for human confirmation before irreversible steps. These are the
   vendor's own claims; the head-to-head comparison at the end of this part shows
   how independent tests see it.
@@ -622,9 +646,10 @@ The essentials:
   Bedrock labs in this book cannot call Argon
   ([AWS, Bedrock model cards](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html)).
 
-**Gemini 3.8 Flash** (September 2026) is the faster everyday model, and smaller
-Flash-Lite models serve low-cost uses
-([Gemini API models](https://ai.google.dev/gemini-api/docs/models)). The Gemini
+**Gemini 3.8 Flash** (September 2026) is Google's most intelligent Flash model
+for everyday work, and smaller Flash-Lite models serve low-cost uses
+([Google, Gemini 3.8 Flash](https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/);
+[Gemini API models](https://ai.google.dev/gemini-api/docs/models)). The Gemini
 app has a free tier and paid Google AI Plus, Pro and Ultra plans
 ([Gemini subscriptions](https://gemini.google/subscriptions/)).
 
@@ -827,121 +852,224 @@ agent's own reports about what it did {cite}`trivedi2026verifiable`.
   its users, an early legal test of agents acting on people's behalf
   ([GeekWire](https://www.geekwire.com/2026/judge-blocks-perplexitys-ai-bot-from-shopping-on-amazon-in-early-test-of-agentic-commerce/)).
 
-### Head to head: Gemini 4 Argon and Claude Opus 5.5
+### Head to head: four flagships in October 2026
 
-Gemini 4 Argon and Claude Opus 5.5 arrived within weeks of each other, Opus 5.5
-on September 22, 2026 and Argon on September 30 for partners and October 13 for
-everyone, and they are the two flagships most often compared this fall
-([Anthropic, Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5)). The
-comparison is also a lesson in reading benchmarks, because the answer depends on
-who ran the test and how.
+Four models dominate comparisons this fall: Anthropic's **Claude Opus 5.5**,
+OpenAI's **GPT-6 Astra** and **GPT-6.1 Sol**, and Google's **Gemini 4 Argon**.
+They arrived within a few weeks of each other, and comparing them is also a
+lesson in reading benchmarks, because the answer depends on who ran the test,
+how, and at which effort setting.
 
-```{list-table} Gemini 4 Argon and Claude Opus 5.5 compared (mid-October 2026)
+**Specifications and price.** These come from each company's own documentation.
+
+```{list-table} Four flagship models compared: specifications (mid-October 2026)
 :header-rows: 1
-:widths: 34 20 20 26
+:widths: 20 20 20 20 20
 
 * - Measure
-  - Gemini 4 Argon
   - Claude Opus 5.5
-  - Who measured it
-* - Artificial Analysis Intelligence Index v4.3.2
-  - 53
-  - **58**
-  - Artificial Analysis (independent)
-* - Terminal-Bench 4.0, independent run
-  - 57%
-  - **60%**
-  - Artificial Analysis
-* - Terminal-Bench 4.0, as reported by the vendors
-  - 57.4%
-  - **66.4%**
-  - Google model card; Anthropic
-* - AutomationBench, Artificial Analysis version
-  - **78%**
-  - 70%
-  - Artificial Analysis
-* - Vals Index (knowledge work)
-  - **68.90%**
-  - 66.97%
-  - Vals AI (independent)
-* - DeepSWE v1.1 (agentic coding)
-  - **77.9%**
-  - 74.2%
-  - Google model card
-* - Vibe Code Bench (building apps)
-  - **91.9%**
-  - 90.3%
-  - Google model card; Vals AI
-* - GraphWalks, 256K to 1M tokens (long context, F1)
-  - **84.2%**
-  - 66.8%
-  - Google model card
+  - GPT-6 Astra
+  - GPT-6.1 Sol
+  - Gemini 4 Argon
+* - Released
+  - September 22, 2026
+  - September 3, 2026, first to a limited set of organizations
+  - September 29, 2026
+  - September 30, 2026 for select partners; generally available October 13
 * - Context window
-  - 1M tokens, input and output combined
   - 1M tokens
-  - Google; Anthropic
+  - 1,050,000 tokens (up to 922,000 input)
+  - 1,050,000 tokens (up to 922,000 input)
+  - 1,048,576 tokens, shared by input and output
+* - Longest single response
+  - 128,000 tokens
+  - 128,000 tokens
+  - 128,000 tokens
+  - 65,536 tokens by default; up to about 1M with long decode
 * - API price per million input and output tokens
+  - 4 and 20 dollars
+  - 10 and 50 dollars
+  - 2 and 10 dollars
   - 2 and 10 dollars through November 30, 2026; 4 and 20 dollars from
     December 1
-  - 4 and 20 dollars
-  - Google; Anthropic
-* - Wait before the first answer token in testing
-  - 44.7 seconds (high thinking)
-  - 684 seconds (max effort)
-  - Artificial Analysis
+* - Effort or thinking settings
+  - Low to max; default medium
+  - Low to max
+  - Low to max; default medium
+  - Low, medium or high; default medium
+* - On Amazon Bedrock
+  - Yes
+  - Yes
+  - Yes
+  - No
 ```
 
-Sources for the table:
-[Artificial Analysis comparison](https://artificialanalysis.ai/models/comparisons/gemini-4-argon-vs-claude-opus-5-5);
-[Google, Gemini 4 Argon model card](https://deepmind.google/models/model-cards/gemini-4-argon/);
+Sources:
+[Claude models overview](https://platform.claude.com/docs/en/models/overview);
 [Anthropic, Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5);
-[Vals AI, Gemini 4 Argon](https://www.vals.ai/models/google_gemini-4-argon);
-[Vals AI, Claude Opus 5.5](https://www.vals.ai/models/anthropic_claude-opus-5-5);
+[Anthropic, Effort](https://platform.claude.com/docs/en/build-with-claude/effort);
+[OpenAI, GPT-6 Astra model page](https://developers.openai.com/api/docs/models/gpt-6-astra);
+[OpenAI, GPT-6.1 Sol model page](https://developers.openai.com/api/docs/models/gpt-6.1-sol);
+[OpenAI, GPT-6 Astra](https://openai.com/index/gpt-6-astra/);
+[Google, Gemini 4 Argon model page](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon);
 [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing);
-[Claude models overview](https://platform.claude.com/docs/en/models/overview).
-Bold marks the higher figure in each row.
+[AWS, Bedrock model cards](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html).
+OpenAI charges more for prompts longer than 272,000 input tokens, as described
+above.
 
-Four lessons come out of this table:
+**Independent results.** Artificial Analysis runs the same tests on every model
+itself. Each model below was tested at its highest setting: max effort for the
+Anthropic and OpenAI models and high thinking for Argon.
 
-1. **Who ran the test matters.** On Terminal-Bench 4.0, which measures getting
-   real work done in a command-line terminal, Opus 5.5 scored 66.4 percent in
-   Anthropic's own run at its xhigh effort setting, the figure Google's model
-   card also lists, but 60 percent when Artificial Analysis ran the test
-   itself. Argon's score was nearly the same in both, 57.4 and 57 percent.
-2. **Each vendor shows its best side.** Google's model card leads with tests
-   Argon wins, such as DeepSWE, Vibe Code Bench and long-context retrieval,
-   while Anthropic's announcement compares Opus 5.5 with OpenAI's and its own
-   models and leaves Argon out. On the independent Artificial Analysis
-   comparison page, Argon scored higher on only one of the 10 tests listed,
-   AutomationBench.
-3. **Effort settings change both scores and waiting time.** Artificial Analysis
-   tested Opus 5.5 at max effort and Argon at its high thinking level. The two
-   generated text at about the same speed, roughly 100 tokens per second, but
-   Opus 5.5 thought for more than 11 minutes before its first answer token,
-   compared with about 45 seconds for Argon. That is Part 3 in action: more
-   effort bought a higher score at the cost of a much longer wait.
-4. **Price depends on the date and the task.** Argon's list price is half of
-   Opus 5.5's through November 30, 2026 and the same afterward. What a task
-   really costs also depends on how many tokens each model spends: Vals AI
-   reported about 15.68 dollars per test run on its index for Argon and 32.14
-   dollars for Opus 5.5. Small leads deserve caution too; Vals AI gives each
-   index score a margin of about one point, so a two-point gap is narrow.
+```{list-table} Four flagship models compared: independent results from Artificial Analysis
+:header-rows: 1
+:widths: 28 18 18 18 18
+
+* - Measure
+  - Claude Opus 5.5
+  - GPT-6 Astra
+  - GPT-6.1 Sol
+  - Gemini 4 Argon
+* - Intelligence Index v4.3.2 (higher is better)
+  - **58**
+  - 53
+  - 52
+  - 53
+* - Cost per Intelligence Index task
+  - 5.98 dollars
+  - 3.26 dollars
+  - **0.72 dollars**
+  - 1.99 dollars at the introductory price (3.98 dollars at the full price)
+* - Hallucination rate on AA-Omniscience (lower is better)
+  - Not given in the published summary
+  - 51%
+  - 54%
+  - **15%**
+* - Output speed
+  - **About 97 tokens per second**
+  - About 57 tokens per second
+  - About 66 tokens per second
+  - Not yet reported
+* - Time to first answer token, including thinking (lower is better)
+  - About 728 seconds
+  - **About 269 seconds**
+  - About 324 seconds
+  - Not yet reported
+```
+
+Sources:
+[Artificial Analysis, Claude Opus 5.5](https://artificialanalysis.ai/models/claude-opus-5-5);
+[Artificial Analysis, GPT-6 Astra](https://artificialanalysis.ai/models/gpt-6-astra);
+[Artificial Analysis, GPT-6.1 Sol and Claude Opus 5.5](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5);
+[Artificial Analysis, Gemini 4 Argon and Claude Opus 5.5](https://artificialanalysis.ai/models/comparisons/gemini-4-argon-vs-claude-opus-5-5);
+[Artificial Analysis, Gemini 4 Argon article](https://artificialanalysis.ai/articles/gemini-4-argon-google-top-three-labs).
+Bold marks the best figure in each row. Artificial Analysis updates its
+measurements, so figures on its pages can change over time; at the time of
+writing it had not yet published speed figures for Argon.
+
+In the same independent testing, Opus 5.5 led GPT-6.1 Sol on Humanity's Last
+Exam (61.4 percent against 52.9) and Terminal-Bench 4.0 (59.6 against 56.1),
+while Sol scored higher on GDP.pdf, which OpenAI describes as a test of
+answering questions about professional PDF documents (31.0 against 26.2)
+([Artificial Analysis](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5);
+[OpenAI, Introducing GPT-6.1 Sol](https://openai.com/index/introducing-gpt-6-1-sol/)).
+
+**Results reported by a vendor.** Google's model card for Argon reports scores
+for Argon, Astra and Opus 5.5 side by side; GPT-6.1 Sol is not included.
+
+```{list-table} Selected results from Google's Gemini 4 Argon model card (vendor-reported, October 2026)
+:header-rows: 1
+:widths: 34 22 22 22
+
+* - Benchmark (what it tests)
+  - Claude Opus 5.5
+  - GPT-6 Astra
+  - Gemini 4 Argon
+* - Terminal-bench 4.0 (work in a command-line terminal)
+  - **66.4%**
+  - 58.2%
+  - 57.4%
+* - FrontierSWE v2 (large software engineering projects)
+  - 62.3%
+  - **65.5%**
+  - 55.0%
+* - DeepSWE v1.1 (agentic coding)
+  - 74.2%
+  - 74.1%
+  - **77.9%**
+* - OSWorld-2.0, offline subset (operating a computer)
+  - Not reported
+  - **72.6%**
+  - 69.2%
+* - Vals Index (professional knowledge work)
+  - 67.0%
+  - 63.1%
+  - **68.9%**
+* - GraphWalks, 256K to 1M tokens (long-context reasoning, F1)
+  - 66.8%
+  - 71.8%
+  - **84.2%**
+```
+
+Source: [Google, Gemini 4 Argon model card](https://deepmind.google/models/model-cards/gemini-4-argon/).
+Bold marks the best figure in each row.
+
+Five lessons come out of these tables:
+
+1. **Who ran the test matters.** On Terminal-Bench 4.0, Opus 5.5 scored 66.4
+   percent in Anthropic's own run at its xhigh effort setting, the figure
+   Google's card also lists, but about 60 percent when Artificial Analysis ran
+   the test itself.
+2. **Versions of a benchmark differ.** OpenAI's announcement of Astra quotes a
+   score of 61.2 on an earlier version (4.1) of the Artificial Analysis
+   Intelligence Index, while the current version 4.3.2 gives Astra 53. Both are
+   correct for their version, and they cannot be compared with each other
+   ([OpenAI, GPT-6 Astra](https://openai.com/index/gpt-6-astra/)).
+3. **Effort changes the gap.** At low effort, Opus 5.5 and GPT-6.1 Sol both
+   score 42 on the Artificial Analysis index, at 0.55 and 0.13 dollars per task.
+   At max effort, Opus 5.5 pulls ahead, 58 to 52, but its cost per task rises to
+   5.98 dollars against 0.72 for Sol, and its time to first answer token grows
+   from under 7 seconds to more than 12 minutes
+   ([Artificial Analysis](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5)).
+   That is Part 3 in action.
+4. **Price per token is not price per task.** Argon and Sol charge the same
+   per token until November 30, 2026, yet Argon cost about 1.99 dollars per
+   index task against 0.72 for Sol, because it produced about 62,000 output
+   tokens per task. Astra has the highest price per token of the four but costs
+   less per task than Opus 5.5 at max effort.
+5. **A hallucination rate is not an accuracy score.** Artificial Analysis
+   defines the hallucination rate on its AA-Omniscience knowledge test as how
+   often a model guesses when it lacks the required knowledge, instead of
+   admitting it does not know
+   ([Artificial Analysis, AA-Omniscience](https://artificialanalysis.ai/articles/aa-omniscience-knowledge-hallucination-benchmark)).
+   Argon guessed far less often (15 percent against 51 for Astra), but Astra
+   answered more questions correctly (63 percent against 50 for Argon). One
+   model knows more; the other is better at knowing what it does not know.
 
 **Which should you choose?** There is no single winner, so match the model to
 the work:
 
-- **Gemini 4 Argon** is attractive for high-volume or cost-sensitive work while
-  its introductory price lasts, for very long documents and video, for the
-  knowledge-work and app-building tasks where it led above, and for teams that
-  already work in Google's tools.
-- **Claude Opus 5.5** is attractive for the hardest reasoning and for agentic
-  coding in a terminal, where it led in both the vendor and the independent
-  runs, and for work where it led the independent index. It is also the one of
-  the two you can use in this book's labs, because it is available on Amazon
-  Bedrock and Gemini is not.
-- **For either one**, run a small evaluation on your own tasks before you
-  commit, as {doc}`../module-2/01-evaluating-llms` recommends; a benchmark lead
-  of a few points rarely predicts which model will do better on your work.
+- **Claude Opus 5.5** led the independent intelligence index, and it led
+  terminal-based coding against the models tested in both vendor and
+  independent runs. It is the most expensive per task
+  at max effort and, of the three models with measured times, the slowest to
+  start answering at that setting.
+- **GPT-6 Astra** posted the best reported results in the tables above for
+  operating a computer and for large software projects. It has the highest price
+  per token and guessed often on the AA-Omniscience test.
+- **GPT-6.1 Sol** was by far the cheapest per task and matched Opus 5.5 at low
+  effort, which makes it a strong default for high-volume and budget-sensitive
+  work.
+- **Gemini 4 Argon** guessed least in independent testing, led long-context
+  reasoning and professional knowledge work in Google's tests, and can write very
+  long single responses with long decode. Its
+  price doubles on December 1, 2026.
+- **In this book's labs**, Opus 5.5, Astra and Sol are all available on Amazon
+  Bedrock; Argon is not.
+- **Whatever you pick**, run a small evaluation on your own tasks before you
+  commit, as {doc}`../module-2/01-evaluating-llms` recommends; a lead of a few
+  points on someone else's benchmark rarely predicts which model will do better
+  on your work.
 
 ## Part 3: Effort levels, explained in detail
 
@@ -1361,6 +1489,15 @@ effort or thinking setting, the test harness and timeouts, so always note the
 source and conditions before comparing models.
 ```
 
+```{admonition} Q11. GPT-6.1 Sol and Gemini 4 Argon both cost 2 dollars per million input tokens and 10 dollars per million output tokens, yet one cost about 0.72 dollars per task and the other about 1.99. How can that be?
+:class: dropdown
+The price per token was the same, but the number of tokens each model used per
+task was not. Argon produced about 62,000 output tokens per task in Artificial
+Analysis's testing, much of it thinking, so each task cost more. Cost per task
+depends on price per token times tokens used, and the tokens used depend on the
+model and the effort setting.
+```
+
 ## Key takeaways
 
 - **AI contains ML, which contains deep learning**; generative AI, foundation
@@ -1376,9 +1513,10 @@ source and conditions before comparing models.
 - Separate the **company**, the **model** and the **app**. Most flagship models
   are closed; open-weight models vary widely in license, and open weights are
   not the same as open source.
-- Flagships such as **Gemini 4 Argon** and **Claude Opus 5.5** trade leads
-  depending on the test, the tester and the effort setting; check who measured a
-  score, and evaluate on your own tasks.
+- The October 2026 flagships, **Claude Opus 5.5**, **GPT-6 Astra**,
+  **GPT-6.1 Sol** and **Gemini 4 Argon**, trade leads depending on the test, the
+  tester, the benchmark version and the effort setting; compare cost per task,
+  not just price per token, and evaluate on your own tasks.
 - An **effort level** sets how much work a model does on a request, mostly
   thinking, tool calls and self-checking. It is a **behavioral signal, not a
   token budget**, and it does not change what the model knows.
