@@ -86,9 +86,11 @@ sphinx:
     html_css_files:
       - custom.css
       - sidebar-toggle-fix.css
-    # Repairs the "Toggle primary sidebar" button, which does nothing in the shipped theme.
+    # Repairs the "Toggle primary sidebar" and "Toggle secondary sidebar" buttons, which do
+    # nothing in the shipped theme.
     # sphinx-book-theme and pydata-sphinx-theme bind their handlers with
-    # querySelector(".primary-toggle"), which takes the first match. This build renders two:
+    # querySelector(".primary-toggle") and querySelector(".secondary-toggle"), which take the
+    # first match. This build renders two of each:
     # the navbar icon, which is hidden at every width, and the button readers actually click.
     # The handlers land on the hidden one. See the comments in both _static files.
     html_js_files:
