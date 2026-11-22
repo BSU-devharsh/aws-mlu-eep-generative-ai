@@ -224,6 +224,19 @@ meets LLMs, and grades each claim by its evidence {cite}`trivedi2026engineering`
   readiness levels and notes that **trusted execution environments**, hardware
   enclaves that isolate computation, are the only approach in production today.
 
+### Where your prompts go: data retention on Amazon Bedrock
+
+A prompt sent to a hosted model is data you hand to someone else, so you should know whether it is kept. AWS states that Amazon Bedrock does not use prompts and completions to train AWS models or share them with third parties ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html)). Whether a request is retained is now a setting. An account or a Bedrock project has a **data retention mode**, ordered from least to most permissive: `none` (zero data retention: nothing is written to durable storage), `default`, `aws_review` (inputs and outputs may be kept for human safety review by AWS), and the legacy `provider_data_share`. New accounts and projects start at `inherit`, which defers to the broader scope ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/data-retention.html)).
+
+Most models need no retention, but some frontier models require it as a condition of use. For Anthropic's Claude Fable 5 and Fable 5.1, Bedrock retains all traffic for up to 30 days for automated abuse detection ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html)). If an account is set to `none` and calls such a model, Bedrock refuses the request rather than quietly retaining data.
+
+```bash
+# Pin an account to zero data retention
+aws bedrock put-account-data-retention --mode none
+```
+
+A common pattern keeps production accounts at `none`, enforced across the organization with a service control policy, and runs any experiment that needs a retaining model in its own Bedrock project ([AWS Security Blog](https://aws.amazon.com/blogs/security/enforce-zero-data-retention-on-amazon-bedrock-with-bedrock-projects-and-service-control-policies/)). The companion textbook places provider retention among the other controls for AI data, from anonymization to deletion ([Protecting AI Data](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#protecting-ai-data-anonymization-synthetic-data-and-unlearning)).
+
 ### Bounding AI inside security systems
 
 When AI becomes part of a security system, its own account of what it did is
