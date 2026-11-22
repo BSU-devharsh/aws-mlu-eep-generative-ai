@@ -235,6 +235,14 @@ and "return items within two weeks" even with different words. A **vector
 database** (see the {doc}`ai-and-tools-reference` chapter) stores these vectors and does
 the nearest-neighbor search efficiently at scale.
 
+### Searching millions of vectors: approximate nearest neighbors
+
+The code above compares the query with every document. That **exact k-nearest-neighbor (k-NN)** search is fine for three documents, but its cost grows with the number of vectors times their dimension, and a knowledge base can hold millions of chunks with 1,024 dimensions each. Vector databases therefore build an index for **approximate nearest neighbor (ANN)** search, which trades a small loss of recall for a large gain in speed.
+
+The most widely used index is **HNSW** (Hierarchical Navigable Small World) {cite}`malkov2020hnsw`. It links each vector to a few of its neighbors in a graph, and builds a stack of sparser graphs on top, like the express lanes of a highway. A search starts in the sparsest top layer, moves greedily toward the query, then drops a layer and repeats until it reaches the bottom layer. Two settings control the trade-off: how many neighbors each vector keeps, which costs memory, and how many candidates a search explores, which costs time. A second family, **IVF** (inverted file), clusters the vectors and searches only the clusters nearest the query. The vector engine in Amazon OpenSearch Serverless, a common store for Bedrock Knowledge Bases, offers exact k-NN and ANN search with both HNSW and IVF ([AWS](https://aws.amazon.com/opensearch-service/serverless-vector-engine)).
+
+**Embeddings are not anonymized data.** It is tempting to think a vector of numbers hides the text it came from. It does not. Researchers trained a model that recovered 92 percent of 32-token inputs exactly from their embeddings, and recovered full names from embedded clinical notes {cite}`morris2023embeddings`. Protect a vector store with the same access control and encryption as the documents in it.
+
 ## How tokens and embeddings relate
 
 They are different stages of the pipeline, do not confuse them:

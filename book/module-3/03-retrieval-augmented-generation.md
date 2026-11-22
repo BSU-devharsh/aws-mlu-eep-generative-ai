@@ -111,6 +111,15 @@ with that passage, and the LLM composes a grounded answer, citing real policy
 text rather than guessing.
 ```
 
+### Knowledge graphs and GraphRAG
+
+Similarity search finds passages that sound like the question. It struggles when the answer depends on relationships spread across many documents, such as which suppliers of a failed part also serve another plant. **GraphRAG** adds a **knowledge graph**, a store of entities and the relationships between them, to retrieval. Amazon Bedrock Knowledge Bases has offered GraphRAG since March 2025: during ingestion a foundation model extracts entities and relationships from your documents, and the service stores the graph alongside the embeddings in Amazon Neptune Analytics ([AWS](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-bedrock-knowledge-bases-graphrag-generally-available)). At query time it runs a vector search for the relevant chunks, then follows graph links to related entities and passages, which gives the model connected context and makes the answer easier to trace. The current limits include Amazon S3 as the only data source and no options to customize how the graph is built ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-graphs.html)). The {doc}`../primer/ai-concepts-assistants-effort` places knowledge graphs in the wider family of symbolic and semantic AI.
+
+```{admonition} Security view
+:class: warning
+Everything retrieval returns enters the prompt, so a document can carry instructions as well as facts. A poisoned page in the knowledge base can tell the model to ignore its rules or to send data somewhere, which is **indirect prompt injection**. Treat retrieved text as data: filter retrieval by the user's own permissions so the model never sees documents the user may not read, keep write access to the knowledge base as tight as write access to code, and check the output before it leaves. The companion textbook covers these controls ([The Output Channel as an Exfiltration Path](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#the-output-channel-as-an-exfiltration-path)) and when to use RAG instead of fine-tuning from a security point of view ([Choosing Between RAG and Fine-Tuning](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#choosing-between-rag-and-fine-tuning-knowledge-versus-behavior)).
+```
+
 ## Multimodal embeddings and multimodal RAG
 
 RAG extends beyond text. Multimodal models face three classic challenges:
@@ -160,5 +169,8 @@ Implement RAG and multimodal RAG on Amazon Bedrock in
   current data at query time.
 - **Multimodal embeddings** put text and images in one space, enabling **multimodal
   RAG**.
+- **GraphRAG** adds a knowledge graph of entities and relationships to vector
+  search. Retrieved text is untrusted input: filter it by the user's permissions
+  and guard against indirect prompt injection.
 
 Next, we let models act, not just retrieve, with agents.

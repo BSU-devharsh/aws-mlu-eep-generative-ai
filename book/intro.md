@@ -51,6 +51,34 @@ explanation followed by a set of labs.
   - Build production-style generative AI applications.
 ```
 
+## Companion book on AI security
+
+This book shows how to build with generative AI. Its companion, the open textbook *Cybersecurity: Theory, Practice, and Ethics* by the same author ([book.com.puter.tips](https://book.com.puter.tips/)), shows how these systems are attacked and how to defend them. Where a chapter here explains how something works, a **Security view** note or a link points to the matching section there.
+
+```{list-table}
+:header-rows: 1
+:widths: 30 30 40
+
+* - Topic
+  - This book
+  - Companion book (security)
+* - Symbolic, pattern, and semantic AI
+  - {doc}`primer/ai-concepts-assistants-effort`
+  - [Section 17.3](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#symbolic-pattern-and-semantic-ai-three-ways-to-hold-knowledge)
+* - Prompting and its abuse
+  - {doc}`module-1/03-prompt-engineering`, {doc}`module-2/04-improving-security-and-safety`
+  - [Five threat-modeling lenses, including the OWASP Top 10 for LLM Applications](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#one-system-five-lenses-stride-pasta-maestro-and-the-two-owasp-lists)
+* - Evaluating models
+  - {doc}`module-2/01-evaluating-llms`
+  - [Evaluating models under class imbalance](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#evaluating-models-under-class-imbalance-beyond-accuracy)
+* - Tool use, MCP, and agents
+  - {doc}`module-3/04-agents`
+  - [MCP tool poisoning](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#mcp-tool-poisoning-when-tool-metadata-is-the-attack) and [the output channel as an exfiltration path](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#the-output-channel-as-an-exfiltration-path)
+* - Logging and monitoring AI
+  - {doc}`module-3/04-agents` (AgentCore Observability)
+  - [Protecting AI telemetry](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#protecting-ai-telemetry-redact-before-the-siem)
+```
+
 ## How to read each chapter
 
 Every chapter follows the same rhythm so you always know where you are:

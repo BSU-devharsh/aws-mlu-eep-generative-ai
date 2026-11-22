@@ -185,6 +185,23 @@ described:
   supported is still a finding.
 ```
 
+## Measuring a classifier when one class is rare
+
+Many evaluation tasks are classification: is this message toxic, is this transaction fraud, does this answer cite a real source. When one class is rare, **accuracy** misleads. Picture 100,000 transactions of which 517 are fraud. A model that calls every transaction legitimate is 99.48 percent accurate and catches no fraud at all. Use the **confusion matrix** instead, which counts true positives, false positives, false negatives, and true negatives, and the measures built on it:
+
+- **Precision**: of the items the model flagged, the share that were truly positive.
+- **Recall**: of the truly positive items, the share the model flagged.
+- **F1 score**: the harmonic mean of precision and recall, high only when both are.
+- **PR-AUC**: the area under the precision-recall curve across all thresholds. A random model scores about the share of positives, 0.005 here, so on rare classes it separates good models from weak ones more clearly than accuracy or ROC-AUC.
+
+Then choose the decision threshold from what each mistake costs. If a missed fraud costs 100 times what a false alarm costs, the best threshold on calibrated probabilities is the false-alarm cost divided by the sum of both costs, about 0.01, far below the default of 0.5. The companion textbook works through this example with code ([Evaluating Models Under Class Imbalance](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#evaluating-models-under-class-imbalance-beyond-accuracy)).
+
+## Drift: when yesterday's evaluation stops being true
+
+An evaluation describes a model on the data you tested. Production data moves. **Data drift** is a change in the inputs: users ask about a new product, write in another language, or paste longer documents. **Concept drift** is a change in the right answer for the same input: a policy, a price, or a law changes, so a response that was correct last month is wrong today. Evaluations also go stale when **benchmark contamination** leaks test questions into training data, so a score measures memory rather than skill.
+
+Treat evaluation as continuous. Keep a fixed test set to catch regressions, sample live traffic for fresh review, watch input statistics and user feedback for shifts, and re-run the full evaluation whenever the model, the prompt, the retrieved data, or the world it describes changes.
+
 ## Evaluation on Amazon Bedrock
 
 Amazon Bedrock provides built-in model evaluation in two flavors.
@@ -233,5 +250,8 @@ community toward harder, fresher, task-specific evaluations, exactly the
 - Two 2026 case studies show evaluation in practice: test whether a model just
   agrees with the user (**sycophancy**), validate any LLM judge against human
   labels, and check that a score measures what you think before relying on it.
+- When one class is rare, report **precision, recall, F1, and PR-AUC**, not
+  accuracy, and set thresholds from the cost of each error. Re-evaluate as
+  **data drift** and **concept drift** change what correct looks like.
 
 Next we step back from measurement to the principles that make AI responsible.

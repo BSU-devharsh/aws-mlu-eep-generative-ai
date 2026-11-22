@@ -157,6 +157,11 @@ powers the retrieval use cases above and the retrieval-augmented generation you
 will build in Module 3.
 ```
 
+```{admonition} Security view
+:class: warning
+Every input channel is also an instruction channel. Text inside an image, a scanned page, or an audio clip can steer a multimodal model the same way a typed prompt can, and a person looking at the input may not see it. In August 2025, Trail of Bits showed images whose hidden text appears only after the automatic downscaling many AI systems apply before the model sees the picture; the researchers used them to exfiltrate data through Google's Gemini CLI ([Trail of Bits](https://blog.trailofbits.com/2025/08/21/weaponizing-image-scaling-against-production-ai-systems/)). Show users the image exactly as the model receives it, treat text read from images as untrusted data, and require confirmation before any action the model proposes after reading one. The companion textbook covers multimodal injection with the other AI attack paths ([Section 17.13](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#one-system-five-lenses-stride-pasta-maestro-and-the-two-owasp-lists)).
+```
+
 ## In the news
 
 Multimodality has become a baseline expectation rather than a special feature.
