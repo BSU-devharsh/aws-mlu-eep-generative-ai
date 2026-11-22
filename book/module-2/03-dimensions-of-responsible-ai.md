@@ -81,6 +81,12 @@ the reasons behind them {cite}`trivedi2026tool`.
 the responsible-AI sense, it is the mitigation of unintended **bias**, where bias
 means a disparity in performance across groups.
 
+**Where bias comes from.** Bias can enter at every stage of building a model {cite}`suresh2021framework`. **Historical bias** is in the world itself, so even perfectly collected data reproduces it: a hiring model trained on past promotion decisions learns past discrimination. **Representation bias** comes from sampling: a group that is rare in the training data gets worse predictions. **Measurement bias** comes from proxies: a label or feature that measures the real target differently for different groups, such as arrests used as a stand-in for crime. Each source needs a different fix, which is why collecting more data does not cure historical bias.
+
+**Measuring it.** Three group-fairness criteria are common. **Demographic parity** asks that groups receive positive predictions at the same rate. **Equal opportunity** asks for equal true-positive rates, and **equalized odds** asks for equal true-positive and false-positive rates, both conditional on the true label {cite}`hardt2016equality`. These criteria can conflict: when two groups have different base rates, a well-calibrated model cannot equalize all error rates at once {cite}`chouldechova2017fair`, so choosing a criterion is a policy decision, not only a technical one. The {doc}`../appendix-traditional-ml` works a numerical example, including the four-fifths rule for disparate impact.
+
+**Mitigating it.** Fixes act at three stages: **pre-processing** changes the data (re-weighting or resampling under-represented groups), **in-processing** adds a fairness constraint to training, and **post-processing** adjusts decisions, for example with per-group thresholds. For generative models, test with **counterfactual prompts**: pairs that differ only in a name, gender, or other attribute, then compare the answers.
+
 Fairness can also be attacked on purpose. In collaborative learning, a malicious
 participant can steer a shared model toward unequal treatment of groups while
 keeping its accuracy high; Chapter 4 describes this fairness poisoning and one
@@ -99,6 +105,10 @@ These are often confused but differ:
   making users aware when they are interacting with AI.
 - **Explainability** is the ability to understand and evaluate the system's
   outputs, helping users understand how a decision was reached and build trust.
+
+**Explaining one decision.** For models with clear input features, such as a credit or fraud model, **local attribution** methods estimate how much each feature pushed one prediction up or down. **LIME** fits a simple, readable model around the single input being explained {cite}`ribeiro2016why`. **SHAP** gives each feature a Shapley value from cooperative game theory, so the contributions add up to the difference between the prediction and the average prediction {cite}`lundberg2017unified`. Local explanations support notices to individuals, such as the reasons a loan was denied; **global** explanations average attributions over many predictions to show what the model relies on overall. On AWS, Amazon SageMaker Clarify computed SHAP attributions and bias metrics, but AWS closed it to new customers on July 30, 2026 and now points new users to the open-source SHAP library, the published bias-metric formulas, and Amazon Bedrock Evaluations for foundation models ([AWS documentation](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-availability-change.html)).
+
+**Explaining an LLM.** Feature attribution over thousands of tokens says little about why a long answer came out as it did. In practice, explanations for LLM applications come from **grounding**, showing the sources an answer used, as in the worked example below, and from the model's own written reasoning. That reasoning helps, but it is not a faithful record of how the model decided: when researchers slipped hints into questions, Claude 3.7 Sonnet mentioned a hint it had used only 25 percent of the time and DeepSeek R1 39 percent {cite}`chen2025reasoning`. Treat a model's stated reasoning as a claim to check, not as proof.
 
 ```{admonition} Worked example: explainability via citations
 :class: note

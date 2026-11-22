@@ -231,6 +231,8 @@ chapter map closely onto these regimes, which is why treating responsible AI as 
 governance practice, rather than a feature, increasingly aligns with legal
 obligation, not just good intentions.
 
+The companion textbook covers the legal side in more depth: the EU AI Act's risk tiers and its duties for providers and deployers, the 2026 Digital Omnibus that moved the high-risk deadlines to December 2027 and August 2028, ISO/IEC 42001, and NIST's newer profiles ([Governing AI: Laws, Standards, and Roles](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#governing-ai-laws-standards-and-roles)).
+
 ## Key takeaways
 
 - **Responsible AI** maximizes benefit and minimizes harm, defined through
