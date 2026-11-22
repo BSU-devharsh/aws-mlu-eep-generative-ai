@@ -118,6 +118,117 @@ toolkits, ReAct, and runtimes, map directly onto what the managed service does f
 you.
 ```
 
+## Tool use on Amazon Bedrock with the Converse API
+
+On Amazon Bedrock the model never runs a tool itself. You send the definitions of the tools it may use along with the conversation. When the model decides it needs one, it stops and returns a request that names the tool and the input to give it. Your code runs the tool and sends the result back, and the model continues. AWS calls this **client-side tool calling**, and the Converse API offers it with the same request shape for every model that supports tools ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use-inference-call.html)).
+
+1. **Send the message and the tool definitions.** Each tool is a `toolSpec` with a `name`, a `description` the model reads to decide when to use it, and an `inputSchema` written in JSON Schema, all inside the request's `toolConfig`.
+2. **Read the tool request.** If the model wants a tool, the response's `stopReason` is `tool_use` and the assistant message holds a `toolUse` block with a `toolUseId`, the tool `name`, and its `input`.
+3. **Run the tool in your code.** Check that the name is one you offered and that the input is valid before you act on it.
+4. **Return the result.** Add the assistant message to the conversation, then a user message with a `toolResult` block carrying the same `toolUseId` and the tool's output.
+5. **Repeat until the model answers.** The loop ends when `stopReason` is something other than `tool_use`, usually `end_turn`.
+
+```python
+import boto3
+
+client = boto3.client("bedrock-runtime")
+MODEL_ID = "your-model-id"   # any Bedrock model that supports tool use
+
+tool_config = {"tools": [{"toolSpec": {
+    "name": "get_weather",
+    "description": "Current temperature in Celsius for a city.",
+    "inputSchema": {"json": {"type": "object",
+                             "properties": {"city": {"type": "string"}},
+                             "required": ["city"]}}}}]}
+
+def get_weather(city):        # your code; the model only asks for it
+    return {"city": city, "celsius": 21}
+
+TOOLS = {"get_weather": get_weather}
+messages = [{"role": "user", "content": [{"text": "Is it warm in Lisbon right now?"}]}]
+
+while True:
+    response = client.converse(modelId=MODEL_ID, messages=messages, toolConfig=tool_config)
+    message = response["output"]["message"]
+    messages.append(message)
+    if response["stopReason"] != "tool_use":
+        break
+    results = []
+    for block in message["content"]:
+        if "toolUse" in block:
+            use = block["toolUse"]
+            if use["name"] not in TOOLS:          # never run a tool you did not offer
+                raise ValueError(f"unknown tool {use['name']}")
+            output = TOOLS[use["name"]](**use["input"])
+            results.append({"toolResult": {"toolUseId": use["toolUseId"],
+                                           "content": [{"json": output}]}})
+    messages.append({"role": "user", "content": results})
+
+print(message["content"][0]["text"])
+```
+
+The same loop is what LangChain agents and Bedrock Agents run for you; seeing it bare makes clear where the controls belong. The model proposes, and your code decides whether to execute.
+
+## Structured outputs and strict tool use
+
+A model asked for JSON usually returns JSON, but usually is not good enough for a program that parses every reply. Since February 4, 2026, Amazon Bedrock has offered **structured outputs**, which use **constrained decoding**: at each step the service allows only the tokens that keep the reply valid against a JSON schema you supply, so the model cannot produce output that breaks it ([AWS](https://aws.amazon.com/about-aws/whats-new/2026/02/structured-outputs-available-amazon-bedrock)). It works with the Converse, ConverseStream, InvokeModel, and InvokeModelWithResponseStream APIs; in the Converse API the schema goes in the request's `outputConfig.textFormat` field. A second mechanism, **strict tool use**, adds `strict: true` to a tool definition so that the tool name and input the model returns are guaranteed to match the tool's input schema.
+
+The schemas follow a supported subset of JSON Schema Draft 2020-12. Every object must set `additionalProperties` to `false`, Bedrock rejects a schema with unsupported features with an error, and the first request with a new schema can take minutes while the service compiles it into a grammar ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/structured-output.html)). Support began with Anthropic's Claude 4.5 models and selected open-weight models and has since been extended, so check the model support table before you rely on it.
+
+A schema guarantees the shape of an answer, not its truth or safety. A valid `summary` field can still be wrong, or can carry text it should not, so validate the values too.
+
+## The Model Context Protocol
+
+Tool definitions written into one application work only in that application. The **Model Context Protocol (MCP)**, released by Anthropic in November 2024 and placed under the Linux Foundation's Agentic AI Foundation in December 2025, standardizes the connection instead, so a tool is built once as an MCP server and used by any MCP-aware application.
+
+- **Host, clients, and servers.** The **host** is the AI application, such as a chat app, an IDE, or an agent. For each server it connects to, the host runs one **client**. A **server** offers capabilities through three primitives: **tools** the model can call, **resources** such as files and records it can read, and **prompts**, which are reusable templates.
+- **Transports.** A local server usually talks over standard input and output (stdio); a remote server uses **Streamable HTTP**.
+- **The current version.** The specification dated July 28, 2026 made the protocol stateless. The old initialize handshake and session identifier are gone; every request carries its own protocol version and capabilities, so any server instance behind a load balancer can answer it, and HTTP requests name the method and tool in headers that gateways can route on. Requests that a server once sent back to the client, such as asking the user a question, now travel as Multi Round-Trip Requests inside the original call ([MCP specification](https://modelcontextprotocol.io/specification/2026-07-28)).
+
+MCP and Converse tool use fit together. MCP is how the host discovers a server's tools and calls them; Converse tool use is how the model asks for one. A host lists an MCP server's tools, turns each into a `toolSpec`, and when the model returns a `toolUse` block, calls the matching tool on the server.
+
+```{admonition} Security view
+:class: warning
+A tool's description goes straight into the model's context, so a malicious or compromised MCP server can hide instructions in it, the attack known as tool poisoning. Connect only servers you trust, pin and review their tool definitions, give each server the narrowest credentials it needs, and require a person to approve actions that cannot be undone. The companion textbook covers the attack and the controls in detail ([Section 17.13, MCP Tool Poisoning](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#mcp-tool-poisoning-when-tool-metadata-is-the-attack)).
+```
+
+## Amazon Bedrock AgentCore
+
+Building an agent is one problem; running it in production is another. **Amazon Bedrock AgentCore**, generally available since October 13, 2025, is a set of managed services for running agents built with any framework, such as LangGraph, CrewAI, LlamaIndex, Google ADK, or the OpenAI Agents SDK, and any model ([AWS](https://aws.amazon.com/about-aws/whats-new/2025/10/amazon-bedrock-agentcore-available)). Bedrock Agents, described above, builds the agent for you; AgentCore hosts and governs agents you build yourself.
+
+```{list-table}
+:header-rows: 1
+:widths: 22 78
+
+* - Service
+  - What it does
+* - Runtime
+  - Serverless hosting for agents, with each session isolated from the others
+* - Memory
+  - Short-term context within a session and long-term memory across sessions
+* - Gateway
+  - Turns existing APIs and AWS Lambda functions into tools agents can call over MCP, and connects to MCP servers
+* - Identity
+  - Gives agents their own identities and manages the credentials they use to reach other services on a user's behalf
+* - Code Interpreter
+  - Runs code the agent writes in an isolated environment
+* - Browser
+  - A managed web browser the agent can drive
+* - Observability
+  - Traces, metrics, and dashboards in Amazon CloudWatch
+* - Policy
+  - Rules, written in the Cedar policy language or drafted from plain English, that allow or deny an agent's tool calls; generally available since March 3, 2026
+* - Evaluations
+  - Built-in and custom evaluators that score agent quality continuously; generally available since March 31, 2026
+```
+
+Policy and Evaluations were announced in preview on December 2, 2025 and reached general availability in March 2026 ([AWS News Blog](https://aws.amazon.com/blogs/aws/amazon-bedrock-agentcore-adds-quality-evaluations-and-policy-controls-for-deploying-trusted-ai-agents/)). Policy matters because it is enforced outside the model: policies attach to an AgentCore Gateway, which checks every agent-to-tool request before the tool runs, so a prompt cannot talk its way past a rule.
+
+```{admonition} Security view
+:class: warning
+Isolation settings deserve testing, not trust. In March 2026, researchers at BeyondTrust disclosed that the Code Interpreter's Sandbox network mode still let DNS queries out, enough to run commands and move data over DNS. AWS fixed the DNS path in April 2026 and recommends VPC mode when you need full control of traffic. The companion textbook explains this case and the output-side controls that contain an agent ([Section 17.13, The Output Channel as an Exfiltration Path](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#the-output-channel-as-an-exfiltration-path)).
+```
+
 ## In the news
 
 Agents are the most active frontier in AI. **Agentic AI** has expanded into coding
@@ -141,5 +252,14 @@ Build an agent on Amazon Bedrock in {doc}`labs/Lab-4/lab4_agents`.
   Agents offers this as a managed service.
 - Agents need capable models, are hard to debug, raise security risks, and are
   overkill for simple tasks.
+- On Amazon Bedrock the model only **requests** a tool; your code runs it. The
+  Converse API loop is `toolUse` out, `toolResult` back, until `stopReason` is
+  no longer `tool_use`.
+- **Structured outputs** and **strict tool use** guarantee the shape of JSON
+  answers and tool inputs through constrained decoding, not their truth.
+- **MCP** standardizes how hosts connect to tool servers; its July 2026 version
+  is stateless. Tool descriptions are untrusted input.
+- **AgentCore** runs and governs agents built with any framework; its Policy
+  service enforces tool rules at the gateway, outside the model.
 
 Finally, we extend applications across modalities.

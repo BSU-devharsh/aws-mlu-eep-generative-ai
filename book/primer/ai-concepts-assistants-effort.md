@@ -388,6 +388,51 @@ acceptable use policy
 ([Llama 4 license](https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE)).
 Part 2 notes the license for each model family.
 
+### Symbolic, pattern, and semantic AI
+
+AI has grown from two traditions, and a third label is common in industry. **Symbolic AI** stores knowledge as explicit symbols and rules and reasons by logic and search. It is the tradition of the 1956 Dartmouth proposal, of Allen Newell and Herbert Simon's **physical symbol system hypothesis**, which held that a system that manipulates symbols has the necessary and sufficient means for general intelligent action {cite}`newell1976computer`, and of the **expert systems** of the 1970s and 1980s, such as the medical adviser MYCIN, which combined a base of if-then rules with an inference engine. Its decisions can be traced rule by rule, but it is brittle: it fails on cases its rules did not foresee, and every rule must be written and maintained by experts.
+
+**Pattern AI** is an informal name for what textbooks call **sub-symbolic**, **connectionist**, or **statistical** AI. It stores knowledge as numbers, the weights of a model, and learns them from examples instead of being told the rules. The connectionist revival of the 1980s, captured in Rumelhart and McClelland's *Parallel Distributed Processing* {cite}`rumelhart1986parallel`, led to the deep learning and the large language models in the rest of this book. Pattern AI handles noisy, high-volume data such as images, speech and free text, where rules are too many to write. Its weaknesses mirror symbolic AI's strengths: its reasoning is hard to inspect, it needs large amounts of data and compute, and it can be fluent and wrong.
+
+**Semantic AI** is also an industry term rather than a research tradition. It means representing what data *means* explicitly, with **ontologies** (formal vocabularies of concepts and their relationships), **knowledge graphs** (facts stored as subject, predicate, object triples), metadata, and **semantic layers** that define each business metric once. It is symbolic knowledge representation applied to enterprise data, and it has open standards: the W3C's Resource Description Framework (RDF) for triples, the Web Ontology Language (OWL 2) for ontologies, and the SPARQL query language. RDF 1.1 is the current W3C Recommendation, and RDF 1.2, which lets a triple be the object of another triple, became a Candidate Recommendation in April 2026 ([W3C](https://www.w3.org/news/2026/w3c-invites-implementations-of-rdf-1-2-concepts-and-abstract-data-model-and-rdf-1-2-semantics)). Semantic AI resolves ambiguity that pattern models guess at: whether *Apple* means the fruit or the company, or which contract rules a figure such as annual recurring revenue follows. It also ties an answer to a definition and its lineage, which auditors can check.
+
+```{list-table}
+:header-rows: 1
+:widths: 18 27 27 28
+
+* -
+  - Symbolic AI
+  - Pattern AI
+  - Semantic AI
+* - Knowledge stored as
+  - Hand-written rules and facts
+  - Learned weights
+  - Ontologies, knowledge graphs, metric definitions
+* - How it gets knowledge
+  - Experts encode it
+  - Learned from data
+  - Modeled by experts, often extracted with ML help
+* - Explainability
+  - High: the rule chain is the explanation
+  - Low: the answer is a statistical likelihood
+  - High for definitions and relationships
+* - Typical failure
+  - Brittle on unforeseen cases
+  - Confidently wrong, hard to audit
+  - Incomplete or stale ontology
+* - Good fit
+  - Compliance checks, formal verification, configuration
+  - Vision, speech, translation, generation, forecasting
+  - Enterprise search, consistent metrics, grounding agents
+```
+
+The three work best together, and most modern systems are **hybrids**. **Neuro-symbolic** systems pair a neural model with a symbolic engine: DeepMind's AlphaGeometry, published in *Nature* in January 2024, used a language model to suggest geometric constructions and a symbolic deduction engine to prove theorems, and solved 25 of 30 olympiad geometry problems {cite}`trinh2024solving`. **GraphRAG** adds a knowledge graph to retrieval: Amazon Bedrock Knowledge Bases builds a graph of the entities and relationships in your documents and stores it with the embeddings in Amazon Neptune Analytics, a capability generally available since March 2025 ([AWS](https://aws.amazon.com/about-aws/whats-new/2025/03/amazon-bedrock-knowledge-bases-graphrag-generally-available)). Even an ordinary agent is a hybrid: the language model decides what to do, and deterministic tools, a calculator, a database query, a rule engine, compute the answer ({doc}`../module-3/04-agents`).
+
+```{admonition} Security view
+:class: note
+The same split shapes security tools. Signature rules are symbolic, auditable, and easy to evade with a small change; machine-learning detectors are pattern AI that generalize but can be evaded by adversarial inputs and need careful evaluation on imbalanced data. The companion textbook covers both in its intrusion detection chapter ([Chapter 12](https://book.com.puter.tips/chapters/12_idps/chapter12.html)) and its AI security chapter ([Section 17.13](https://book.com.puter.tips/chapters/17_emerging/chapter17.html)).
+```
+
 ### The terms at a glance
 
 ```{list-table}
@@ -400,6 +445,15 @@ Part 2 notes the license for each model family.
 * - AI
   - Machines doing tasks that need human-like intelligence
   - Field (broadest)
+* - Symbolic AI
+  - Knowledge as explicit rules and logic, written by experts
+  - Tradition within AI
+* - Pattern (connectionist) AI
+  - Knowledge as learned weights; includes ML and deep learning
+  - Tradition within AI
+* - Semantic AI
+  - Meaning made explicit with ontologies and knowledge graphs
+  - Industry term for symbolic knowledge representation
 * - Machine learning
   - Learning patterns from data instead of hand-written rules
   - Approach within AI
@@ -1498,6 +1552,16 @@ depends on price per token times tokens used, and the tokens used depend on the
 model and the effort setting.
 ```
 
+```{admonition} Q12. A bank wants a chatbot that answers questions about its fee schedule and must show auditors which rule produced each answer. Which mix of symbolic, pattern and semantic AI fits?
+:class: dropdown
+A hybrid. A language model, which is pattern AI, reads the customer's question
+and writes the reply. The fee rules and their definitions live in a knowledge
+graph or rule engine, which is symbolic and semantic AI, and the model calls it
+as a tool or retrieves from it. The rule engine computes the fee and records
+which rule fired, so auditors can trace each answer to a definition instead of
+to the model's weights.
+```
+
 ## Key takeaways
 
 - **AI contains ML, which contains deep learning**; generative AI, foundation
@@ -1507,6 +1571,11 @@ model and the effort setting.
   thresholds instead: 10<sup>26</sup> operations for frontier models in
   California and New York, and 10<sup>25</sup> for the EU's presumption of
   systemic risk.
+- **Symbolic AI** stores knowledge as explicit rules, **pattern AI** learns it
+  as weights from data, and **semantic AI** makes meaning explicit with
+  ontologies and knowledge graphs. Rules are auditable but brittle, learned
+  models are flexible but opaque, and most modern systems, from AlphaGeometry
+  to GraphRAG to tool-using agents, combine them.
 - **Agentic AI** is a way of using models in a loop with tools. **AGI** and
   **superintelligence** are hypothetical capability levels with competing
   definitions and no agreed test.

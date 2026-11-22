@@ -82,6 +82,27 @@ Cache deterministic queries (temperature zero); creative responses may be hurt b
 caching. Set an expiration so cached answers do not go stale, and size your store
 appropriately.
 
+### Prompt caching
+
+Response caching reuses a whole answer. **Prompt caching** reuses part of the work of reading a prompt. Many applications send the same long prefix on every call: a system prompt, tool definitions, a policy manual, or the earlier turns of a conversation. With prompt caching, Amazon Bedrock stores the model's processed state for that prefix at a **cache checkpoint**, and later requests that start with the same prefix read it from the cache instead of processing it again ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html)). AWS reports that this can cut input token costs by up to 90 percent for repeated context ([AWS blog](https://aws.amazon.com/blogs/machine-learning/optimizing-cost-and-latency-with-amazon-bedrock-prompt-caching/)). The model still reads the whole prompt, so the answer does not depend on whether the prefix came from the cache.
+
+Bedrock supports two kinds. With **implicit** caching, the service reuses eligible prefixes without any change to your request. With **explicit** caching, you mark where the reusable prefix ends by adding a `cachePoint` block in the `system`, `messages`, or `tools` field of a Converse request.
+
+```python
+response = client.converse(
+    modelId=MODEL_ID,
+    system=[{"text": LONG_POLICY_MANUAL},          # same on every call
+            {"cachePoint": {"type": "default"}}],  # cache everything above
+    messages=[{"role": "user", "content": [{"text": question}]}],  # changes per call
+)
+usage = response["usage"]
+print(usage.get("cacheWriteInputTokens", 0), usage.get("cacheReadInputTokens", 0))
+```
+
+A few rules decide whether caching pays off. Each model has a minimum prefix length per checkpoint, from 512 to 4,096 tokens depending on the model, and a limit on checkpoints per request, four for Claude models. A cache entry lives for a short time to live, five minutes by default and one hour on some models, and each hit resets the timer. The response's `cacheWriteInputTokens` and `cacheReadInputTokens` fields show whether a call wrote or read the cache. Because the match is on the prefix, put the stable content first and the changing content last; one changed character early in the prompt means a cache miss for everything after it. Prompt caching works with on-demand inference, not with batch inference.
+
+Prompt caching is not memory. The model remembers nothing between calls; you still send the full prompt each time, and the cache only saves the cost of reading it.
+
 ### Handling long conversations
 
 LLMs have a finite context window, and naively keeping every message causes three
@@ -143,7 +164,9 @@ and retrieval remain essential for cost control even as raw context windows grow
   **chat prompt templates** structure them.
 - A chatbot is an **LLM + prompt template + memory**, looping retrieve, respond,
   and save.
-- **Caching** cuts cost and latency for repeated, deterministic queries.
+- **Response caching** cuts cost and latency for repeated, deterministic
+  queries; **prompt caching** reuses a long, stable prompt prefix across calls
+  and bills cached reads at a much lower rate.
 - Long conversations need **window** or **summary** memory; stuffing whole
   documents into the prompt does not scale, motivating RAG.
 
