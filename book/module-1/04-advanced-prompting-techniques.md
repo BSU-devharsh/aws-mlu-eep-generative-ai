@@ -113,7 +113,7 @@ turning those logits into actual text. There are two broad styles:
   - The sampled token is not guaranteed to be the single most likely one.
 * - Can get stuck in repetitive loops; output is not "creative."
   - Allows greater diversity in output.
-* - Equivalent to sampling with `T = 0`.
+* - The limit of temperature sampling as `T` approaches 0.
   - Controlled by temperature, top-p, and top-k.
 ```
 
