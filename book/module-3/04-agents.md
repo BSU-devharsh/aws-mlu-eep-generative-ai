@@ -169,6 +169,44 @@ print(message["content"][0]["text"])
 
 The same loop is what LangChain agents and Bedrock Agents run for you; seeing it bare makes clear where the controls belong. The model proposes, and your code decides whether to execute.
 
+### Stop conditions and safe retries
+
+The loop above is an **agent harness** in miniature: ordinary code that calls the model, checks each proposed action, runs the allowed ones, and decides when to stop. As written it stops only when the model says so, which is the one condition you cannot rely on. A production harness adds **stop conditions** that it enforces itself:
+
+- a step limit, so a model that keeps asking for tools is cut off after, say, ten turns;
+- a token or cost budget, read from the `usage` field (`inputTokens`, `outputTokens`, `totalTokens`) that every Converse response returns;
+- loop detection, which ends the run when the same tool is requested with the same input twice in a row;
+- a time limit, and a kill switch an operator can use.
+
+```python
+MAX_STEPS, MAX_TOKENS = 10, 20_000
+steps, tokens_used, seen = 0, 0, set()
+
+while True:
+    steps += 1
+    if steps > MAX_STEPS:
+        raise RuntimeError("stopped: step limit reached")
+    response = client.converse(modelId=MODEL_ID, messages=messages, toolConfig=tool_config)
+    tokens_used += response["usage"]["totalTokens"]
+    if tokens_used > MAX_TOKENS:
+        raise RuntimeError("stopped: token budget spent")
+    message = response["output"]["message"]
+    messages.append(message)
+    if response["stopReason"] != "tool_use":
+        break
+    for block in message["content"]:
+        if "toolUse" in block:
+            key = (block["toolUse"]["name"], repr(sorted(block["toolUse"]["input"].items())))
+            if key in seen:
+                raise RuntimeError("stopped: repeated identical tool call")
+            seen.add(key)
+    # ... run the tools and append the toolResult message as before ...
+```
+
+Calls fail too. Bedrock returns a `ThrottlingException` when you exceed your quota, and the AWS SDK for Python can retry for you with **exponential backoff**, waiting longer after each failure and adding random jitter so that many clients do not retry in step: create the client with `botocore.config.Config(retries={"max_attempts": 5, "mode": "standard"})`, or `"adaptive"` to add client-side rate limiting. Retries are only safe when the action they repeat is **idempotent**, meaning it has the same effect whether it runs once or twice. Reading the weather is idempotent; sending a payment is not, so give such tools an idempotency key that the downstream service uses to ignore duplicates.
+
+Limits stop runaway agents but not manipulated ones. The cybersecurity textbook's subsection on [designing agents to contain prompt injection](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#designing-agents-to-contain-prompt-injection) covers the design patterns that do, such as **plan-then-execute**, where the list of tool calls is fixed before the agent reads any untrusted content, and the **dual LLM** pattern, where the model that can act never sees untrusted text.
+
 ## Structured outputs and strict tool use
 
 A model asked for JSON usually returns JSON, but usually is not good enough for a program that parses every reply. Since February 4, 2026, Amazon Bedrock has offered **structured outputs**, which use **constrained decoding**: at each step the service allows only the tokens that keep the reply valid against a JSON schema you supply, so the model cannot produce output that breaks it ([AWS](https://aws.amazon.com/about-aws/whats-new/2026/02/structured-outputs-available-amazon-bedrock)). It works with the Converse, ConverseStream, InvokeModel, and InvokeModelWithResponseStream APIs; in the Converse API the schema goes in the request's `outputConfig.textFormat` field. A second mechanism, **strict tool use**, adds `strict: true` to a tool definition so that the tool name and input the model returns are guaranteed to match the tool's input schema.
