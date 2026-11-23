@@ -226,7 +226,7 @@ Treat evaluation as continuous. Keep a fixed **golden test set** of representati
 
 ## Evaluation on Amazon Bedrock
 
-Amazon Bedrock provides built-in model evaluation in two flavors.
+Amazon Bedrock Evaluations offers four kinds of evaluation job. The first two are the classic ones.
 
 **Programmatic (automatic) evaluation** is a four-step flow: (1) choose a
 foundation model, (2) select the task type (text generation, classification, Q&A,
@@ -240,6 +240,26 @@ metrics or define your own, upload a dataset, add people to the work team, run
 inference, collect human evaluations, and view results. The evaluation report
 tracks your team's ratings, visualizes score distributions, and explains metrics
 simply.
+
+**LLM-as-a-judge evaluation** uses a judge model that you pick from those on
+Bedrock to score another model's answers against your prompt dataset. Built-in
+metrics include correctness, completeness, faithfulness (hallucination
+detection), helpfulness, professional style and tone, and responsible AI metrics
+such as harmfulness and answer refusal, and you can define custom metrics with
+your own rubric. **RAG evaluation** applies the same judge to a retrieval system,
+either Amazon Bedrock Knowledge Bases or your own pipeline: retrieve-only jobs
+score context relevance and coverage, and retrieve-and-generate jobs add
+correctness, faithfulness, and citation precision and coverage. Both became
+generally available on March 20, 2025 {cite}`awsllmjudge2025`. With **bring your
+own inference responses**, you supply the answers in the dataset, so a model or
+RAG system hosted outside Bedrock can be scored the same way. A judge is a model
+with its own biases. Zheng and colleagues found that judges favor the answer
+shown first (position bias), longer answers (verbosity bias), and answers
+written by themselves (self-enhancement bias), although a strong judge still
+agreed with human raters over 80 percent of the time {cite}`zheng2023judging`.
+Swap answer order between runs, use a judge from a different model family than
+the models under test, and validate its scores against a sample of human ratings
+before you rely on them, as the case study above did.
 
 ```{admonition} Worked example: choosing what to measure
 :class: note
