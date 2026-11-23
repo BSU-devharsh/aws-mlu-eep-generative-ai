@@ -285,6 +285,58 @@ Each maps onto a defense already in this module: guardrails and input/output
 validation, least-privilege tools and human-in-the-loop for agents, provenance
 for the model supply chain, and treating model output as untrusted.
 
+### Threat modeling a Bedrock application
+
+Threat modeling asks, before you build, what could go wrong and what you will do about it. The cybersecurity textbook asks which statement about AI threat modeling methods is most accurate, and the answer is to combine methods, because they complement each other ([one system, five lenses](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#one-system-five-lenses-stride-pasta-maestro-and-the-two-owasp-lists)). STRIDE walks each element of a data flow diagram for spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege. MAESTRO places the elements on the layers of an agent system. MITRE ATLAS and the OWASP lists supply the known techniques to check each threat against. Two shortcuts fail. A threat model predicts where a system could fail, so it guides testing and red teaming rather than replacing them. And a hosted model still needs one: AWS describes security on Bedrock as a shared responsibility, with AWS securing the cloud and the customer securing what it builds in the cloud ([AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/security.html)), and prompts, retrieved documents, tools, and outputs are all on the customer's side.
+
+The table walks a typical Bedrock application, a chat front end over a knowledge base with an agent that can call tools.
+
+```{list-table}
+:header-rows: 1
+:widths: 18 24 26 32
+
+* - Element
+  - STRIDE threat
+  - Where to look it up
+  - Control on AWS
+* - User prompt
+  - Tampering and elevation of privilege through prompt injection
+  - OWASP LLM Top 10: prompt injection; MITRE ATLAS: LLM prompt injection
+  - Bedrock Guardrails prompt attack filter; keep instructions and user text in separate fields
+* - Knowledge base documents
+  - Tampering: poisoned or injected documents
+  - OWASP LLM Top 10: vector and embedding weaknesses, data and model poisoning
+  - Limit who can write to the source S3 bucket; review new documents; filter retrieval by metadata
+* - Model response
+  - Information disclosure of personal or confidential data
+  - OWASP LLM Top 10: sensitive information disclosure
+  - Guardrails sensitive information filters; grant retrieval access per user
+* - Tools and action groups
+  - Elevation of privilege through excessive agency
+  - OWASP Top 10 for Agentic Applications: tool misuse, identity and privilege abuse
+  - Least-privilege roles for each tool; user confirmation; AgentCore Policy; separate approval for high-impact actions
+* - Logs
+  - Repudiation: no record of who asked for what
+  - MAESTRO evaluation and observability layer
+  - Model invocation logging and AWS CloudTrail, with access to the logs restricted
+* - API endpoint
+  - Denial of service and runaway cost
+  - OWASP LLM Top 10: unbounded consumption
+  - Quotas, throttling, and token budgets per caller
+```
+
+Keep the table with the code. When you add a tool, a data source, or a model, update the threat model in the same change, and turn each row into a test that the evaluation and red-team suites run.
+
+### Assessing Bedrock as a vendor
+
+Using Bedrock makes AWS, and the provider of the model you choose, your AI vendors. The cybersecurity textbook asks what a SOC 2 report tells you about an AI vendor: it attests to the vendor's controls over a period, not to model risks such as bias or prompt injection ([responsible AI, risk assessment, and human oversight](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#responsible-ai-risk-assessment-and-human-oversight)). On AWS the evidence looks like this.
+
+- **SOC reports.** Amazon Bedrock, excluding Bedrock Marketplace, and Amazon Bedrock AgentCore are in scope for the AWS SOC 1, 2, and 3 reports ([AWS](https://aws.amazon.com/compliance/services-in-scope/SOC/)). The AWS SOC 2 report covers security, availability, confidentiality, and privacy. You download it from AWS Artifact under a nondisclosure agreement; the SOC 3 report is a public summary, and a monthly continued operations letter, also called a bridge letter, covers the time since the last report period ([AWS](https://aws.amazon.com/compliance/soc-faqs/)). Note the Marketplace exclusion: a model you deploy from Bedrock Marketplace needs its own evidence.
+- **ISO/IEC 42001.** In November 2024 AWS announced accredited ISO/IEC 42001 certification of its AI management system for Amazon Bedrock, Amazon Q Business, Amazon Textract, and Amazon Transcribe, and in November 2025 it completed the first surveillance audit with no findings ([AWS](https://aws.amazon.com/blogs/security/aws-successfully-completed-its-first-surveillance-audit-for-iso-420012023-with-no-findings)). That certifies how AWS manages AI risk, not how any one model behaves.
+- **Model-level evidence.** The behavior of the model you pick comes from its provider and from your own tests. Read the provider's model card or system card, then evaluate the model on your own tasks and attacks with the evaluation methods of Chapter 1 and the guardrails above.
+
+Together these answer different questions: the reports and certificates show that the platform is run under audited controls, and the model documentation and your evaluations show whether the model is fit for your use.
+
 ### Privacy-preserving machine learning
 
 When models must learn from sensitive data, privacy-preserving techniques keep the
@@ -378,6 +430,11 @@ robustness, watermarking, and debiasing. See {doc}`labs-overview`.
 - **Guardrails** (keyword-, metric-, and LLM-based) filter unsafe inputs and
   outputs; Amazon Bedrock Guardrails provides this as a managed service.
 - **Watermarking** marks AI-generated content for provenance and trust.
+- **Threat model** each application with combined methods (STRIDE, MAESTRO,
+  ATLAS, OWASP); a hosted model still leaves prompts, data, tools, and outputs
+  on your side of shared responsibility.
+- A **SOC 2 report** and ISO/IEC 42001 certification cover the vendor's
+  controls and AI management, not model behavior; evaluate the model yourself.
 - **Content Credentials** (C2PA) attach a signed origin and edit history to
   media; test that every pipeline step keeps them.
 - Return **labels, not scores, logits, explanations, or embeddings**, to outside

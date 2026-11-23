@@ -137,6 +137,96 @@ Training and running neural networks is mostly multiplying large matrices, so th
 
 Memory is usually the limit before arithmetic is. Each parameter stored in 16-bit precision takes 2 bytes, so the weights of a 70-billion-parameter model alone take about 140 GB, well beyond the 80 GB of an NVIDIA H100, so the model must be split across GPUs or compressed; serving also needs room for the **KV cache**, which grows with the context length and the number of users served at once. Two techniques stretch memory. **Quantization** stores weights in 8 or 4 bits instead of 16, trading a little accuracy for a smaller footprint. A **mixture-of-experts** (MoE) model splits its layers into many expert networks and routes each token to only a few of them. Its **active parameters**, the ones used for a given token, set the compute cost, but memory must still hold every expert. DeepSeek-V3, for example, has 671 billion parameters, of which 37 billion are active for each token ([DeepSeek-V3 technical report](https://arxiv.org/abs/2412.19437)).
 
+## Quantization
+
+A **quantized model** stores its numerical parameters, its weights and sometimes its activations, at lower precision than it was trained in: 8-bit or 4-bit integers, or 8-bit floating-point numbers, instead of 32-bit or 16-bit floating-point numbers. Each group of weights keeps a **scale factor**, and every weight is divided by the scale, rounded to the nearest integer the format allows, and stored as that integer. At inference time the integers are multiplied back by the scale. The model loses a little numerical precision and gains a smaller memory footprint, faster inference, and lower energy use, which is what lets large models run on a laptop, a phone, or fewer GPUs.
+
+There are two ways to get there. **Post-training quantization (PTQ)** compresses a model that is already trained, often using a small set of **calibration data** to keep the error low; it is fast and needs no retraining. **Quantization-aware training (QAT)** simulates low-precision arithmetic during training or fine-tuning, so the model learns to tolerate it and keeps more of its accuracy; Jacob and colleagues introduced the integer-only training and inference scheme that made it practical on mobile hardware {cite}`jacob2018quantization`. Several PTQ methods give their names to the quantized models people share:
+
+- **GPTQ** uses approximate second-order information to correct the error of each weight as it quantizes the next. It quantized models with 175 billion parameters to 3 or 4 bits per weight in about four GPU hours with negligible loss of accuracy {cite}`frantar2023gptq`.
+- **AWQ**, activation-aware weight quantization, observes that a small fraction of weights matter most and finds them by looking at the activations rather than the weights; scaling those channels before quantizing protects them {cite}`lin2024awq`.
+- **LLM.int8()** and the 4-bit **NF4** format of QLoRA keep large language models usable at 8 and 4 bits {cite}`dettmers2022llmint8,dettmers2023qlora`.
+- **GGUF** is a file format rather than a method: a single file holding the tensors and metadata for inference with GGML and llama.cpp, with many quantization types such as Q8_0, Q4_K, and Q6_K {cite}`hfgguf`. Ollama and other local runtimes use it.
+
+The code below quantizes one row of weights that, like real language-model layers, contains two large outliers. It compares one scale for the whole row with one scale per block of 32 weights, the layout of GGUF's Q8_0 and Q4_0 types, and then works out the memory that weights alone need.
+
+```python
+import numpy as np
+
+rng = np.random.default_rng(0)
+w = rng.normal(0, 0.02, size=4096).astype(np.float32)    # one row of a weight matrix
+w[[100, 2000]] = [0.6, -0.5]                             # two outliers, as real LLM layers have
+
+def absmax(x, bits):
+    """Symmetric quantization: one scale maps the largest magnitude to the top integer."""
+    qmax = 2 ** (bits - 1) - 1                            # 127 for 8 bits, 7 for 4 bits
+    scale = np.abs(x).max() / qmax
+    return np.clip(np.round(x / scale), -qmax, qmax) * scale
+
+def blockwise(x, bits, block=32):
+    """One scale per block of 32 weights, as in GGUF's Q8_0 and Q4_0 types."""
+    return np.concatenate([absmax(b, bits) for b in x.reshape(-1, block)])
+
+def rel_err(x_hat):
+    return np.linalg.norm(x_hat - w) / np.linalg.norm(w)
+
+print(f"{'scheme':<30}{'bits per weight':>16}{'relative error':>16}")
+for name, x_hat, bpw in [("int8, one scale per row", absmax(w, 8), 8 + 16 / 4096),
+                         ("int4, one scale per row", absmax(w, 4), 4 + 16 / 4096),
+                         ("int8, scale per 32 weights", blockwise(w, 8), 8 + 16 / 32),
+                         ("int4, scale per 32 weights", blockwise(w, 4), 4 + 16 / 32)]:
+    print(f"{name:<30}{bpw:>16.2f}{rel_err(x_hat):>16.1%}")
+
+print("\nWeights alone, in GB:")
+for params in (7e9, 70e9):
+    sizes = {fmt: params * bits / 8 / 1e9 for fmt, bits in [("FP32", 32), ("FP16", 16), ("INT8", 8), ("INT4", 4)]}
+    print(f"  {params / 1e9:.0f}B parameters: " + ", ".join(f"{k} {v:.1f}" for k, v in sizes.items()))
+```
+
+```text
+scheme                         bits per weight  relative error
+int8, one scale per row                   8.00            5.9%
+int4, one scale per row                   4.00           81.5%
+int8, scale per 32 weights                8.50            0.8%
+int4, scale per 32 weights                4.50           13.2%
+
+Weights alone, in GB:
+  7B parameters: FP32 28.0, FP16 14.0, INT8 7.0, INT4 3.5
+  70B parameters: FP32 280.0, FP16 140.0, INT8 70.0, INT4 35.0
+```
+
+Two lessons show in the numbers. With one scale per row, the outliers set the scale, so at 4 bits almost every ordinary weight rounds to zero and the error is 81.5 percent; one scale per block confines each outlier's damage to its own 32 weights, at a cost of half a bit per weight for the extra scales. That is why practical formats quantize in small groups, and why methods such as AWQ treat important weights specially. The memory table matches the rule of thumb: a 70-billion-parameter model needs about 140 GB for its weights at 16 bits, 70 GB at 8 bits, and 35 GB at 4 bits, before the KV cache and other working memory.
+
+On Amazon Bedrock you rarely quantize anything yourself, because AWS serves the hosted models. Quantization matters when you bring your own model. Custom Model Import accepts weights in safetensors format at FP32, FP16, or BF16 precision, converts FP32 models to BF16 internally, and does not support importing quantized models ([AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html)). A quantized copy is for hardware you run yourself, such as an edge device or a self-hosted server.
+
+### Trusting a quantized model
+
+Quantized copies of popular open models are easy to find on model hubs, usually made by someone other than the lab that released the original. The cybersecurity textbook asks what a security team should do with one: the lab signed the original, but its signature does not cover the quantized files. The best answer is to quantize the verified original in your own pipeline and sign the result, because a clean malware scan cannot reveal behavior hidden in the weights and popularity is not evidence ([trusting derived models](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#trusting-derived-models-quantized-converted-and-fine-tuned-copies)). Research supports the caution: Egashira and colleagues built models that look benign in full precision but behave maliciously once quantized, including in GGUF formats {cite}`egashira2024exploiting,egashira2025mind`.
+
+On AWS the pipeline looks like this:
+
+1. Download the lab's original into a build environment and verify its signature. The OpenSSF `model_signing` tool checks a Sigstore signature against the identity the lab publishes, for example `model_signing verify <model_dir> --signature model.sig --identity <lab identity> --identity-provider <OIDC provider>`; flag spellings have changed between releases, so check `model_signing verify --help` for your version.
+2. Record the hash of every file and store the verified files in an Amazon S3 bucket with versioning turned on, writable only by the build role.
+3. For Bedrock, import the verified full-precision files directly, since Custom Model Import does not take quantized models. For your own hardware, quantize in the same isolated build with a pinned tool version and settings, and write a provenance record that links the input hashes, the tool and settings, and the output hashes.
+4. Evaluate the result against the original, including security behavior, sign it with your organization's identity, and let deployment accept only signed artifacts.
+
+The import itself takes the S3 location of the verified files:
+
+```python
+import boto3
+
+bedrock = boto3.client("bedrock")
+job = bedrock.create_model_import_job(
+    jobName="lab-model-v1-verified",
+    importedModelName="lab-model-v1",
+    roleArn="arn:aws:iam::111122223333:role/MyImportModelRole",
+    modelDataSource={"s3DataSource": {"s3Uri": "s3://verified-models/lab-model-v1/"}},
+)
+print(job["jobArn"])
+```
+
+Give the import role read access only to the verified bucket, so that nobody can import a model that skipped the checks.
+
 ## Foundation models change the workflow
 
 Foundation models break the one-model-per-task pattern. The key difference is
@@ -345,6 +435,10 @@ application on top of a decoder-only model.
 - Memory, not arithmetic, usually limits model size: 16-bit weights take 2 bytes
   per parameter, and a mixture-of-experts model computes with its **active
   parameters** but must store them all.
+- **Quantization** stores weights at 8 or 4 bits with a scale per group of
+  weights; PTQ compresses a trained model, QAT trains for low precision, and
+  small groups keep outliers from ruining accuracy. Derive quantized copies
+  from a verified original in your own pipeline and sign them.
 - Outputs vary run to run, even at temperature zero; fine-tuning can erase old
   skills, including safety behavior (**catastrophic forgetting**); and training
   on model-generated data narrows what models know (**model collapse**).
