@@ -185,6 +185,19 @@ described:
   supported is still a finding.
 ```
 
+## Hallucinations, grounding, and knowing when not to answer
+
+A **hallucination** is fluent output that is not supported by the facts. When the model was given source material, as in summarization or retrieval-augmented generation, researchers distinguish two kinds {cite}`ji2023survey`. An **intrinsic** hallucination contradicts the source: the document says the fee is 2 percent and the answer says 3. An **extrinsic** hallucination adds claims the source cannot support: the answer cites a fee waiver the document never mentions. Extrinsic content is sometimes true, but it is unverifiable from the source, so a grounded application should treat it as an error.
+
+**Faithfulness**, also called **groundedness**, measures how much of an answer is supported by its source. Amazon Bedrock Guardrails can check it at run time: its contextual grounding check takes the grounding source, the user's query, and the model's response, scores the response for grounding and for relevance, and blocks it when either score falls below a threshold you set between 0 and 0.99 ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html)).
+
+The safest answer is sometimes no answer. **Abstention** means the system declines, says it does not know, or hands off to a person when it lacks reliable information. Deciding when to abstain depends on the kind of uncertainty {cite}`kendall2017uncertainties`. **Aleatoric uncertainty** comes from noise or ambiguity in the data itself, such as a question with two reasonable readings; more data does not remove it, but a clarifying question can. **Epistemic uncertainty** comes from gaps in what the model knows, such as an event after its training cutoff; better data, retrieval, or a tool call can remove it. Evaluate abstention like any other behavior: a system that never abstains will hallucinate on hard questions, and one that abstains too often is useless.
+
+```{admonition} Security view
+:class: warning
+Hallucinations can be weaponized. Code assistants sometimes suggest packages that do not exist. A USENIX Security 2025 study generated 576,000 code samples with 16 LLMs and found that 19.7 percent of the packages they recommended were hallucinated, with 205,474 unique made-up names {cite}`spracklen2025package`. An attacker who registers one of those names on a public registry, a technique now called **slopsquatting**, gets malware installed by every developer who trusts the suggestion. Check that a suggested package exists, is the one you expect, and comes from an approved source before installing it. The companion textbook covers this with the other supply chain attacks ([Supply Chain Attacks](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#supply-chain-attacks)).
+```
+
 ## Measuring a classifier when one class is rare
 
 Many evaluation tasks are classification: is this message toxic, is this transaction fraud, does this answer cite a real source. When one class is rare, **accuracy** misleads. Picture 100,000 transactions of which 517 are fraud. A model that calls every transaction legitimate is 99.48 percent accurate and catches no fraud at all. Use the **confusion matrix** instead, which counts true positives, false positives, false negatives, and true negatives, and the measures built on it:
@@ -196,11 +209,20 @@ Many evaluation tasks are classification: is this message toxic, is this transac
 
 Then choose the decision threshold from what each mistake costs. If a missed fraud costs 100 times what a false alarm costs, the best threshold on calibrated probabilities is the false-alarm cost divided by the sum of both costs, about 0.01, far below the default of 0.5. The companion textbook works through this example with code ([Evaluating Models Under Class Imbalance](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#evaluating-models-under-class-imbalance-beyond-accuracy)).
 
+## More metrics you will meet
+
+A few more measures appear across model cards, papers, and security reports.
+
+- **ROC curve and ROC-AUC.** The receiver operating characteristic curve plots the true-positive rate against the false-positive rate as the decision threshold moves. The area under it runs from 0.5, chance, to 1.0, perfect ranking. On rare classes it can look strong while precision is poor, which is why the PR curve above is the better guide there.
+- **pass@k.** For code generation, the probability that at least one of k generated samples passes the unit tests. It was introduced with the HumanEval benchmark, along with an unbiased way to estimate it from n samples of which c pass: one minus the number of ways to choose k samples from the n minus c failing ones, divided by the number of ways to choose k from n {cite}`chen2021evaluating`. A high pass@10 with a low pass@1 means a person or a test suite must pick the good answer out of many.
+- **Attack success rate (ASR).** In safety and security testing, the share of adversarial attempts that achieve their goal, such as jailbreak prompts that get a disallowed answer. Report it with the attack set, the number of tries, and the model settings, because the same model can score very differently against a different set.
+- **Goodhart's law.** Often stated as: when a measure becomes a target, it ceases to be a good measure. A team that tunes a model to a benchmark, or a judge model to one rubric, can raise the score without improving the behavior the score was meant to reflect. Keep some evaluations out of the tuning loop, and rotate in new ones.
+
 ## Drift: when yesterday's evaluation stops being true
 
-An evaluation describes a model on the data you tested. Production data moves. **Data drift** is a change in the inputs: users ask about a new product, write in another language, or paste longer documents. **Concept drift** is a change in the right answer for the same input: a policy, a price, or a law changes, so a response that was correct last month is wrong today. Evaluations also go stale when **benchmark contamination** leaks test questions into training data, so a score measures memory rather than skill.
+An evaluation describes a model on the data you tested. Production data moves. **Data drift** is a change in the inputs: users ask about a new product, write in another language, or paste longer documents. **Concept drift** is a change in the right answer for the same input: a policy, a price, or a law changes, so a response that was correct last month is wrong today. **Label drift**, also called prior shift, is a change in the mix of outcomes, such as a fraud rate that doubles, which changes precision even when neither the inputs nor the model change. Evaluations also go stale when **benchmark contamination** leaks test questions into training data, so a score measures memory rather than skill.
 
-Treat evaluation as continuous. Keep a fixed test set to catch regressions, sample live traffic for fresh review, watch input statistics and user feedback for shifts, and re-run the full evaluation whenever the model, the prompt, the retrieved data, or the world it describes changes.
+Treat evaluation as continuous. Keep a fixed **golden test set** of representative and adversarial cases and re-run it after every change to catch regressions, sample live traffic for fresh review, watch input statistics and user feedback for shifts, and re-run the full evaluation whenever the model, the prompt, the retrieved data, or the world it describes changes.
 
 ## Evaluation on Amazon Bedrock
 
@@ -250,6 +272,8 @@ community toward harder, fresher, task-specific evaluations, exactly the
 - Two 2026 case studies show evaluation in practice: test whether a model just
   agrees with the user (**sycophancy**), validate any LLM judge against human
   labels, and check that a score measures what you think before relying on it.
+- Separate **intrinsic** from **extrinsic** hallucinations, measure **faithfulness**,
+  and let the system **abstain** when it lacks reliable information.
 - When one class is rare, report **precision, recall, F1, and PR-AUC**, not
   accuracy, and set thresholds from the cost of each error. Re-evaluate as
   **data drift** and **concept drift** change what correct looks like.

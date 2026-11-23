@@ -192,6 +192,15 @@ MCP and Converse tool use fit together. MCP is how the host discovers a server's
 A tool's description goes straight into the model's context, so a malicious or compromised MCP server can hide instructions in it, the attack known as tool poisoning. Connect only servers you trust, pin and review their tool definitions, give each server the narrowest credentials it needs, and require a person to approve actions that cannot be undone. The companion textbook covers the attack and the controls in detail ([Section 17.13, MCP Tool Poisoning](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#mcp-tool-poisoning-when-tool-metadata-is-the-attack)).
 ```
 
+## Agent memory and session state
+
+A model call has no memory; everything the model knows about the conversation is in the prompt you send. Agents that work across many steps or sessions therefore keep **memory** outside the model. **Short-term memory** is the working context of the current task: the conversation, tool results, and intermediate notes, trimmed or summarized to fit the context window. **Long-term memory** is an external store, often a database or vector index, that holds facts, preferences, and summaries of past sessions, and that the agent queries when it needs them. In multi-agent systems some memory is **shared**, so one agent's notes become another agent's input. AgentCore Memory, below, provides both short-term and long-term stores as a managed service. **Session persistence** is the related job of keeping an agent's state, memory, and credentials consistent across turns, retries, and restarts, so that a long task can resume without starting over.
+
+```{admonition} Security view
+:class: warning
+Memory turns a one-time attack into a lasting one. An injected instruction that the agent saves as a user preference will be read back in every later session. That is why the OWASP Top 10 for Agentic Applications, released in December 2025, lists memory and context poisoning as ASI06. Write to long-term memory only through validated, attributable operations, keep each user's memory separate, expire what is no longer needed, and let users see and delete what the agent remembers. The companion textbook covers memory poisoning with the other agentic threats ([Threat Modeling AI Systems](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#threat-modeling-ai-systems-from-stride-to-maestro)).
+```
+
 ## Amazon Bedrock AgentCore
 
 Building an agent is one problem; running it in production is another. **Amazon Bedrock AgentCore**, generally available since October 13, 2025, is a set of managed services for running agents built with any framework, such as LangGraph, CrewAI, LlamaIndex, Google ADK, or the OpenAI Agents SDK, and any model ([AWS](https://aws.amazon.com/about-aws/whats-new/2025/10/amazon-bedrock-agentcore-available)). Bedrock Agents, described above, builds the agent for you; AgentCore hosts and governs agents you build yourself.

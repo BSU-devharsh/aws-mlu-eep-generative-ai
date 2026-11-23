@@ -55,6 +55,88 @@ features reliably predict the correct label.
   - Yes
 ```
 
+## How a model learns: loss, gradients, and overfitting
+
+Every model in this book, from a fraud classifier to a frontier LLM, is trained the same basic way. It is also, in practice, **narrow AI**: it does the tasks it was trained or prompted for, and no system in production today is general intelligence. Models also differ in what they learn. A **discriminative** model learns the boundary between classes so it can label inputs, such as spam or not spam. A **generative** model learns the distribution of its data so it can produce new samples, such as the next token of a sentence.
+
+Training is a loop with four parts.
+
+- **Loss function.** A single number that says how wrong the model's predictions are on the training data. Classifiers and language models use **cross-entropy loss**, which is small when the model gives high probability to the right answer and grows quickly when it is confidently wrong. An LLM's pretraining objective is exactly this: the cross-entropy of predicting each next token.
+- **Gradient.** For each weight, the direction and size of change that would increase the loss fastest. Backpropagation computes all of these gradients at once.
+- **Gradient descent.** Move every weight a small step against its gradient, then repeat. Each step lowers the loss a little.
+- **Learning rate.** The size of each step. Too small and training crawls; too large and the weights overshoot, so the loss bounces or diverges. Most large models use **Adam**, an optimizer that adapts the step for each weight from running averages of its past gradients {cite}`kingma2015adam`.
+
+At the output, a language model produces one raw score, a **logit**, for every token in its vocabulary. The **softmax** function turns those scores into probabilities that sum to 1. Dividing the logits by a **temperature** before the softmax is what the temperature setting described under non-determinism below does: a low temperature sharpens the distribution toward the top token, and a high one flattens it.
+
+The code below trains a two-feature classifier with plain gradient descent at three learning rates, then applies softmax at three temperatures.
+
+```python
+import numpy as np
+
+rng = np.random.default_rng(0)
+# Toy task: predict sign-up (1) from two scaled features
+X = rng.normal(size=(200, 2))
+y = (X[:, 0] + 0.5 * X[:, 1] + rng.normal(scale=0.5, size=200) > 0).astype(float)
+
+def softmax(logits, temperature=1.0):
+    z = np.asarray(logits, dtype=float) / temperature
+    z = z - z.max()                       # for numerical stability
+    e = np.exp(z)
+    return e / e.sum()
+
+def cross_entropy(p, y):                  # p = predicted probability of class 1
+    p = np.clip(p, 1e-12, 1 - 1e-12)
+    return float(-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p)))
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-np.clip(z, -500, 500)))
+
+def train(lr, steps=100):
+    w, b = np.zeros(2), 0.0
+    for _ in range(steps):
+        p = sigmoid(X @ w + b)               # forward pass
+        grad_w = X.T @ (p - y) / len(y)      # gradient of the loss
+        grad_b = float(np.mean(p - y))
+        w -= lr * grad_w                     # gradient descent step
+        b -= lr * grad_b
+    return cross_entropy(sigmoid(X @ w + b), y)
+
+print(f"starting loss = {cross_entropy(np.full(200, 0.5), y):.3f}")
+for lr in (0.01, 0.5, 500.0):
+    print(f"learning rate {lr:>5}: loss after 100 steps = {train(lr):.3f}")
+
+logits = [2.0, 1.0, 0.1]
+for t in (0.5, 1.0, 2.0):
+    print(f"softmax at temperature {t}: {np.round(softmax(logits, t), 3)}")
+```
+
+```text
+starting loss = 0.693
+learning rate  0.01: loss after 100 steps = 0.584
+learning rate   0.5: loss after 100 steps = 0.293
+learning rate 500.0: loss after 100 steps = 2.701
+softmax at temperature 0.5: [0.864 0.117 0.019]
+softmax at temperature 1.0: [0.659 0.242 0.099]
+softmax at temperature 2.0: [0.502 0.304 0.194]
+```
+
+A loss of 0.693 is what a model that always says 50 percent would score. A learning rate of 0.01 is too timid to get far in 100 steps, 0.5 reaches a good fit, and 500 overshoots so badly that the loss ends far worse than where it started. At temperature 0.5 the top logit takes 86 percent of the probability; at temperature 2.0 it takes only half.
+
+**Overfitting** is the main way training goes wrong. A model with enough capacity can memorize its training data, noise included, so training loss keeps falling while performance on new data gets worse. That is why data is split into a **training set** to learn from, a **validation set** to tune settings and decide when to stop, and a **test set** that is touched only once, for the final score. Early stopping, regularization, more data, and smaller models all reduce overfitting. The opposite, **underfitting**, means the model is too simple or trained too little to capture the pattern.
+
+**Transfer learning** reuses a model trained on one task as the starting point for another, so the new task needs far less data and compute. Foundation models are transfer learning at a very large scale: pretraining learns general patterns once, and prompting, retrieval, or fine-tuning adapts them to your task, as the next section describes.
+
+```{admonition} Security view
+:class: note
+The same gradients that train a model also attack it. An attacker who can compute or estimate gradients can nudge an input in the direction that most increases the loss, which is how adversarial examples are made. Overfitting is a privacy risk too: a model that memorized its training records leaks them through membership inference and extraction. The companion textbook covers both ([Adversarial Machine Learning](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#adversarial-machine-learning) and [Attacks on Models](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#attacks-on-models-inversion-extraction-membership-inference-and-poisoning)).
+```
+
+## The hardware underneath: GPUs, accelerators, and memory
+
+Training and running neural networks is mostly multiplying large matrices, so the hardware that matters is the hardware that does many multiplications in parallel. **GPUs** do this with thousands of simple cores and became the default for both training and inference. Cloud providers also build their own accelerators: Google's **TPUs**, and AWS's **Trainium** for training and **Inferentia** for inference. Phones and laptops include a low-power **NPU** (neural processing unit) for running small models on the device, which keeps data local and saves battery.
+
+Memory is usually the limit before arithmetic is. Each parameter stored in 16-bit precision takes 2 bytes, so the weights of a 70-billion-parameter model alone take about 140 GB, well beyond the 80 GB of an NVIDIA H100, so the model must be split across GPUs or compressed; serving also needs room for the **KV cache**, which grows with the context length and the number of users served at once. Two techniques stretch memory. **Quantization** stores weights in 8 or 4 bits instead of 16, trading a little accuracy for a smaller footprint. A **mixture-of-experts** (MoE) model splits its layers into many expert networks and routes each token to only a few of them. Its **active parameters**, the ones used for a given token, set the compute cost, but memory must still hold every expert. DeepSeek-V3, for example, has 671 billion parameters, of which 37 billion are active for each token ([DeepSeek-V3 technical report](https://arxiv.org/abs/2412.19437)).
+
 ## Foundation models change the workflow
 
 Foundation models break the one-model-per-task pattern. The key difference is
@@ -257,6 +339,12 @@ application on top of a decoder-only model.
   and **encoder-decoder** at sequence-to-sequence tasks.
 - LLMs are limited by reliability, bias, the context window, IP and privacy
   risks, cost, and environmental impact, all of which motivate later modules.
+- Models learn by gradient descent on a **loss**; the **learning rate** sets the
+  step size, **softmax** with a temperature turns logits into probabilities, and
+  **overfitting** is why data is split into training, validation, and test sets.
+- Memory, not arithmetic, usually limits model size: 16-bit weights take 2 bytes
+  per parameter, and a mixture-of-experts model computes with its **active
+  parameters** but must store them all.
 - Outputs vary run to run, even at temperature zero; fine-tuning can erase old
   skills, including safety behavior (**catastrophic forgetting**); and training
   on model-generated data narrows what models know (**model collapse**).
