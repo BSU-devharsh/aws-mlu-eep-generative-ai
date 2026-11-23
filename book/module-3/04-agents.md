@@ -207,6 +207,100 @@ Calls fail too. Bedrock returns a `ThrottlingException` when you exceed your quo
 
 Limits stop runaway agents but not manipulated ones. The cybersecurity textbook's subsection on [designing agents to contain prompt injection](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#designing-agents-to-contain-prompt-injection) covers the design patterns that do, such as **plan-then-execute**, where the list of tool calls is fixed before the agent reads any untrusted content, and the **dual LLM** pattern, where the model that can act never sees untrusted text.
 
+### Separating initiation from approval
+
+The cybersecurity textbook works through a question about an agent that both initiates vendor payments and approves them. That design violates separation of duties, and the fix is to split initiation and approval across separate identities ([separation of duties for AI agents](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#separation-of-duties-for-ai-agents-who-initiates-and-who-approves)). This section builds the split into the tool loop above. Three design rules carry most of the weight.
+
+1. Give the agent a tool that proposes a payment and no tool that approves one. Approval runs in a separate service, under the approver's own credentials.
+2. Let the harness, not the model, supply the caller's identity. A tool input field such as `approver` would let injected text claim to be someone else.
+3. Check independence where the approval happens: the approver is not the initiator, does not share its sponsor, and is a person above a set amount.
+
+```python
+from dataclasses import dataclass, field
+import uuid
+
+@dataclass
+class Payment:
+    vendor: str
+    amount: float                      # US dollars
+    initiator: str                     # identity that proposed the payment
+    id: str = field(default_factory=lambda: uuid.uuid4().hex[:8])
+    status: str = "pending_approval"
+    approver: str | None = None
+
+SPONSOR = {"ap-agent": "dana", "ap-agent-clone": "dana", "review-agent": "lee",
+           "dana": "dana", "lee": "lee", "sam": "sam"}
+HUMANS = {"dana", "lee", "sam"}
+HUMAN_ABOVE = 10_000
+queue: dict[str, Payment] = {}
+
+def propose_payment(vendor: str, amount: float, *, caller: str) -> dict:
+    """The only payment tool the agent can call: it queues, it never pays."""
+    p = Payment(vendor, amount, initiator=caller)
+    queue[p.id] = p
+    return {"payment_id": p.id, "status": p.status}
+
+def approve_payment(payment_id: str, *, approver: str) -> Payment:
+    """Runs in the approval service under the approver's own credentials."""
+    p = queue[payment_id]
+    if approver == p.initiator:
+        raise PermissionError("initiator cannot approve its own payment")
+    if SPONSOR[approver] == SPONSOR[p.initiator]:
+        raise PermissionError("approver shares the initiator's sponsor")
+    if p.amount > HUMAN_ABOVE and approver not in HUMANS:
+        raise PermissionError("amount needs a human approver")
+    p.status, p.approver = "approved", approver
+    return p
+
+# The harness exposes only propose_payment and supplies the caller identity itself
+AGENT_ID = "ap-agent"
+TOOLS = {"propose_payment": propose_payment}
+
+def run_tool(tool_use: dict) -> dict:
+    fn = TOOLS.get(tool_use["name"])
+    if fn is None:
+        return {"toolUseId": tool_use["toolUseId"], "status": "error",
+                "content": [{"text": f"tool {tool_use['name']} is not available to this agent"}]}
+    result = fn(**tool_use["input"], caller=AGENT_ID)   # identity comes from the harness, not the model
+    return {"toolUseId": tool_use["toolUseId"], "content": [{"json": result}]}
+```
+
+The test sends the harness stub tool requests shaped like the `toolUse` blocks of a Converse response, including one that an injected instruction might produce, and then tries several approvers.
+
+```python
+from approval import run_tool, approve_payment, queue
+# Stub tool requests, shaped like toolUse blocks from a Converse response
+injected = {"toolUseId": "t1", "name": "approve_payment", "input": {"payment_id": "x"}}
+print(run_tool(injected)["content"][0]["text"])
+small = run_tool({"toolUseId": "t2", "name": "propose_payment", "input": {"vendor": "Acme", "amount": 4200}})
+large = run_tool({"toolUseId": "t3", "name": "propose_payment", "input": {"vendor": "Acme", "amount": 48000}})
+pid_small, pid_large = small["content"][0]["json"]["payment_id"], large["content"][0]["json"]["payment_id"]
+for pid, who in [(pid_small, "ap-agent"), (pid_small, "ap-agent-clone"), (pid_small, "dana"),
+                 (pid_large, "review-agent"), (pid_small, "review-agent"), (pid_large, "sam")]:
+    try:
+        p = approve_payment(pid, approver=who)
+        print(f"{queue[pid].amount:>8,.0f} USD by {who:<15} -> approved")
+    except PermissionError as e:
+        print(f"{queue[pid].amount:>8,.0f} USD by {who:<15} -> refused: {e}")
+```
+
+```text
+tool approve_payment is not available to this agent
+   4,200 USD by ap-agent        -> refused: initiator cannot approve its own payment
+   4,200 USD by ap-agent-clone  -> refused: approver shares the initiator's sponsor
+   4,200 USD by dana            -> refused: approver shares the initiator's sponsor
+  48,000 USD by review-agent    -> refused: amount needs a human approver
+   4,200 USD by review-agent    -> approved
+  48,000 USD by sam             -> approved
+```
+
+The injected approval never reaches the payment service, because the tool does not exist for this agent. The clone and the agent's own sponsor are refused even though they are different identities, and the review agent can approve the small payment but not the large one. In production the queue is a database table or a workflow step, the approver signs in through its own identity provider, and the agent's AWS Identity and Access Management (IAM) role has no permission to call the approval API at all.
+
+Amazon Bedrock offers two managed checks that help but do not replace the split.
+
+- **User confirmation.** Bedrock Agents can ask the end user to confirm before invoking an action group function. Set `requireConfirmation` to `ENABLED` for the function, or `x-requireConfirmation` in an OpenAPI schema, and the agent asks a confirmation question before it acts; AWS recommends this as a safeguard against malicious prompt injection ([AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-userconfirmation.html)). **Return of control** goes further and hands the action's parameters back to your application to carry out ([AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/action-handle.html)). The person who confirms is usually the user who asked for the payment, so confirmation checks intent, not separation of duties. Route the approval to a different person.
+- **AgentCore Policy.** Policy, described later in this chapter, evaluates an agent's tool calls against Cedar rules that live outside the agent's code, so a rule can deny the agent's identity any call to an approval tool even if a prompt injection asks for one.
+
 ## Structured outputs and strict tool use
 
 A model asked for JSON usually returns JSON, but usually is not good enough for a program that parses every reply. Since February 4, 2026, Amazon Bedrock has offered **structured outputs**, which use **constrained decoding**: at each step the service allows only the tokens that keep the reply valid against a JSON schema you supply, so the model cannot produce output that breaks it ([AWS](https://aws.amazon.com/about-aws/whats-new/2026/02/structured-outputs-available-amazon-bedrock)). It works with the Converse, ConverseStream, InvokeModel, and InvokeModelWithResponseStream APIs; in the Converse API the schema goes in the request's `outputConfig.textFormat` field. A second mechanism, **strict tool use**, adds `strict: true` to a tool definition so that the tool name and input the model returns are guaranteed to match the tool's input schema.
@@ -302,6 +396,10 @@ Build an agent on Amazon Bedrock in {doc}`labs/Lab-4/lab4_agents`.
 - On Amazon Bedrock the model only **requests** a tool; your code runs it. The
   Converse API loop is `toolUse` out, `toolResult` back, until `stopReason` is
   no longer `tool_use`.
+- Keep **initiation and approval** in separate identities: give the agent a
+  propose tool only, let the harness supply the caller's identity, and check
+  independence in the approval service. User confirmation checks intent, not
+  separation of duties.
 - **Structured outputs** and **strict tool use** guarantee the shape of JSON
   answers and tool inputs through constrained decoding, not their truth.
 - **MCP** standardizes how hosts connect to tool servers; its July 2026 version
