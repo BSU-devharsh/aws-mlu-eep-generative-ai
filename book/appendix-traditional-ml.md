@@ -28,17 +28,11 @@ Classical supervised ML follows a repeatable pipeline. You explore and clean the
 data, engineer features, train a model, evaluate it, and check it for fairness,
 looping back to improve features whenever the metrics disappoint.
 
-```{image} _static/figures/bk_ml_pipeline.*
+```{figure} _static/figures/bk_ml_pipeline.*
 :alt: Six numbered pipeline stages with icons: raw data, EDA, features, train model, evaluate, and check fairness, with a loop from evaluate back to features
 :width: 95%
 :align: center
 :class: anim-fig
-```
-
-```{figure} _static/ml-pipeline.svg
-:alt: A left-to-right pipeline diagram with the stages raw data, EDA, feature engineering, train model, evaluate, and check fairness, with a dashed feedback arrow from evaluate back to feature engineering.
-:width: 100%
-:align: center
 
 The supervised machine learning pipeline. Steps run left to right; the dashed loop
 means you revisit feature engineering when evaluation metrics are poor.

@@ -148,20 +148,14 @@ A simple decision process:
 5. **Test and iterate.** Evaluate a couple of candidate models on your own
    examples before committing.
 
-```{image} ../_static/figures/bk_choose_model.*
+```{figure} ../_static/figures/bk_choose_model.*
 :alt: Five numbered cards: match the modality, match difficulty to effort, weigh cost and context, privacy and compliance, and test and iterate, with a loop back to raise the effort and then deploy
 :width: 95%
 :align: center
 :class: anim-fig
-```
 
-```{figure} ../_static/choose-model-flowchart.svg
-:alt: A five-step decision flowchart for choosing a model and effort level. The steps are match the modality, match difficulty to effort, weigh cost and context, respect privacy and compliance, then test and iterate, looping back to raise the effort when the model makes errors.
-:width: 80%
-:align: center
-
-Choosing the right model and effort level as a decision flow. Steps run top to
-bottom; the dashed loop returns to step 2 to raise the effort whenever the model
+Choosing the right model and effort level as a decision flow. Steps run left to
+right; the dashed loop returns to step 2 to raise the effort whenever the model
 makes reasoning errors.
 ```
 

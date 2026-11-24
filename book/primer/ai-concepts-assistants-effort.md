@@ -41,20 +41,15 @@ After this chapter you should be able to:
 People use *AI*, *machine learning*, *deep learning*, *LLM* and *agent* as if
 they were interchangeable. They are not. Most of these terms **nest inside one
 another**, a few **cut across** the others, and a few name **capability levels**
-that no one has shown a system to reach. Figure 1 puts them on one map, and the
+that no one has shown a system to reach. {numref}`Figure %s <fig-ai-concepts-map>` puts them on one map, and the
 sections below walk through it from the outside in.
 
-```{image} ../_static/figures/bk_ai_concepts_map.*
-:alt: Animated map of nested AI terms built from the outside in: AI, machine learning, deep learning, generative AI, foundation models and LLMs, frontier models, with an NLP band across them, agentic AI as a model in a loop with tools, and AGI and superintelligence as hypothetical levels
+```{figure} ../_static/figures/bk_ai_concepts_map.*
+:name: fig-ai-concepts-map
+:alt: Animated map of nested AI terms built from the outside in: AI, machine learning, deep learning, generative AI, foundation models and LLMs, frontier models, with an NLP band across them, agentic AI as a model in a loop with tools, AGI and superintelligence as hypothetical levels, and a note on how to read the map
 :width: 95%
 :align: center
 :class: anim-fig
-```
-
-```{figure} ../_static/ai-concepts-map.svg
-:alt: Nested boxes from broadest to narrowest. Artificial intelligence contains machine learning, which contains deep learning, which contains generative AI, which contains foundation models and large language models, which contain frontier models. A dashed band labeled NLP cuts across every layer. To the right, agentic AI is shown as a model in a loop with tools, and AGI and superintelligence are shown as hypothetical capability levels.
-:width: 100%
-:align: center
 
 How the core terms relate. Each box sits inside the broader one around it. The
 nesting is a simplification: a few foundation models, such as embedding models,
@@ -142,7 +137,7 @@ standard textbook by Jurafsky and Martin describes it as the field, also called
 computational linguistics, aimed at getting computers to perform useful tasks
 involving human language, and calls it the new heart of modern AI
 ([Jurafsky and Martin, Speech and Language Processing, 3rd edition draft](https://web.stanford.edu/~jurafsky/slp3/1.pdf)).
-NLP is drawn as a dashed band in Figure 1 because it is defined by the **problem**
+NLP is drawn as a dashed band in {numref}`Figure %s <fig-ai-concepts-map>` because it is defined by the **problem**
 (language), not by a technique. Over the decades it has been tackled with
 hand-written rules (ELIZA, a 1966 program that imitated a psychotherapist by
 pattern matching, is a famous early example), with statistical machine learning,
@@ -312,7 +307,7 @@ are not orchestrated to act autonomously
 ([Federal Register, January 8, 2026](https://www.govinfo.gov/content/pkg/FR-2026-01-08/html/2026-00206.htm)).
 NIST launched an AI Agent Standards Initiative in February 2026
 ([NIST](https://nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure)).
-Agentic AI is therefore **a way of using models**, not a new layer in Figure 1.
+Agentic AI is therefore **a way of using models**, not a new layer in {numref}`Figure %s <fig-ai-concepts-map>`.
 {doc}`../module-3/04-agents` shows how to build one.
 
 ### Artificial general intelligence (AGI)
@@ -1146,17 +1141,11 @@ faster ([Claude Help Center, model, effort and thinking settings](https://suppor
 ChatGPT and Gemini have similar controls under different names. The sentence
 makes three claims, and each one has a concrete technical reason behind it.
 
-```{image} ../_static/figures/bk_effort_levels.*
+```{figure} ../_static/figures/bk_effort_levels.*
 :alt: The same prompt at low, medium, and high or maximum effort, built row by row: one thinking step, then a few with a tool call, then many with several tool calls and a self-check; wait, tokens, and checking grow with effort
 :width: 95%
 :align: center
 :class: anim-fig
-```
-
-```{figure} ../_static/effort-levels.svg
-:alt: Three rows show the same model answering the same prompt at low, medium and high or maximum effort. At low effort there is one short thinking step before the answer. At medium effort there are a few thinking steps and one tool call. At high or maximum effort there are many thinking steps, several tool calls and a self-check before a longer answer. An arrow shows that waiting time, tokens used and checking all grow with effort.
-:width: 100%
-:align: center
 
 What changes when you raise the effort level. The model and the prompt stay the
 same; what grows is the work done before and during the answer.
