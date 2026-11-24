@@ -149,7 +149,7 @@ A simple decision process:
    examples before committing.
 
 ```{figure} ../_static/figures/bk_choose_model.*
-:alt: Five numbered cards: match the modality, match difficulty to effort, weigh cost and context, privacy and compliance, and test and iterate, with a loop back to raise the effort and then deploy
+:alt: Five numbered cards for match the modality, match difficulty to effort, weigh cost and context, privacy and compliance, and test and iterate, with a loop back to raise the effort and then deploy
 :width: 95%
 :align: center
 :class: anim-fig

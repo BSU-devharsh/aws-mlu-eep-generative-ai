@@ -110,7 +110,7 @@ Putting it together, a query flows through five stages:
 5. **Generate** the final response with the LLM.
 
 ```{image} ../_static/figures/bk_rag.*
-:alt: RAG in two parts: indexing documents into chunks, embeddings, and a vector database, then answering a question by a cleaned query, similarity search, rerank, augment, and generate
+:alt: RAG in two parts, indexing documents into chunks, embeddings, and a vector database, then answering a question by a cleaned query, similarity search, rerank, augment, and generate
 :width: 95%
 :align: center
 :class: anim-fig

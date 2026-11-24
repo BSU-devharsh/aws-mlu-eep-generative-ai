@@ -29,7 +29,7 @@ data, engineer features, train a model, evaluate it, and check it for fairness,
 looping back to improve features whenever the metrics disappoint.
 
 ```{figure} _static/figures/bk_ml_pipeline.*
-:alt: Six numbered pipeline stages with icons: raw data, EDA, features, train model, evaluate, and check fairness, with a loop from evaluate back to features
+:alt: Six numbered pipeline stages with icons for raw data, EDA, features, train model, evaluate, and check fairness, with a loop from evaluate back to features
 :width: 95%
 :align: center
 :class: anim-fig

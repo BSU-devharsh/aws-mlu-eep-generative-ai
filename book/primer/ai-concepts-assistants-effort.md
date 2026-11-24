@@ -46,7 +46,7 @@ sections below walk through it from the outside in.
 
 ```{figure} ../_static/figures/bk_ai_concepts_map.*
 :name: fig-ai-concepts-map
-:alt: Animated map of nested AI terms built from the outside in: AI, machine learning, deep learning, generative AI, foundation models and LLMs, frontier models, with an NLP band across them, agentic AI as a model in a loop with tools, AGI and superintelligence as hypothetical levels, and a note on how to read the map
+:alt: Animated map of nested AI terms built from the outside in, covering AI, machine learning, deep learning, generative AI, foundation models and LLMs, frontier models, with an NLP band across them, agentic AI as a model in a loop with tools, AGI and superintelligence as hypothetical levels, and a note on how to read the map
 :width: 95%
 :align: center
 :class: anim-fig
@@ -1142,7 +1142,7 @@ ChatGPT and Gemini have similar controls under different names. The sentence
 makes three claims, and each one has a concrete technical reason behind it.
 
 ```{figure} ../_static/figures/bk_effort_levels.*
-:alt: The same prompt at low, medium, and high or maximum effort, built row by row: one thinking step, then a few with a tool call, then many with several tool calls and a self-check; wait, tokens, and checking grow with effort
+:alt: The same prompt at low, medium, and high or maximum effort, built row by row, with one thinking step, then a few with a tool call, then many with several tool calls and a self-check; wait, tokens, and checking grow with effort
 :width: 95%
 :align: center
 :class: anim-fig

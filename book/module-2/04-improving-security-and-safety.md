@@ -103,7 +103,7 @@ validator for every app.
 ```
 
 ```{image} ../_static/figures/bk_guardrails.*
-:alt: Guardrails on the way in and out: a prompt passes an input guardrail to the model and the draft passes an output guardrail to the user; blocked requests get a refusal; Bedrock Guardrails policies listed
+:alt: Guardrails on the way in and out. A prompt passes an input guardrail to the model and the draft passes an output guardrail to the user; blocked requests get a refusal; Bedrock Guardrails policies listed
 :width: 95%
 :align: center
 :class: anim-fig

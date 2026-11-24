@@ -57,7 +57,7 @@ and **decision-making tasks** (where custom tools enhance the LLM's planning),
 though performance still falls short of expert humans.
 
 ```{image} ../_static/figures/bk_react.*
-:alt: ReAct loop around an agent: reason to plan, act by calling a tool such as a knowledge base or calculator, observe the result, and answer when done
+:alt: ReAct loop around an agent that reasons to plan, acts by calling a tool such as a knowledge base or calculator, observes the result, and answers when done
 :width: 95%
 :align: center
 :class: anim-fig
@@ -136,7 +136,7 @@ On Amazon Bedrock the model never runs a tool itself. You send the definitions o
 5. **Repeat until the model answers.** The loop ends when `stopReason` is something other than `tool_use`, usually `end_turn`.
 
 ```{image} ../_static/figures/bk_converse_loop.*
-:alt: Converse API tool loop: the application sends messages and tool definitions, the model returns stopReason tool_use, the application checks and runs the tool and returns a toolResult, until stopReason end_turn
+:alt: Converse API tool loop, where the application sends messages and tool definitions, the model returns stopReason tool_use, the application checks and runs the tool and returns a toolResult, until stopReason end_turn
 :width: 95%
 :align: center
 :class: anim-fig
