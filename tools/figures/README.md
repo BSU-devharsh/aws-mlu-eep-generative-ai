@@ -9,3 +9,6 @@ These scripts draw the animated SVG figures in `book/_static/figures/`, with a P
 Each element of a figure carries a build step. A one-shot CSS fade, active only when the reader has not asked for
 reduced motion, reveals the steps in order; `book/_static/figure-build.js` restarts the build when a figure scrolls
 into view and adds a Replay button. Rendering a PNG needs `rsvg-convert`.
+
+Every build step carries a numbered badge, so the numbers run 1 to N with no gaps. When a script does not place a
+step's badge itself, `fig.py` adds one at save time beside the step's first box, label, or icon.

@@ -102,4 +102,5 @@
 <g class="st s5"><text x="550.0" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Same model, same prompt: only the work before and during the answer grows.</text></g>
 <g class="st s5"><text x="550.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">Illustrative, not to scale. Effort changes how much work the model does on this request, not what it knows.</text></g>
 <g class="st s5"><text x="550.0" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">With adaptive thinking, a high setting on an easy question may still produce little or no thinking.</text></g>
+<g class="st s5"><circle cx="289.2" cy="367.3" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="289.2" y="371.9" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
 </svg>

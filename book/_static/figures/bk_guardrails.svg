@@ -89,4 +89,5 @@
 <g class="st s6"><use href="#i-idcard" x="775.0" y="405.0" width="30" height="30"/></g>
 <g class="st s6"><text x="814.0" y="426.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="start">PII filters</text></g>
 <g class="st s7"><text x="550.0" y="468.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">Implementation styles: keyword-based, metric-based (a classifier and a threshold), or LLM-based (a helper model judges intent).</text></g>
+<g class="st s7"><circle cx="193.5" cy="463.7" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="193.5" y="468.3" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">7</text></g>
 </svg>

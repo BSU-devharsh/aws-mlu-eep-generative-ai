@@ -39,6 +39,7 @@ f.text(280, 330, "+ knowledge lives inside the model", 13, GREEN, "bold", step=3
 f.text(280, 380, "e.g. a virtual tutor trained on course content", 12, MUTED, step=3, italic=True)
 f.zone(560, 60, 520, 360, "Retrieval-augmented generation", GREEN, "#eef8ef", step=4); f.badge(4, 1062, 76, step=4, color=GREEN)
 f.icon("database", 640, 140, 60, "Current data", step=4, label_size=12); f.icon("document", 780, 220, 50, "prompt + context", step=5, label_size=12)
+f.badge(5, 780 - text_width("prompt + context", 12, True) / 2 - 16, 256, step=5)
 f.icon("robot", 960, 220, 70, "Same model:", "weights unchanged", step=5); f.arrow([(670, 160), (750, 205)], None, GREEN, step=5, width=2.4); f.arrow([(808, 220), (918, 220)], None, GREEN, step=5, width=2.4)
 f.text(820, 330, "+ current or fluctuating data, cites sources", 13, GREEN, "bold", step=6); f.text(820, 352, "- retrieval quality limits the answer", 13, RED, "bold", step=6)
 f.text(820, 380, "e.g. is it a good time to buy a company's stock?", 12, MUTED, step=6, italic=True)
