@@ -53,6 +53,13 @@ re-evaluation for drift.
   - Ask "Is it a good time to buy a company's stock?"
 ```
 
+```{image} ../_static/figures/bk_finetune_vs_rag.*
+:alt: Fine-tuning trains a base model on 100 to 1,000 examples into a new specialized model, while RAG feeds current data into the prompt of the same unchanged model
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Retrieval-Augmented Generation
 
 RAG is an **in-context learning** technique that gives an LLM knowledge beyond its
@@ -101,6 +108,13 @@ Putting it together, a query flows through five stages:
 3. **Retrieve relevant info** from the vector database via similarity search.
 4. **Augment** the prompt with the retrieved results.
 5. **Generate** the final response with the LLM.
+
+```{image} ../_static/figures/bk_rag.*
+:alt: RAG in two parts: indexing documents into chunks, embeddings, and a vector database, then answering a question by a cleaned query, similarity search, rerank, augment, and generate
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ```{admonition} Worked example: a return-policy bot
 :class: note

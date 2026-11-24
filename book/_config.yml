@@ -86,6 +86,7 @@ sphinx:
     html_css_files:
       - custom.css
       - sidebar-toggle-fix.css
+      - figure-build.css
     # Repairs the "Toggle primary sidebar" and "Toggle secondary sidebar" buttons, which do
     # nothing in the shipped theme.
     # sphinx-book-theme and pydata-sphinx-theme bind their handlers with
@@ -95,6 +96,8 @@ sphinx:
     # The handlers land on the hidden one. See the comments in both _static files.
     html_js_files:
       - sidebar-toggle-fix.js
+      # Replays the build animation of the icon figures and adds a Replay button.
+      - figure-build.js
     # Custom 404 page (sphinx-notfound-page).
     # The prefix must match the GitHub Pages project subpath so the 404's own
     # assets and links resolve correctly when served from any URL depth.

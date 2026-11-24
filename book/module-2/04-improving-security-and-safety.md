@@ -102,6 +102,13 @@ apply them consistently across models and applications, rather than hand-coding 
 validator for every app.
 ```
 
+```{image} ../_static/figures/bk_guardrails.*
+:alt: Guardrails on the way in and out: a prompt passes an input guardrail to the model and the draft passes an output guardrail to the user; blocked requests get a refusal; Bedrock Guardrails policies listed
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Watermarking
 
 A **watermark** is a signal encoding the source of content, used to distinguish
@@ -156,6 +163,13 @@ after resize,  C2PA segment present: False
 ```
 
 The resize removed the segment without any warning. Test every step that touches an image, from upload to the content delivery network, and either keep the credential, re-sign the result with your own certificate, or use a service that preserves credentials, such as Cloudflare Images ([Cloudflare](https://blog.cloudflare.com/preserve-content-credentials-with-cloudflare-images)). The presence check above validates nothing; use a current, conforming C2PA library or verifier to check signatures, bindings, and the trust list.
+
+```{image} ../_static/figures/bk_c2pa.*
+:alt: A C2PA-signed image passes through an ordinary resize step that silently drops the APP11 segments, so the published image has no credential; the fix is to test every step and keep, re-sign, or preserve the credential
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ## Debiasing
 
@@ -233,6 +247,13 @@ Model extraction copies a model by querying it, so what your API returns decides
 - Explanations that people are owed, such as the principal reasons for a credit denial, go to the affected person through the decision process, not to every caller for any input it chooses.
 
 The wrapper below is the outside face of a classification service. Whatever the internal model returns, the caller gets one label, and each caller has a daily budget. Full scores stay in an internal audit log, where they help you spot a caller whose queries look like a systematic sweep.
+
+```{image} ../_static/figures/bk_model_api.*
+:alt: A public wrapper returns one label to partner A, logs full scores internally, and stops scraper B after 500 queries a day
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ```python
 from collections import defaultdict
@@ -326,6 +347,13 @@ The table walks a typical Bedrock application, a chat front end over a knowledge
 ```
 
 Keep the table with the code. When you add a tool, a data source, or a model, update the threat model in the same change, and turn each row into a test that the evaluation and red-team suites run.
+
+```{image} ../_static/figures/bk_threat_model.*
+:alt: A Bedrock app from user to chat front end, guardrails, model, knowledge base, agent tools, and logs, with one threat and one control card for each element
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ### Assessing Bedrock as a vendor
 

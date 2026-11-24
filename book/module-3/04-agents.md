@@ -56,6 +56,13 @@ tasks** (where simple prompting hallucinates and an agent can query real sources
 and **decision-making tasks** (where custom tools enhance the LLM's planning),
 though performance still falls short of expert humans.
 
+```{image} ../_static/figures/bk_react.*
+:alt: ReAct loop around an agent: reason to plan, act by calling a tool such as a knowledge base or calculator, observe the result, and answer when done
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## LangChain agents
 
 LangChain provides the machinery:
@@ -127,6 +134,13 @@ On Amazon Bedrock the model never runs a tool itself. You send the definitions o
 3. **Run the tool in your code.** Check that the name is one you offered and that the input is valid before you act on it.
 4. **Return the result.** Add the assistant message to the conversation, then a user message with a `toolResult` block carrying the same `toolUseId` and the tool's output.
 5. **Repeat until the model answers.** The loop ends when `stopReason` is something other than `tool_use`, usually `end_turn`.
+
+```{image} ../_static/figures/bk_converse_loop.*
+:alt: Converse API tool loop: the application sends messages and tool definitions, the model returns stopReason tool_use, the application checks and runs the tool and returns a toolResult, until stopReason end_turn
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ```python
 import boto3
@@ -214,6 +228,13 @@ The cybersecurity textbook works through a question about an agent that both ini
 1. Give the agent a tool that proposes a payment and no tool that approves one. Approval runs in a separate service, under the approver's own credentials.
 2. Let the harness, not the model, supply the caller's identity. A tool input field such as `approver` would let injected text claim to be someone else.
 3. Check independence where the approval happens: the approver is not the initiator, does not share its sponsor, and is a person above a set amount.
+
+```{image} ../_static/figures/bk_approval_separation.*
+:alt: The AP agent can only propose a payment into a queue; a separate approval service with its own identity checks that the approver is not the initiator, does not share the sponsor, and is a person above 10,000 dollars before release
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ```python
 from dataclasses import dataclass, field

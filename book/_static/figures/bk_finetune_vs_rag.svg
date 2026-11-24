@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" width="1100" height="480" role="img" aria-labelledby="t d"><title id="t">Fine-tuning changes the model; RAG changes what the model sees</title><desc id="d">Left: fine-tuning continues training on roughly 100 to 1,000 high-quality examples, updating the weights to create a new, specialized model; it suits knowledge that changes about yearly and needs re-evaluation for drift. Right: RAG leaves the weights alone and retrieves current data into the prompt at question time; it suits fast-changing information such as stock prices.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}.s6{animation-delay:4.50s}.s7{animation-delay:5.40s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-2e7d32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2e7d32"/></marker><marker id="a-6a3d9a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#6a3d9a"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-document" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M26 8 H62 L76 22 V90 H26 Z" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<path d="M62 8 V22 H76" fill="#d5dbe2" stroke="#6b7785" stroke-width="1.2"/>
+<g stroke="#9aa6b3" stroke-width="2.4" stroke-linecap="round"><line x1="34" y1="34" x2="68" y2="34"/><line x1="34" y1="44" x2="68" y2="44"/><line x1="34" y1="54" x2="60" y2="54"/><line x1="34" y1="64" x2="66" y2="64"/></g>
+</symbol>
+<symbol id="i-robot" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<line x1="50" y1="8" x2="50" y2="18" stroke="#5b6b7d" stroke-width="2.5"/><circle cx="50" cy="7" r="4" fill="#ff9800" stroke="#e65100"/>
+<rect x="24" y="18" width="52" height="40" rx="11" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="31" y="27" width="38" height="20" rx="7" fill="#183247"/>
+<circle cx="42" cy="37" r="4" fill="#4dd0e1"/><circle cx="58" cy="37" r="4" fill="#4dd0e1"/>
+<rect x="18" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/><rect x="76" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/>
+<path d="M30 92 V70 a8 8 0 0 1 8 -8 h24 a8 8 0 0 1 8 8 V92 Z" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="40" y="70" width="20" height="10" rx="2" fill="#183247"/><circle cx="45" cy="75" r="1.8" fill="#8fd16a"/><circle cx="55" cy="75" r="1.8" fill="#ff7043"/>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+<symbol id="i-database" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M24 22 v56 a26 9 0 0 0 52 0 v-56" fill="url(#g-db)" stroke="#4f5964" stroke-width="1.2"/>
+<path d="M24 41 a26 9 0 0 0 52 0 M24 60 a26 9 0 0 0 52 0" fill="none" stroke="#5f6a76" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="26" ry="9" fill="#f1f3f5" stroke="#4f5964" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="18" ry="5" fill="#dfe4e9"/>
+</symbol>
+</defs>
+<rect width="1100" height="480" fill="#ffffff"/>
+<text x="550.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">Fine-tuning changes the model; RAG changes what the model sees</text>
+<g class="st s1"><rect x="20" y="60" width="520" height="360" rx="14" fill="#f5eef8" stroke="#6a3d9a" stroke-width="2"/><text x="34.0" y="82.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#6a3d9a" font-weight="bold" text-anchor="start">Fine-tuning</text></g>
+<g class="st s1"><circle cx="522" cy="76" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="522.0" y="80.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s1"><use href="#i-document" x="70.0" y="150.0" width="60" height="60"/><text x="100.0" y="225.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2933" font-weight="bold" text-anchor="middle">100 to 1,000 high-</text><text x="100.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">quality examples</text></g>
+<g class="st s2"><use href="#i-robot" x="235.0" y="145.0" width="70" height="70"/><text x="270.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="bold" text-anchor="middle">Base model</text></g>
+<g class="st s2"><path d="M132.0 180.0 L226.0 180.0" fill="none" stroke="#6a3d9a" stroke-width="2.4" marker-end="url(#a-6a3d9a)" stroke-linejoin="round"/><text x="179.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6a3d9a" font-weight="bold" text-anchor="middle">train</text></g>
+<g class="st s2"><use href="#i-gear" x="286.0" y="126.0" width="28" height="28"/></g>
+<g class="st s3"><use href="#i-robot" x="405.0" y="145.0" width="70" height="70"/><text x="440.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="bold" text-anchor="middle">New, specialized</text><text x="440.0" y="247.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">model: weights changed</text></g>
+<g class="st s3"><path d="M310.0 180.0 L398.0 180.0" fill="none" stroke="#6a3d9a" stroke-width="2.4" marker-end="url(#a-6a3d9a)" stroke-linejoin="round"/></g>
+<g class="st s3"><text x="280.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="middle">+ knowledge lives inside the model</text></g>
+<g class="st s3"><text x="280.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#c0392b" font-weight="bold" text-anchor="middle">- poor for fast-changing data; re-evaluate for drift</text></g>
+<g class="st s3"><text x="280.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">e.g. a virtual tutor trained on course content</text></g>
+<g class="st s4"><rect x="560" y="60" width="520" height="360" rx="14" fill="#eef8ef" stroke="#2e7d32" stroke-width="2"/><text x="574.0" y="82.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#2e7d32" font-weight="bold" text-anchor="start">Retrieval-augmented generation</text></g>
+<g class="st s4"><circle cx="1062" cy="76" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="1062.0" y="80.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s4"><use href="#i-database" x="610.0" y="110.0" width="60" height="60"/><text x="640.0" y="185.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2933" font-weight="bold" text-anchor="middle">Current data</text></g>
+<g class="st s5"><use href="#i-document" x="755.0" y="195.0" width="50" height="50"/><text x="780.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1f2933" font-weight="bold" text-anchor="middle">prompt + context</text></g>
+<g class="st s5"><use href="#i-robot" x="925.0" y="185.0" width="70" height="70"/><text x="960.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="bold" text-anchor="middle">Same model:</text><text x="960.0" y="287.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">weights unchanged</text></g>
+<g class="st s5"><path d="M670.0 160.0 L750.0 205.0" fill="none" stroke="#2e7d32" stroke-width="2.4" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s5"><path d="M808.0 220.0 L918.0 220.0" fill="none" stroke="#2e7d32" stroke-width="2.4" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s6"><text x="820.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="middle">+ current or fluctuating data, cites sources</text></g>
+<g class="st s6"><text x="820.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#c0392b" font-weight="bold" text-anchor="middle">- retrieval quality limits the answer</text></g>
+<g class="st s6"><text x="820.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">e.g. is it a good time to buy a company&#x27;s stock?</text></g>
+<g class="st s7"><text x="550.0" y="456.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="middle" font-style="italic">On Bedrock, fine-tuning needs no code: upload training data to S3 and configure the job.</text></g>
+</svg>

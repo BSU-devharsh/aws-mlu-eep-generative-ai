@@ -261,6 +261,13 @@ Swap answer order between runs, use a judge from a different model family than
 the models under test, and validate its scores against a sample of human ratings
 before you rely on them, as the case study above did.
 
+```{image} ../_static/figures/bk_eval_options.*
+:alt: Four Bedrock evaluation types as cards: programmatic, human, LLM-as-a-judge, and RAG evaluation, with a note on judge biases
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{admonition} Worked example: choosing what to measure
 :class: note
 Suppose you are deploying a customer-support assistant. Pure accuracy is the wrong

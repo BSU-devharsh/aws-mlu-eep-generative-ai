@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 460" width="1100" height="460" role="img" aria-labelledby="t d"><title id="t">Content Credentials: a signed record that must survive every step of your pipeline</title><desc id="d">A camera or editing tool signs a C2PA manifest describing where the image came from and how it was edited; in JPEG files it travels in APP11 segments. An ordinary resize in a publishing pipeline drops those segments without warning, so the published thumbnail has no credential. Fix each step: preserve the credential, re-sign the result with your own certificate, or use a service that keeps it.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f4e9c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f4e9c"/></marker><marker id="a-d9822b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#d9822b"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-eye" viewBox="0 0 100 100">
+<path d="M8 50 C26 22 74 22 92 50 C74 78 26 78 8 50 Z" fill="url(#g-paper)" stroke="#2f6fae" stroke-width="3"/>
+<circle cx="50" cy="50" r="17" fill="url(#g-screen)" stroke="#0b4f9c" stroke-width="2"/>
+<circle cx="50" cy="50" r="7" fill="#0d1b2a"/><circle cx="44" cy="44" r="3.5" fill="#fff"/>
+</symbol>
+<symbol id="i-document" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M26 8 H62 L76 22 V90 H26 Z" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<path d="M62 8 V22 H76" fill="#d5dbe2" stroke="#6b7785" stroke-width="1.2"/>
+<g stroke="#9aa6b3" stroke-width="2.4" stroke-linecap="round"><line x1="34" y1="34" x2="68" y2="34"/><line x1="34" y1="44" x2="68" y2="44"/><line x1="34" y1="54" x2="60" y2="54"/><line x1="34" y1="64" x2="66" y2="64"/></g>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+<symbol id="i-browser" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="8" y="16" width="84" height="66" rx="5" fill="#ffffff" stroke="#4a5562" stroke-width="1.6"/>
+<path d="M8 21 a5 5 0 0 1 5 -5 h74 a5 5 0 0 1 5 5 v9 h-84 Z" fill="#d7dce2"/>
+<circle cx="16" cy="23" r="2.4" fill="#e74c3c"/><circle cx="24" cy="23" r="2.4" fill="#f5b041"/><circle cx="32" cy="23" r="2.4" fill="#8fd16a"/>
+<rect x="40" y="19.5" width="46" height="7" rx="3.5" fill="#ffffff" stroke="#9aa3ae" stroke-width=".8"/>
+<rect x="16" y="38" width="40" height="7" rx="2" fill="#1f4e9c"/>
+<g stroke="#b8c0ca" stroke-width="3.4" stroke-linecap="round"><line x1="16" y1="54" x2="84" y2="54"/><line x1="16" y1="63" x2="76" y2="63"/><line x1="16" y1="72" x2="64" y2="72"/></g>
+</symbol>
+<symbol id="i-certificate" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="12" y="16" width="76" height="56" rx="3" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<rect x="17" y="21" width="66" height="46" rx="2" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+<g stroke="#9aa6b3" stroke-width="2.2" stroke-linecap="round"><line x1="24" y1="32" x2="62" y2="32"/><line x1="24" y1="41" x2="56" y2="41"/><line x1="24" y1="50" x2="50" y2="50"/></g>
+<path d="M66 60 l-5 26 7 -5 7 5 -5 -26" fill="#c62828"/>
+<circle cx="70" cy="56" r="10" fill="url(#g-gold)" stroke="#a5760e" stroke-width="1.2"/>
+</symbol>
+<symbol id="i-cross" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="url(#g-red)" stroke="#7f0000" stroke-width="2"/>
+<path d="M35 35 L65 65 M65 35 L35 65" stroke="#fff" stroke-width="9" stroke-linecap="round"/></symbol>
+<symbol id="i-shield" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M50 8 L84 20 V48 C84 70 68 84 50 92 C32 84 16 70 16 48 V20 Z" fill="url(#g-green)" stroke="#1b5e20" stroke-width="1.6"/>
+<path d="M36 50 L46 60 L66 38" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+</defs>
+<rect width="1100" height="460" fill="#ffffff"/>
+<text x="550.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">Content Credentials: a signed record that must survive every step of your pipeline</text>
+<g class="st s1"><use href="#i-eye" x="75.0" y="135.0" width="70" height="70"/><text x="110.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Capture or edit</text><text x="110.0" y="235.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">C2PA manifest signed</text></g>
+<g class="st s1"><circle cx="64" cy="120" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="64.0" y="124.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><path d="M156.0 170.0 L344.0 170.0" fill="none" stroke="#1f4e9c" stroke-width="2.4" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s2"><use href="#i-document" x="355.0" y="135.0" width="70" height="70"/><text x="390.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Signed JPEG</text><text x="390.0" y="235.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">manifest in APP11</text></g>
+<g class="st s2"><circle cx="344" cy="120" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="344.0" y="124.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><path d="M436.0 170.0 L624.0 170.0" fill="none" stroke="#1f4e9c" stroke-width="2.4" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s3"><use href="#i-gear" x="635.0" y="135.0" width="70" height="70"/><text x="670.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Resize for a thumbnail</text><text x="670.0" y="235.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">ordinary image code</text></g>
+<g class="st s3"><circle cx="624" cy="120" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="624.0" y="124.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><path d="M716.0 170.0 L904.0 170.0" fill="none" stroke="#d9822b" stroke-width="2.4" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s4"><use href="#i-browser" x="915.0" y="135.0" width="70" height="70"/><text x="950.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Published image</text><text x="950.0" y="235.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#52606d" font-weight="normal" text-anchor="middle">credential gone</text></g>
+<g class="st s4"><circle cx="904" cy="120" r="12" fill="#c0392b" stroke="#fff" stroke-width="2"/><text x="904.0" y="124.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s2"><use href="#i-certificate" x="404.0" y="104.0" width="32" height="32"/></g>
+<g class="st s4"><use href="#i-cross" x="937.0" y="107.0" width="26" height="26"/></g>
+<g class="st s3"><text x="660.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#c0392b" font-weight="bold" text-anchor="middle">APP11 segments dropped silently</text></g>
+<g class="st s5"><rect x="40.0" y="300.0" width="1020.0" height="120.0" rx="8" fill="#e8f5e9" fill-opacity="1" stroke="#2e7d32" stroke-width="1.6"/></g>
+<g class="st s5"><circle cx="40" cy="300" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="40.0" y="304.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+<g class="st s5"><use href="#i-shield" x="60.0" y="340.0" width="40" height="40"/></g>
+<g class="st s5"><text x="110.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="start">Test every step that touches an image, from upload to the content delivery network, then:</text></g>
+<g class="st s5"><text x="130.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">- keep the credential through the step,</text></g>
+<g class="st s5"><text x="130.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">- re-sign the result with your own certificate, or</text></g>
+<g class="st s5"><text x="130.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">- use a service that preserves Content Credentials.</text></g>
+</svg>

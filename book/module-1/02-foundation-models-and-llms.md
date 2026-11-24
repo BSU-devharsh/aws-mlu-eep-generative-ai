@@ -227,6 +227,13 @@ print(job["jobArn"])
 
 Give the import role read access only to the verified bucket, so that nobody can import a model that skipped the checks.
 
+```{image} ../_static/figures/bk_quantized_pipeline.*
+:alt: Verify the lab signed original, store it in a versioned S3 bucket, then import full precision to Bedrock or quantize in-house, evaluate, sign, and deploy only signed artifacts; an unverified hub quantization is rejected
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Foundation models change the workflow
 
 Foundation models break the one-model-per-task pattern. The key difference is
