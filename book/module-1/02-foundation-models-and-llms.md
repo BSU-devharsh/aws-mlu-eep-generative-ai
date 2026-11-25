@@ -234,6 +234,97 @@ Give the import role read access only to the verified bucket, so that nobody can
 :class: anim-fig
 ```
 
+### Recording how a model was built: in-toto and SLSA provenance
+
+Step 3 above writes a provenance record, and step 4 signs the result. They answer different questions. A signature on the final files proves who signed them and that they have not changed since. A provenance record says how the files were built: from which inputs, with which tool and settings, and by which system. The standard format for that record is an **in-toto attestation** carrying **SLSA provenance** {cite}`torresarias2019intoto,slsa2025spec`. The cybersecurity textbook covers the format, the SLSA Build levels, and the attacks that provenance does and does not stop ([build provenance with in-toto and SLSA](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#build-provenance-with-in-toto-and-slsa)).
+
+An in-toto attestation has three layers {cite}`intoto2026attestation`:
+
+- A **statement** names the files it covers, called subjects, by their SHA-256 digests. A verifier matches files by digest, never by name.
+- A **predicate** holds the claim. SLSA provenance, predicate type `https://slsa.dev/provenance/v1`, lists the build's parameters, its **resolved dependencies** with their digests, and the **builder ID** of the system that ran it.
+- An **envelope** carries the signatures. The recommended envelope, the Dead Simple Signing Envelope (DSSE), signs the payload together with its type, so a payload signed for one purpose cannot pass as another {cite}`dsse2024protocol`.
+
+The OpenSSF `model_signing` signature from step 1 is itself an in-toto statement in a DSSE envelope, but its predicate lists only the files and their digests. SLSA provenance over the same digests adds the process.
+
+For the quantization in step 3, the statement lists the quantized files as subjects and the verified original's files, the pinned tool, and the recipe as dependencies. The code below writes the statement and signs it with an asymmetric AWS KMS key (key spec `ECC_NIST_P256`, key usage `SIGN_VERIFY`). KMS signs messages of up to 4,096 bytes, so the code signs the SHA-256 digest of the DSSE pre-authentication encoding and sets `MessageType="DIGEST"`.
+
+```python
+import base64, hashlib, json, pathlib
+import boto3
+
+kms = boto3.client("kms")
+KEY = "alias/model-provenance"                 # asymmetric ECC_NIST_P256 key, key usage SIGN_VERIFY
+IN_TOTO = "application/vnd.in-toto+json"
+
+def digests(folder):
+    return [{"name": p.name, "digest": {"sha256": hashlib.sha256(p.read_bytes()).hexdigest()}}
+            for p in sorted(pathlib.Path(folder).iterdir()) if p.is_file()]
+
+def pae(payload_type, body):                   # DSSE pre-authentication encoding
+    t = payload_type.encode()
+    return b"DSSEv1 %d %s %d %s" % (len(t), t, len(body), body)
+
+statement = {
+    "_type": "https://in-toto.io/Statement/v1",
+    "subject": digests("quantized"),
+    "predicateType": "https://slsa.dev/provenance/v1",
+    "predicate": {
+        "buildDefinition": {
+            "buildType": "https://example.com/quantize/v1",
+            "externalParameters": {"recipe": "recipes/q4.yaml", "source": "s3://verified-models/lab-model-v1/"},
+            "resolvedDependencies": digests("original")
+                + [{"name": "quantizer", "digest": {"sha256": "<digest of the pinned tool>"}}],
+        },
+        "runDetails": {"builder": {"id": "https://example.com/builders/model-build"}},
+    },
+}
+body = json.dumps(statement, sort_keys=True).encode()
+signature = kms.sign(KeyId=KEY, Message=hashlib.sha256(pae(IN_TOTO, body)).digest(),
+                     MessageType="DIGEST", SigningAlgorithm="ECDSA_SHA_256")["Signature"]
+envelope = {"payloadType": IN_TOTO, "payload": base64.b64encode(body).decode(),
+            "signatures": [{"keyid": KEY, "sig": base64.b64encode(signature).decode()}]}
+pathlib.Path("quantized.intoto.json").write_text(json.dumps(envelope))
+```
+
+Run this signing step outside the quantization job. That job runs a third-party tool on third-party weights, and if its role can call `kms:Sign`, any code in the job can sign a statement that claims anything. Give `kms:Sign` only to a separate signing step that reads the job's outputs and computes the digests itself, and give the job's role no access to the key. SLSA requires this separation at Build Level 3, where the signing secret must be out of reach of user-defined build steps {cite}`slsa2025spec`.
+
+The deployment gate checks the envelope before the model runs anywhere:
+
+```python
+def admit(envelope, folder, approved_original, builder="https://example.com/builders/model-build"):
+    body = base64.b64decode(envelope["payload"])
+    try:                                       # verify the signature before trusting the payload
+        kms.verify(KeyId=KEY, Message=hashlib.sha256(pae(envelope["payloadType"], body)).digest(),
+                   MessageType="DIGEST", SigningAlgorithm="ECDSA_SHA_256",
+                   Signature=base64.b64decode(envelope["signatures"][0]["sig"]))
+    except kms.exceptions.KMSInvalidSignatureException:
+        return "refuse: signature does not verify"
+    st = json.loads(body)
+    if envelope["payloadType"] != IN_TOTO or st["predicateType"] != "https://slsa.dev/provenance/v1":
+        return "refuse: not SLSA provenance"
+    if st["predicate"]["runDetails"]["builder"]["id"] != builder:
+        return "refuse: unexpected builder"
+    if {s["digest"]["sha256"] for s in st["subject"]} != {d["digest"]["sha256"] for d in digests(folder)}:
+        return "refuse: files do not match the subjects"
+    deps = {d["digest"].get("sha256") for d in st["predicate"]["buildDefinition"]["resolvedDependencies"]}
+    if not {d["digest"]["sha256"] for d in approved_original} <= deps:
+        return "refuse: not built from the approved original"
+    return "admit"
+```
+
+Here `approved_original` is the list of digests you recorded in step 2. KMS reports a bad signature by raising `KMSInvalidSignatureException`, not by returning false, so the gate catches that exception. The gate does not rebuild anything: verification compares the signed record with what you expect.
+
+```{image} ../_static/figures/bk_model_provenance.*
+:alt: Model provenance on AWS. A verified original in a versioned S3 bucket feeds an isolated build job that writes quantized files and an in-toto statement listing their digests, the original's digests, the tool, and the recipe. A separate signer signs the statement through an AWS KMS key in a DSSE envelope, and the build job has no kms Sign permission. S3 stores the files and the envelope, and a deployment gate admits the model only if KMS Verify passes, the digests match, and the original is the approved one.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+Provenance records what the build saw, so it is only as trustworthy as the build platform. In May 2026, attackers poisoned a GitHub Actions cache and read a release workflow's OpenID Connect (OIDC) token from runner memory, then published 84 malicious npm package versions whose provenance was cryptographically valid and named the correct repository {cite}`mcnamara2026shaihulud`. Keep build jobs isolated from one another, do not share caches between untrusted jobs and release jobs, and alert when a release is published from a failed run.
+
+The cybersecurity textbook asks what in-toto or SLSA provenance adds beyond a signature on the final model file. The answer is evidence of the build steps, the inputs, and the builder. A performance benchmark is a test result, which can travel as its own attestation but is not provenance. Provenance does not show that the training data was licensed for commercial use. Neither provenance nor a signature encrypts the model: both protect integrity and authenticity, not confidentiality.
+
 ## Foundation models change the workflow
 
 Foundation models break the one-model-per-task pattern. The key difference is
@@ -446,6 +537,9 @@ application on top of a decoder-only model.
   weights; PTQ compresses a trained model, QAT trains for low precision, and
   small groups keep outliers from ruining accuracy. Derive quantized copies
   from a verified original in your own pipeline and sign them.
+- A signature says who vouches for a model's files; **SLSA provenance** in an
+  **in-toto** attestation says how they were built. Sign it outside the build
+  job and check it before the model runs anywhere.
 - Outputs vary run to run, even at temperature zero; fine-tuning can erase old
   skills, including safety behavior (**catastrophic forgetting**); and training
   on model-generated data narrows what models know (**model collapse**).
