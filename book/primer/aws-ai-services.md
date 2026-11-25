@@ -18,6 +18,8 @@ current AWS documentation before you design or budget around them.
 
 ## Core definitions
 
+Three terms frame the rest of this chapter. Each one is a subset of the one before it, and AWS offers managed services at every level.
+
 **Artificial Intelligence (AI)** is the field of computer science devoted to
 solving cognitive problems associated with human intelligence, such as learning,
 problem-solving, and pattern recognition.
@@ -48,6 +50,8 @@ full ML platforms.
 
 ## Intelligent search: Amazon Kendra
 
+Enterprise search is a common first use of AI in an organization, because the answers people need are often spread across many systems.
+
 **Amazon Kendra** is an ML-powered enterprise search service. Instead of matching
 keywords, it understands the **context and meaning** of a query and finds relevant
 information across scattered sources, document repositories, SharePoint,
@@ -76,6 +80,8 @@ using natural language processing (NLP) and ML over your content.
 
 ## Text and language: NLP services
 
+Many tasks need only one narrow language skill, such as turning speech into text or text into speech. For those, AWS offers task-specific services that need no model training.
+
 **Natural Language Processing (NLP)** is the area of AI focused on analyzing,
 understanding, and generating human language. AWS offers several task-specific,
 fully managed text and speech services you can call from the console or an API:
@@ -102,6 +108,8 @@ These map onto the single-modality tasks in {doc}`ai-literacy` (speech-to-text,
 text-to-speech, image-to-text) delivered as managed APIs.
 
 ## Conversational interfaces: Amazon Lex
+
+A chatbot or voice assistant needs to understand what a person wants and keep a conversation on track. Amazon Lex provides both.
 
 **Amazon Lex** lets you build conversational interfaces, chatbots and voice
 assistants, into your applications. It uses the same deep-learning technology
@@ -130,6 +138,8 @@ natural language instead of menus and forms.
 ```
 
 ## Document insights: Amazon Comprehend
+
+Organizations hold large amounts of text, such as reviews, emails, and reports, that no one has time to read. Amazon Comprehend extracts the useful facts from it.
 
 **Amazon Comprehend** uses NLP to extract insights from text with no preprocessing
 required. It analyzes UTF-8 text to recognize entities, key phrases, language,
@@ -176,7 +186,18 @@ yourself, and **Bedrock** when you want to consume and adapt foundation models. 
 task-specific services above (Kendra, Lex, Comprehend, Transcribe, Polly, Textract,
 Translate) sit one level higher still, ready-made AI for a specific job.
 
+The figure below turns that advice into a short decision, from the most ready-made option to the one that gives you the most control.
+
+```{image} ../_static/figures/bk_aws_ai_choice.*
+:alt: Decision flow for choosing an AWS AI service, first a task-specific service such as Kendra or Comprehend if one does the exact job, then Amazon Bedrock if a pre-trained foundation model can do it, and otherwise Amazon SageMaker AI to build your own model
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Key takeaways
+
+The points below summarize the AWS AI services this chapter covered.
 
 - **AI -> ML -> generative AI** is a nesting; AWS has managed services at each
   level.

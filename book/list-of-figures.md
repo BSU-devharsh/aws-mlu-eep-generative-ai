@@ -13,6 +13,12 @@ omitted.)
 
 * - Location
   - Figure
+* - {doc}`intro`
+  - Reading order of the book, from the primer through the three modules and
+    their labs to the appendices.
+* - {doc}`primer/ai-literacy`
+  - Data check to run before pasting text into an AI tool, covering PII, FERPA,
+    and HIPAA.
 * - {doc}`primer/ai-and-tools-reference`
   - Decision flowchart for choosing a model and effort level.
 * - {doc}`primer/ai-concepts-assistants-effort`
@@ -21,6 +27,13 @@ omitted.)
     relate.
 * - {doc}`primer/ai-concepts-assistants-effort`
   - What changes inside a model at low, medium and high or maximum effort.
+* - {doc}`primer/aws-ai-services`
+  - Decision flow for choosing a task-specific AWS AI service, Amazon Bedrock, or
+    Amazon SageMaker AI.
+* - {doc}`primer/tokens-and-embeddings`
+  - Tokens for processing text versus embeddings for comparing meaning.
+* - {doc}`primer/practical-ai-workflow`
+  - The seven steps of the practical AI workflow, with a feedback loop.
 ```
 
 ## Module 1: Fundamentals of Generative AI

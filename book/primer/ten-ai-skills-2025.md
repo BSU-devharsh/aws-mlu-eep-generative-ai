@@ -20,6 +20,8 @@ book build.
 
 ## Overview
 
+The ten skills run from directing a single model to running AI systems in production. The table below names each skill, says what it is, and lists representative tools; the sections after it take the skills one at a time.
+
 ```{list-table}
 :header-rows: 1
 :widths: 4 26 40 30
@@ -54,7 +56,7 @@ book build.
   - Pinecone, LlamaIndex, Haystack, Elastic
 * - 7
   - **AEO / GEO**
-  - Optimising so your brand shows up in AI-generated answers.
+  - Optimizing so your brand shows up in AI-generated answers.
   - Searchable, Trakkr.ai, Screaming Frog
 * - 8
   - **AI Tool Stacking**
@@ -93,6 +95,8 @@ up to operating a whole AI system.
 
 ## 1. Prompt Engineering
 
+Every other skill on this list starts with a well-written prompt, so this one comes first.
+
 **What it is:** the craft of writing inputs that turn a capable model into useful,
 actionable output. **When to use it:** any time you need AI to think like a
 strategist or operator, not a chatbot. **Tools:** ChatGPT, Claude, Gemini,
@@ -115,6 +119,8 @@ response = llm.invoke(prompt.format(report_text="Q3 revenue fell 8% ..."))
 
 ## 2. AI Agents
 
+Once you can direct a model, the next step is to let it act for you with tools.
+
 **What it is:** an AI **tool-using executor**, it carries out a task end to end by
 calling tools and APIs, rather than just answering. (Contrast with *Agentic AI*
 below, which adds planning and self-evaluation on top.) **When to use it:**
@@ -132,6 +138,8 @@ agent.invoke("How old is the current US president in days?")
 
 ## 3. Workflow Automation
 
+Agents handle one task at a time, and automation makes routine work run on its own schedule.
+
 **What it is:** connecting your tools so routine work happens without you. **When
 to use it:** any repeatable task, reporting, onboarding, data entry. **Tools:**
 Make, Zapier, n8n, Bardeen. These are mostly no-code platforms; the same logic can
@@ -148,6 +156,8 @@ def automate(new_files):
 ```
 
 ## 4. Agentic AI
+
+Agentic AI adds planning and self-checking on top of a single agent, so a system can work toward a goal over many steps.
 
 **What it is:** a **planner + executor + self-evaluator**, it plans an approach,
 executes it (often using agents and tools), evaluates its own results, and
@@ -173,6 +183,8 @@ def agentic_solve(task, max_iters=3):
 
 ## 5. Multimodal AI
 
+Much real work involves images, audio, and documents, not just text, and multimodal models handle all of them.
+
 **What it is:** AI that works across text, images, audio, and code in one flow.
 **When to use it:** turning a rough idea into a full campaign, copy, visuals,
 video, voiceover. **Tools:** Gemini, Claude 3.5 Sonnet, OpenAI Vision, Stable
@@ -192,6 +204,8 @@ msg = [{"role": "user", "content": [
 
 ## 6. RAG (Retrieval-Augmented Generation)
 
+A model knows only what it learned in training, and retrieval lets it answer from your own, current data.
+
 **What it is:** teaching AI to pull from your data instead of making things up.
 **When to use it:** customer support, sales enablement, internal knowledge, any
 case where accuracy matters. **Tools:** Pinecone, LlamaIndex, Haystack, Elastic.
@@ -204,7 +218,9 @@ context = "\n".join(d.page_content for d in docs)
 answer = llm.invoke(f"Answer using ONLY this context:\n{context}\n\nQ: {query}")
 ```
 
-## 7. AEO / GEO (Answer & Generative Engine Optimisation)
+## 7. AEO / GEO (Answer & Generative Engine Optimization)
+
+As more people ask AI assistants instead of searching the web, it matters whether those assistants find and cite your content.
 
 **What it is:** SEO for the AI era, making sure your brand shows up in AI-generated
 answers. **When to use it:** when prospects start asking ChatGPT instead of Google.
@@ -222,7 +238,9 @@ ranked = sorted(candidates, key=lambda c: embedding_similarity(q, c), reverse=Tr
 
 ## 8. AI Tool Stacking
 
-**What it is:** combining your favourite tools so they run as one system. **When to
+No single tool does everything well, so a common skill is connecting several of them into one flow.
+
+**What it is:** combining your favorite tools so they run as one system. **When to
 use it:** to build always-on workflows that cut costs and free up your team.
 **Tools:** Notion AI, ClickUp AI, Airtable AI, Zapier AI. The engineering analogue
 is composing services with a standard interface, exactly what LangChain provides;
@@ -239,6 +257,8 @@ for t in parse_list(tasks):
 
 ## 9. AI Content Generation
 
+Content work is where many people first see large time savings, as long as a person still edits the result.
+
 **What it is:** producing content at scale without building a ten-person marketing
 team. **When to use it:** daily posts, video edits, podcasts, repurposing
 long-form into short. **Tools:** Descript, Saywhat, OpusClip, ElevenLabs. This
@@ -254,6 +274,8 @@ posts = llm.invoke(
 ```
 
 ## 10. LLM Management (LLMOps and Observability)
+
+Running AI in production brings the same concerns as any other system: cost, quality, and reliability over time.
 
 **What it is:** controlling cost, accuracy, and performance across the AI you use.
 **When to use it:** once AI becomes core to your operations and you need visibility
@@ -388,6 +410,8 @@ illustrative and verify against current sources.
 ```
 
 ## Key takeaways
+
+The points below summarize the ten skills and how they fit together.
 
 - The ten skills form a ladder: **direct a model** (prompt engineering, multimodal)
   -> **ground it** (RAG, content) -> **let it act** (agents, agentic AI) ->

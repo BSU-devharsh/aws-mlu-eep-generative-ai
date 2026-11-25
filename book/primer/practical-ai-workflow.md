@@ -31,6 +31,15 @@ emotional intelligence** human.
 
 ## The seven steps
 
+The steps build on each other. The first three set up a capable assistant with your context and your formulas, the next three make that setup persistent and reusable, and the last one uses AI to improve the setup itself.
+
+```{image} ../_static/figures/bk_ai_workflow.*
+:alt: Seven steps in a row, grouped as set it up, make it persistent, and improve it, from choosing an assistant and writing a master prompt to saving a custom assistant, with step 7 looping back to refine steps 2 to 6
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ### 1. Get a capable assistant
 
 Start with a capable, paid-tier assistant (the post uses ChatGPT Plus/Pro; Claude
@@ -85,7 +94,9 @@ write system prompts, suggest custom instructions, and improve your prompts. Thi
 is the iterative, "prompting is a loop" mindset from
 {doc}`../module-1/03-prompt-engineering`, turned on the workflow itself.
 
-## What "AI does the work" looks like in practice
+## What it looks like when AI does the work
+
+The same split of work applies across a job. In each area below, the assistant produces the first version and you supply the judgment, the voice, and the final check.
 
 ```{list-table}
 :header-rows: 1
@@ -200,6 +211,8 @@ prompting into a maintainable system, the practical foundation that the prompt
 engineering, chains, and evaluation chapters formalize.
 
 ## Key takeaways
+
+The points below capture the workflow in brief.
 
 - Build **reusable context** (master prompt), **reusable formulas** (system
   prompts), and **reusable workers** (custom assistants), then stop re-explaining

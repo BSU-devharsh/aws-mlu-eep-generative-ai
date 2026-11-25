@@ -30,6 +30,15 @@ The prerequisites are deliberately light:
 The book is divided into three modules. Each module contains several chapters of
 explanation followed by a set of labs.
 
+The figure below shows the reading order, including the primer that comes before the modules and the appendices that follow them.
+
+```{image} _static/figures/bk_book_roadmap.*
+:alt: Reading order of the book, from the primer through Modules 1, 2, and 3 to the appendices, with labs in every module in which a Jupyter notebook sends API calls to a foundation model on Amazon Bedrock
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{list-table}
 :header-rows: 1
 :widths: 18 52 30

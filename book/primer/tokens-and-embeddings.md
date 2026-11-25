@@ -20,6 +20,8 @@ deep dive that both chapters point back to.
 
 ## Part 1: Tokens
 
+A model never sees words or characters directly. It reads tokens, and this part explains what they are, how text is split into them, and why the count matters for cost and context.
+
 ### What is a token?
 
 A **token** is the unit of text a language model actually processes. It is usually
@@ -99,6 +101,8 @@ plt.tight_layout(); plt.show()
 
 ### Why tokens matter
 
+Tokens explain three things you meet every day: how much a model can read at once, what a request costs and how fast it returns, and some of the odd mistakes models make.
+
 - **Context window.** A model's limit (for example, hundreds of thousands of
   tokens) is measured in tokens, not words or characters. Input that exceeds it is
   truncated or must be chunked, the motivation for retrieval-augmented generation.
@@ -119,6 +123,8 @@ print(f"${estimate_cost(1200, 400):.4f} for a 1200-in / 400-out call")
 ```
 
 ## Part 2: Embeddings
+
+Tokens let a model read text, and embeddings let a program compare meanings. This part explains what an embedding is, how to measure similarity between two of them, how to get real embeddings from Amazon Bedrock, and how search scales to millions of vectors.
 
 ### What is an embedding?
 
@@ -274,7 +280,18 @@ dedicated **embedding model** can output a single vector for a whole passage tha
 you compare against others. Tokens are about *processing* text; embeddings are
 about *comparing* meaning.
 
+The figure below draws the two lanes side by side.
+
+```{image} ../_static/figures/bk_tokens_embeddings.*
+:alt: Two lanes, one where a tokenizer splits text into subword tokens that a language model reads and that count toward its context window and cost, and one where an embedding model turns a whole passage into one vector that a vector index compares by cosine similarity to find the closest passages
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Key takeaways
+
+The points below are the essentials of tokens and embeddings.
 
 - A **token** is the subword unit models read and write; ~4 characters of English or ~0.75
   words each. Tokens define the **context window** and **billing**, so count them.

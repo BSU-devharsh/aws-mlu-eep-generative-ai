@@ -20,6 +20,8 @@ capabilities and pricing in each vendor's current documentation.
 
 ## Foundation models, effort, and thinking
 
+Three ideas explain most of what you see when you pick a model today. A foundation model is the general-purpose engine, an effort level sets how hard it works on a request, and a thinking mode lets it reason before it answers. This section defines each one and ends with a short guide to choosing among them.
+
 ### What is a foundation model?
 
 A **foundation model** is a large model pre-trained on broad data that can be
@@ -118,6 +120,8 @@ limits faster, see {doc}`ai-concepts-assistants-effort`.
 
 ### Adaptive and extended thinking
 
+Some models can reason privately before they reply, and you can often control how much.
+
 **Extended thinking** (sometimes called a reasoning or "thinking" mode) lets a
 model work through a problem step by step internally before giving its final
 answer, an automated, built-in version of the chain-of-thought prompting in
@@ -167,6 +171,8 @@ around them.
 
 ### AI assistants and app builders
 
+Beyond the chat assistants from the major labs, a set of tools specializes in research, office work, and building apps from a description.
+
 **Perplexity** is an AI-powered answer engine: it searches the web and returns a
 synthesized, cited answer rather than a list of links, useful for research with
 sources.
@@ -181,6 +187,8 @@ web apps with no code. You describe an app in plain language and it assembles th
 prompts and UI, a low-stakes way to learn prompt engineering.
 
 ### AWS AI services
+
+AWS offers AI at several levels, from managed foundation models to full machine learning platforms. These are the services this book refers to most often.
 
 **Amazon Bedrock** is a fully managed service that provides foundation models
 from multiple providers through one API, with security and customization built in.
@@ -227,6 +235,8 @@ and its source code (<https://github.com/aws-solutions/deepracer-on-aws>) for
 current details.
 
 ### Other foundation-model families
+
+The best-known US providers are not the only source of strong models, and several open model families now compete with them.
 
 **Qwen** is a family of open and commercial large language (and multimodal) models
 developed by Alibaba. **DeepSeek** is a family of models from the Chinese AI lab of
@@ -283,6 +293,8 @@ like Amazon Bedrock, which trade that hands-on control for convenience and scale
 ```
 
 ### Programming languages and data tools
+
+The labs in this book use a small set of languages and libraries. The table below says what each one is for.
 
 ```{list-table}
 :header-rows: 1
@@ -361,6 +373,8 @@ fields," a vector database answers "which items mean roughly the same thing."
 
 ## Core architectural ideas
 
+A few building blocks recur in every discussion of modern AI. Each entry below names one and says what it does.
+
 **Perceptron.** The simplest building block of a neural network: a single
 artificial neuron that takes weighted inputs, sums them, and applies an activation
 function to produce an output. Stacking and connecting many perceptrons in layers
@@ -381,6 +395,8 @@ colleagues that proposed the transformer and the self-attention mechanism. It is
 one of the most influential papers in modern AI and is cited throughout this book.
 
 ## Agents and assistants
+
+Assistants answer questions, while agents also take actions toward a goal. The terms below mark the difference and name the common kinds.
 
 **Agentic AI** refers to AI systems that do not just answer a single prompt but
 **pursue goals over multiple steps**, deciding what to do, using tools (search,
@@ -454,6 +470,8 @@ AI, machine learning, deep learning, NLP, LLMs, frontier models, and agentic AI,
 and explains how companies use the word *superintelligence* today.
 
 ## Key takeaways
+
+The points below are the ones to remember from this reference.
 
 - A **foundation model** is broadly pre-trained and adapted to many tasks;
   **effort levels** and **extended/adaptive thinking** trade speed and cost for

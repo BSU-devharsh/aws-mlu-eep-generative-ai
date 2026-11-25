@@ -58,7 +58,7 @@ are not generative, and older generative methods existed before deep learning.
 
 ### Artificial intelligence (AI)
 
-**Artificial intelligence** is the broadest term. It was coined in a 1955
+Artificial intelligence is the broadest term. It was coined in a 1955
 proposal by John McCarthy, Marvin Minsky, Nathaniel Rochester and Claude Shannon
 for a summer study at Dartmouth College in 1956. The proposal rested on the
 conjecture that every feature of intelligence can in principle be described so
@@ -81,7 +81,7 @@ are all AI, even though none of them learned anything from examples.
 
 ### Machine learning (ML)
 
-**Machine learning** is the part of AI in which a system **learns patterns from
+Machine learning is the part of AI in which a system **learns patterns from
 data instead of following rules a person wrote**. Arthur Samuel used the term in
 1959 for a checkers program that learned to play better than its own programmer,
 and he argued that learning from experience would remove much of the detailed
@@ -118,7 +118,7 @@ large scale is what made foundation models possible {cite}`bommasani2021opportun
 
 ### Deep learning (DL)
 
-**Deep learning** is machine learning with **neural networks that have many
+Deep learning is machine learning with **neural networks that have many
 layers**. Each layer turns its input into a slightly more abstract
 representation, and the network learns these layers of features from data
 instead of relying on features a person designed by hand. LeCun, Bengio and
@@ -130,7 +130,7 @@ modern large language model is a deep-learning model.
 
 ### Natural language processing (NLP)
 
-**Natural language processing** is the field concerned with getting computers to
+Natural language processing is the field concerned with getting computers to
 understand, interpret and generate human language: translation, summarization,
 sentiment analysis, question answering, speech assistants and chatbots. The
 standard textbook by Jurafsky and Martin describes it as the field, also called
@@ -146,7 +146,7 @@ counts and a modern chatbot are both NLP.
 
 ### Generative AI
 
-**Generative AI** refers to models that **create new content**, such as text,
+Generative AI refers to models that **create new content**, such as text,
 images, audio, video or code, that resembles the data they learned from. The US
 National Institute of Standards and Technology (NIST) notes that not all
 generative AI is derived from foundation models, although for the purposes of
@@ -291,7 +291,7 @@ controls how much of it they use.
 
 ### Agentic AI
 
-**Agentic AI** describes systems in which a model does not just answer once but
+Agentic AI describes systems in which a model does not just answer once but
 **works in a loop**: it plans, calls tools such as web search, code execution,
 files or apps, looks at the results, and decides what to do next until a goal is
 met. Anthropic distinguishes **workflows**, where code follows a predefined path
@@ -312,7 +312,7 @@ Agentic AI is therefore **a way of using models**, not a new layer in {numref}`F
 
 ### Artificial general intelligence (AGI)
 
-**AGI** names a **capability level**, not a technique, and there is **no single
+AGI names a **capability level**, not a technique, and there is **no single
 agreed definition**. Three widely cited ones show the range:
 
 - **Economic.** The OpenAI Charter (2018) defines AGI as highly autonomous
@@ -337,7 +337,7 @@ independent expert panel**
 
 ### Superintelligence (ASI)
 
-**Superintelligence**, or artificial superintelligence (ASI), means an intellect
+Superintelligence, or artificial superintelligence (ASI), means an intellect
 that **greatly exceeds** the best humans in practically every field. The
 philosopher Nick Bostrom gave the classic definition in 1998 and refined it in
 his 2014 book: any intellect that greatly exceeds the cognitive performance of
@@ -436,6 +436,8 @@ The same split shapes security tools. Signature rules are symbolic, auditable, a
 ```
 
 ### The terms at a glance
+
+The table below puts the terms from this section side by side, with a one-line meaning for each and the kind of term it is.
 
 ```{list-table}
 :header-rows: 1
@@ -592,7 +594,7 @@ based on the Amazon Bedrock model catalog
 
 ### OpenAI: ChatGPT, Codex and GPT models
 
-**ChatGPT** is OpenAI's assistant. Its launch on November 30, 2022 brought
+ChatGPT is OpenAI's assistant. Its launch on November 30, 2022 brought
 conversational generative AI to a mass audience
 ([OpenAI, Introducing ChatGPT](https://openai.com/index/chatgpt/)). In
 October 2026 OpenAI's lineup centers on the GPT-6 generation: **GPT-6 Astra**,
@@ -642,7 +644,7 @@ GPT-6 Luna as well
 
 ### Anthropic: Claude
 
-**Claude** is Anthropic's assistant and model family, available in the Claude
+Claude is Anthropic's assistant and model family, available in the Claude
 apps for web, desktop and mobile, through the Claude API, and on Amazon Bedrock,
 Google Cloud and Microsoft's cloud. In October 2026 Anthropic's documentation
 lists four current models
@@ -673,7 +675,7 @@ is why the labs in this book can use them.
 
 ### Google: Gemini and Gemma
 
-**Gemini** is both Google's assistant app and its model family. Its flagship is
+Gemini is both Google's assistant app and its model family. Its flagship is
 **Gemini 4 Argon**, the first model of the Gemini 4 generation. Google first
 offered it to select cybersecurity partners on September 30, 2026 and made it
 generally available on October 13, 2026, to developers through the
@@ -751,7 +753,7 @@ Messenger and Ray-Ban Meta glasses. Meta's model strategy changed sharply in
 
 ### Mistral AI: Mistral Vibe
 
-**Mistral AI** is a French company. On May 28, 2026 it renamed its **Le Chat**
+Mistral AI is a French company. On May 28, 2026 it renamed its **Le Chat**
 assistant to **Vibe**: one agent and one subscription for both work and code,
 with a Work Mode for multi-step tasks across connected apps, a Code Mode that
 runs coding sessions in the cloud and opens pull requests, the **Vibe CLI** for
@@ -804,7 +806,7 @@ as Bedrock) were reorganized in 2025 and 2026:
 
 ### DeepSeek and Qwen: open-weight models from China
 
-**DeepSeek** is a Chinese AI lab whose models drew worldwide attention in early
+DeepSeek is a Chinese AI lab whose models drew worldwide attention in early
 2025. Its technical report for **DeepSeek-V3** (December 2024) described a
 mixture-of-experts model with 671 billion parameters, of which 37 billion are
 active for each token, trained in 2.788 million GPU hours; that figure is the
@@ -840,7 +842,7 @@ Amazon Bedrock offers several earlier Qwen3 models
 
 ### OpenClaw: an open-source agent you run yourself
 
-**OpenClaw**, introduced in {doc}`ai-and-tools-reference`, is different from
+OpenClaw, introduced in {doc}`ai-and-tools-reference`, is different from
 everything above: it is **not a model** but an open-source (MIT-licensed)
 personal agent that runs on your own computer and that you talk to through chat
 apps such as WhatsApp, Telegram, Slack, Discord or iMessage. You connect it to a
@@ -874,6 +876,8 @@ updated, and rely on limits you can check from outside rather than on the
 agent's own reports about what it did {cite}`trivedi2026verifiable`.
 
 ### Other assistants you will meet
+
+A few more assistants come up often enough to know by name. Most of them run on models from the companies above.
 
 - **Microsoft Copilot** is Microsoft's assistant across Windows and Microsoft
   365, already introduced in {doc}`ai-and-tools-reference`. In August 2026
@@ -1306,6 +1310,8 @@ which is exactly what the app sentence means by **uses your limits faster**.
 
 ### The settings each major provider offers
 
+Each provider names its effort and thinking controls differently, and the defaults change from model to model. The table below lists the settings and defaults as the providers documented them in October 2026.
+
 ```{list-table} Effort and thinking controls as of October 2026
 :header-rows: 1
 :widths: 16 34 50
@@ -1416,6 +1422,8 @@ sources do confirm is the most useful one: **effort changes how hard the model
 works, not what it knows.**
 
 ### Choosing an effort level
+
+The right level depends on how hard the task is and how costly a wrong answer would be. The table below matches each level to the work it suits and the risk it carries.
 
 ```{list-table}
 :header-rows: 1
@@ -1566,6 +1574,8 @@ to the model's weights.
 ```
 
 ## Key takeaways
+
+The points below collect the ideas from this chapter that the rest of the book builds on.
 
 - **AI contains ML, which contains deep learning**; generative AI, foundation
   models, LLMs and frontier models are progressively narrower groups inside deep

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 350" width="1180" height="350" role="img" aria-labelledby="t d"><title id="t">Seven steps that make an assistant do the heavy lifting</title><desc id="d">Seven cards in a row. Steps 1 to 3 set up the assistant: get a capable assistant, write a master prompt with your context, and build system prompts that hold your formulas. Steps 4 to 6 make the setup persistent: use project folders for lasting context, set custom instructions as your defaults, and turn a workflow into a custom assistant. Step 7 uses AI to improve the setup, and an arrow loops from it back to steps 2 to 6.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}.s6{animation-delay:4.50s}.s7{animation-delay:5.40s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f2933" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f2933"/></marker><marker id="a-6a3d9a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#6a3d9a"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-laptop" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="20" y="22" width="60" height="42" rx="3" fill="#2f353d" stroke="#14181d" stroke-width="1.2"/>
+<rect x="24" y="26" width="52" height="34" rx="1" fill="url(#g-screen)"/>
+<path d="M24 26 h52 v12 Q50 31 24 41 Z" fill="#fff" opacity=".18"/>
+<path d="M12 70 L20 64 H80 L88 70 Z" fill="url(#g-silver)" stroke="#5b6570" stroke-width="1"/>
+<rect x="12" y="70" width="76" height="5" rx="2" fill="#9aa3ae" stroke="#5b6570" stroke-width=".8"/>
+<rect x="42" y="66" width="16" height="2.4" rx="1" fill="#8892a0"/>
+</symbol>
+<symbol id="i-document" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M26 8 H62 L76 22 V90 H26 Z" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<path d="M62 8 V22 H76" fill="#d5dbe2" stroke="#6b7785" stroke-width="1.2"/>
+<g stroke="#9aa6b3" stroke-width="2.4" stroke-linecap="round"><line x1="34" y1="34" x2="68" y2="34"/><line x1="34" y1="44" x2="68" y2="44"/><line x1="34" y1="54" x2="60" y2="54"/><line x1="34" y1="64" x2="66" y2="64"/></g>
+</symbol>
+<symbol id="i-checklist" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="22" y="14" width="56" height="76" rx="4" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.4"/>
+<rect x="38" y="9" width="24" height="10" rx="3" fill="#7d8796"/>
+<path d="M30 32 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="33" x2="70" y2="33" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/><path d="M30 48 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="49" x2="70" y2="49" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/><path d="M30 64 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="65" x2="70" y2="65" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/>
+<line x1="30" y1="81" x2="70" y2="81" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+<symbol id="i-database" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M24 22 v56 a26 9 0 0 0 52 0 v-56" fill="url(#g-db)" stroke="#4f5964" stroke-width="1.2"/>
+<path d="M24 41 a26 9 0 0 0 52 0 M24 60 a26 9 0 0 0 52 0" fill="none" stroke="#5f6a76" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="26" ry="9" fill="#f1f3f5" stroke="#4f5964" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="18" ry="5" fill="#dfe4e9"/>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+<symbol id="i-robot" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<line x1="50" y1="8" x2="50" y2="18" stroke="#5b6b7d" stroke-width="2.5"/><circle cx="50" cy="7" r="4" fill="#ff9800" stroke="#e65100"/>
+<rect x="24" y="18" width="52" height="40" rx="11" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="31" y="27" width="38" height="20" rx="7" fill="#183247"/>
+<circle cx="42" cy="37" r="4" fill="#4dd0e1"/><circle cx="58" cy="37" r="4" fill="#4dd0e1"/>
+<rect x="18" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/><rect x="76" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/>
+<path d="M30 92 V70 a8 8 0 0 1 8 -8 h24 a8 8 0 0 1 8 8 V92 Z" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="40" y="70" width="20" height="10" rx="2" fill="#183247"/><circle cx="45" cy="75" r="1.8" fill="#8fd16a"/><circle cx="55" cy="75" r="1.8" fill="#ff7043"/>
+</symbol>
+<symbol id="i-search" viewBox="0 0 100 100">
+<circle cx="42" cy="42" r="24" fill="#e3f2fd" stroke="#2f6fae" stroke-width="7"/>
+<line x1="60" y1="60" x2="86" y2="86" stroke="#5b6570" stroke-width="11" stroke-linecap="round"/>
+<path d="M30 34 a14 14 0 0 1 12 -8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</symbol>
+</defs>
+<rect width="1180" height="350" fill="#ffffff"/>
+<text x="590.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">Seven steps that make an assistant do the heavy lifting</text>
+<g class="st s1"><rect x="20" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#1f4e9c" stroke-width="2.2" filter="url(#f-drop)"/><rect x="20" y="96" width="144" height="8" rx="4" fill="#1f4e9c"/><use href="#i-laptop" x="64.0" y="110.0" width="56.0" height="56.0"/><text x="92.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f4e9c" font-weight="bold" text-anchor="middle">Assistant</text><text x="92.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">a capable</text><text x="92.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">model</text></g>
+<g class="st s1"><circle cx="30" cy="106" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="30.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><rect x="186" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#1f4e9c" stroke-width="2.2" filter="url(#f-drop)"/><rect x="186" y="96" width="144" height="8" rx="4" fill="#1f4e9c"/><use href="#i-document" x="230.0" y="110.0" width="56.0" height="56.0"/><text x="258.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f4e9c" font-weight="bold" text-anchor="middle">Master prompt</text><text x="258.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">your</text><text x="258.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">context</text></g>
+<g class="st s2"><circle cx="196" cy="106" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="196.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s2"><path d="M165.0 171.0 L185.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s3"><rect x="352" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#1f4e9c" stroke-width="2.2" filter="url(#f-drop)"/><rect x="352" y="96" width="144" height="8" rx="4" fill="#1f4e9c"/><use href="#i-checklist" x="396.0" y="110.0" width="56.0" height="56.0"/><text x="424.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f4e9c" font-weight="bold" text-anchor="middle">System prompts</text><text x="424.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">your</text><text x="424.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">formulas</text></g>
+<g class="st s3"><circle cx="362" cy="106" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="362.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s3"><path d="M331.0 171.0 L351.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s4"><rect x="518" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#2e7d32" stroke-width="2.2" filter="url(#f-drop)"/><rect x="518" y="96" width="144" height="8" rx="4" fill="#2e7d32"/><use href="#i-database" x="562.0" y="110.0" width="56.0" height="56.0"/><text x="590.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="middle">Project folders</text><text x="590.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">persistent</text><text x="590.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">context</text></g>
+<g class="st s4"><circle cx="528" cy="106" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="528.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s4"><path d="M497.0 171.0 L517.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s5"><rect x="684" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#2e7d32" stroke-width="2.2" filter="url(#f-drop)"/><rect x="684" y="96" width="144" height="8" rx="4" fill="#2e7d32"/><use href="#i-gear" x="728.0" y="110.0" width="56.0" height="56.0"/><text x="756.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="middle">Instructions</text><text x="756.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">your</text><text x="756.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">defaults</text></g>
+<g class="st s5"><circle cx="694" cy="106" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="694.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+<g class="st s5"><path d="M663.0 171.0 L683.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s6"><rect x="850" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#2e7d32" stroke-width="2.2" filter="url(#f-drop)"/><rect x="850" y="96" width="144" height="8" rx="4" fill="#2e7d32"/><use href="#i-robot" x="894.0" y="110.0" width="56.0" height="56.0"/><text x="922.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="middle">Custom assistant</text><text x="922.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">a workflow,</text><text x="922.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">saved</text></g>
+<g class="st s6"><circle cx="860" cy="106" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="860.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">6</text></g>
+<g class="st s6"><path d="M829.0 171.0 L849.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s7"><rect x="1016" y="96" width="144" height="150" rx="10" fill="#ffffff" stroke="#6a3d9a" stroke-width="2.2" filter="url(#f-drop)"/><rect x="1016" y="96" width="144" height="8" rx="4" fill="#6a3d9a"/><use href="#i-search" x="1060.0" y="110.0" width="56.0" height="56.0"/><text x="1088.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#6a3d9a" font-weight="bold" text-anchor="middle">Improve</text><text x="1088.0" y="205.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">AI refines</text><text x="1088.0" y="221.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">your setup</text></g>
+<g class="st s7"><circle cx="1026" cy="106" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="1026.0" y="110.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">7</text></g>
+<g class="st s7"><path d="M995.0 171.0 L1015.0 171.0" fill="none" stroke="#1f2933" stroke-width="1.8" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s1"><path d="M24 82 L24 74 L492 74 L492 82" fill="none" stroke="#1f4e9c" stroke-width="2"/></g>
+<g class="st s1"><text x="258.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f4e9c" font-weight="bold" text-anchor="middle">Set it up</text></g>
+<g class="st s4"><path d="M522 82 L522 74 L990 74 L990 82" fill="none" stroke="#2e7d32" stroke-width="2"/></g>
+<g class="st s4"><text x="756.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#2e7d32" font-weight="bold" text-anchor="middle">Make it persistent</text></g>
+<g class="st s7"><path d="M1020 82 L1020 74 L1156 74 L1156 82" fill="none" stroke="#6a3d9a" stroke-width="2"/></g>
+<g class="st s7"><text x="1088.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#6a3d9a" font-weight="bold" text-anchor="middle">Improve it</text></g>
+<g class="st s7"><path d="M1088.0 250.0 L1088.0 316.0 L258.0 316.0 L258.0 250.0" fill="none" stroke="#6a3d9a" stroke-width="2.2" marker-end="url(#a-6a3d9a)" stroke-linejoin="round"/><text x="673.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6a3d9a" font-weight="bold" text-anchor="middle">step 7 feeds back into steps 2 to 6</text></g>
+</svg>

@@ -34,6 +34,8 @@ The initiative is organized around a **5-pillar AI literacy framework**.
 
 ## The five pillars and how this book covers them
 
+Each pillar names a skill area that an AI-literate worker needs. The table below says what each pillar means and which chapters of this book develop it.
+
 ```{list-table}
 :header-rows: 1
 :widths: 26 36 38
@@ -313,6 +315,8 @@ documents before submission.
 ```
 
 ## Key takeaways
+
+The points below summarize how this book lines up with the initiative and with common course frameworks.
 
 - The DOL **Make America AI-Ready** initiative defines a **5-pillar AI literacy
   framework**: Understand AI Principles, Explore AI Uses, Direct AI Effectively,

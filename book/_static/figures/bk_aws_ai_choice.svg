@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="1100" height="500" role="img" aria-labelledby="t d"><title id="t">Which AWS AI service fits the job, a ready-made service, a foundation model, or your own model</title><desc id="d">A decision flow. Start with your task and ask whether a ready-made AI service does this exact job. If yes, use a task-specific service such as Amazon Kendra, Lex, Comprehend, Transcribe, Polly, Textract, or Translate, which need no training. If no, ask whether a pre-trained foundation model can do it with prompting or fine-tuning. If yes, use Amazon Bedrock, which offers foundation models from many providers through one API. If no, use Amazon SageMaker AI to build, train, and deploy your own model, starting from built-in algorithms. Control and effort grow from the top option to the bottom one.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f2933" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f2933"/></marker><marker id="a-2e7d32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2e7d32"/></marker><marker id="a-c0392b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#c0392b"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-user" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M18 94 C18 66 32 58 50 58 C68 58 82 66 82 94 Z" fill="url(#g-suit)" stroke="#11161c" stroke-width="1"/>
+<path d="M44 58 L50 70 L56 58 Z" fill="#fff"/><path d="M48.5 60 L51.5 60 L52.5 76 L50 80 L47.5 76 Z" fill="#c62828"/>
+<rect x="45" y="48" width="10" height="11" fill="url(#g-skin)"/>
+<ellipse cx="50" cy="34" rx="15" ry="17" fill="url(#g-skin)" stroke="#c89273" stroke-width=".8"/>
+<path d="M35 28 C34 14 66 12 66 28 C62 22 52 20 44 22 C40 23 37 25 35 28 Z" fill="#3b2a20"/></symbol>
+<symbol id="i-search" viewBox="0 0 100 100">
+<circle cx="42" cy="42" r="24" fill="#e3f2fd" stroke="#2f6fae" stroke-width="7"/>
+<line x1="60" y1="60" x2="86" y2="86" stroke="#5b6570" stroke-width="11" stroke-linecap="round"/>
+<path d="M30 34 a14 14 0 0 1 12 -8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</symbol>
+<symbol id="i-cloud" viewBox="0 0 100 100">
+<path d="M22 74 C8 74 4 56 18 50 C16 34 36 26 46 36 C52 20 78 22 80 42 C96 42 98 72 80 74 Z"
+ fill="url(#g-cloud)" stroke="#5b9bd5" stroke-width="2"/>
+<path d="M26 66 C20 66 18 60 22 58" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+</defs>
+<rect width="1100" height="500" fill="#ffffff"/>
+<text x="550.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">Which AWS AI service fits the job, a ready-made service, a foundation model, or your own model</text>
+<g class="st s1"><use href="#i-user" x="51.0" y="87.0" width="58" height="58"/><text x="80.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Your task</text></g>
+<g class="st s1"><path d="M114.0 116.0 L192.0 116.0" fill="none" stroke="#1f2933" stroke-width="2.2" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="196.0" y="80.0" width="320" height="72" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="356.0" y="112.2" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="bold" text-anchor="middle">Does a ready-made AI service</text><text x="356.0" y="130.2" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="normal" text-anchor="middle">do this exact job?</text></g>
+<g class="st s1"><circle cx="44" cy="76" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="44.0" y="80.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><path d="M516.0 116.0 L636.0 116.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/><text x="576.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="middle">yes</text></g>
+<g class="st s2"><rect x="640.0" y="66.0" width="430.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2.2"/></g>
+<g class="st s2"><rect x="640.0" y="66.0" width="8.0" height="100.0" rx="4" fill="#2e7d32" fill-opacity="1" stroke="#2e7d32" stroke-width="1"/></g>
+<g class="st s2"><use href="#i-search" x="662.0" y="89.0" width="54" height="54"/></g>
+<g class="st s2"><text x="728.0" y="103.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="start">Task-specific AI services</text></g>
+<g class="st s2"><text x="728.0" y="123.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Kendra, Lex, Comprehend, Transcribe,</text></g>
+<g class="st s2"><text x="728.0" y="140.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Polly, Textract, Translate; no training</text></g>
+<g class="st s2"><circle cx="1048" cy="66" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="1048.0" y="70.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><path d="M356.0 152.0 L356.0 226.0" fill="none" stroke="#c0392b" stroke-width="2.2" marker-end="url(#a-c0392b)" stroke-linejoin="round"/></g>
+<g class="st s3"><text x="368.0" y="194.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#c0392b" font-weight="bold" text-anchor="start">no</text></g>
+<g class="st s3"><rect x="196.0" y="230.0" width="320" height="72" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="356.0" y="262.2" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="bold" text-anchor="middle">Can a pre-trained foundation</text><text x="356.0" y="280.2" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f2933" font-weight="normal" text-anchor="middle">model do it, with prompts or tuning?</text></g>
+<g class="st s3"><path d="M516.0 266.0 L636.0 266.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/><text x="576.0" y="258.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#2e7d32" font-weight="bold" text-anchor="middle">yes</text></g>
+<g class="st s3"><rect x="640.0" y="216.0" width="430.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#1f4e9c" stroke-width="2.2"/></g>
+<g class="st s3"><rect x="640.0" y="216.0" width="8.0" height="100.0" rx="4" fill="#1f4e9c" fill-opacity="1" stroke="#1f4e9c" stroke-width="1"/></g>
+<g class="st s3"><use href="#i-cloud" x="662.0" y="239.0" width="54" height="54"/></g>
+<g class="st s3"><text x="728.0" y="253.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f4e9c" font-weight="bold" text-anchor="start">Amazon Bedrock</text></g>
+<g class="st s3"><text x="728.0" y="273.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Foundation models from many providers</text></g>
+<g class="st s3"><text x="728.0" y="290.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">through one API; prompt, add RAG, or fine-tune</text></g>
+<g class="st s3"><circle cx="1048" cy="216" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="1048.0" y="220.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><path d="M356.0 302.0 L356.0 416.0 L636.0 416.0" fill="none" stroke="#c0392b" stroke-width="2.2" marker-end="url(#a-c0392b)" stroke-linejoin="round"/></g>
+<g class="st s4"><text x="368.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#c0392b" font-weight="bold" text-anchor="start">no</text></g>
+<g class="st s4"><rect x="640.0" y="366.0" width="430.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#6a3d9a" stroke-width="2.2"/></g>
+<g class="st s4"><rect x="640.0" y="366.0" width="8.0" height="100.0" rx="4" fill="#6a3d9a" fill-opacity="1" stroke="#6a3d9a" stroke-width="1"/></g>
+<g class="st s4"><use href="#i-gear" x="662.0" y="389.0" width="54" height="54"/></g>
+<g class="st s4"><text x="728.0" y="403.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#6a3d9a" font-weight="bold" text-anchor="start">Amazon SageMaker AI</text></g>
+<g class="st s4"><text x="728.0" y="423.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Build, train, and deploy your own models,</text></g>
+<g class="st s4"><text x="728.0" y="440.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">starting from built-in algorithms</text></g>
+<g class="st s4"><circle cx="1048" cy="366" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="1048.0" y="370.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s4"><text x="196.0" y="486.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="start">Less effort and control at the top, more at the bottom</text></g>
+</svg>

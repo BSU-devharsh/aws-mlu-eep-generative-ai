@@ -27,6 +27,8 @@ responses, including those in this book, may contain mistakes.
 
 ## Part 1: AI and IT basics
 
+This part sets out the vocabulary the rest of the book uses. It defines AI and the model types you will meet, sorts AI tasks by the kind of input and output they handle, separates chatbots, agents, and autonomous systems by how much they act on their own, and uses the six levels of self-driving to show how autonomy grows in steps.
+
 **What is AI?** Artificial Intelligence is a broad branch of computer science
 that builds systems capable of performing tasks that normally require human
 intelligence, such as learning, reasoning, language understanding, and
@@ -199,6 +201,8 @@ change, so confirm any specific claim against current sources before citing it.
 ```
 
 ## Part 2: Chat management and prompts
+
+Every AI assistant keeps a history of your conversations, and how you manage that history affects both privacy and productivity. This part covers deleting, saving, organizing, searching, and sharing chats, and the memory and workspace features that carry context from one chat to the next.
 
 ### Deleting chats
 
@@ -436,6 +440,15 @@ walled garden for FERPA, a BAA for HIPAA) is what legally separates "private,
 not used for training" from "consumer default."
 ```
 
+The figure below combines the default rule with the FERPA and HIPAA recipes into one check to run before you paste anything into an AI tool.
+
+```{image} ../_static/figures/bk_data_check.*
+:alt: Decision flow that asks whether text contains personal, student, or health data, allows a consumer tool with training turned off when it does not, and otherwise requires de-identifying the text and using a vetted tool under an institutional agreement or a signed BAA
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## Part 4: AI for educators
 
 A frequent question: **can educators upload documents to help grade assignments?**
@@ -460,6 +473,8 @@ Yes, with a critical condition, **de-identify the documents first**.
 ```
 
 ## Key takeaways
+
+The points below summarize what an AI-literate user knows and does.
 
 - **AI** is the broad field; an **LLM** is language-focused AI; a **multimodal**
   model also handles images, audio, or video.
