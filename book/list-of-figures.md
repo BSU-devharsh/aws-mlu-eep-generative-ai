@@ -105,6 +105,9 @@ The Module 2 figures cover evaluation, governance, and the controls that make a 
 * - {doc}`module-2/04-improving-security-and-safety`
   - Threat modeling a Bedrock application, with one threat and one control per
     component.
+* - {doc}`module-2/04-improving-security-and-safety`
+  - Where the ten Gandalf: Agent Breaker attacks enter an agent, and where to stop
+    them.
 * - {doc}`module-2/labs/Lab-3/lab3-robustness`
   - Robustness and guardrails architecture diagrams.
 * - {doc}`module-2/labs/Lab-4/lab4b-watermarking`

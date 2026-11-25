@@ -615,3 +615,63 @@ def serverless_backend():
 
 if __name__ == "__main__" and "m4" in sys.argv:
     serverless_backend()
+
+
+def agent_breaker():
+    p = Fig(1180, 492, "Where the ten Agent Breaker attacks enter an agent, and where to stop them",
+            "An agent in the center combines a model with tools. On the left, an attacker types into the chat directly, the "
+            "path used against Cycling Coach, Solace AI, Thingularity, and CorpConnect Messenger. Above and below, six indirect "
+            "paths carry the attack inside content the agent reads: a web page for Trippy Planner, an uploaded PDF for "
+            "PortfolioIQ Advisor, a memory entry for MindfulChat, a repository rules file for Curs-ed CodeReview, an MCP tool "
+            "description for OmniChat Desktop, and a retrieved court filing for Clause AI. On the right are the results the "
+            "attacks aim for: a leaked prompt or tool list, profanity, a phishing link, a wrong recommendation, malicious code, "
+            "or an email sent for the attacker. A shield on the path out stands for the defenses: check untrusted text before "
+            "the model reads it, ask a person to confirm actions, and give tools the least privilege they need.")
+    cx, cy = 590, 262
+    p.rect(480, 192, 220, 140, "#eef5fc", BLUE, 2.4, rx=12)
+    p.icon("robot", 530, cy - 8, 56)
+    p.text(632, cy - 14, "Agent", 17, BLUE, "bold")
+    p.text(632, cy + 10, "model + tools", 13, INK)
+    p.icon("attacker", 100, cy, 58, "Chat (direct)", None, step=1, label_size=14, label_color=RED)
+    p.text(100, cy + 64, "Cycling Coach, Solace AI,", 12, MUTED, step=1)
+    p.text(100, cy + 80, "Thingularity, CorpConnect", 12, MUTED, step=1)
+    p.arrow([(134, cy), (476, cy)], "typed by the attacker", RED, step=1, size=12)
+    p.badge(1, 62, cy - 42, step=1, color=RED)
+    top = [(330, "browser", "Web page", "Trippy Planner", (520, 188)),
+           (590, "document", "Uploaded PDF", "PortfolioIQ Advisor", (590, 188)),
+           (850, "memory", "Memory entry", "MindfulChat", (660, 188))]
+    bot = [(330, "code", "Rules file", "Curs-ed CodeReview", (520, 336)),
+           (590, "gear", "Tool description", "OmniChat Desktop", (590, 336)),
+           (850, "database", "Retrieved filing", "Clause AI", (660, 336))]
+    n = 2
+    for x, ic, t, app, end in top:
+        p.icon(ic, x, 92, 46, None, None, step=n)
+        p.text(x + 32, 88, t, 14, ORANGE, "bold", anchor="start", step=n)
+        p.text(x + 32, 106, app, 12, MUTED, anchor="start", step=n)
+        p.arrow([(x, 118), end], None, ORANGE, step=n, width=1.8)
+        p.badge(n, x - 34, 70, step=n, color=ORANGE)
+        n += 1
+    for x, ic, t, app, end in bot:
+        p.icon(ic, x, 432, 46, None, None, step=n)
+        p.text(x + 32, 428, t, 14, ORANGE, "bold", anchor="start", step=n)
+        p.text(x + 32, 446, app, 12, MUTED, anchor="start", step=n)
+        p.arrow([(x, 406), end], None, ORANGE, step=n, width=1.8)
+        p.badge(n, x - 34, 410, step=n, color=ORANGE)
+        n += 1
+    p.text(1004, 150, "Indirect: the attack hides in content the agent reads", 12.5, ORANGE, "bold", anchor="middle")
+    p.rect(928, 186, 232, 152, "#fdecea", RED, 2, rx=10, step=8)
+    p.text(1044, 210, "What the attacks aim for", 13.5, RED, "bold", step=8)
+    for i, t in enumerate(["leaked prompt or tool list", "profanity", "phishing link in a plan",
+                           "wrong recommendation", "malicious code, rogue email"]):
+        p.text(944, 236 + i * 20, "• " + t, 12.5, INK, anchor="start", step=8)
+    p.arrow([(704, cy), (924, cy)], None, RED, step=8)
+    p.icon("shield", 814, cy, 44, step=8)
+    p.text(814, cy + 40, "check untrusted text,", 12, GREEN, "bold", step=8)
+    p.text(814, cy + 56, "confirm actions,", 12, GREEN, "bold", step=8)
+    p.text(814, cy + 72, "least privilege", 12, GREEN, "bold", step=8)
+    p.badge(8, 784, cy - 46, step=8, color=GREEN)
+    p.save(OUT + "bk_agent_breaker")
+
+
+if __name__ == "__main__" and "m5" in sys.argv:
+    agent_breaker()
