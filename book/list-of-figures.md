@@ -7,6 +7,8 @@ omitted.)
 
 ## Primer: AI Literacy
 
+The primer's figures introduce the vocabulary and habits the rest of the book relies on.
+
 ```{list-table}
 :header-rows: 1
 :widths: 20 80
@@ -38,6 +40,8 @@ omitted.)
 
 ## Module 1: Fundamentals of Generative AI
 
+The Module 1 figures show how models are reached, prompted, and built, along with the diagrams in its labs.
+
 ```{list-table}
 :header-rows: 1
 :widths: 20 80
@@ -68,6 +72,8 @@ omitted.)
 ```
 
 ## Module 2: Responsible Generative AI
+
+The Module 2 figures cover evaluation, governance, and the controls that make a model safer to deploy.
 
 ```{list-table}
 :header-rows: 1
@@ -108,6 +114,8 @@ omitted.)
 ```
 
 ## Module 3: Building Applications with Foundation Models
+
+The Module 3 figures show how applications combine models with chains, memory, retrieval, and tools.
 
 ```{list-table}
 :header-rows: 1
@@ -150,6 +158,8 @@ omitted.)
 
 ## Appendix
 
+The appendix figures cover the classical machine learning workflow and a small serverless backend.
+
 ```{list-table}
 :header-rows: 1
 :widths: 20 80
@@ -158,12 +168,16 @@ omitted.)
   - Figure
 * - {doc}`appendix-traditional-ml`
   - Traditional machine learning pipeline, from raw data to fairness checks.
+* - {doc}`appendix-serverless-backend`
+  - A free serverless backend, a Lambda Function URL in front of a DynamoDB
+    table.
 ```
 
 ```{admonition} Note
 :class: note
 Additional generated images and intermediate diagrams appear within individual lab
-notebooks as you run them. The labs are the primary home for the book's figures;
-most explanatory chapters use tables and worked examples, and the few diagrams
-they include are drawn as SVG so they render cleanly on every device.
+notebooks as you run them. The diagrams in the chapters are drawn as SVG so they
+render cleanly on every device, and most of them build step by step, with numbered
+badges that match the order of the steps; press Replay build under a figure to
+watch it again.
 ```

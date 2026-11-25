@@ -20,6 +20,15 @@ Treat the numbers below as a guide and confirm the current limits on the
 before relying on "free." Always set a billing alarm.
 ```
 
+The figure below shows the backend you will build, numbered by the steps that follow.
+
+```{image} _static/figures/bk_serverless_backend.*
+:alt: A client sends POST and GET requests to a public Lambda Function URL with CORS, which invokes the TodoHandler Lambda function, which assumes the LambdaTodoRole IAM role and reads and writes the TodoTable DynamoDB table provisioned at 5 read and 5 write units
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## The Always Free allowances (typical)
 
 These allowances have historically reset every month, indefinitely:
@@ -34,6 +43,8 @@ Staying at or below those capacity units is what keeps the project free. We will
 build a **serverless TODO API** to demonstrate.
 
 ## Step 1: Create the DynamoDB table
+
+The table stores the tasks. Provisioned capacity at a low setting keeps it inside the Always Free allowance.
 
 1. Sign in to the **AWS Management Console**.
 2. Open **DynamoDB** and click **Create table**.
@@ -67,6 +78,8 @@ responsible-AI and security practices in Module 2.
 ```
 
 ## Step 3: Write the Lambda function
+
+The function handles every request: it adds a task on POST and returns all tasks on GET. First create it in the console, then paste in the code.
 
 1. Open the **AWS Lambda** console and click **Create function**.
 2. Choose **Author from scratch** and configure:
@@ -174,6 +187,8 @@ curl https://YOUR-FUNCTION-URL.lambda-url.us-east-1.on.aws/
 Expected response: a JSON array of all saved task objects.
 
 ## Essential design rules for the free tier
+
+A few habits keep the backend fast, cheap, and inside the free allowances as it grows.
 
 - **Avoid table scans on large datasets.** `table.scan()` reads the entire table
   and burns Read Capacity Units. For production, use `table.query()` with a

@@ -4,6 +4,8 @@ title: "About the Author and Selected Publications"
 
 # About the Author and Selected Publications
 
+This page introduces the author and lists selected publications, grouped by type.
+
 **Devharsh Trivedi, Ph.D., CISSP** is an Assistant Professor in the Department of
 Mathematics, Engineering and Computer Science at LaGuardia Community College, The
 City University of New York (CUNY). He was previously a Lecturer in the Department
@@ -22,6 +24,8 @@ sources for the version of record.
 
 ## Books and monographs
 
+The book-length works below include this textbook and its companion on cybersecurity.
+
 1. D. Trivedi. *Cybersecurity: Theory, Practice, and Ethics.* 2026. DOI:
    [10.5281/zenodo.20581926](https://doi.org/10.5281/zenodo.20581926).
 2. D. Trivedi. *Generative AI with Amazon Bedrock: An Online Textbook* (this book).
@@ -36,6 +40,8 @@ sources for the version of record.
    [10.5281/zenodo.20585412](https://doi.org/10.5281/zenodo.20585412).
 
 ## Journal articles
+
+The journal articles below are listed with their DOIs where available.
 
 6. D. Trivedi. "ProofLayer: Control Coverage Screening for Government Cybersecurity
    Policies via Multi-LLM Orchestration." *Journal of Cybersecurity, Digital
@@ -80,6 +86,8 @@ sources for the version of record.
 
 ## Conference and symposium papers
 
+The papers below appeared in conference and symposium proceedings.
+
 18. S. Despeignes, T. Huggins, D. Trivedi. "Local Government Supply Chain
     Cybersecurity: Addressing the Implementation Gap in Resource-Limited
     Municipalities." *Journal of Computing Sciences in Colleges* 41(3), 36-37, 2026.
@@ -112,6 +120,8 @@ sources for the version of record.
 
 ## Theses
 
+The theses below range from the author's doctoral thesis to earlier degree projects.
+
 26. D. Trivedi. *Towards Efficient Security Analytics.* Ph.D. thesis, 2024.
 27. D. Trivedi. *Performance Evaluation and Security of Image Reconstruction
     Application in Magnetic Resonance Imaging Machines.* Nirma Institute of
@@ -120,6 +130,8 @@ sources for the version of record.
     Technology, 2013.
 
 ## Software
+
+The software below is listed with its repository or DOI.
 
 29. D. Trivedi. *chiku: Polynomial Function Approximation Library in Python.* GitHub
     (github.com/devharsh/chiku), 2023.
@@ -141,6 +153,8 @@ sources for the version of record.
     [10.5281/zenodo.20672918](https://doi.org/10.5281/zenodo.20672918).
 
 ## Technical reports, preprints, and educational materials
+
+The reports, preprints, and teaching materials below are listed with their DOIs or links where available.
 
 38. D. Trivedi, N. Kaaniche, N. Triandopoulos, M. Laurent, J. Walters. "Fairis:
     Fairness-Aware Aggregation with Provable Influence Containment against Fairness

@@ -574,3 +574,44 @@ def multimodal_agent():
 
 if __name__ == "__main__" and "m3" in sys.argv:
     langchain_chain(); chat_turn(); multimodal_agent()
+
+
+def serverless_backend():
+    p = Fig(1180, 420, "A free serverless backend, a Lambda Function URL in front of a DynamoDB table",
+            "The figure follows the five steps of the appendix. A DynamoDB table named TodoTable with partition key id uses "
+            "provisioned capacity of 5 read and 5 write units. An IAM role named LambdaTodoRole gives the function table access "
+            "and CloudWatch logging. A Lambda function named TodoHandler reads and writes the table. A Lambda Function URL with "
+            "CORS exposes the function over HTTPS; its auth type NONE makes it public, so a real system should use AWS_IAM or "
+            "API Gateway. A client tests it with curl, sending POST to add a task and GET to list tasks.")
+    cy = 180
+    hcard(p, 870, cy - 60, 280, 120, "database", "DynamoDB table", "TodoTable, key id\nprovisioned 5 RCU, 5 WCU", BLUE, 1, isz=46)
+    p.badge(1, 1130, cy - 60, step=1)
+    p.rect(560, 290, 260, 88, "#ffffff", PURPLE, 2, rx=10, step=2)
+    p.icon("idcard", 600, 334, 44, step=2)
+    p.text(632, 322, "IAM role", 15, PURPLE, "bold", anchor="start", step=2)
+    p.text(632, 344, "LambdaTodoRole: table", 12.5, INK, anchor="start", step=2)
+    p.text(632, 362, "access, CloudWatch logs", 12.5, INK, anchor="start", step=2)
+    p.badge(2, 800, 290, step=2, color=PURPLE)
+    hcard(p, 560, cy - 60, 260, 120, "code", "Lambda function", "TodoHandler, Python\nreads and writes tasks", ORANGE, 3, isz=46)
+    p.badge(3, 800, cy - 60, step=3, color=ORANGE)
+    p.arrow([(690, 288), (690, 244)], None, PURPLE, step=3)
+    p.text(700, 272, "assumes", 12, PURPLE, "bold", anchor="start", step=3)
+    p.arrow([(820, cy), (866, cy)], None, INK, step=3, both=True)
+    p.rect(300, cy - 60, 210, 120, "#ffffff", GREEN, 2, rx=10, step=4)
+    p.icon("lock", 340, cy, 40, step=4)
+    p.text(370, cy - 18, "Function URL", 15, GREEN, "bold", anchor="start", step=4)
+    p.text(370, cy + 4, "HTTPS, CORS on", 12.5, INK, anchor="start", step=4)
+    p.text(370, cy + 24, "auth NONE is public", 12.5, RED, anchor="start", step=4)
+    p.badge(4, 490, cy - 60, step=4, color=GREEN)
+    p.arrow([(510, cy), (556, cy)], None, INK, step=4)
+    p.icon("laptop", 100, cy, 60, "Client", "curl or a web page", step=5, label_size=14)
+    p.arrow([(136, cy - 14), (296, cy - 14)], "POST a task", INK, step=5, size=12)
+    p.arrow([(296, cy + 14), (136, cy + 14)], "GET all tasks", INK, step=5, size=12, label_dy=24)
+    p.badge(5, 60, cy - 70, step=5)
+    p.text(40, 370, "For real use, switch to AWS_IAM auth or", 13, MUTED, anchor="start")
+    p.text(40, 388, "API Gateway, and scope the role to one table.", 13, MUTED, anchor="start")
+    p.save(OUT + "bk_serverless_backend")
+
+
+if __name__ == "__main__" and "m4" in sys.argv:
+    serverless_backend()

@@ -73,7 +73,7 @@ and encoded differently.
 
 ## 2. Exploratory data analysis (EDA)
 
-**EDA** is the practice of understanding a dataset before modeling: its
+EDA is the practice of understanding a dataset before modeling: its
 distributions, relationships, and quality problems. Do it well and later steps get
 much easier.
 
@@ -133,7 +133,7 @@ fix in the next step.
 
 ## 3. Feature engineering
 
-**Feature engineering** turns raw columns into inputs a model can learn from. The
+Feature engineering turns raw columns into inputs a model can learn from. The
 core moves:
 
 - **Impute missing values** (fill with a median, mode, or a learned value).
@@ -392,6 +392,8 @@ $95 > 80$, yes, 95 is flagged as a potential outlier.
 ```
 
 ## Key takeaways
+
+The points below summarize the classical machine learning workflow that generative AI builds on.
 
 - Classical ML begins with **EDA**: understand distributions, cardinality,
   correlations, and data-quality issues before modeling.
