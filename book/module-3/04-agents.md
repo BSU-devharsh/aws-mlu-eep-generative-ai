@@ -4,6 +4,8 @@ title: "Agents"
 
 # Chapter 4: Agents
 
+This chapter covers agents, systems in which a model plans, calls tools, and acts toward a goal. It introduces tools and the ReAct pattern, builds agents with LangChain, works through an agentic workflow, and covers the Converse API, structured outputs, the Model Context Protocol, agent memory, and Amazon Bedrock AgentCore.
+
 ## Why it matters
 
 So far the model has produced language and retrieved data. **Agents** let it
@@ -30,7 +32,7 @@ task, powered by an LLM as its reasoning engine and enhanced with **tools**.
 
 ## Tools
 
-**Tools** are functions or interfaces an agent can interact with, APIs, document
+Tools are functions or interfaces an agent can interact with, APIs, document
 loaders, functions, even other agents. A tool may or may not itself depend on an
 LLM. Examples: a knowledge base of company documents (RAG), a calculator for
 arithmetic, an API call for weather, or a Wikipedia search for facts. Tools are
@@ -405,6 +407,8 @@ engineering effort is concentrated.
 Build an agent on Amazon Bedrock in {doc}`labs/Lab-4/lab4_agents`.
 
 ## Key takeaways
+
+The points below summarize what agents add and how to keep them safe and reliable.
 
 - An **agent** uses an LLM as a reasoning engine plus **tools** to act, going
   beyond single prompts and fixed chains.

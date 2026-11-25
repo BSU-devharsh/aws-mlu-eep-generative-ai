@@ -466,3 +466,111 @@ def rai_dimensions():
 
 if __name__ == "__main__" and "m2" in sys.argv:
     grounding_check(); nist_rmf(); rai_dimensions()
+
+
+def langchain_chain():
+    p = Fig(1180, 470, "A LangChain chain written with LCEL, and the memory that carries context between calls",
+            "The top row is the chain prompt_template piped into llm piped into StrOutputParser. Input variables, content type "
+            "bedtime story and topic a cat, fill the prompt template to make the prompt, tell me a bedtime story about a cat. "
+            "A chat model on Amazon Bedrock generates a reply, and the output parser turns it into a plain string. The bottom row "
+            "shows memory. Before a call, the application retrieves the conversation history from memory and adds it to the "
+            "prompt. After the call, it writes the new exchange back to memory, so the next call knows what came before.")
+    p.rect(30, 62, 1120, 40, "#f4f6f8", "#9aa5b1", 1.2, rx=6)
+    p.text(590, 88, "chain = prompt_template | llm | StrOutputParser()", 16, INK, "bold")
+    cy = 196
+    p.rect(30, cy - 44, 170, 88, "#ffffff", MUTED, 1.6, rx=8, step=1)
+    p.text(115, cy - 18, "Input variables", 13, MUTED, "bold", step=1)
+    p.text(115, cy + 6, "content_type:", 12.5, INK, step=1)
+    p.text(115, cy + 24, "bedtime story; topic: a cat", 11.5, INK, step=1)
+    p.arrow([(200, cy), (246, cy)], None, INK, step=1)
+    hcard(p, 250, cy - 50, 240, 100, "document", "Prompt template", "Tell me a {content_type}\nabout {topic}.", BLUE, 1, isz=40)
+    p.badge(1, 470, cy - 50, step=1)
+    p.arrow([(490, cy), (556, cy)], None, INK, step=2)
+    hcard(p, 560, cy - 50, 230, 100, "robot", "Chat model", "on Amazon Bedrock\ngenerates a reply", PURPLE, 2, isz=40)
+    p.badge(2, 770, cy - 50, step=2, color=PURPLE)
+    p.arrow([(790, cy), (856, cy)], None, INK, step=3)
+    hcard(p, 860, cy - 50, 290, 100, "gear", "Output parser", "StrOutputParser returns\nOnce upon a time, ...", GREEN, 3, isz=40)
+    p.badge(3, 1130, cy - 50, step=3, color=GREEN)
+    # memory row
+    p.rect(250, 300, 540, 150, "#fff8ee", ORANGE, 2, rx=10, step=4)
+    p.text(776, 436, "Memory: the model itself is stateless", 14, ORANGE, "bold", anchor="end", step=4)
+    p.icon("database", 330, 394, 50, "Conversation history", None, step=4, label_size=13)
+    p.arrow([(330, 368), (330, 252)], "retrieve and add\nto the prompt", ORANGE, step=4, size=12, label_dy=6, label_anchor="start")
+    p.badge(4, 240, 296, step=4, color=ORANGE)
+    p.arrow([(675, 252), (675, 394), (362, 394)], "write the new exchange", ORANGE, step=5, size=12, label_at=0.78, label_dy=-10)
+    p.badge(5, 690, 276, step=5, color=ORANGE)
+    p.save(OUT + "bk_langchain_chain")
+
+
+def chat_turn():
+    p = Fig(1180, 470, "One chatbot turn with a response cache, conversation memory, and prompt caching",
+            "A user message first goes to a response cache. On a hit, which suits deterministic questions, the cached answer "
+            "returns at once. On a miss, the application builds the prompt from a long system prompt marked as a cached prefix, "
+            "the recent conversation held in memory, either the last k turns or a running summary, and the new message. The "
+            "Bedrock Converse API returns the reply, reading the cached prefix more cheaply. The application then writes the "
+            "exchange to memory and stores the reply in the cache with an expiry time.")
+    p.icon("user", 70, 150, 56, "User", "new message", step=1, label_size=14)
+    p.arrow([(102, 150), (196, 150)], None, INK, step=1)
+    p.badge(1, 30, 100, step=1)
+    hcard(p, 200, 104, 230, 92, "memory", "Response cache", "same question asked\nbefore? check here", ORANGE, 2, isz=40)
+    p.badge(2, 410, 104, step=2, color=ORANGE)
+    p.arrow([(316, 104), (316, 74), (70, 74), (70, 116)], "hit: return the cached answer", GREEN, step=2, size=12, label_at=0.5)
+    p.arrow([(316, 196), (316, 252)], None, RED, step=3)
+    p.text(328, 230, "miss", 13, RED, "bold", anchor="start", step=3)
+    p.rect(150, 256, 420, 170, "#ffffff", BLUE, 2, rx=10, step=3)
+    p.text(170, 282, "Prompt", 15, BLUE, "bold", anchor="start", step=3)
+    rows = [("System prompt, long and fixed", "cached prefix (cachePoint)", "#cfe0f6"),
+            ("Memory: last k turns or a summary", "keeps the window small", "#ffe8cc"),
+            ("New user message", "changes every turn", "#e6f4e6")]
+    for i, (a, b, col) in enumerate(rows):
+        y = 296 + i * 42
+        p.rect(170, y, 380, 34, col, col, 1, rx=5, step=3)
+        p.text(182, y + 22, a, 13, INK, "bold", anchor="start", step=3)
+        p.text(540, y + 22, b, 12, MUTED, anchor="end", step=3)
+    p.badge(3, 140, 246, step=3)
+    p.arrow([(570, 340), (694, 340)], None, INK, step=4)
+    p.icon("cloud", 726, 330, 66, "Bedrock", "Converse API", step=4, label_size=14)
+    p.text(726, 270, "reads the cached prefix", 12, MUTED, step=4)
+    p.text(726, 286, "at a lower cost", 12, MUTED, step=4)
+    p.badge(4, 680, 300, step=4, color=PURPLE)
+    p.arrow([(776, 330), (856, 330)], "reply", INK, step=5, size=12)
+    hcard(p, 860, 280, 290, 100, "database", "Write back", "exchange into memory;\nreply into the cache, with expiry", GREEN, 5, isz=40)
+    p.badge(5, 1130, 280, step=5, color=GREEN)
+    p.arrow([(1005, 280), (1005, 150), (434, 150)], None, GREEN, step=5, dash=True)
+    p.save(OUT + "bk_chat_turn")
+
+
+def multimodal_agent():
+    p = Fig(1180, 440, "A multimodal agent that looks at a photo, retrieves the manual, and walks the user through a fix",
+            "A user sends a photo of a broken device and asks how to fix it. The agent reasons about the request with the "
+            "ReAct pattern. It calls an image tool, a multimodal model that describes what the photo shows, and a retrieval tool "
+            "that searches a knowledge base of manuals with multimodal embeddings and returns the matching manual page. The "
+            "agent reasons over both results and answers with step-by-step instructions.")
+    p.icon("user-laptop", 80, 210, 64, "User", "photo + question", step=1, label_size=14)
+    p.badge(1, 36, 150, step=1)
+    p.arrow([(118, 210), (226, 210)], None, INK, step=1)
+    p.rect(230, 130, 250, 160, "#eef5fc", BLUE, 2.2, rx=12, step=2)
+    p.icon("robot", 300, 196, 58, step=2)
+    p.text(400, 180, "Agent", 17, BLUE, "bold", step=2)
+    p.text(400, 204, "reasons with", 13, INK, step=2)
+    p.text(400, 222, "ReAct", 13, INK, "bold", step=2)
+    p.text(355, 270, "reason, act, observe, repeat", 12, MUTED, step=2)
+    p.badge(2, 240, 140, step=2)
+    p.arrow([(480, 170), (626, 110)], "call", PURPLE, step=3, size=12)
+    hcard(p, 630, 60, 290, 96, "eye", "Image tool", "a multimodal model describes\nthe damage in the photo", PURPLE, 3, isz=42)
+    p.badge(3, 900, 60, step=3, color=PURPLE)
+    p.arrow([(480, 250), (626, 310)], "call", ORANGE, step=4, size=12, label_dy=22)
+    hcard(p, 630, 264, 290, 96, "database", "Retrieval tool", "multimodal RAG over manuals\nreturns the right page", ORANGE, 4, isz=42)
+    p.badge(4, 900, 264, step=4, color=ORANGE)
+    p.arrow([(920, 108), (1053, 108), (1053, 174)], None, PURPLE, step=5, dash=True)
+    p.arrow([(920, 312), (1053, 312), (1053, 246)], None, ORANGE, step=5, dash=True)
+    p.rect(946, 178, 214, 64, "#e8f5e9", GREEN, 1.8, rx=8, step=5)
+    p.text(1053, 206, "Step-by-step fix", 14, GREEN, "bold", step=5)
+    p.text(1053, 228, "answer to the user", 12, INK, step=5)
+    p.badge(5, 940, 172, step=5, color=GREEN)
+    p.text(590, 410, "On AWS: multimodal models in Amazon Bedrock, Bedrock Knowledge Bases for retrieval, and Bedrock Agents to orchestrate", 13, MUTED)
+    p.save(OUT + "bk_multimodal_agent")
+
+
+if __name__ == "__main__" and "m3" in sys.argv:
+    langchain_chain(); chat_turn(); multimodal_agent()

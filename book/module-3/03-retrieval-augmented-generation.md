@@ -4,6 +4,8 @@ title: "Retrieval-Augmented Generation"
 
 # Chapter 3: Retrieval-Augmented Generation
 
+This chapter covers retrieval-augmented generation, the most common way to give a model knowledge it was not trained on. It explains grounding, walks through the RAG workflow from chunking to reranking, shows how to keep retrieval healthy over time, and extends RAG to images.
+
 ## Why it matters
 
 Chapter 2 ended with a problem: you cannot fit all your knowledge into a prompt,
@@ -16,7 +18,7 @@ work, and how RAG extends to images through multimodal embeddings.
 
 ## Grounding a model
 
-**Grounding** is a set of techniques that make an LLM's output consistent with
+Grounding is a set of techniques that make an LLM's output consistent with
 established facts (mitigating hallucinations), common-sense reasoning, real-world
 context, and user intent. It can be achieved through prompt engineering
 (in-context learning), fine-tuning, RAG, and tools (with agents).
@@ -73,6 +75,8 @@ The data can come from internal documents, logs, company policies, and more.
 
 ## The RAG workflow
 
+A RAG system has an indexing side that prepares documents ahead of time and a query side that retrieves from them at answer time. The subsections below follow both sides, step by step.
+
 ### Document chunking
 
 Long documents are split into **chunks** that fit the LLM's context window;
@@ -91,7 +95,7 @@ databases were introduced in the {doc}`../primer/ai-and-tools-reference`.)
 
 ### Rerankers and recall
 
-**Recall** is the LLM's ability to find the right information from everything
+Recall is the LLM's ability to find the right information from everything
 retrieved. One way to improve it is to retrieve *more* documents, but not all are
 equally relevant. **Rerankers** are specialized models that score the relevance of
 each document to the query, much more accurate than embedding models but slower.
@@ -240,6 +244,8 @@ Implement RAG and multimodal RAG on Amazon Bedrock in
 {doc}`labs/Lab-3/lab3b-multimodal_rag`.
 
 ## Key takeaways
+
+The points below summarize how to build and maintain a RAG system.
 
 - **Grounding** aligns outputs with fact and context; **RAG** does it by retrieving
   external data into the prompt, with no training.

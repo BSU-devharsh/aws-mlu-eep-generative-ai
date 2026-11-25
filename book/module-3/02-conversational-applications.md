@@ -4,6 +4,8 @@ title: "Developing Conversational Applications"
 
 # Chapter 2: Developing Conversational Applications
 
+This chapter builds a chatbot. It moves from single questions to multi-turn conversation, assembles a chatbot from a chat model, prompt, and memory, and then customizes it with caching, long-conversation handling, and the wider context a conversation needs.
+
 ## Why it matters
 
 A chatbot is the most familiar generative-AI application, and it is the natural
@@ -66,6 +68,8 @@ memory.save_context({"input": user_input}, {"output": response})
 ```
 
 ## Customizing chat applications
+
+A working chatbot is only the start. The subsections below cover the changes that make one faster, cheaper, and better at long conversations.
 
 ### Caching
 
@@ -130,6 +134,15 @@ memory = ConversationBufferWindowMemory(k=1)   # keep last 1 exchange
 memory = ConversationSummaryMemory(llm=llm)    # summarize the history
 ```
 
+The figure below puts response caching, prompt caching, and memory together in one turn of a chatbot.
+
+```{image} ../_static/figures/bk_chat_turn.*
+:alt: One chatbot turn in which a user message first checks a response cache, returns a cached answer on a hit, and on a miss builds a prompt from a cached system prefix, recent memory, and the new message, calls the Bedrock Converse API, and writes the exchange back to memory and the reply into the cache
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ### Context is more than chat history
 
 The context you put in a prompt need not be only past interactions; it can include
@@ -159,6 +172,8 @@ eliminate, the context-window pressures in this chapter; summarization, windowin
 and retrieval remain essential for cost control even as raw context windows grow.
 
 ## Key takeaways
+
+The points below summarize how to build and tune a conversational application.
 
 - **Chat models** consume a sequence of system, human, and AI messages; LangChain's
   **chat prompt templates** structure them.

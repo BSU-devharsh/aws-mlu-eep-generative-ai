@@ -66,3 +66,12 @@ div.cell_output::before {
   border-radius: 3px;
   margin-bottom: 4px;
 }
+
+/* Let long inline code (for example a call with arguments) wrap on narrow
+   screens instead of pushing the page wider than the viewport. */
+p code, li code, td code, h1 code, h2 code, h3 code, h4 code,
+p code span.pre, li code span.pre, td code span.pre,
+h1 code span.pre, h2 code span.pre, h3 code span.pre, h4 code span.pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

@@ -4,6 +4,8 @@ title: "Multimodal Applications"
 
 # Chapter 5: Multimodal Applications
 
+This chapter brings the book together in applications that combine text, images, and video. It explains why multimodal applications add value, surveys examples from personalization to healthcare, and ends with multimodal agents.
+
 ## Why it matters
 
 This final chapter brings the whole book together. You have models (Module 1),
@@ -25,6 +27,8 @@ Multimodal applications help businesses in four ways:
   wide range of open-source and commercial choices by size, cost, and performance.
 
 ## Examples of multimodal applications
+
+Multimodal models are already used across many industries. The subsections below cover four common areas.
 
 ### Personalization
 
@@ -81,6 +85,15 @@ accept an image or video as part of the request, retrieve across modalities
 act, for instance, a customer-service agent that looks at a photo of a broken
 device, retrieves the right manual page, and walks the user through a fix.
 
+The figure below follows that customer-service example from the photo to the answer.
+
+```{image} ../_static/figures/bk_multimodal_agent.*
+:alt: A user sends a photo and a question to an agent that reasons with ReAct, calls an image tool that describes the damage and a retrieval tool that finds the right manual page, and combines both into step-by-step repair instructions
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{admonition} AWS in practice
 :class: note
 Everything here runs on Amazon Bedrock: multimodal models (Amazon Nova, Anthropic
@@ -107,6 +120,8 @@ multimodal agents on Amazon Bedrock: see {doc}`labs/Lab-5/lab5a-personalization`
 {doc}`labs/Lab-5/lab5c-multimodal_agents`.
 
 ## Key takeaways
+
+The points below close the module and the book.
 
 - Multimodal applications add accuracy, ease of development, intuitive interaction,
   and access to performant models.

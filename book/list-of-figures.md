@@ -115,6 +115,26 @@ omitted.)
 
 * - Location
   - Figure
+* - {doc}`module-3/01-langchain-modules`
+  - A LangChain chain written with LCEL, and the memory that carries context
+    between calls.
+* - {doc}`module-3/02-conversational-applications`
+  - One chatbot turn with a response cache, conversation memory, and prompt
+    caching.
+* - {doc}`module-3/03-retrieval-augmented-generation`
+  - Fine-tuning versus retrieval-augmented generation.
+* - {doc}`module-3/03-retrieval-augmented-generation`
+  - The RAG workflow, from indexing documents to generating a grounded answer.
+* - {doc}`module-3/04-agents`
+  - The ReAct loop of reasoning, acting, and observing.
+* - {doc}`module-3/04-agents`
+  - The tool loop of the Bedrock Converse API.
+* - {doc}`module-3/04-agents`
+  - Separating an agent that proposes a payment from the service that approves
+    it.
+* - {doc}`module-3/05-multimodal-applications`
+  - A multimodal agent that looks at a photo, retrieves the manual, and walks
+    the user through a fix.
 * - {doc}`module-3/labs/Lab-1/lab1-langchain_modules`
   - LangChain module and chain diagrams.
 * - {doc}`module-3/labs/Lab-2/lab2-chatbots`

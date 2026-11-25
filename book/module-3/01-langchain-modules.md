@@ -4,6 +4,8 @@ title: "LangChain Modules"
 
 # Chapter 1: LangChain Modules
 
+This chapter introduces LangChain, the framework the Module 3 labs use to build applications from models. It covers the core modules, prompt templates, output parsers, and chains, and the memory that lets an application remember earlier turns.
+
 ## Why it matters
 
 A single prompt is rarely a whole application. Real systems combine prompts,
@@ -37,6 +39,8 @@ Four motivations explain why it caught on:
 
 ## Core modules
 
+Three modules do most of the work in a LangChain application: a prompt template builds the input, the model generates, and an output parser shapes the result. Chains connect them.
+
 ### Prompt templates
 
 A **prompt template** is a parameterized, reusable recipe for an LLM, a
@@ -49,14 +53,14 @@ model-agnostic and reusable:
 
 ### Output parsers
 
-**Output parsers** convert an LLM's raw text into structured formats, for example
+Output parsers convert an LLM's raw text into structured formats, for example
 `StrOutputParser`, `JsonOutputParser`, `XMLOutputParser`, and
 `BooleanOutputParser`. They are essential when downstream code needs the output in
 a specific shape.
 
 ### Chains and LCEL
 
-**Chains** build complex applications by composing modules into a sequence of
+Chains build complex applications by composing modules into a sequence of
 calls to an LLM, a tool, and so on. The recommended way to write them is the
 **LangChain Expression Language (LCEL)**, which composes components with a simple
 pipe syntax and provides streaming, parallel execution, retries and fallbacks,
@@ -96,6 +100,15 @@ memory.load_memory_variables({})
 Storing *everything* eventually overflows the context window, the problem Chapter
 2 solves with smarter memory strategies.
 
+The figure below shows a chain and its memory working together on one call.
+
+```{image} ../_static/figures/bk_langchain_chain.*
+:alt: An LCEL chain in which input variables fill a prompt template, a chat model on Amazon Bedrock generates a reply, and an output parser returns a string, while memory retrieves the conversation history into the prompt before the call and writes the new exchange back after it
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{admonition} AWS in practice
 :class: note
 LangChain integrates with Amazon Bedrock through `langchain-aws`, so the chains and
@@ -114,6 +127,8 @@ observable components has become standard engineering practice rather than an
 experiment.
 
 ## Key takeaways
+
+The points below summarize the LangChain building blocks used in the rest of this module.
 
 - **LangChain** composes LLM applications from modular, swappable components and
   emphasizes prompting over training.

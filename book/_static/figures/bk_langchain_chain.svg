@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 470" width="1180" height="470" role="img" aria-labelledby="t d"><title id="t">A LangChain chain written with LCEL, and the memory that carries context between calls</title><desc id="d">The top row is the chain prompt_template piped into llm piped into StrOutputParser. Input variables, content type bedtime story and topic a cat, fill the prompt template to make the prompt, tell me a bedtime story about a cat. A chat model on Amazon Bedrock generates a reply, and the output parser turns it into a plain string. The bottom row shows memory. Before a call, the application retrieves the conversation history from memory and adds it to the prompt. After the call, it writes the new exchange back to memory, so the next call knows what came before.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f2933" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f2933"/></marker><marker id="a-d9822b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#d9822b"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-document" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M26 8 H62 L76 22 V90 H26 Z" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<path d="M62 8 V22 H76" fill="#d5dbe2" stroke="#6b7785" stroke-width="1.2"/>
+<g stroke="#9aa6b3" stroke-width="2.4" stroke-linecap="round"><line x1="34" y1="34" x2="68" y2="34"/><line x1="34" y1="44" x2="68" y2="44"/><line x1="34" y1="54" x2="60" y2="54"/><line x1="34" y1="64" x2="66" y2="64"/></g>
+</symbol>
+<symbol id="i-robot" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<line x1="50" y1="8" x2="50" y2="18" stroke="#5b6b7d" stroke-width="2.5"/><circle cx="50" cy="7" r="4" fill="#ff9800" stroke="#e65100"/>
+<rect x="24" y="18" width="52" height="40" rx="11" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="31" y="27" width="38" height="20" rx="7" fill="#183247"/>
+<circle cx="42" cy="37" r="4" fill="#4dd0e1"/><circle cx="58" cy="37" r="4" fill="#4dd0e1"/>
+<rect x="18" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/><rect x="76" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/>
+<path d="M30 92 V70 a8 8 0 0 1 8 -8 h24 a8 8 0 0 1 8 8 V92 Z" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="40" y="70" width="20" height="10" rx="2" fill="#183247"/><circle cx="45" cy="75" r="1.8" fill="#8fd16a"/><circle cx="55" cy="75" r="1.8" fill="#ff7043"/>
+</symbol>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+<symbol id="i-database" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M24 22 v56 a26 9 0 0 0 52 0 v-56" fill="url(#g-db)" stroke="#4f5964" stroke-width="1.2"/>
+<path d="M24 41 a26 9 0 0 0 52 0 M24 60 a26 9 0 0 0 52 0" fill="none" stroke="#5f6a76" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="26" ry="9" fill="#f1f3f5" stroke="#4f5964" stroke-width="1.2"/>
+<ellipse cx="50" cy="22" rx="18" ry="5" fill="#dfe4e9"/>
+</symbol>
+</defs>
+<rect width="1180" height="470" fill="#ffffff"/>
+<text x="590.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">A LangChain chain written with LCEL, and the memory that carries context between calls</text>
+<rect x="30.0" y="62.0" width="1120.0" height="40.0" rx="6" fill="#f4f6f8" fill-opacity="1" stroke="#9aa5b1" stroke-width="1.2"/>
+<text x="590.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f2933" font-weight="bold" text-anchor="middle">chain = prompt_template | llm | StrOutputParser()</text>
+<g class="st s1"><rect x="30.0" y="152.0" width="170.0" height="88.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#52606d" stroke-width="1.6"/></g>
+<g class="st s1"><text x="115.0" y="178.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="bold" text-anchor="middle">Input variables</text></g>
+<g class="st s1"><text x="115.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">content_type:</text></g>
+<g class="st s1"><text x="115.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" fill="#1f2933" font-weight="normal" text-anchor="middle">bedtime story; topic: a cat</text></g>
+<g class="st s1"><path d="M200.0 196.0 L246.0 196.0" fill="none" stroke="#1f2933" stroke-width="2.2" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="250.0" y="146.0" width="240.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#1f4e9c" stroke-width="2.2"/></g>
+<g class="st s1"><rect x="250.0" y="146.0" width="8.0" height="100.0" rx="4" fill="#1f4e9c" fill-opacity="1" stroke="#1f4e9c" stroke-width="1"/></g>
+<g class="st s1"><use href="#i-document" x="272.0" y="176.0" width="40" height="40"/></g>
+<g class="st s1"><text x="324.0" y="183.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f4e9c" font-weight="bold" text-anchor="start">Prompt template</text></g>
+<g class="st s1"><text x="324.0" y="203.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Tell me a {content_type}</text></g>
+<g class="st s1"><text x="324.0" y="220.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">about {topic}.</text></g>
+<g class="st s1"><circle cx="470" cy="146" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="470.0" y="150.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><path d="M490.0 196.0 L556.0 196.0" fill="none" stroke="#1f2933" stroke-width="2.2" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="560.0" y="146.0" width="230.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#6a3d9a" stroke-width="2.2"/></g>
+<g class="st s2"><rect x="560.0" y="146.0" width="8.0" height="100.0" rx="4" fill="#6a3d9a" fill-opacity="1" stroke="#6a3d9a" stroke-width="1"/></g>
+<g class="st s2"><use href="#i-robot" x="582.0" y="176.0" width="40" height="40"/></g>
+<g class="st s2"><text x="634.0" y="183.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#6a3d9a" font-weight="bold" text-anchor="start">Chat model</text></g>
+<g class="st s2"><text x="634.0" y="203.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">on Amazon Bedrock</text></g>
+<g class="st s2"><text x="634.0" y="220.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">generates a reply</text></g>
+<g class="st s2"><circle cx="770" cy="146" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="770.0" y="150.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><path d="M790.0 196.0 L856.0 196.0" fill="none" stroke="#1f2933" stroke-width="2.2" marker-end="url(#a-1f2933)" stroke-linejoin="round"/></g>
+<g class="st s3"><rect x="860.0" y="146.0" width="290.0" height="100.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2.2"/></g>
+<g class="st s3"><rect x="860.0" y="146.0" width="8.0" height="100.0" rx="4" fill="#2e7d32" fill-opacity="1" stroke="#2e7d32" stroke-width="1"/></g>
+<g class="st s3"><use href="#i-gear" x="882.0" y="176.0" width="40" height="40"/></g>
+<g class="st s3"><text x="934.0" y="183.8" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="start">Output parser</text></g>
+<g class="st s3"><text x="934.0" y="203.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">StrOutputParser returns</text></g>
+<g class="st s3"><text x="934.0" y="220.8" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">Once upon a time, ...</text></g>
+<g class="st s3"><circle cx="1130" cy="146" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="1130.0" y="150.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><rect x="250.0" y="300.0" width="540.0" height="150.0" rx="10" fill="#fff8ee" fill-opacity="1" stroke="#d9822b" stroke-width="2"/></g>
+<g class="st s4"><text x="776.0" y="436.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#d9822b" font-weight="bold" text-anchor="end">Memory: the model itself is stateless</text></g>
+<g class="st s4"><use href="#i-database" x="305.0" y="369.0" width="50" height="50"/><text x="330.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Conversation history</text></g>
+<g class="st s4"><path d="M330.0 368.0 L330.0 252.0" fill="none" stroke="#d9822b" stroke-width="2.2" marker-end="url(#a-d9822b)" stroke-linejoin="round"/><text x="330.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#d9822b" font-weight="bold" text-anchor="start">retrieve and add</text><text x="330.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#d9822b" font-weight="bold" text-anchor="start">to the prompt</text></g>
+<g class="st s4"><circle cx="240" cy="296" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="240.0" y="300.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s5"><path d="M675.0 252.0 L675.0 394.0 L362.0 394.0" fill="none" stroke="#d9822b" stroke-width="2.2" marker-end="url(#a-d9822b)" stroke-linejoin="round"/><text x="462.1" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#d9822b" font-weight="bold" text-anchor="middle">write the new exchange</text></g>
+<g class="st s5"><circle cx="690" cy="276" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="690.0" y="280.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+</svg>
