@@ -222,6 +222,63 @@ regulators increasingly expect. Consult the official framework
 text; details and companion profiles are periodically updated.
 ```
 
+## The EU AI Act: Article 50 versus Article 15
+
+Two articles of the EU AI Act {cite}`eu2024aiact` touch almost every generative AI application, and they are easy to confuse. Article 50 is about transparency: telling people that they are dealing with AI and marking what AI generates. Article 15 is about engineering quality: how accurate, robust, and secure a high-risk system must be. Article 50 applies to many systems at any risk level, while Article 15 applies only to high-risk systems but reaches into how they are built and tested. The figure below sets the two side by side.
+
+```{image} ../_static/figures/bk_art50_vs_art15.*
+:alt: Two lanes of icons comparing the articles. The Article 50 lane shows four duties that apply at any risk level from August 2, 2026, a Bedrock agent telling a person it is AI, a generator marking its output so a detector can find it, a deployer of emotion recognition informing the people exposed, and a deployer labeling a deepfake for the public. The Article 15 lane shows a high-risk system whose provider declares accuracy levels and metrics, adds a fail-safe backup, shields the model from data poisoning and adversarial inputs, and passes a conformity assessment before the system goes on the market.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+### Article 50: tell people and mark the output
+
+Article 50 has applied since August 2, 2026, and like the rest of the Act it covers providers outside the EU whose systems' output is used in the EU {cite}`ec2026art50`. It sets four duties, two for providers and two for deployers.
+
+1. **Interaction.** A provider must design a system that talks with people, such as a chatbot or an agent, so that people are told they are dealing with AI, unless that is obvious. A company that builds an assistant on Amazon Bedrock and offers it under its own name is the provider of that assistant.
+2. **Marking.** A provider of a system that generates synthetic audio, images, video, or text must mark the output in a machine-readable format so that it can be detected as AI-generated. The marking must be effective, interoperable, robust, and reliable as far as technically feasible.
+3. **Emotion recognition and biometric categorization.** A deployer of such a system must inform the people exposed to it.
+4. **Deepfakes and public-interest text.** A deployer that publishes a deepfake must disclose that it is artificial. A deployer that publishes AI-generated text to inform the public on matters of public interest must disclose that too, unless a person reviewed the text and holds editorial responsibility for it.
+
+The disclosure must be clear and must come at the latest at the first interaction or exposure. Fines for breaking these duties reach 15 million euros or 3 percent of worldwide annual turnover. The 2026 Digital Omnibus gave providers of generative systems already on the market before August 2, 2026 until December 2, 2026 to meet the marking duty; the other three duties had no delay {cite}`eu2026omnibus`. The Commission's Code of Practice on Transparency of AI-Generated Content, published on June 10, 2026 and found adequate in July, expects at least two layers of machine-readable marking, such as signed metadata and a watermark. Its non-binding guidelines of July 20, 2026 explain what falls in and out of scope {cite}`ec2026transparencycode,ec2026art50guidelines`.
+
+Marking is partly a model feature and partly your job. Some models in Amazon Bedrock add a watermark to their output: the Bedrock user guide lists the Amazon Nova Sonic speech models, which add an inaudible watermark to all the speech they generate, and several Anthropic Claude models, which watermark text {cite}`aws2026watermarking`. Not every model adds one, and editing, paraphrasing, translating, compressing, or cropping can weaken a watermark, so check what your pipeline keeps. The Content Credentials check in {doc}`04-improving-security-and-safety` shows how easily ordinary image code drops signed metadata.
+
+### Article 15: accuracy, robustness, and cybersecurity
+
+Article 15 applies to high-risk systems, such as AI used in hiring, credit scoring, or education, from December 2, 2027 for the uses listed in Annex III and from August 2, 2028 for products covered by Annex I {cite}`ec2026art15`. The provider must design the system to reach an appropriate level of accuracy, robustness, and cybersecurity and keep that level throughout the lifecycle. Each requirement maps to work in this module.
+
+- **Accuracy.** Declare the accuracy levels and the metrics used to measure them in the instructions for use. The evaluation methods in {doc}`01-evaluating-llms` produce those numbers.
+- **Robustness.** Tolerate errors, faults, and inconsistencies, for example with redundancy and fail-safe plans. A system that keeps learning after release must stop its own possibly biased outputs from feeding back into future training.
+- **Cybersecurity.** Resist attempts to alter the system's use, outputs, or performance. The Act names data poisoning, model poisoning through pre-trained components, adversarial examples, confidentiality attacks, and model flaws. The jailbreak defenses, guardrails, and adversarial machine learning material in {doc}`04-improving-security-and-safety` apply here.
+
+Article 15 binds the provider, which shows compliance in a conformity assessment before the system goes on the market. Other duties that often appear beside it come from neighboring articles: risk management (Article 9), logging (Article 12), human oversight (Article 14), and the quality management system (Article 17); a deployer's duties are in Article 26. For a product with digital elements, meeting the essential requirements of the Cyber Resilience Act counts toward the cybersecurity part of Article 15, but not toward accuracy or robustness {cite}`eu2024cra`.
+
+```{list-table}
+:header-rows: 1
+:widths: 20 40 40
+
+* - Aspect
+  - Article 50
+  - Article 15
+* - What it governs
+  - Telling people about AI and marking AI output
+  - How well a high-risk system works and resists attack
+* - Which systems
+  - Interactive, generative, emotion recognition, and biometric categorization systems, and deepfakes, at any risk level
+  - High-risk systems only
+* - Who must act
+  - Providers for 50(1) and 50(2); deployers for 50(3) and 50(4)
+  - The provider, before the system is placed on the market
+* - Applies from
+  - August 2, 2026; December 2, 2026 for marking by generative systems already on the market
+  - December 2, 2027 (Annex III); August 2, 2028 (Annex I)
+```
+
+Both articles can apply to one application. A hiring assistant built on Bedrock is high-risk under Annex III, so Article 15 governs its accuracy and security, and its chat interface must still tell applicants that they are talking to AI under Article 50(1). A marketing image generator is not high-risk, so it has no Article 15 duties, but its provider must mark its images under Article 50(2). The companion textbook covers both articles in more depth ([Article 50 and Article 15](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#article-50-and-article-15-transparency-versus-accuracy-robustness-and-cybersecurity)).
+
 ## In the news
 
 Responsible AI has moved from voluntary principle to emerging regulation, with
@@ -241,5 +298,8 @@ The companion textbook covers the legal side in more depth: the EU AI Act's risk
 - **Risk assessment** is define -> identify and evaluate -> summarize, with risk
   quantified as **likelihood x severity** per the NIST framework.
 - **Governance** ties the practice together across teams.
+- In the EU AI Act, **Article 50** requires disclosure and machine-readable marking of AI
+  output at any risk level, while **Article 15** requires accuracy, robustness, and
+  cybersecurity from high-risk systems.
 
 Next, we examine each responsible-AI dimension in detail.

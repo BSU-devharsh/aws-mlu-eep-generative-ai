@@ -120,6 +120,10 @@ and checking their ratio (soft watermarking), minimal "necessary and sufficient"
 constraints, and methods that exploit Unicode character codes (for example,
 Easymark's Whitemark, Variantmark, and Printmark), embedding signals invisible to
 humans but algorithmically detectable.
+Since August 2, 2026, Article 50(2) of the EU AI Act has required providers of
+generative systems to mark their output in a machine-readable, detectable way;
+{doc}`02-foundations-of-responsible-ai` compares that duty with the accuracy,
+robustness, and cybersecurity requirements of Article 15.
 
 ### Content Credentials for images
 

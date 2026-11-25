@@ -3,7 +3,7 @@
 These scripts draw the animated SVG figures in `book/_static/figures/`, with a PNG copy of each for the PDF.
 
 - `fig.py` and `icons.py` hold the drawing helpers and the icon library (original artwork, no third-party assets).
-- `bk_redraws.py`, `bk_new_a.py`, `bk_new_b.py`, and `bk_new_c.py` draw the figures; each writes to `out/`.
+- `bk_redraws.py`, `bk_new_a.py`, `bk_new_b.py`, `bk_new_c.py`, and `bk_new_d.py` draw the figures; each writes to `out/`.
 - `integrate.py` holds the helpers that insert a figure into a page.
 
 Each element of a figure carries a build step. A one-shot CSS fade, active only when the reader has not asked for
