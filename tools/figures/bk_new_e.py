@@ -354,3 +354,115 @@ def mllm():
 
 if __name__ == "__main__" and "m1" in sys.argv:
     bedrock_api(); prompt_anatomy(); reasoning_strategies(); mllm()
+
+
+def grounding_check():
+    p = Fig(1180, 420, "Checking that an answer is grounded in its source, and abstaining when it is not",
+            "A user asks what the fee is, and the source document says the fee is 2 percent. The model drafts an answer that "
+            "says 3 percent, an intrinsic hallucination because it contradicts the source. A contextual grounding check in "
+            "Amazon Bedrock Guardrails takes the source, the query, and the response and scores the response for grounding and "
+            "relevance. If both scores meet the thresholds you set, the answer is returned. If either falls below its threshold, "
+            "the response is blocked and the system abstains, by declining, asking a clarifying question, or handing off to a person.")
+    p.icon("user", 80, 120, 56, "Question", "What is the fee?", step=1, label_size=14)
+    p.icon("document", 80, 300, 54, "Source", "the fee is 2 percent", step=1, label_size=14)
+    p.badge(1, 30, 70, step=1)
+    p.arrow([(112, 120), (200, 196)], None, INK, step=2)
+    p.arrow([(112, 300), (200, 226)], None, INK, step=2)
+    p.icon("robot", 240, 210, 62, "Model", None, step=2, label_size=14)
+    p.arrow([(276, 210), (336, 210)], None, INK, step=2)
+    p.rect(340, 174, 190, 72, "#fdecea", RED, 1.8, rx=8, step=2)
+    p.text(435, 202, "Draft answer", 14, RED, "bold", step=2)
+    p.text(435, 226, "the fee is 3 percent", 13, INK, step=2)
+    p.badge(2, 214, 150, step=2)
+    p.arrow([(530, 210), (592, 210)], None, INK, step=3)
+    p.rect(596, 130, 260, 160, "#f7f2fb", PURPLE, 2, rx=10, step=3)
+    p.icon("shield", 640, 170, 46, step=3)
+    p.text(756, 166, "Contextual", 14, PURPLE, "bold", step=3)
+    p.text(756, 184, "grounding check", 14, PURPLE, "bold", step=3)
+    p.text(726, 226, "grounding score vs threshold", 13, INK, step=3)
+    p.text(726, 248, "relevance score vs threshold", 13, INK, step=3)
+    p.text(726, 274, "thresholds from 0 to 0.99", 12, MUTED, step=3)
+    p.badge(3, 606, 120, step=3, color=PURPLE)
+    p.arrow([(856, 150), (930, 150)], "both pass", GREEN, step=4, size=12)
+    hcard(p, 934, 76, 226, 92, "check", "Return", "the grounded\nanswer", GREEN, 4, isz=40)
+    p.badge(4, 1140, 76, step=4, color=GREEN)
+    p.arrow([(856, 270), (930, 270)], "either fails", RED, step=5, size=12)
+    p.rect(934, 230, 226, 150, "#ffffff", RED, 2.2, rx=10, step=5)
+    p.rect(934, 230, 8, 150, RED, RED, 1, rx=4, step=5)
+    p.text(958, 260, "Block and abstain", 16, RED, "bold", anchor="start", step=5)
+    for i, t in enumerate(["decline the request", "ask a clarifying question", "hand off to a person"]):
+        p.text(958, 292 + i * 26, "• " + t, 13, INK, anchor="start", step=5)
+    p.badge(5, 1140, 230, step=5, color=RED)
+    p.text(435, 330, "An intrinsic hallucination contradicts", 13, MUTED, step=2)
+    p.text(435, 348, "the source; an extrinsic one adds", 13, MUTED, step=2)
+    p.text(435, 366, "claims the source cannot support.", 13, MUTED, step=2)
+    p.save(OUT + "bk_grounding_check")
+
+
+def nist_rmf():
+    p = Fig(1180, 490, "The NIST AI Risk Management Framework, Govern across Map, Measure, and Manage",
+            "Govern sits in the center as a culture of risk management, with policies, accountability, roles, and oversight that "
+            "cut across the other three functions. Around it, Map establishes the context and identifies risks, Measure analyzes, "
+            "assesses, and tracks those risks with quantitative and qualitative methods, and Manage prioritizes and acts on them "
+            "with mitigations such as guardrails and oversight, and monitors over time. Arrows run from Map to Measure to Manage "
+            "and back to Map, because the cycle repeats as the system and its risks change.")
+    cx, cy = 590, 250
+    p.circle(cx, cy, 96, "#eef5fc", BLUE, 2.6, step=1)
+    p.icon("checklist", cx, cy - 40, 50, step=1)
+    p.text(cx, cy + 14, "Govern", 20, BLUE, "bold", step=1)
+    p.text(cx, cy + 38, "policies, roles,", 13, INK, step=1)
+    p.text(cx, cy + 56, "accountability, oversight", 13, INK, step=1)
+    p.badge(1, cx - 78, cy - 78, step=1)
+    cards = [(120, 120, "nodes", "Map", "set the context and\nidentify risks", GREEN, 2),
+             (830, 120, "search", "Measure", "analyze, assess, and\ntrack risks", ORANGE, 3),
+             (475, 412, "shield", "Manage", "mitigate, prioritize,\nand monitor", PURPLE, 4)]
+    for x, y, ic, t, sub, col, st in cards:
+        hcard(p, x, y - 46, 230, 92, ic, t, sub, col, st, isz=44)
+        p.badge(st, x + 212, y - 46, step=st, color=col)
+    p.arrow([(352, 84), (826, 84)], None, INK, step=3)
+    p.arrow([(946, 168), (946, 412), (707, 412)], None, INK, step=4)
+    p.arrow([(473, 412), (234, 412), (234, 170)], "repeat as risks change", INK, step=4, label_at=0.3, label_dy=20)
+    for x, y in [(352, 120), (830, 120), (590, 354)]:
+        pass
+    p.raw(f'<path d="M352 140 L498 210" stroke="{BLUE}" stroke-width="1.6" stroke-dasharray="5 5" fill="none"/>'
+          f'<path d="M828 140 L682 210" stroke="{BLUE}" stroke-width="1.6" stroke-dasharray="5 5" fill="none"/>'
+          f'<path d="M590 346 L590 364" stroke="{BLUE}" stroke-width="1.6" stroke-dasharray="5 5" fill="none"/>', step=4)
+    p.save(OUT + "bk_nist_rmf")
+
+
+def rai_dimensions():
+    p = Fig(1180, 560, "The eight dimensions of responsible AI",
+            "A hub labeled responsible AI connects to eight cards. Controllability means mechanisms to monitor and steer system "
+            "behavior. Privacy and security means obtaining, using, and protecting data and models appropriately. Safety means "
+            "preventing harmful output and misuse. Fairness means considering the impact on different groups of stakeholders. "
+            "Veracity and robustness means correct output even with unexpected or adversarial input. Explainability means "
+            "understanding and evaluating outputs. Transparency means helping stakeholders make informed choices about using the "
+            "system. Governance means best practices across the AI supply chain, for providers and deployers alike.")
+    import math
+    cx, cy = 590, 300
+    dims = [("gear", "Controllability", "monitor and steer\nbehavior", BLUE),
+            ("lock", "Privacy and security", "protect data\nand models", BLUE),
+            ("shield", "Safety", "prevent harmful output\nand misuse", GREEN),
+            ("group", "Fairness", "weigh the impact\non every group", GREEN),
+            ("check", "Veracity, robustness", "correct output, even\non unexpected input", ORANGE),
+            ("search", "Explainability", "understand and\nevaluate outputs", ORANGE),
+            ("eye", "Transparency", "let people make\ninformed choices", PURPLE),
+            ("checklist", "Governance", "best practices across\nthe supply chain", PURPLE)]
+    w, h = 262, 92
+    pos = []
+    for i in range(8):
+        a = -math.pi / 2 + i * math.pi / 4
+        pos.append((cx + 410 * math.cos(a), cy + 196 * math.sin(a)))
+    for i, ((x, y), (ic, t, sub, col)) in enumerate(zip(pos, dims)):
+        p.raw(f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}" stroke="#b8c2cc" stroke-width="2"/>', step=i + 1)
+    p.circle(cx, cy, 78, "#ffffff", INK, 2.4)
+    p.text(cx, cy - 4, "Responsible", 17, INK, "bold")
+    p.text(cx, cy + 18, "AI", 17, INK, "bold")
+    for i, ((x, y), (ic, t, sub, col)) in enumerate(zip(pos, dims)):
+        hcard(p, x - w / 2, y - h / 2, w, h, ic, t, sub, col, i + 1, isz=42, tsize=15)
+        p.badge(i + 1, x - w / 2 + w - 16, y - h / 2, step=i + 1, color=col)
+    p.save(OUT + "bk_rai_dimensions")
+
+
+if __name__ == "__main__" and "m2" in sys.argv:
+    grounding_check(); nist_rmf(); rai_dimensions()

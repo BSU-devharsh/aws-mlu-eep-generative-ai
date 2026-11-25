@@ -75,6 +75,30 @@ omitted.)
 
 * - Location
   - Figure
+* - {doc}`module-2/01-evaluating-llms`
+  - The four evaluation types in Amazon Bedrock: programmatic, human,
+    LLM-as-a-judge, and RAG evaluation.
+* - {doc}`module-2/01-evaluating-llms`
+  - Checking that an answer is grounded in its source, and abstaining when it
+    is not.
+* - {doc}`module-2/02-foundations-of-responsible-ai`
+  - The NIST AI Risk Management Framework, with Govern across Map, Measure, and
+    Manage.
+* - {doc}`module-2/02-foundations-of-responsible-ai`
+  - EU AI Act Article 50 transparency duties versus Article 15 requirements for
+    high-risk systems.
+* - {doc}`module-2/03-dimensions-of-responsible-ai`
+  - The eight dimensions of responsible AI.
+* - {doc}`module-2/04-improving-security-and-safety`
+  - Guardrails on the way into and out of a model.
+* - {doc}`module-2/04-improving-security-and-safety`
+  - How an ordinary resize step silently drops an image's C2PA credential.
+* - {doc}`module-2/04-improving-security-and-safety`
+  - A model API that resists extraction by returning labels, logging scores,
+    and rate-limiting.
+* - {doc}`module-2/04-improving-security-and-safety`
+  - Threat modeling a Bedrock application, with one threat and one control per
+    component.
 * - {doc}`module-2/labs/Lab-3/lab3-robustness`
   - Robustness and guardrails architecture diagrams.
 * - {doc}`module-2/labs/Lab-4/lab4b-watermarking`

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 560" width="1180" height="560" role="img" aria-labelledby="t d"><title id="t">The eight dimensions of responsible AI</title><desc id="d">A hub labeled responsible AI connects to eight cards. Controllability means mechanisms to monitor and steer system behavior. Privacy and security means obtaining, using, and protecting data and models appropriately. Safety means preventing harmful output and misuse. Fairness means considering the impact on different groups of stakeholders. Veracity and robustness means correct output even with unexpected or adversarial input. Explainability means understanding and evaluating outputs. Transparency means helping stakeholders make informed choices about using the system. Governance means best practices across the AI supply chain, for providers and deployers alike.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}.s6{animation-delay:4.50s}.s7{animation-delay:5.40s}.s8{animation-delay:6.30s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-gear" viewBox="0 0 100 100">
+<path d="M50 10 l7 2 2 10 8 4 9 -5 5 5 -5 9 4 8 10 2 2 7 -2 7 -10 2 -4 8 5 9 -5 5 -9 -5 -8 4 -2 10 -7 2 -7 -2 -2 -10 -8 -4 -9 5 -5 -5 5 -9 -4 -8 -10 -2 -2 -7 2 -7 10 -2 4 -8 -5 -9 5 -5 9 5 8 -4 2 -10 Z"
+ fill="url(#g-steel-top)" stroke="#3d4450" stroke-width="1.4"/>
+<circle cx="50" cy="50" r="14" fill="#eef1f4" stroke="#3d4450" stroke-width="1.4"/>
+</symbol>
+<symbol id="i-lock" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M32 44 V30 a18 18 0 0 1 36 0 V44" fill="none" stroke="#7d8796" stroke-width="7"/>
+<rect x="22" y="42" width="56" height="44" rx="6" fill="url(#g-gold)" stroke="#a5760e" stroke-width="1.4"/>
+<circle cx="50" cy="60" r="6" fill="#5d4006"/><rect x="47.5" y="62" width="5" height="12" rx="2" fill="#5d4006"/>
+</symbol>
+<symbol id="i-shield" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M50 8 L84 20 V48 C84 70 68 84 50 92 C32 84 16 70 16 48 V20 Z" fill="url(#g-green)" stroke="#1b5e20" stroke-width="1.6"/>
+<path d="M36 50 L46 60 L66 38" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+<symbol id="i-group" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<g transform="translate(-18,4) scale(.8)">
+<path d="M18 94 C18 66 32 58 50 58 C68 58 82 66 82 94 Z" fill="url(#g-suit2)" stroke="#11161c" stroke-width="1"/>
+<path d="M44 58 L50 70 L56 58 Z" fill="#fff"/>
+<rect x="45" y="48" width="10" height="11" fill="url(#g-skin)"/>
+<ellipse cx="50" cy="34" rx="15" ry="17" fill="url(#g-skin)" stroke="#c89273" stroke-width=".8"/>
+<path d="M33 30 C33 12 67 12 67 30 L68 46 C64 40 62 34 60 30 C52 32 44 31 38 26 C36 34 34 40 32 46 Z" fill="#1f1a17"/></g>
+<g transform="translate(38,4) scale(.8)">
+<path d="M18 94 C18 66 32 58 50 58 C68 58 82 66 82 94 Z" fill="url(#g-suit)" stroke="#11161c" stroke-width="1"/>
+<path d="M44 58 L50 70 L56 58 Z" fill="#fff"/><path d="M48.5 60 L51.5 60 L52.5 76 L50 80 L47.5 76 Z" fill="#c62828"/>
+<rect x="45" y="48" width="10" height="11" fill="url(#g-skin)"/>
+<ellipse cx="50" cy="34" rx="15" ry="17" fill="url(#g-skin)" stroke="#c89273" stroke-width=".8"/>
+<path d="M35 28 C34 14 66 12 66 28 C62 22 52 20 44 22 C40 23 37 25 35 28 Z" fill="#3b2a20"/></g>
+<g transform="translate(10,14) scale(.86)">
+<path d="M18 94 C18 66 32 58 50 58 C68 58 82 66 82 94 Z" fill="url(#g-suit3)" stroke="#11161c" stroke-width="1"/>
+<path d="M44 58 L50 70 L56 58 Z" fill="#fff"/><path d="M48.5 60 L51.5 60 L52.5 76 L50 80 L47.5 76 Z" fill="#c62828"/>
+<rect x="45" y="48" width="10" height="11" fill="url(#g-skin)"/>
+<ellipse cx="50" cy="34" rx="15" ry="17" fill="url(#g-skin)" stroke="#c89273" stroke-width=".8"/>
+<path d="M35 28 C34 14 66 12 66 28 C62 22 52 20 44 22 C40 23 37 25 35 28 Z" fill="#3b2a20"/></g>
+</symbol>
+<symbol id="i-check" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="url(#g-green)" stroke="#1b5e20" stroke-width="2"/>
+<path d="M32 51 L45 64 L69 38" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-search" viewBox="0 0 100 100">
+<circle cx="42" cy="42" r="24" fill="#e3f2fd" stroke="#2f6fae" stroke-width="7"/>
+<line x1="60" y1="60" x2="86" y2="86" stroke="#5b6570" stroke-width="11" stroke-linecap="round"/>
+<path d="M30 34 a14 14 0 0 1 12 -8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</symbol>
+<symbol id="i-eye" viewBox="0 0 100 100">
+<path d="M8 50 C26 22 74 22 92 50 C74 78 26 78 8 50 Z" fill="url(#g-paper)" stroke="#2f6fae" stroke-width="3"/>
+<circle cx="50" cy="50" r="17" fill="url(#g-screen)" stroke="#0b4f9c" stroke-width="2"/>
+<circle cx="50" cy="50" r="7" fill="#0d1b2a"/><circle cx="44" cy="44" r="3.5" fill="#fff"/>
+</symbol>
+<symbol id="i-checklist" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="22" y="14" width="56" height="76" rx="4" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.4"/>
+<rect x="38" y="9" width="24" height="10" rx="3" fill="#7d8796"/>
+<path d="M30 32 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="33" x2="70" y2="33" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/><path d="M30 48 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="49" x2="70" y2="49" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/><path d="M30 64 l4 4 8 -9" fill="none" stroke="#2e7d32" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="48" y1="65" x2="70" y2="65" stroke="#9aa6b3" stroke-width="3" stroke-linecap="round"/>
+<line x1="30" y1="81" x2="70" y2="81" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+</symbol>
+</defs>
+<rect width="1180" height="560" fill="#ffffff"/>
+<text x="590.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">The eight dimensions of responsible AI</text>
+<g class="st s1"><line x1="590" y1="300" x2="590.0" y2="104.0" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s2"><line x1="590" y1="300" x2="879.9" y2="161.4" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s3"><line x1="590" y1="300" x2="1000.0" y2="300.0" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s4"><line x1="590" y1="300" x2="879.9" y2="438.6" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s5"><line x1="590" y1="300" x2="590.0" y2="496.0" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s6"><line x1="590" y1="300" x2="300.1" y2="438.6" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s7"><line x1="590" y1="300" x2="180.0" y2="300.0" stroke="#b8c2cc" stroke-width="2"/></g>
+<g class="st s8"><line x1="590" y1="300" x2="300.1" y2="161.4" stroke="#b8c2cc" stroke-width="2"/></g>
+<circle cx="590" cy="300" r="78" fill="#ffffff" fill-opacity="1" stroke="#1f2933" stroke-width="2.4"/>
+<text x="590.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#1f2933" font-weight="bold" text-anchor="middle">Responsible</text>
+<text x="590.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#1f2933" font-weight="bold" text-anchor="middle">AI</text>
+<g class="st s1"><rect x="459.0" y="58.0" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#1f4e9c" stroke-width="2.2"/></g>
+<g class="st s1"><rect x="459.0" y="58.0" width="8.0" height="92.0" rx="4" fill="#1f4e9c" fill-opacity="1" stroke="#1f4e9c" stroke-width="1"/></g>
+<g class="st s1"><use href="#i-gear" x="481.0" y="83.0" width="42" height="42"/></g>
+<g class="st s1"><text x="535.0" y="91.5" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f4e9c" font-weight="bold" text-anchor="start">Controllability</text></g>
+<g class="st s1"><text x="535.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">monitor and steer</text></g>
+<g class="st s1"><text x="535.0" y="128.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">behavior</text></g>
+<g class="st s1"><circle cx="705.0" cy="58.0" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="705.0" y="62.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><rect x="748.9" y="115.4" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#1f4e9c" stroke-width="2.2"/></g>
+<g class="st s2"><rect x="748.9" y="115.4" width="8.0" height="92.0" rx="4" fill="#1f4e9c" fill-opacity="1" stroke="#1f4e9c" stroke-width="1"/></g>
+<g class="st s2"><use href="#i-lock" x="770.9" y="140.4" width="42" height="42"/></g>
+<g class="st s2"><text x="824.9" y="148.9" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#1f4e9c" font-weight="bold" text-anchor="start">Privacy and security</text></g>
+<g class="st s2"><text x="824.9" y="168.9" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">protect data</text></g>
+<g class="st s2"><text x="824.9" y="185.9" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">and models</text></g>
+<g class="st s2"><circle cx="994.9137802864846" cy="115.4070708874367" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="994.9" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><rect x="869.0" y="254.0" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2.2"/></g>
+<g class="st s3"><rect x="869.0" y="254.0" width="8.0" height="92.0" rx="4" fill="#2e7d32" fill-opacity="1" stroke="#2e7d32" stroke-width="1"/></g>
+<g class="st s3"><use href="#i-shield" x="891.0" y="279.0" width="42" height="42"/></g>
+<g class="st s3"><text x="945.0" y="287.5" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="start">Safety</text></g>
+<g class="st s3"><text x="945.0" y="307.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">prevent harmful output</text></g>
+<g class="st s3"><text x="945.0" y="324.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">and misuse</text></g>
+<g class="st s3"><circle cx="1115.0" cy="254.0" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="1115.0" y="258.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><rect x="748.9" y="392.6" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2.2"/></g>
+<g class="st s4"><rect x="748.9" y="392.6" width="8.0" height="92.0" rx="4" fill="#2e7d32" fill-opacity="1" stroke="#2e7d32" stroke-width="1"/></g>
+<g class="st s4"><use href="#i-group" x="770.9" y="417.6" width="42" height="42"/></g>
+<g class="st s4"><text x="824.9" y="426.1" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="start">Fairness</text></g>
+<g class="st s4"><text x="824.9" y="446.1" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">weigh the impact</text></g>
+<g class="st s4"><text x="824.9" y="463.1" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">on every group</text></g>
+<g class="st s4"><circle cx="994.9137802864846" cy="392.5929291125633" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="994.9" y="397.2" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s5"><rect x="459.0" y="450.0" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#d9822b" stroke-width="2.2"/></g>
+<g class="st s5"><rect x="459.0" y="450.0" width="8.0" height="92.0" rx="4" fill="#d9822b" fill-opacity="1" stroke="#d9822b" stroke-width="1"/></g>
+<g class="st s5"><use href="#i-check" x="481.0" y="475.0" width="42" height="42"/></g>
+<g class="st s5"><text x="535.0" y="483.5" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#d9822b" font-weight="bold" text-anchor="start">Veracity, robustness</text></g>
+<g class="st s5"><text x="535.0" y="503.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">correct output, even</text></g>
+<g class="st s5"><text x="535.0" y="520.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">on unexpected input</text></g>
+<g class="st s5"><circle cx="705.0" cy="450.0" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="705.0" y="454.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+<g class="st s6"><rect x="169.1" y="392.6" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#d9822b" stroke-width="2.2"/></g>
+<g class="st s6"><rect x="169.1" y="392.6" width="8.0" height="92.0" rx="4" fill="#d9822b" fill-opacity="1" stroke="#d9822b" stroke-width="1"/></g>
+<g class="st s6"><use href="#i-search" x="191.1" y="417.6" width="42" height="42"/></g>
+<g class="st s6"><text x="245.1" y="426.1" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#d9822b" font-weight="bold" text-anchor="start">Explainability</text></g>
+<g class="st s6"><text x="245.1" y="446.1" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">understand and</text></g>
+<g class="st s6"><text x="245.1" y="463.1" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">evaluate outputs</text></g>
+<g class="st s6"><circle cx="415.08621971351556" cy="392.5929291125633" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="415.1" y="397.2" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">6</text></g>
+<g class="st s7"><rect x="49.0" y="254.0" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#6a3d9a" stroke-width="2.2"/></g>
+<g class="st s7"><rect x="49.0" y="254.0" width="8.0" height="92.0" rx="4" fill="#6a3d9a" fill-opacity="1" stroke="#6a3d9a" stroke-width="1"/></g>
+<g class="st s7"><use href="#i-eye" x="71.0" y="279.0" width="42" height="42"/></g>
+<g class="st s7"><text x="125.0" y="287.5" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#6a3d9a" font-weight="bold" text-anchor="start">Transparency</text></g>
+<g class="st s7"><text x="125.0" y="307.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">let people make</text></g>
+<g class="st s7"><text x="125.0" y="324.5" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">informed choices</text></g>
+<g class="st s7"><circle cx="295.0" cy="254.0" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="295.0" y="258.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">7</text></g>
+<g class="st s8"><rect x="169.1" y="115.4" width="262.0" height="92.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#6a3d9a" stroke-width="2.2"/></g>
+<g class="st s8"><rect x="169.1" y="115.4" width="8.0" height="92.0" rx="4" fill="#6a3d9a" fill-opacity="1" stroke="#6a3d9a" stroke-width="1"/></g>
+<g class="st s8"><use href="#i-checklist" x="191.1" y="140.4" width="42" height="42"/></g>
+<g class="st s8"><text x="245.1" y="148.9" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#6a3d9a" font-weight="bold" text-anchor="start">Governance</text></g>
+<g class="st s8"><text x="245.1" y="168.9" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">best practices across</text></g>
+<g class="st s8"><text x="245.1" y="185.9" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="start">the supply chain</text></g>
+<g class="st s8"><circle cx="415.08621971351545" cy="115.4070708874367" r="12" fill="#6a3d9a" stroke="#fff" stroke-width="2"/><text x="415.1" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">8</text></g>
+</svg>

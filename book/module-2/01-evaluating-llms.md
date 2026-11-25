@@ -4,6 +4,8 @@ title: "Evaluating LLMs"
 
 # Chapter 1: Evaluating LLMs
 
+This chapter explains how to tell how good a language model is. It covers why evaluation matters and why it is hard, the range of approaches from benchmarks to human review, case studies of testing AI tools before people rely on them, hallucination and grounding, metrics for rare classes, drift, and the evaluation tools in Amazon Bedrock.
+
 ## Why it matters
 
 Before you can use a model responsibly, you have to know how good it is, and that
@@ -103,7 +105,7 @@ appears to measure.
 
 ### Does the model just agree with the expert? LLM sycophancy in forensic work
 
-**Sycophancy** is a model's tendency to shape its answer to match what the user
+Sycophancy is a model's tendency to shape its answer to match what the user
 says they believe. In forensic practice the prompt usually carries the
 examiner's working hypothesis, so a sycophantic model could hand that hypothesis
 back in the voice of an independent instrument and create the appearance of
@@ -141,7 +143,7 @@ The study tested the hypothesis directly {cite}`trivedi2026tool`:
 
 ### Does the score measure what you think? ProofLayer and policy screening
 
-**ProofLayer** is a two-stage system for screening government cybersecurity
+ProofLayer is a two-stage system for screening government cybersecurity
 policies against a control catalog: a keyword stage maps policy text to 22
 controls crosswalked to NIST SP 800-53 Revision 5, and a language-model stage is
 meant to resolve the cases keyword matching cannot, with an orchestration layer
@@ -192,6 +194,15 @@ A **hallucination** is fluent output that is not supported by the facts. When th
 **Faithfulness**, also called **groundedness**, measures how much of an answer is supported by its source. Amazon Bedrock Guardrails can check it at run time: its contextual grounding check takes the grounding source, the user's query, and the model's response, scores the response for grounding and for relevance, and blocks it when either score falls below a threshold you set between 0 and 0.99 ([AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html)).
 
 The safest answer is sometimes no answer. **Abstention** means the system declines, says it does not know, or hands off to a person when it lacks reliable information. Deciding when to abstain depends on the kind of uncertainty {cite}`kendall2017uncertainties`. **Aleatoric uncertainty** comes from noise or ambiguity in the data itself, such as a question with two reasonable readings; more data does not remove it, but a clarifying question can. **Epistemic uncertainty** comes from gaps in what the model knows, such as an event after its training cutoff; better data, retrieval, or a tool call can remove it. Evaluate abstention like any other behavior: a system that never abstains will hallucinate on hard questions, and one that abstains too often is useless.
+
+The figure below puts grounding and abstention together for the fee example above.
+
+```{image} ../_static/figures/bk_grounding_check.*
+:alt: A question and a source that says the fee is 2 percent go to a model that drafts an answer of 3 percent, a contextual grounding check scores the answer for grounding and relevance against thresholds, and the answer is returned only if both pass, otherwise the system blocks it and declines, asks a clarifying question, or hands off to a person
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ```{admonition} Security view
 :class: warning
@@ -288,6 +299,8 @@ community toward harder, fresher, task-specific evaluations, exactly the
 "collect your own benchmark" advice above.
 
 ## Key takeaways
+
+The points below summarize how to evaluate a model and how to read the results.
 
 - Evaluation matters because LLMs have many abilities, broad but shallow
   knowledge, growing influence, agentic reach, and roles judging other systems.

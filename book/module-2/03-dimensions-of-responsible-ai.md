@@ -4,6 +4,8 @@ title: "Dimensions of Responsible AI"
 
 # Chapter 3: Dimensions of Responsible AI
 
+This chapter takes the dimensions of responsible AI one at a time. For each one it says what the dimension means, why it matters for generative AI, and what you can do about it.
+
 ## Why it matters
 
 Chapter 2 named the eight dimensions of responsible AI. This chapter takes each
@@ -11,6 +13,15 @@ one in turn and makes it concrete, what it means, why it matters, and how it
 shows up in generative AI. Treat this as the working vocabulary you will use when
 assessing and improving any AI system. A **risk** here is the possibility of an
 adverse event affecting one or more of these dimensions.
+
+The figure below shows the eight dimensions that the sections of this chapter cover.
+
+```{image} ../_static/figures/bk_rai_dimensions.*
+:alt: A hub labeled responsible AI connected to eight cards, controllability, privacy and security, safety, fairness, veracity and robustness, explainability, transparency, and governance, each with a short description
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ## Privacy and security
 
@@ -30,7 +41,7 @@ other instructions and produce insults," subverting a journalism bot.
 
 ## Robustness
 
-**Robustness** is a model's ability to generalize well and perform reliably on
+Robustness is a model's ability to generalize well and perform reliably on
 real-world data that deviates from its training data. Four common types:
 
 ```{list-table}
@@ -53,7 +64,7 @@ real-world data that deviates from its training data. Four common types:
 
 ## Veracity
 
-**Veracity** is the truthfulness and accuracy of generated responses. Improving
+Veracity is the truthfulness and accuracy of generated responses. Improving
 veracity means reducing **hallucinations**, plausible-sounding but factually
 incorrect output that stems from the probabilistic nature of LLMs. It matters
 because models are trained on data containing inaccuracies and biases, and high
@@ -77,7 +88,7 @@ the reasons behind them {cite}`trivedi2026tool`.
 
 ## Fairness and safety
 
-**Fairness** considers how a system affects different subpopulations of users. In
+Fairness considers how a system affects different subpopulations of users. In
 the responsible-AI sense, it is the mitigation of unintended **bias**, where bias
 means a disparity in performance across groups.
 
@@ -120,7 +131,7 @@ answer into an auditable one. You will build RAG yourself in Module 3.
 
 ## Governance
 
-**Governance** is the systems, processes, and structures by which an organization
+Governance is the systems, processes, and structures by which an organization
 is directed, controlled, and held accountable. It provides oversight to manage
 risk and achieve objectives, supports ethical and transparent decision-making,
 promotes accountability, builds stakeholder trust, and enables compliance with
@@ -128,7 +139,7 @@ laws, regulations, and industry standards.
 
 ## Controllability
 
-**Controllability** is having mechanisms to monitor and steer the AI system's
+Controllability is having mechanisms to monitor and steer the AI system's
 behavior. You can steer behavior through:
 
 - **In-context solutions**: details, examples, and guidance via prompts.
@@ -152,9 +163,11 @@ a durable way to organize these fast-moving expectations.
 
 ## Key takeaways
 
-- The eight dimensions, **privacy and security, robustness, veracity, fairness,
-  safety, transparency, explainability, governance, controllability**, are the
-  working vocabulary of responsible AI.
+The points below collect the dimensions and the main lever for each.
+
+- The eight dimensions, **privacy and security, veracity and robustness,
+  fairness, safety, transparency, explainability, governance, and
+  controllability**, are the working vocabulary of responsible AI.
 - **Robustness** has noise, OOD, adversarial, and multi-task forms; **veracity**
   has credibility, factuality, coherence, completeness, and temporal facets.
 - **Transparency** informs engagement; **explainability** justifies outputs (for

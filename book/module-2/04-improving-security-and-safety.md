@@ -4,6 +4,8 @@ title: "Improving Security and Safety"
 
 # Chapter 4: Improving Security and Safety
 
+This chapter turns the principles of responsible AI into tools. It covers jailbreaking and prompt injection, the guardrails that filter unsafe inputs and outputs, watermarking and content credentials, debiasing, and the wider relationship between AI and security.
+
 ## Why it matters
 
 The previous chapters told you *what* responsible AI requires. This one gives you
@@ -13,6 +15,8 @@ three families of defense: **guardrails** that filter unsafe inputs and outputs,
 prejudiced output. These are the hands-on techniques behind the Module 2 labs.
 
 ## Jailbreaking
+
+The most common attack on a language model needs no special access, only a carefully written prompt.
 
 ```{admonition} Key terms
 :class: tip
@@ -66,6 +70,8 @@ and mitigate adversarial outcomes before production. Note, too, that LLMs can be
 used to generate jailbreaks against other LLMs, so defenses must keep evolving.
 
 ## Guardrails
+
+The main defense against unsafe input and output is a layer of checks around the model.
 
 ```{admonition} Definition
 :class: tip
@@ -456,6 +462,8 @@ The Module 2 labs implement these defenses on Amazon Bedrock: data protection,
 robustness, watermarking, and debiasing. See {doc}`labs-overview`.
 
 ## Key takeaways
+
+The points below summarize the attacks and defenses in this chapter.
 
 - **Jailbreaks** are prompt injections that bypass safety features; pretending,
   attention shifting, and privilege escalation are the main types.

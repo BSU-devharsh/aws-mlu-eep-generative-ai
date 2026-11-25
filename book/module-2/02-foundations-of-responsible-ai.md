@@ -4,6 +4,8 @@ title: "Foundations of Responsible AI"
 
 # Chapter 2: Foundations of Responsible AI
 
+This chapter defines responsible AI and shows how organizations practice it. It names the dimensions of responsible AI, follows responsibility across the lifecycle, walks through a risk assessment, introduces the NIST AI Risk Management Framework, and compares two articles of the EU AI Act.
+
 ## Why it matters
 
 Evaluation (Chapter 1) tells you how a model behaves. Responsible AI tells you how
@@ -13,6 +15,8 @@ responsibility spans the whole design-build-operate lifecycle, and gives a
 concrete method for assessing the risk of an AI application.
 
 ## What is responsible AI?
+
+Responsible AI has a working definition that the rest of the module relies on.
 
 ```{admonition} Definition
 :class: tip
@@ -212,6 +216,15 @@ design-build-operate lifecycle above:
     (guardrails, oversight), and monitor over time.
 ```
 
+The figure below shows how the functions relate. Govern runs through all of them, and the other three repeat as a cycle while the system and its risks change.
+
+```{image} ../_static/figures/bk_nist_rmf.*
+:alt: Govern in the center, with policies, roles, accountability, and oversight, linked to three cards in a cycle, Map to set the context and identify risks, Measure to analyze and track them, and Manage to mitigate, prioritize, and monitor, with an arrow back to Map
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{admonition} Why it matters here
 :class: note
 Using the AI RMF as scaffolding means the responsible-AI work in this module,
@@ -291,6 +304,8 @@ obligation, not just good intentions.
 The companion textbook covers the legal side in more depth: the EU AI Act's risk tiers and its duties for providers and deployers, the 2026 Digital Omnibus that moved the high-risk deadlines to December 2027 and August 2028, ISO/IEC 42001, and NIST's newer profiles ([Governing AI: Laws, Standards, and Roles](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#governing-ai-laws-standards-and-roles)).
 
 ## Key takeaways
+
+The points below summarize the foundations that the next two chapters build on.
 
 - **Responsible AI** maximizes benefit and minimizes harm, defined through
   evolving **dimensions** and practiced organization-wide.
