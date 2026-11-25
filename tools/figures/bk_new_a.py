@@ -21,7 +21,7 @@ q = [("user", "Question", "What is the return\npolicy?"), ("search", "Retrieval 
 for i, (ic, name, sub) in enumerate(q):
     x = 80 + i * 186; r.icon(ic, x, 360, 56, name, sub, step=5 + i, label_size=13)
     if i < 5: r.arrow([(x + 36, 360), (x + 150, 360)], None, GREEN, step=6 + i, width=2.4)
-r.arrow([(860, 190), (390, 330)], None, BLUE, step=7, dash=True, width=1.8); r.text(700, 270, "searches the same vector store", 11, BLUE, "bold", step=7)
+r.arrow([(452, 328), (452, 230), (860, 230), (860, 212)], None, BLUE, step=7, dash=True, width=1.8); r.text(656, 223, "searches the same vector store", 11, BLUE, "bold", step=7)
 r.text(550, 530, "Worked example: the bot retrieves Return policy: 15 days after purchase and cites it instead of guessing.", 13, MUTED, italic=True, step=11)
 r.save(OUT + "bk_rag")
 
