@@ -4,6 +4,8 @@ title: "Prompt Engineering"
 
 # Chapter 3: Prompt Engineering
 
+This chapter covers the craft of writing input that gets good output from a model. It names the parts of a prompt, explains the inference parameters that shape generation, lists best practices, and shows how examples in a prompt let a model learn a task on the spot.
+
 ## Why it matters
 
 You now know what LLMs are and how transformers make them work. But a foundation
@@ -57,13 +59,22 @@ The parts are:
 Not every prompt needs all four, but naming them gives you a checklist. When an
 answer disappoints, it is usually because one component is missing or ambiguous.
 
+The figure below labels the four parts of the example prompt and adds the inference parameters that the next section describes.
+
+```{image} ../_static/figures/bk_prompt_anatomy.*
+:alt: A prompt built from four labeled parts, context, instruction, input, and output format, flows into an LLM whose temperature, top-p, and maximum-token settings shape a bulleted response
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ```{admonition} Definition
 :class: tip
 **Prompt engineering** is the systematic design and optimization of prompts to
 guide an LLM's response so that outputs are accurate, relevant, and coherent.
 ```
 
-Three things are worth internalizing about prompt engineering as a discipline:
+Four things are worth internalizing about prompt engineering as a discipline:
 
 - It is **iterative**. Finding the optimal prompt often takes several attempts.
 - Prompt **quality and structure** significantly influence performance.
@@ -292,6 +303,8 @@ majority answer, which only works if the paths differ.
 
 ### Common misconceptions
 
+A few beliefs about inference parameters are widespread and wrong, and each one can lead to a bad design choice.
+
 - **Temperature zero is deterministic.** It is greedy in principle, but hosted
   services batch your request with others and floating-point arithmetic depends
   on the order of operations, so the output can still vary, as the
@@ -495,6 +508,8 @@ instructions, formats, and inference parameters, and observing how the output
 changes.
 
 ## Key takeaways
+
+The points below are the core habits of good prompting.
 
 - A prompt can contain an **instruction**, **context**, **input**, and **output
   format**; naming these helps you debug weak responses.

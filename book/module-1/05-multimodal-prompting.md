@@ -4,6 +4,8 @@ title: "Multimodal Prompting"
 
 # Chapter 5: Multimodal Prompting
 
+This chapter extends prompting beyond text to images, video, and audio. It explains what multimodal means, how multimodal LLMs are built, how to prompt them, and where they are used.
+
 ## Why it matters
 
 Every technique so far has worked on text. But the world is not only text. People
@@ -85,6 +87,15 @@ In other words, the encoders translate non-text inputs into the same kind of
 internal representation, embeddings, that the language model already knows how to
 work with. This is the same embedding idea introduced with Titan Embeddings in
 Chapter 1, now applied across modalities.
+
+The figure below traces each kind of input through its encoder and adapter into the language model.
+
+```{image} ../_static/figures/bk_mllm.*
+:alt: Image, video, and audio inputs each pass through their own encoder and an adapter into a central language model, which also receives the tokenized text prompt and produces a text answer
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ## Prompting multimodal LLMs
 
@@ -181,6 +192,8 @@ a multimodal model on Amazon Bedrock using both images and text and explores
 visual use cases hands-on.
 
 ## Key takeaways
+
+The points below summarize what multimodal models add and how to prompt them.
 
 - Single-modality models cannot solve tasks that require both seeing and writing;
   **multimodal** models can.

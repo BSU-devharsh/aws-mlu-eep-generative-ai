@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 460" width="1180" height="460" role="img" aria-labelledby="t d"><title id="t">A multimodal LLM keeps a language model at its core and adds encoders for other inputs</title><desc id="d">On the left are three non-text inputs, an image, a video, and an audio clip. Each goes through its own encoder, a vision encoder, a video encoder, and an audio encoder, and an adapter maps the result into embeddings that the language model already works with. The text prompt is split into tokens and embedded the same way. The language model at the center attends over all of these embeddings together and generates a text answer.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f4e9c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f4e9c"/></marker><marker id="a-2e7d32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2e7d32"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-camera" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="10" y="22" width="12" height="12" rx="2" fill="#6b7785"/><path d="M16 34 v18 h14" fill="none" stroke="#6b7785" stroke-width="4"/>
+<path d="M26 26 h50 l14 10 v14 l-14 10 h-50 Z" fill="url(#g-silver)" stroke="#5b6570" stroke-width="1.4"/>
+<circle cx="80" cy="43" r="7" fill="#2b3138"/><circle cx="80" cy="43" r="3" fill="#4fc3f7"/>
+<circle cx="34" cy="34" r="2.4" fill="#e74c3c"/>
+</symbol>
+<symbol id="i-videocall" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<rect x="6" y="14" width="88" height="66" rx="5" fill="#2b3138" stroke="#14181d" stroke-width="1.4"/>
+<rect x="10" y="18" width="38" height="26" rx="2" fill="#4a5562"/><circle cx="29" cy="27" r="5.5" fill="url(#g-skin)"/><path d="M19 44 c0 -9 20 -9 20 0 Z" fill="#1f2d3d"/><rect x="52" y="18" width="38" height="26" rx="2" fill="#4a5562"/><circle cx="71" cy="27" r="5.5" fill="url(#g-skin)"/><path d="M61 44 c0 -9 20 -9 20 0 Z" fill="#6b3fa0"/><rect x="10" y="47" width="38" height="26" rx="2" fill="#4a5562"/><circle cx="29" cy="56" r="5.5" fill="url(#g-skin)"/><path d="M19 73 c0 -9 20 -9 20 0 Z" fill="#2e4a6b"/><rect x="52" y="47" width="38" height="26" rx="2" fill="#4a5562"/><circle cx="71" cy="56" r="5.5" fill="url(#g-skin)"/><path d="M61 73 c0 -9 20 -9 20 0 Z" fill="#7a4b2a"/>
+<rect x="38" y="82" width="24" height="6" rx="2" fill="#9aa3ae"/>
+</symbol>
+<symbol id="i-headset" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M22 56 v-10 a28 28 0 0 1 56 0 v10" fill="none" stroke="#3b424d" stroke-width="5"/>
+<rect x="14" y="50" width="16" height="26" rx="6" fill="#3b424d"/><rect x="70" y="50" width="16" height="26" rx="6" fill="#3b424d"/>
+<path d="M78 74 q0 14 -20 16" fill="none" stroke="#3b424d" stroke-width="3"/><rect x="48" y="86" width="12" height="8" rx="3" fill="#1f4e9c"/>
+<circle cx="50" cy="56" r="14" fill="url(#g-skin)"/><path d="M36 92 c0 -16 28 -16 28 0 Z" fill="#2e4a6b"/>
+</symbol>
+<symbol id="i-document" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<path d="M26 8 H62 L76 22 V90 H26 Z" fill="url(#g-paper)" stroke="#6b7785" stroke-width="1.2"/>
+<path d="M62 8 V22 H76" fill="#d5dbe2" stroke="#6b7785" stroke-width="1.2"/>
+<g stroke="#9aa6b3" stroke-width="2.4" stroke-linecap="round"><line x1="34" y1="34" x2="68" y2="34"/><line x1="34" y1="44" x2="68" y2="44"/><line x1="34" y1="54" x2="60" y2="54"/><line x1="34" y1="64" x2="66" y2="64"/></g>
+</symbol>
+<symbol id="i-robot" viewBox="0 0 100 100"><ellipse cx="50" cy="95" rx="38" ry="4.5" fill="url(#g-shadow)"/>
+<line x1="50" y1="8" x2="50" y2="18" stroke="#5b6b7d" stroke-width="2.5"/><circle cx="50" cy="7" r="4" fill="#ff9800" stroke="#e65100"/>
+<rect x="24" y="18" width="52" height="40" rx="11" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="31" y="27" width="38" height="20" rx="7" fill="#183247"/>
+<circle cx="42" cy="37" r="4" fill="#4dd0e1"/><circle cx="58" cy="37" r="4" fill="#4dd0e1"/>
+<rect x="18" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/><rect x="76" y="32" width="6" height="12" rx="2" fill="#7d8ea2"/>
+<path d="M30 92 V70 a8 8 0 0 1 8 -8 h24 a8 8 0 0 1 8 8 V92 Z" fill="url(#g-robot)" stroke="#4d5d70" stroke-width="1.4"/>
+<rect x="40" y="70" width="20" height="10" rx="2" fill="#183247"/><circle cx="45" cy="75" r="1.8" fill="#8fd16a"/><circle cx="55" cy="75" r="1.8" fill="#ff7043"/>
+</symbol>
+</defs>
+<rect width="1180" height="460" fill="#ffffff"/>
+<text x="590.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">A multimodal LLM keeps a language model at its core and adds encoders for other inputs</text>
+<g class="st s1"><use href="#i-camera" x="55.0" y="105.0" width="50" height="50"/><text x="80.0" y="170.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Image</text></g>
+<g class="st s1"><path d="M110.0 130.0 L166.0 130.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="170.0" y="104.0" width="170" height="52" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="255.0" y="134.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Vision encoder</text></g>
+<g class="st s2"><path d="M340.0 130.0 L396.0 130.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="400.0" y="108.0" width="120" height="44" rx="6" fill="#ffffff" stroke="#9aa5b1" stroke-width="1.6" filter="url(#f-drop)"/><text x="460.0" y="134.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Adapter</text></g>
+<g class="st s2"><path d="M520.0 130.0 L642.0 190.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><use href="#i-videocall" x="55.0" y="205.0" width="50" height="50"/><text x="80.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Video</text></g>
+<g class="st s1"><path d="M110.0 230.0 L166.0 230.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="170.0" y="204.0" width="170" height="52" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="255.0" y="234.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Video encoder</text></g>
+<g class="st s2"><path d="M340.0 230.0 L396.0 230.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="400.0" y="208.0" width="120" height="44" rx="6" fill="#ffffff" stroke="#9aa5b1" stroke-width="1.6" filter="url(#f-drop)"/><text x="460.0" y="234.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Adapter</text></g>
+<g class="st s2"><path d="M520.0 230.0 L642.0 230.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><use href="#i-headset" x="55.0" y="305.0" width="50" height="50"/><text x="80.0" y="370.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="middle">Audio</text></g>
+<g class="st s1"><path d="M110.0 330.0 L166.0 330.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="170.0" y="304.0" width="170" height="52" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="255.0" y="334.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Audio encoder</text></g>
+<g class="st s2"><path d="M340.0 330.0 L396.0 330.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="400.0" y="308.0" width="120" height="44" rx="6" fill="#ffffff" stroke="#9aa5b1" stroke-width="1.6" filter="url(#f-drop)"/><text x="460.0" y="334.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Adapter</text></g>
+<g class="st s2"><path d="M520.0 330.0 L642.0 270.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><circle cx="40" cy="82" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="40.0" y="86.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><circle cx="392" cy="82" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="392.0" y="86.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><use href="#i-document" x="58.0" y="392.0" width="44" height="44"/></g>
+<g class="st s3"><text x="108.0" y="418.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="bold" text-anchor="start">Text prompt, split into tokens</text></g>
+<g class="st s3"><path d="M318.0 414.0 L700.0 414.0 L700.0 324.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s3"><circle cx="300" cy="386" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="300.0" y="390.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><rect x="646.0" y="136.0" width="220.0" height="188.0" rx="12" fill="#eef5fc" fill-opacity="1" stroke="#1f4e9c" stroke-width="2.4"/></g>
+<g class="st s4"><use href="#i-robot" x="725.0" y="165.0" width="62" height="62"/></g>
+<g class="st s4"><text x="756.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f4e9c" font-weight="bold" text-anchor="middle">Language model</text></g>
+<g class="st s4"><text x="756.0" y="284.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">attends over shared</text></g>
+<g class="st s4"><text x="756.0" y="302.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">embeddings</text></g>
+<g class="st s4"><circle cx="656" cy="146" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="656.0" y="150.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s5"><path d="M866.0 230.0 L952.0 230.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s5"><rect x="956.0" y="180.0" width="200.0" height="100.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2"/></g>
+<g class="st s5"><text x="1056.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#2e7d32" font-weight="bold" text-anchor="middle">Text answer</text></g>
+<g class="st s5"><text x="1056.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">describes, reads, or</text></g>
+<g class="st s5"><text x="1056.0" y="256.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1f2933" font-weight="normal" text-anchor="middle">reasons about the input</text></g>
+<g class="st s5"><circle cx="966" cy="170" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="966.0" y="174.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+</svg>

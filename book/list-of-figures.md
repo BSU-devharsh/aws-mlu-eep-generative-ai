@@ -44,6 +44,21 @@ omitted.)
 
 * - Location
   - Figure
+* - {doc}`module-1/01-introduction-to-generative-ai`
+  - How a request travels through Amazon Bedrock to models from several
+    providers.
+* - {doc}`module-1/02-foundation-models-and-llms`
+  - Verifying a model, importing or quantizing it, evaluating it, and signing it
+    before deployment.
+* - {doc}`module-1/02-foundation-models-and-llms`
+  - Recording how a model was built with in-toto and SLSA provenance.
+* - {doc}`module-1/03-prompt-engineering`
+  - The four parts of a prompt and the inference parameters that shape the
+    response.
+* - {doc}`module-1/04-advanced-prompting-techniques`
+  - Chain-of-thought, self-consistency, and tree-of-thought on one question.
+* - {doc}`module-1/05-multimodal-prompting`
+  - How a multimodal LLM brings images, video, and audio into a language model.
 * - {doc}`module-1/labs/Lab-4/lab4b-Tree-of-Thought`
   - Tree-of-Thought reasoning diagram.
 * - {doc}`module-1/labs/Lab-5/Lab5-Multimodal`

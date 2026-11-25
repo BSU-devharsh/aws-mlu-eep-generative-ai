@@ -4,6 +4,8 @@ title: "Introduction to Generative AI"
 
 # Chapter 1: Introduction to Generative AI
 
+This chapter introduces generative AI and the foundation models behind it. It defines large language models, surveys what they are used for, and introduces Amazon Bedrock, the service every lab in this book uses.
+
 > "Generative models are a key enabler of machine creativity, allowing machines
 > to go beyond what they've seen before and create something new."
 > — Ian Goodfellow
@@ -129,9 +131,9 @@ consistent interface, including:
 * - Provider
   - Example model family
 * - Amazon
-  - Titan
+  - Nova, Titan
 * - AI21 Labs
-  - Jurassic-2
+  - Jamba
 * - Anthropic
   - Claude
 * - Cohere
@@ -150,6 +152,15 @@ governance:
   providers.
 - Bedrock adds **security capabilities** such as encryption, identity and access
   management (IAM), and a range of compliance designations.
+
+The figure below shows the path a request takes through Bedrock and the protections it passes on the way.
+
+```{image} ../_static/figures/bk_bedrock_api.*
+:alt: An application sends a request through the AWS SDK to Amazon Bedrock, where IAM checks the caller, the data is encrypted and kept private, and one API routes the request to a model from one of several providers before the response returns
+:width: 95%
+:align: center
+:class: anim-fig
+```
 
 ### Amazon Titan models
 
@@ -206,6 +217,8 @@ programmatically with Boto3. Read this chapter first, then open the labs from
 {doc}`labs-overview`.
 
 ## Key takeaways
+
+The points below are the foundation for the rest of Module 1.
 
 - Generative AI *creates* new content rather than only classifying inputs.
 - A **foundation model** is pre-trained on broad data and adapted to many tasks;

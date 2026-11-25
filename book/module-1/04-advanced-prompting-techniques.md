@@ -4,6 +4,8 @@ title: "Advanced Prompting Techniques"
 
 # Chapter 4: Advanced Prompting Techniques
 
+This chapter covers techniques for problems that need several steps of reasoning. It moves from chain-of-thought prompting to self-consistency and tree-of-thought, explains how decoding turns probabilities into text along the way, and closes with a note on safety.
+
 ## Why it matters
 
 Standard prompt engineering, clear instructions and a few examples, handles most
@@ -25,6 +27,8 @@ The advanced techniques here do not replace those habits; they sit on top of
 them.
 
 ## Chain-of-thought prompting
+
+The first technique asks the model to show its work.
 
 **Chain-of-thought (CoT)** prompting breaks a complex task into intermediate
 reasoning steps, encouraging the model to *explain its reasoning* rather than
@@ -122,6 +126,8 @@ is exactly what the next technique exploits.
 
 ## Self-consistency
 
+One chain of reasoning can go wrong at any step, and the next technique guards against that by asking for several.
+
 **Self-consistency** builds directly on chain-of-thought {cite}`wang2022self`.
 The idea: instead of trusting one chain of reasoning, generate **multiple, diverse
 reasoning paths** through few-shot CoT, then take a **majority vote** over their
@@ -147,6 +153,8 @@ Its limitations mirror its strengths:
   inference run.
 
 ## Tree-of-thought
+
+Some problems need the model to explore options and back up from dead ends, not just reason in a straight line.
 
 **Tree-of-thought (ToT)** generalizes chain-of-thought one step further
 {cite}`yao2023tree`. Rather than following a single line of reasoning (CoT) or
@@ -185,6 +193,15 @@ ToT also requires **more resources** than sampling methods, though the
 flexibility of how you build the tree lets you tune the cost-performance
 trade-off.
 
+The figure below runs all three techniques on the age question from the lab, so you can compare how much work each one does and where each one catches a mistake.
+
+```{image} ../_static/figures/bk_reasoning_strategies.*
+:alt: Three panels on one age question, chain-of-thought reasoning in a single line to 34, self-consistency sampling three paths that answer 34, 34, and 21 and voting for 34, and tree-of-thought rating candidate thoughts, pruning a wrong one, backtracking from a failed branch, and answering 34
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
 ## A note on safety
 
 Advanced reasoning prompts make models more capable, but capability cuts both
@@ -211,6 +228,8 @@ and votes on the answer, and {doc}`labs/Lab-4/lab4b-Tree-of-Thought`, which buil
 and searches a tree of thoughts.
 
 ## Key takeaways
+
+The points below compare the three techniques and when each one pays off.
 
 - **Chain-of-thought** elicits step-by-step reasoning ("Let's think step by
   step") and improves accuracy on reasoning tasks, especially in large models.

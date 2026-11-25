@@ -187,3 +187,170 @@ def data_check():
 
 if __name__ == "__main__":
     book_roadmap(); aws_ai_choice(); tokens_embeddings(); ai_workflow(); data_check()
+
+
+def bedrock_api():
+    p = Fig(1180, 400, "Amazon Bedrock puts many foundation models behind one managed API",
+            "An application on the left sends a request through the AWS SDK to Amazon Bedrock. Inside Bedrock, identity and "
+            "access management checks who is calling, the data is encrypted, and prompts and responses are not shared with AWS "
+            "or with the model providers. Bedrock routes the request to a foundation model chosen from several providers, and "
+            "the response comes back the same way. You can choose a model per task and swap it without rewriting code.")
+    p.icon("laptop", 90, 200, 62, "Your application", "AWS SDK or API", step=1, label_size=14)
+    p.badge(1, 52, 158, step=1)
+    p.arrow([(128, 186), (300, 186)], "request", BLUE, step=2, size=12)
+    p.badge(2, 150, 160, step=2)
+    p.arrow([(300, 216), (128, 216)], "response", GREEN, step=5, size=12, label_dy=22, label_at=0.62)
+    p.badge(5, 270, 238, step=5, color=GREEN)
+    p.zone(306, 66, 330, 300, "Amazon Bedrock", BLUE, "#eef5fc", step=3)
+    p.icon("cloud", 471, 156, 70, "One API", "for every model", step=3, label_size=14)
+    p.icon("key", 370, 290, 38, "IAM checks", "the caller", step=3, label_size=13)
+    p.icon("lock", 471, 290, 38, "Encrypted", None, step=3, label_size=13)
+    p.icon("shield", 572, 290, 40, "Data stays", "private", step=3, label_size=13)
+    p.badge(3, 296, 56, step=3)
+    for i, (y, t) in enumerate([(110, "Provider A model"), (200, "Provider B model"), (290, "Provider C model")]):
+        p.arrow([(640, 200), (772, y)], None, BLUE, step=4, width=1.8)
+        p.icon("robot", 800, y, 50, None, None, step=4)
+        p.text(836, y + 5, t, 14, INK, "bold", anchor="start", step=4)
+    p.badge(4, 760, 70, step=4)
+    p.text(906, 352, "choose a model per task; swap it without rewriting code", 13, MUTED, step=4)
+    p.save(OUT + "bk_bedrock_api")
+
+
+def prompt_anatomy():
+    p = Fig(1180, 470, "The parts of a prompt and the knobs that shape the response",
+            "On the left, a prompt is built from four parts. The context says the text is a customer email received last week. "
+            "The instruction asks the model to summarize the main points. The input is the body of the email. The output format "
+            "asks for a bulleted list. The prompt goes to a language model whose inference parameters, temperature, top-p, and "
+            "maximum tokens, shape how it generates. The response on the right is a short bulleted list of the email's main points.")
+    parts = [("Context", "The following is a customer email received last week.", "#5b9bd5", 1),
+             ("Instruction", "Summarize the main points of the email ...", BLUE, 2),
+             ("Input", "To whom it may concern: Following up on our last meeting ...", ORANGE, 3),
+             ("Output format", "... in a bulleted list.", GREEN, 4)]
+    p.rect(26, 62, 540, 380, "#ffffff", "#9aa5b1", 1.6, rx=10)
+    p.text(296, 86, "The prompt", 15, INK, "bold")
+    for i, (t, ex, col, st) in enumerate(parts):
+        y = 104 + i * 84
+        p.rect(44, y, 504, 70, "#ffffff", col, 2, rx=8, step=st)
+        p.rect(44, y, 8, 70, col, col, 1, rx=4, step=st)
+        p.text(92, y + 28, t, 15, col, "bold", anchor="start", step=st)
+        p.text(92, y + 52, ex, 13, INK, anchor="start", italic=True, step=st)
+        p.badge(st, 70, y + 23, step=st, color=col)
+    p.arrow([(570, 210), (684, 210)], None, INK, step=5)
+    p.icon("robot", 724, 210, 66, "LLM", None, step=5, label_size=15)
+    p.rect(642, 276, 166, 120, "#f7f2fb", PURPLE, 1.6, rx=8, step=5)
+    p.text(725, 298, "Inference parameters", 13, PURPLE, "bold", step=5)
+    for j, k in enumerate(["temperature", "top-p", "max tokens"]):
+        y = 322 + j * 26
+        p.text(660, y, k, 13, INK, anchor="start", step=5)
+        p.raw(f'<line x1="742" y1="{y-4}" x2="796" y2="{y-4}" stroke="#c9b6dc" stroke-width="4" stroke-linecap="round"/>'
+              f'<circle cx="{752 + j * 16}" cy="{y-4}" r="6" fill="{PURPLE}"/>', step=5)
+    p.badge(5, 680, 172, step=5, color=PURPLE)
+    p.arrow([(772, 210), (870, 210)], None, INK, step=6)
+    p.rect(874, 150, 280, 130, "#ffffff", GREEN, 2, rx=8, step=6)
+    p.text(1014, 176, "Response", 15, GREEN, "bold", step=6)
+    p.text(894, 208, "• Faster production proposed", 13, INK, anchor="start", step=6)
+    p.text(894, 232, "• Faster delivery proposed", 13, INK, anchor="start", step=6)
+    p.text(894, 256, "• Reply requested", 13, INK, anchor="start", step=6)
+    p.badge(6, 884, 140, step=6, color=GREEN)
+    p.save(OUT + "bk_prompt_anatomy")
+
+
+def reasoning_strategies():
+    p = Fig(1180, 520, "Chain-of-thought, self-consistency, and tree-of-thought on the same question",
+            "Three panels answer the question, when I was 16 my sister was half my age, now I am 42, how old is my sister. In the "
+            "chain-of-thought panel the model reasons in one line, sister was 8, the gap is 8 years, 42 minus 8 is 34. In the "
+            "self-consistency panel the model samples three reasoning paths that answer 34, 34, and 21, and a majority vote picks "
+            "34. In the tree-of-thought panel the model proposes several partial thoughts, rates each one, prunes the weak ones, "
+            "expands the most promising, and backtracks when a branch fails, before choosing a final answer.")
+    p.text(590, 66, "Question: when I was 16, my sister was half my age; I am 42 now; how old is she?", 14, INK, "bold")
+    cols = [(30, "Chain-of-thought", BLUE), (410, "Self-consistency", ORANGE), (790, "Tree-of-thought", GREEN)]
+    for x, t, c in cols:
+        p.rect(x, 84, 360, 418, "#ffffff", c, 2, rx=10)
+        p.text(x + 180, 112, t, 16, c, "bold")
+    # CoT
+    steps = ["sister was 16 / 2 = 8", "gap = 16 - 8 = 8 years", "42 - 8 = 34"]
+    for i, s in enumerate(steps):
+        y = 150 + i * 90
+        p.box(80, y, 260, 50, s, step=1, size=14)
+        if i: p.arrow([(210, y - 40), (210, y - 2)], None, BLUE, step=1)
+    p.arrow([(210, 380), (210, 418)], None, BLUE, step=1)
+    p.box(140, 420, 140, 44, "Answer 34", step=1, kind="ok", size=14)
+    p.badge(1, 46, 126, step=1)
+    # Self-consistency
+    ans = [("8, gap 8, 42 - 8", "34", GREEN), ("16 - 8 = 8, so 34", "34", GREEN), ("half of 42", "21", RED)]
+    for i, (r, a, c) in enumerate(ans):
+        x = 428 + i * 112
+        p.rect(x, 140, 100, 150, "#fff8ee", ORANGE, 1.6, rx=8, step=2)
+        p.text(x + 50, 162, f"path {i+1}", 13, ORANGE, "bold", step=2)
+        for k, part in enumerate(r.split(", ")):
+            p.text(x + 50, 196 + k * 22, part, 12.5, INK, step=2)
+        p.text(x + 50, 274, a, 18, c, "bold", step=2)
+        p.arrow([(x + 50, 294), (550 + i * 40, 368)], None, ORANGE, step=3, width=1.8)
+    p.badge(2, 426, 126, step=2, color=ORANGE)
+    p.box(510, 372, 160, 46, "Majority vote", step=3, size=14)
+    p.arrow([(590, 420), (590, 446)], None, ORANGE, step=3)
+    p.box(520, 448, 140, 40, "Answer 34", step=3, kind="ok", size=14)
+    p.badge(3, 480, 376, step=3, color=ORANGE)
+    # ToT
+    p.box(910, 136, 120, 40, "Problem", step=4, size=14)
+    kids = [(852, "8 years apart", "sure", GREEN), (970, "ages double", "maybe", ORANGE), (1088, "half of 42", "no", RED)]
+    for x, t, v, c in kids:
+        p.arrow([(970, 178), (x, 224)], None, GREEN, step=4, width=1.8)
+        p.rect(x - 54, 228, 108, 54, "#ffffff", c, 1.8, rx=8, step=4)
+        p.text(x, 250, t, 12.5, INK, step=4)
+        p.text(x, 272, f"rated {v}", 12.5, c, "bold", step=4)
+    p.icon("cross", 1088, 302, 22, step=4)
+    p.badge(4, 806, 126, step=4, color=GREEN)
+    p.arrow([(852, 284), (852, 334)], None, GREEN, step=5)
+    p.rect(798, 338, 108, 50, "#ffffff", GREEN, 1.8, rx=8, step=5)
+    p.text(852, 360, "she is 8 years", 12.5, INK, step=5)
+    p.text(852, 380, "younger", 12.5, INK, step=5)
+    p.arrow([(970, 284), (970, 334)], None, ORANGE, step=5, dash=True)
+    p.rect(916, 338, 108, 50, "#ffffff", ORANGE, 1.8, rx=8, step=5, dash=True)
+    p.text(970, 360, "fails check,", 12.5, INK, step=5)
+    p.text(970, 380, "backtrack", 12.5, RED, "bold", step=5)
+    p.arrow([(852, 390), (852, 444)], None, GREEN, step=5)
+    p.box(797, 446, 110, 40, "Answer 34", step=5, kind="ok", size=14)
+    p.text(1042, 466, "expand the best,", 13, MUTED, step=5)
+    p.text(1042, 484, "prune the rest", 13, MUTED, step=5)
+    p.badge(5, 806, 318, step=5, color=GREEN)
+    p.save(OUT + "bk_reasoning_strategies")
+
+
+def mllm():
+    p = Fig(1180, 460, "A multimodal LLM keeps a language model at its core and adds encoders for other inputs",
+            "On the left are three non-text inputs, an image, a video, and an audio clip. Each goes through its own encoder, a "
+            "vision encoder, a video encoder, and an audio encoder, and an adapter maps the result into embeddings that the "
+            "language model already works with. The text prompt is split into tokens and embedded the same way. The language "
+            "model at the center attends over all of these embeddings together and generates a text answer.")
+    rows = [(130, "camera", "Image", "Vision encoder"), (230, "videocall", "Video", "Video encoder"), (330, "headset", "Audio", "Audio encoder")]
+    for y, ic, t, enc in rows:
+        p.icon(ic, 80, y, 50, t, None, step=1, label_size=13)
+        p.arrow([(110, y), (166, y)], None, BLUE, step=1)
+        p.box(170, y - 26, 170, 52, enc, step=1, size=14)
+        p.arrow([(340, y), (396, y)], None, BLUE, step=2)
+        p.box(400, y - 22, 120, 44, "Adapter", step=2, size=14, kind="plain")
+        p.arrow([(520, y), (642, 230 + (y - 230) * 0.4)], None, BLUE, step=2)
+    p.badge(1, 40, 82, step=1)
+    p.badge(2, 392, 82, step=2)
+    p.icon("document", 80, 414, 44, None, None, step=3)
+    p.text(108, 418, "Text prompt, split into tokens", 13, INK, "bold", anchor="start", step=3)
+    p.arrow([(318, 414), (700, 414), (700, 324)], None, GREEN, step=3)
+    p.badge(3, 300, 386, step=3, color=GREEN)
+    p.rect(646, 136, 220, 188, "#eef5fc", BLUE, 2.4, rx=12, step=4)
+    p.icon("robot", 756, 196, 62, None, None, step=4)
+    p.text(756, 262, "Language model", 16, BLUE, "bold", step=4)
+    p.text(756, 284, "attends over shared", 13, INK, step=4)
+    p.text(756, 302, "embeddings", 13, INK, step=4)
+    p.badge(4, 656, 146, step=4)
+    p.arrow([(866, 230), (952, 230)], None, GREEN, step=5)
+    p.rect(956, 180, 200, 100, "#ffffff", GREEN, 2, rx=8, step=5)
+    p.text(1056, 210, "Text answer", 15, GREEN, "bold", step=5)
+    p.text(1056, 236, "describes, reads, or", 13, INK, step=5)
+    p.text(1056, 256, "reasons about the input", 13, INK, step=5)
+    p.badge(5, 966, 170, step=5, color=GREEN)
+    p.save(OUT + "bk_mllm")
+
+
+if __name__ == "__main__" and "m1" in sys.argv:
+    bedrock_api(); prompt_anatomy(); reasoning_strategies(); mllm()

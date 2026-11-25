@@ -4,6 +4,8 @@ title: "Foundation Models and Large Language Models"
 
 # Chapter 2: Foundation Models and Large Language Models
 
+This chapter explains how foundation models work and what they need to run. It reviews how traditional models learn, covers the hardware and quantization that make large models practical, walks through the transformer, and ends with the limits of LLMs and how to record how a model was built.
+
 ## Why it matters
 
 Chapter 1 introduced foundation models and LLMs as the engines of generative AI.
@@ -518,6 +520,8 @@ different Bedrock foundation models with Boto3, and
 application on top of a decoder-only model.
 
 ## Key takeaways
+
+The points below summarize how foundation models are built, run, and trusted.
 
 - Traditional ML trains one model per task; foundation models pre-train once and
   adapt to many tasks.

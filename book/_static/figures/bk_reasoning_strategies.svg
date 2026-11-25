@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 520" width="1180" height="520" role="img" aria-labelledby="t d"><title id="t">Chain-of-thought, self-consistency, and tree-of-thought on the same question</title><desc id="d">Three panels answer the question, when I was 16 my sister was half my age, now I am 42, how old is my sister. In the chain-of-thought panel the model reasons in one line, sister was 8, the gap is 8 years, 42 minus 8 is 34. In the self-consistency panel the model samples three reasoning paths that answer 34, 34, and 21, and a majority vote picks 34. In the tree-of-thought panel the model proposes several partial thoughts, rates each one, prunes the weak ones, expands the most promising, and backtracks when a branch fails, before choosing a final answer.</desc>
+<style>@media (prefers-reduced-motion: no-preference){.st{animation:fig-in .7s ease-out both}.s1{animation-delay:0.00s}.s2{animation-delay:0.90s}.s3{animation-delay:1.80s}.s4{animation-delay:2.70s}.s5{animation-delay:3.60s}}@keyframes fig-in{from{opacity:0}to{opacity:1}}</style>
+<defs><linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#c9ddf4"/></linearGradient><filter id="f-drop" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="1.5" dy="2" stdDeviation="1.6" flood-color="#000" flood-opacity=".18"/></filter><marker id="a-1f4e9c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1f4e9c"/></marker><marker id="a-2e7d32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2e7d32"/></marker><marker id="a-d9822b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#d9822b"/></marker>
+
+<linearGradient id="g-steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a5361"/><stop offset=".5" stop-color="#2b313a"/><stop offset="1" stop-color="#1c2027"/></linearGradient>
+<linearGradient id="g-steel-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8796"/><stop offset="1" stop-color="#4a5361"/></linearGradient>
+<linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset="1" stop-color="#b9c0c9"/></linearGradient>
+<linearGradient id="g-silver-side" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8dde3"/><stop offset="1" stop-color="#9aa3ae"/></linearGradient>
+<linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fc3ff"/><stop offset=".55" stop-color="#1e88e5"/><stop offset="1" stop-color="#0b4f9c"/></linearGradient>
+<linearGradient id="g-router" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb6e8"/><stop offset="1" stop-color="#1f5f99"/></linearGradient>
+<linearGradient id="g-router-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f4fc"/><stop offset="1" stop-color="#a9cdea"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8e99a6"/><stop offset=".45" stop-color="#e3e7eb"/><stop offset="1" stop-color="#7b8693"/></linearGradient>
+<linearGradient id="g-brick" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2774f"/><stop offset="1" stop-color="#b2472a"/></linearGradient>
+<linearGradient id="g-cloud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b8dcf5"/></linearGradient>
+<linearGradient id="g-skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d7bf"/><stop offset="1" stop-color="#e2b394"/></linearGradient>
+<linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b5563"/><stop offset="1" stop-color="#1f2733"/></linearGradient>
+<linearGradient id="g-suit2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5ea7"/><stop offset="1" stop-color="#46336b"/></linearGradient>
+<linearGradient id="g-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3f47"/><stop offset="1" stop-color="#0f1216"/></linearGradient>
+<linearGradient id="g-robot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef5"/><stop offset="1" stop-color="#9fb0c3"/></linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d49a1f"/></linearGradient>
+<linearGradient id="g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e4e9ef"/></linearGradient>
+<linearGradient id="g-green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd38b"/><stop offset="1" stop-color="#2e8b45"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+<radialGradient id="g-shadow"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="g-suit3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e86c1"/><stop offset="1" stop-color="#1b4f72"/></linearGradient>
+<symbol id="i-cross" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="url(#g-red)" stroke="#7f0000" stroke-width="2"/>
+<path d="M35 35 L65 65 M65 35 L35 65" stroke="#fff" stroke-width="9" stroke-linecap="round"/></symbol>
+</defs>
+<rect width="1180" height="520" fill="#ffffff"/>
+<text x="590.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#1f2933" font-weight="bold" text-anchor="middle">Chain-of-thought, self-consistency, and tree-of-thought on the same question</text>
+<text x="590.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Question: when I was 16, my sister was half my age; I am 42 now; how old is she?</text>
+<rect x="30.0" y="84.0" width="360.0" height="418.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#1f4e9c" stroke-width="2"/>
+<text x="210.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#1f4e9c" font-weight="bold" text-anchor="middle">Chain-of-thought</text>
+<rect x="410.0" y="84.0" width="360.0" height="418.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#d9822b" stroke-width="2"/>
+<text x="590.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#d9822b" font-weight="bold" text-anchor="middle">Self-consistency</text>
+<rect x="790.0" y="84.0" width="360.0" height="418.0" rx="10" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="2"/>
+<text x="970.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">Tree-of-thought</text>
+<g class="st s1"><rect x="80.0" y="150.0" width="260" height="50" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="210.0" y="179.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">sister was 16 / 2 = 8</text></g>
+<g class="st s1"><rect x="80.0" y="240.0" width="260" height="50" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="210.0" y="269.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">gap = 16 - 8 = 8 years</text></g>
+<g class="st s1"><path d="M210.0 200.0 L210.0 238.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="80.0" y="330.0" width="260" height="50" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="210.0" y="359.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">42 - 8 = 34</text></g>
+<g class="st s1"><path d="M210.0 290.0 L210.0 328.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><path d="M210.0 380.0 L210.0 418.0" fill="none" stroke="#1f4e9c" stroke-width="2.2" marker-end="url(#a-1f4e9c)" stroke-linejoin="round"/></g>
+<g class="st s1"><rect x="140.0" y="420.0" width="140" height="44" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.6" filter="url(#f-drop)"/><text x="210.0" y="446.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Answer 34</text></g>
+<g class="st s1"><circle cx="46" cy="126" r="12" fill="#1f4e9c" stroke="#fff" stroke-width="2"/><text x="46.0" y="130.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">1</text></g>
+<g class="st s2"><rect x="428.0" y="140.0" width="100.0" height="150.0" rx="8" fill="#fff8ee" fill-opacity="1" stroke="#d9822b" stroke-width="1.6"/></g>
+<g class="st s2"><text x="478.0" y="162.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#d9822b" font-weight="bold" text-anchor="middle">path 1</text></g>
+<g class="st s2"><text x="478.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">8</text></g>
+<g class="st s2"><text x="478.0" y="218.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">gap 8</text></g>
+<g class="st s2"><text x="478.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">42 - 8</text></g>
+<g class="st s2"><text x="478.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#2e7d32" font-weight="bold" text-anchor="middle">34</text></g>
+<g class="st s3"><path d="M478.0 294.0 L550.0 368.0" fill="none" stroke="#d9822b" stroke-width="1.8" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="540.0" y="140.0" width="100.0" height="150.0" rx="8" fill="#fff8ee" fill-opacity="1" stroke="#d9822b" stroke-width="1.6"/></g>
+<g class="st s2"><text x="590.0" y="162.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#d9822b" font-weight="bold" text-anchor="middle">path 2</text></g>
+<g class="st s2"><text x="590.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">16 - 8 = 8</text></g>
+<g class="st s2"><text x="590.0" y="218.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">so 34</text></g>
+<g class="st s2"><text x="590.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#2e7d32" font-weight="bold" text-anchor="middle">34</text></g>
+<g class="st s3"><path d="M590.0 294.0 L590.0 368.0" fill="none" stroke="#d9822b" stroke-width="1.8" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s2"><rect x="652.0" y="140.0" width="100.0" height="150.0" rx="8" fill="#fff8ee" fill-opacity="1" stroke="#d9822b" stroke-width="1.6"/></g>
+<g class="st s2"><text x="702.0" y="162.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#d9822b" font-weight="bold" text-anchor="middle">path 3</text></g>
+<g class="st s2"><text x="702.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">half of 42</text></g>
+<g class="st s2"><text x="702.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#c0392b" font-weight="bold" text-anchor="middle">21</text></g>
+<g class="st s3"><path d="M702.0 294.0 L630.0 368.0" fill="none" stroke="#d9822b" stroke-width="1.8" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s2"><circle cx="426" cy="126" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="426.0" y="130.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">2</text></g>
+<g class="st s3"><rect x="510.0" y="372.0" width="160" height="46" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="590.0" y="399.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Majority vote</text></g>
+<g class="st s3"><path d="M590.0 420.0 L590.0 446.0" fill="none" stroke="#d9822b" stroke-width="2.2" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s3"><rect x="520.0" y="448.0" width="140" height="40" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.6" filter="url(#f-drop)"/><text x="590.0" y="472.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Answer 34</text></g>
+<g class="st s3"><circle cx="480" cy="376" r="12" fill="#d9822b" stroke="#fff" stroke-width="2"/><text x="480.0" y="380.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">3</text></g>
+<g class="st s4"><rect x="910.0" y="136.0" width="120" height="40" rx="6" fill="url(#g-box)" stroke="#4a6fa5" stroke-width="1.6" filter="url(#f-drop)"/><text x="970.0" y="160.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Problem</text></g>
+<g class="st s4"><path d="M970.0 178.0 L852.0 224.0" fill="none" stroke="#2e7d32" stroke-width="1.8" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s4"><rect x="798.0" y="228.0" width="108.0" height="54.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="1.8"/></g>
+<g class="st s4"><text x="852.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">8 years apart</text></g>
+<g class="st s4"><text x="852.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#2e7d32" font-weight="bold" text-anchor="middle">rated sure</text></g>
+<g class="st s4"><path d="M970.0 178.0 L970.0 224.0" fill="none" stroke="#2e7d32" stroke-width="1.8" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s4"><rect x="916.0" y="228.0" width="108.0" height="54.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#d9822b" stroke-width="1.8"/></g>
+<g class="st s4"><text x="970.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">ages double</text></g>
+<g class="st s4"><text x="970.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#d9822b" font-weight="bold" text-anchor="middle">rated maybe</text></g>
+<g class="st s4"><path d="M970.0 178.0 L1088.0 224.0" fill="none" stroke="#2e7d32" stroke-width="1.8" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s4"><rect x="1034.0" y="228.0" width="108.0" height="54.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#c0392b" stroke-width="1.8"/></g>
+<g class="st s4"><text x="1088.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">half of 42</text></g>
+<g class="st s4"><text x="1088.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#c0392b" font-weight="bold" text-anchor="middle">rated no</text></g>
+<g class="st s4"><use href="#i-cross" x="1077.0" y="291.0" width="22" height="22"/></g>
+<g class="st s4"><circle cx="806" cy="126" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="806.0" y="130.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">4</text></g>
+<g class="st s5"><path d="M852.0 284.0 L852.0 334.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s5"><rect x="798.0" y="338.0" width="108.0" height="50.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#2e7d32" stroke-width="1.8"/></g>
+<g class="st s5"><text x="852.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">she is 8 years</text></g>
+<g class="st s5"><text x="852.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">younger</text></g>
+<g class="st s5"><path d="M970.0 284.0 L970.0 334.0" fill="none" stroke="#d9822b" stroke-width="2.2" stroke-dasharray="7 6" marker-end="url(#a-d9822b)" stroke-linejoin="round"/></g>
+<g class="st s5"><rect x="916.0" y="338.0" width="108.0" height="50.0" rx="8" fill="#ffffff" fill-opacity="1" stroke="#d9822b" stroke-width="1.8" stroke-dasharray="6 4"/></g>
+<g class="st s5"><text x="970.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#1f2933" font-weight="normal" text-anchor="middle">fails check,</text></g>
+<g class="st s5"><text x="970.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#c0392b" font-weight="bold" text-anchor="middle">backtrack</text></g>
+<g class="st s5"><path d="M852.0 390.0 L852.0 444.0" fill="none" stroke="#2e7d32" stroke-width="2.2" marker-end="url(#a-2e7d32)" stroke-linejoin="round"/></g>
+<g class="st s5"><rect x="797.0" y="446.0" width="110" height="40" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.6" filter="url(#f-drop)"/><text x="852.0" y="470.9" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1f2933" font-weight="bold" text-anchor="middle">Answer 34</text></g>
+<g class="st s5"><text x="1042.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="middle">expand the best,</text></g>
+<g class="st s5"><text x="1042.0" y="484.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#52606d" font-weight="normal" text-anchor="middle">prune the rest</text></g>
+<g class="st s5"><circle cx="806" cy="318" r="12" fill="#2e7d32" stroke="#fff" stroke-width="2"/><text x="806.0" y="322.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#fff" font-weight="bold" text-anchor="middle">5</text></g>
+</svg>
