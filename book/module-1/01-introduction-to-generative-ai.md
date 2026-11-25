@@ -121,8 +121,10 @@ without standing up a cluster of GPUs? This is the gap **Amazon Bedrock** fills.
 
 Amazon Bedrock is a fully managed service that makes foundation models available
 through a single API. Instead of hosting models yourself, you call an endpoint
-and pay for what you use. Bedrock offers models from several providers behind a
-consistent interface, including:
+and pay for what you use. Bedrock offers models from many providers behind a
+consistent interface. In November 2026 its model catalog listed models from 19
+providers ([Models at a glance](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html));
+the table below shows a selection.
 
 ```{list-table}
 :header-rows: 1
@@ -137,9 +139,17 @@ consistent interface, including:
 * - Anthropic
   - Claude
 * - Cohere
-  - Command
+  - Command, Embed, Rerank
+* - DeepSeek
+  - DeepSeek-V3.x, DeepSeek-R1
 * - Meta
   - Llama
+* - Mistral AI
+  - Mistral, Ministral, Pixtral
+* - OpenAI
+  - GPT, gpt-oss
+* - Qwen
+  - Qwen3
 ```
 
 What makes Bedrock attractive for real applications is not just convenience but
@@ -162,19 +172,24 @@ The figure below shows the path a request takes through Bedrock and the protecti
 :class: anim-fig
 ```
 
-### Amazon Titan models
+### Amazon's own models: Nova and Titan
 
-Amazon's own family on Bedrock is **Titan**. Titan is positioned around
-responsible, high-performing models and comes in two flavors that you will use
+Amazon offers two families of its own models on Bedrock, and you will use both
 repeatedly:
 
-- **Titan Text** is a generative model for summarization, text generation (for
-  example, drafting a blog post), classification, open-ended question answering,
-  and information extraction.
-- **Titan Embeddings** translates text into numerical vectors, *embeddings*, that
-  capture the semantic meaning of the text. Embeddings are the backbone of search
-  and personalization, and they reappear in {doc}`05-multimodal-prompting` and in
-  Module 3's chapter on retrieval-augmented generation.
+- **Amazon Nova** is Amazon's current family of generative models. Nova Micro,
+  Nova Lite, Nova Pro, and Nova 2 Lite handle text and, except for Micro, images
+  and documents too; the labs in this book use them for summarization, text
+  generation, chat, question answering, and information extraction. Nova Canvas
+  and Nova Reel generate images and video, and Nova 2 Sonic and Nova 2.5 Sonic
+  handle speech.
+- **Embeddings** translate text, and in multimodal models images too, into
+  numerical vectors, *embeddings*, that capture meaning. On Bedrock, Amazon's
+  embedding models are the earlier **Titan** family, such as Titan Text Embeddings
+  V2 and Titan Multimodal Embeddings G1, and the newer Nova Multimodal Embeddings.
+  Embeddings are the backbone of search and personalization, and they reappear in
+  {doc}`05-multimodal-prompting` and in Module 3's chapter on retrieval-augmented
+  generation.
 
 ### Common Bedrock use cases
 
@@ -227,8 +242,8 @@ The points below are the foundation for the rest of Module 1.
 - Frontier models are enormous and expensive to train, which is why most teams
   consume them as a service.
 - **Amazon Bedrock** provides foundation models from multiple providers through
-  one secure, managed API, with **Amazon Titan** as Amazon's own text and
-  embedding models.
+  one secure, managed API, with **Amazon Nova** as Amazon's own generative
+  models and **Titan** and Nova embedding models for search and retrieval.
 
 In the next chapter we open up the model itself: what foundation models are made
 of, how the transformer architecture works, and where LLMs fall short.

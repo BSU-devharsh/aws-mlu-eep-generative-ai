@@ -451,8 +451,8 @@ You rarely implement a transformer yourself when working with Bedrock; the
 provider has already trained it. But the architecture explains the knobs you do
 control. The **context window** (how much text the model can attend to at once)
 is a direct consequence of attention. The difference between an *embedding* model
-like Titan Embeddings (encoder-style, understanding) and a *generative* model
-like Titan Text (decoder-style, generation) maps onto the flavors above.
+like Titan Text Embeddings (encoder-style, understanding) and a *generative* model
+like Amazon Nova (decoder-style, generation) maps onto the flavors above.
 ```
 
 ## Challenges and limitations of LLMs
