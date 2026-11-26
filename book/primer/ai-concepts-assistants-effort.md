@@ -1020,7 +1020,7 @@ Anthropic and OpenAI models and high thinking for Argon.
 Sources:
 [Artificial Analysis, Claude Opus 5.5](https://artificialanalysis.ai/models/claude-opus-5-5);
 [Artificial Analysis, GPT-6 Astra](https://artificialanalysis.ai/models/gpt-6-astra);
-[Artificial Analysis, GPT-6.1 Sol and Claude Opus 5.5](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5);
+[Artificial Analysis, GPT-6.1 Sol](https://artificialanalysis.ai/models/gpt-6-1-sol);
 [Artificial Analysis, Gemini 4 Argon and Claude Opus 5.5](https://artificialanalysis.ai/models/comparisons/gemini-4-argon-vs-claude-opus-5-5);
 [Artificial Analysis, Gemini 4 Argon article](https://artificialanalysis.ai/articles/gemini-4-argon-google-top-three-labs).
 Bold marks the best figure in each row. Artificial Analysis updates its
@@ -1031,7 +1031,7 @@ In the same independent testing, Opus 5.5 led GPT-6.1 Sol on Humanity's Last
 Exam (61.4 percent against 52.9) and Terminal-Bench 4.0 (59.6 against 56.1),
 while Sol scored higher on GDP.pdf, which OpenAI describes as a test of
 answering questions about professional PDF documents (31.0 against 26.2)
-([Artificial Analysis](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5);
+([Artificial Analysis](https://artificialanalysis.ai/models/gpt-6-1-sol);
 [OpenAI, Introducing GPT-6.1 Sol](https://openai.com/index/introducing-gpt-6-1-sol/)).
 
 **Results reported by a vendor.** Google's model card for Argon reports scores
@@ -1090,7 +1090,7 @@ Five lessons come out of these tables:
    At max effort, Opus 5.5 pulls ahead, 58 to 52, but its cost per task rises to
    5.98 dollars against 0.72 for Sol, and its time to first answer token grows
    from under 7 seconds to more than 12 minutes
-   ([Artificial Analysis](https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5)).
+   ([Artificial Analysis](https://artificialanalysis.ai/models/gpt-6-1-sol)).
    That is Part 3 in action.
 4. **Price per token is not price per task.** Argon and Sol charge the same
    per token until November 30, 2026, yet Argon cost about 1.99 dollars per
