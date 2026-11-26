@@ -365,6 +365,260 @@ cybersecurity textbook's section on
 [sampling temperature and decoding](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#sampling-temperature-and-decoding-a-security-view)
 covers that attack and how to control these settings in production.
 
+## Random, stochastic, aleatoric, and intermittent
+
+People reach for four words when an application does not behave the same way
+twice: *random*, *stochastic*, *aleatoric*, and *intermittent*. In everyday
+speech they blur together, but each one answers a different question and points
+to a different fix. The figure below sets the four side by side, and the table
+states the question each word answers.
+
+```{image} ../_static/figures/bk_uncertainty_terms.*
+:alt: Four numbered panels. Random shows a die with a flat histogram beside the peaked histogram of two dice summed. Stochastic shows arrows scattered around a target. Aleatoric shows uncertainty falling as data grows, down to a floor that does not move. Intermittent shows a regular and an irregular on and off signal. Each panel ends with an example from a Bedrock application.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+```{list-table}
+:header-rows: 1
+:widths: 14 26 30 30
+
+* - Term
+  - Question it answers
+  - Meaning
+  - Example in a Bedrock application
+* - Random
+  - Is the next outcome known in advance?
+  - No. Outcomes follow a probability distribution, which may or may not be
+    uniform.
+  - The next token the model samples
+* - Stochastic
+  - Does a probability model describe the outcomes, often over time?
+  - Yes. It is the technical word for random, used most for processes.
+  - Generating a whole answer one sampled token at a time
+* - Aleatoric
+  - Could more knowledge remove the uncertainty?
+  - No. The variation lives in the question or the data itself. Its
+    counterpart, epistemic uncertainty, shrinks with more knowledge.
+  - A question with two reasonable readings
+* - Intermittent
+  - Does it happen all the time?
+  - No. It comes and goes, on a regular or an irregular schedule.
+  - Throttling errors that appear only when traffic peaks
+```
+
+### Random
+
+In everyday speech, *random* means lacking a definite plan, purpose, or pattern.
+Statistics uses a narrower sense: an event is random when it has a definite
+probability of occurrence, and a random sample is one in which every element has
+the same chance of being chosen
+([Merriam-Webster](https://www.merriam-webster.com/dictionary/random)). The first
+statistical sense does not require equal chances. A fair die is uniform, because
+each face comes up one time in six. The sum of two dice is random too, yet 7
+comes up six times in 36 while 2 and 12 come up once each. A model's next token
+is random in the same way. The model gives every token in its vocabulary a
+probability, and the distribution is far from uniform: in the temperature example
+above, *Paris* has probability 0.854 at temperature 1.0.
+
+The shape of a distribution decides how well a guesser does. The best single
+guess is the most likely outcome, and it is right with exactly that outcome's
+probability. Greedy decoding makes this guess at every step. Entropy, used in the
+temperature example, measures the average spread of a distribution.
+**Min-entropy**, the negative base-2 logarithm of the largest probability,
+measures the worst case: how easy the single best guess is
+([NIST glossary](https://csrc.nist.gov/glossary/term/min_entropy)). A
+distribution that is not uniform is still random; it is only easier to guess.
+For the same reason, text sampled from a model should never serve as a password
+or a key. Each token carries little min-entropy when the distribution is peaked,
+and an attacker with access to the same model can try the likely outputs first.
+Cryptographic keys come from uniform random bit generators instead, which the
+cybersecurity textbook's section on
+[true, pseudo, and cryptographically secure randomness](https://book.com.puter.tips/chapters/02_cryptography/chapter02.html#randomness-true-pseudo-and-cryptographically-secure)
+covers.
+
+### Stochastic
+
+*Stochastic* means random, specifically involving a random variable, and more
+broadly involving chance or probability
+([Merriam-Webster](https://www.merriam-webster.com/dictionary/stochastic)). It
+comes from the Greek *stochastikos*, skillful in aiming, from a verb meaning to
+aim at or to guess. The image fits. An archer aims at a target, and the arrows
+land around it in a spread that a distribution describes, yet no one can say
+where the next arrow will land. In mathematics, random and stochastic mean the
+same thing. The difference is register and focus: stochastic is the technical
+word, and a **stochastic process** is a sequence of random outcomes that unfolds
+over time.
+
+Text generation is a stochastic process. Each token is drawn from a distribution
+that depends on every token before it, so one early draw can send the rest of the
+answer down a different path. That is why the next chapter calls sampling
+*stochastic decoding*, and why self-consistency can sample several reasoning
+paths and keep the majority answer. Setting the temperature to zero removes the
+sampling step, but it does not make a hosted model fully repeatable. As the
+non-determinism discussion in {doc}`02-foundation-models-and-llms` shows, one
+prompt sent 1,000 times at temperature zero returned 80 different completions
+([Thinking Machines](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/)).
+That variation does not come from sampling. It comes from the server: the batch
+your request joins changes the order of floating-point additions inside the
+model.
+
+### Aleatoric and epistemic uncertainty
+
+*Aleatoric* comes from the Latin *alea*, a die or a game of dice, by way of
+*aleator*, a gambler
+([Dictionary.com](https://www.dictionary.com/browse/aleatory)). Law uses the
+older form: an aleatory contract, such as an insurance policy, pays out only if
+an uncertain event occurs. In modeling, **aleatoric uncertainty** is variation
+built into the process, which more knowledge would not remove. Its counterpart,
+**epistemic uncertainty**, comes from a lack of knowledge, and more data or a
+better model can reduce it {cite}`hullermeier2021aleatoric`.
+
+The line between the two depends on the model. Der Kiureghian and Ditlevsen
+propose a practical test: an uncertainty is epistemic if the modeler sees a way
+to reduce it by gathering more data or refining the model, and aleatoric
+otherwise {cite}`derkiureghian2009aleatory`. A coin toss shows why the test is
+practical rather than absolute. A toss follows physics, and a 2025 study of
+350,757 flips found that a coin lands on the side it started on about 50.8
+percent of the time {cite}`bartos2025coin`. Most analyses still treat the toss as
+aleatoric, because no one measures the launch precisely enough to predict it.
+
+The two kinds call for different fixes in an LLM application
+{cite}`kendall2017uncertainties`. A question with two reasonable readings, such
+as *What is the fee?* when two products have fees, is aleatoric from the model's
+side: retrieval and more training data cannot settle it, but a clarifying
+question to the user can. A question about an event after the model's training
+cutoff is epistemic: retrieval, a tool call, or fine-tuning on newer data can
+remove it. Lowering the temperature removes neither; it only makes the model
+give its most likely answer every time. The section on abstention in Module 2's
+{doc}`../module-2/01-evaluating-llms` shows how to decide when a system should
+ask, retrieve, or decline to answer.
+
+### Intermittent
+
+*Intermittent* means coming and going at intervals, not continuous
+([Merriam-Webster](https://www.merriam-webster.com/dictionary/intermittent)). It
+comes from the Latin *intermittere*, built from *inter-*, between, and *mittere*,
+to send. Unlike the other three words, it describes a pattern in time, not a
+probability. A job that runs every hour on the hour is intermittent and fully
+predictable; a fault that appears only under heavy load is intermittent and hard
+to predict.
+
+The intermittent failures you will meet most often on Amazon Bedrock are
+capacity errors. The troubleshooting guide lists a `ThrottlingException` (HTTP
+429) when a request exceeds your account quotas, and a 503 error when the
+service is temporarily short of capacity. For both, it recommends retries with
+exponential backoff and random jitter {cite}`aws2026bedrockerrors`. These errors
+come and go with traffic, so a request that fails now often succeeds a moment
+later.
+
+Retries handle intermittent failures, and randomness makes the retries work.
+**Exponential backoff** doubles the wait after each failed attempt, up to a cap.
+Backoff alone leaves a problem: clients that failed together retry together, so
+the load still arrives in spikes. **Jitter** breaks up the spikes by drawing each
+wait at random. Marc Brooker's analysis for AWS found that backoff without
+jitter took more calls and more time than the jittered versions
+{cite}`brooker2015backoff`. The retry behavior that the AWS SDKs document uses **full jitter**, which waits
+a random time between zero and the capped backoff {cite}`aws2026sdkretry`.
+
+The code below makes both ideas concrete with no API calls. The first part
+computes how often the best guess wins, and the min-entropy, for a fair die, for
+the next-token distribution from the temperature example at three temperatures,
+and for a uniform 128-bit key. The second part throttles 100 clients at the same
+moment, lets every retry fail, and counts the calls that land in the busiest
+100-millisecond window, with and without full jitter.
+
+```python
+# Best guess, min-entropy, and retry jitter (no API calls)
+import numpy as np
+
+logits = np.array([6.0, 3.5, 3.0, 2.0, 1.5, 1.0, 0.0, -2.0])   # from the temperature example
+
+def softmax(z, temperature):
+    z = np.asarray(z, dtype=float) / temperature
+    e = np.exp(z - z.max())
+    return e / e.sum()
+
+# 1. The best single guess is the most likely outcome; it wins with that outcome's probability.
+print("distribution            best guess wins   min-entropy (bits)")
+for name, top in [("fair die", 1 / 6),
+                  ("next token, T = 0.7", softmax(logits, 0.7).max()),
+                  ("next token, T = 1.0", softmax(logits, 1.0).max()),
+                  ("next token, T = 2.0", softmax(logits, 2.0).max()),
+                  ("uniform 128-bit key", 2.0 ** -128)]:
+    print(f"{name:22} {top:16.3g}   {-np.log2(top):18.2f}")
+
+# 2. 100 clients are throttled at the same moment and every retry fails (the worst case).
+#    Each waits base * 2^attempt seconds, capped at 20, with or without full jitter.
+rng = np.random.default_rng(7)
+base, cap, clients, retries = 1.0, 20.0, 100, 4
+
+def retry_times(jitter):
+    times = []
+    for _ in range(clients):
+        t = 0.0
+        for attempt in range(retries):
+            delay = min(cap, base * 2 ** attempt)
+            t += rng.uniform(0, delay) if jitter else delay
+            times.append(t)
+    return np.array(times)
+
+print()
+for label, jitter in [("no jitter", False), ("full jitter", True)]:
+    t = retry_times(jitter)
+    busiest = np.bincount((t * 10).astype(int)).max()        # calls in the busiest 100 ms window
+    print(f"{label:12} {len(t)} retries over {t.max():5.1f} s   busiest 100 ms window: {busiest:3d} calls")
+```
+
+```text
+distribution            best guess wins   min-entropy (bits)
+fair die                          0.167                 2.58
+next token, T = 0.7               0.954                 0.07
+next token, T = 1.0               0.854                 0.23
+next token, T = 2.0               0.526                 0.93
+uniform 128-bit key            2.94e-39               128.00
+
+no jitter    400 retries over  15.0 s   busiest 100 ms window: 100 calls
+full jitter  400 retries over  13.0 s   busiest 100 ms window:  23 calls
+```
+
+The first block applies the guessing rule from the Random subsection. The best
+guess on a fair die wins one time in six. At temperature 0.7 the next token is
+almost as predictable as a constant, with 0.07 bits of min-entropy, and even at
+temperature 2.0 it carries less than one bit. A uniform 128-bit key carries the
+full 128 bits, so its best guess is no better than any other and almost never
+right.
+
+The second block shows why jitter matters. Without jitter, the 100 clients retry
+in lockstep: all 100 calls land in the same 100-millisecond window, four times
+over, and each spike can trigger the next round of throttling. With full jitter,
+the same 400 retries spread out, and the busiest window holds 23 calls. The last
+retry also comes sooner, because a random wait averages half the full backoff.
+
+In practice the SDK runs this loop for you. Set the retry mode and the attempt
+limit explicitly when you create the client, because the defaults depend on the
+SDK and its version. The AWS SDKs and Tools Reference Guide notes, for example,
+that its updated 2026 retry behavior applies only when you set
+`AWS_NEW_RETRIES_2026=true`, until that behavior becomes the default
+{cite}`aws2026sdkretry`. In Boto3, `total_max_attempts` counts the first request,
+while `max_attempts` in a `Config` object counts only the retries
+{cite}`aws2026boto3retries`.
+
+```python
+import boto3
+from botocore.config import Config
+
+# Standard mode retries throttling and transient errors with exponential backoff and jitter.
+# total_max_attempts=5 means the first request plus up to four retries.
+config = Config(retries={"mode": "standard", "total_max_attempts": 5})
+client = boto3.client("bedrock-runtime", config=config)
+```
+
+Retry only calls that are safe to repeat. A model call that only reads is safe;
+an agent's tool call that sends a payment is not, and Module 3's
+{doc}`../module-3/04-agents` shows how an idempotency key lets a downstream service ignore a duplicate.
+
 ## Best practices in prompt engineering
 
 A handful of practices reliably improve results across models and tasks:
@@ -521,6 +775,12 @@ The points below are the core habits of good prompting.
 - Ranges and defaults differ by model, and the newest reasoning models fix them.
   Tune temperature on your own evaluation set, and do not count on temperature
   zero for repeatability or for preventing hallucination.
+- **Random** means the next outcome is unknown, under any distribution, and
+  **stochastic** is its technical synonym for processes such as generation.
+  **Aleatoric** uncertainty is built into the question and needs a clarifying
+  question; **epistemic** uncertainty yields to retrieval or tools.
+  **Intermittent** failures such as throttling come and go, and retries with
+  exponential backoff and jitter handle them.
 - Follow best practices: be clear, specific, positive, and structured, and expect
   to iterate. Respect each model's required prompt format.
 - **In-context learning**, zero-, one-, and few-shot, adapts the model purely

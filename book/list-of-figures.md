@@ -59,6 +59,9 @@ The Module 1 figures show how models are reached, prompted, and built, along wit
 * - {doc}`module-1/03-prompt-engineering`
   - The four parts of a prompt and the inference parameters that shape the
     response.
+* - {doc}`module-1/03-prompt-engineering`
+  - Random, stochastic, aleatoric, and intermittent, each with an example from a
+    Bedrock application.
 * - {doc}`module-1/04-advanced-prompting-techniques`
   - Chain-of-thought, self-consistency, and tree-of-thought on one question.
 * - {doc}`module-1/05-multimodal-prompting`
