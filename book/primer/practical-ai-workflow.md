@@ -77,7 +77,7 @@ applied to your own knowledge, the same idea formalized as RAG in
 Use the assistant's **custom instructions / personalization** settings to fix your
 communication style once, short, bulleted, no fluff, preferred tone, and to ban
 filler words like "delve" and "moreover." This stops you repeating formatting
-requests and is the personal-settings analogue of a standing system prompt.
+requests and is the personal-settings counterpart of a standing system prompt.
 
 ### 6. Turn workflows into custom assistants
 

@@ -242,7 +242,7 @@ No single tool does everything well, so a common skill is connecting several of 
 
 **What it is:** combining your favorite tools so they run as one system. **When to
 use it:** to build always-on workflows that cut costs and free up your team.
-**Tools:** Notion AI, ClickUp AI, Airtable AI, Zapier AI. The engineering analogue
+**Tools:** Notion AI, ClickUp AI, Airtable AI, Zapier AI. The engineering counterpart
 is composing services with a standard interface, exactly what LangChain provides;
 see {doc}`../module-3/01-langchain-modules`.
 

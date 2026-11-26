@@ -6,9 +6,13 @@ title: "Introduction to Generative AI"
 
 This chapter introduces generative AI and the foundation models behind it. It defines large language models, surveys what they are used for, and introduces Amazon Bedrock, the service every lab in this book uses.
 
-> "Generative models are a key enabler of machine creativity, allowing machines
-> to go beyond what they've seen before and create something new."
-> — Ian Goodfellow
+> We propose a new framework for estimating generative models via an adversarial
+> process, in which we simultaneously train two models: a generative model G that
+> captures the data distribution, and a discriminative model D that estimates the
+> probability that a sample came from the training data rather than G.
+>
+> Ian Goodfellow and colleagues, *Generative Adversarial Networks*, 2014
+> ([arXiv:1406.2661](https://arxiv.org/abs/1406.2661))
 
 ## Why it matters
 
