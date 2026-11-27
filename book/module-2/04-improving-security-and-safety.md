@@ -569,6 +569,68 @@ Keep the table with the code. When you add a tool, a data source, or a model, up
 :class: anim-fig
 ```
 
+### Secure development practices: NIST SP 800-218A
+
+Threat modeling finds what could go wrong; a secure development framework sets the
+practices that prevent it. NIST's **Secure Software Development Framework
+(SSDF)**, SP 800-218, groups such practices into four families: Prepare the
+Organization (PO), Protect the Software (PS), Produce Well-Secured Software (PW),
+and Respond to Vulnerabilities (RV) {cite}`nist2022ssdf`. **SP 800-218A**,
+published on July 26, 2024, is an AI-specific profile of that framework. It adds
+practices, tasks, recommendations, and notes for developing generative AI and
+dual-use foundation models, gives each task a priority of High, Medium, or Low,
+and is meant to be used together with SP 800-218 {cite}`nist2024ssdf218a`. It was
+written for an executive order that was later rescinded, but it remains a final
+NIST publication. The cybersecurity textbook's subsection on
+[NIST SP 800-218A](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#nist-sp-800-218a-the-ssdf-profile-for-generative-ai)
+covers its history and its limits in more detail.
+
+The profile names three audiences: producers of AI models, producers of AI
+systems that use those models, and acquirers of those systems. A Bedrock builder
+is usually the second and the third, and becomes partly the first when it
+customizes a model with its own data. The items that the profile marks as new
+beyond SSDF 1.1 translate directly to that work.
+
+- **PS.1.2 (High): protect training, testing, fine-tuning, and aligning data.**
+  Limit who can change the datasets you use for customization, and keep them
+  versioned so a change is visible. Knowledge base documents are not training
+  data, but the same reasoning protects them.
+- **PS.1.3 (High): protect model weights and configuration data.** Decide who
+  may use, copy, or change a custom model, and grant that access narrowly.
+- **PW.3.1 (High): check data before use.** Look for signs of poisoning, bias,
+  homogeneity, and tampering before a customization job runs.
+- **PW.3.2 (Medium): track provenance.** Record where each dataset came from,
+  when, and in which version, so you can trace a bad model back to its data.
+- **PW.3.3 (Medium): include adversarial samples.** Put attack prompts, such as
+  prompt injection attempts paired with correct refusals, into the fine-tuning
+  and test data.
+- **PO.5.3 (High): monitor the development environment.** Watch how software
+  behaves where you build and train, not only in production.
+
+The profile stops at development. Deploying and operating an AI system is out of
+its scope, so runtime protections such as guardrails, monitoring, and incident
+response come from the rest of this chapter and from the NIST AI Risk Management
+Framework in {doc}`02-foundations-of-responsible-ai`.
+
+#### Check your understanding: SP 800-218A
+
+Try this question before you open the answer. What is NIST SP 800-218A?
+
+- **A.** A list of approved generative AI providers for US agencies
+- **B.** A testing tool for prompt injection vulnerabilities
+- **C.** A technical standard for encrypting model weights when stored at rest
+- **D.** An AI-specific profile of the Secure Software Development Framework
+
+```{admonition} Answer
+:class: dropdown
+**D.** SP 800-218A adds practices for generative AI and dual-use foundation models
+to NIST's SSDF and is used together with SP 800-218. It approves no providers, so
+A is wrong. It is a set of development practices, not a tool, so B is wrong. It
+does require protecting model weights from unauthorized access and modification
+(PS.1.3), but it states that outcome and leaves the mechanism, such as access
+control, encryption, or signing, to you, so C is wrong.
+```
+
 ### Assessing Bedrock as a vendor
 
 Using Bedrock makes AWS, and the provider of the model you choose, your AI vendors. The cybersecurity textbook asks what a SOC 2 report tells you about an AI vendor: it attests to the vendor's controls over a period, not to model risks such as bias or prompt injection ([responsible AI, risk assessment, and human oversight](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#responsible-ai-risk-assessment-and-human-oversight)). On AWS the evidence looks like this.
@@ -907,6 +969,10 @@ The points below summarize the attacks and defenses in this chapter.
   on your side of shared responsibility.
 - A **SOC 2 report** and ISO/IEC 42001 certification cover the vendor's
   controls and AI management, not model behavior; evaluate the model yourself.
+- **NIST SP 800-218A** is an AI-specific profile of the Secure Software
+  Development Framework: protect training data and model weights, check and trace
+  data before use, and add adversarial samples. Runtime controls are out of its
+  scope.
 - A **model card** describes what a model is; a **system card** describes how a
   deployed system behaves. Bedrock model cards are reference pages, so read the
   provider's system card or AWS AI Service Card for risks, and write the system
