@@ -109,6 +109,8 @@ The Module 2 figures cover evaluation, governance, and the controls that make a 
   - Threat modeling a Bedrock application, with one threat and one control per
     component.
 * - {doc}`module-2/04-improving-security-and-safety`
+  - Model card versus system card for a Bedrock application.
+* - {doc}`module-2/04-improving-security-and-safety`
   - Concentration risk: four processes on one model, and the same processes behind
     the Converse API with a tested fallback.
 * - {doc}`module-2/04-improving-security-and-safety`

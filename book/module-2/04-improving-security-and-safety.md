@@ -579,6 +579,90 @@ Using Bedrock makes AWS, and the provider of the model you choose, your AI vendo
 
 Together these answer different questions: the reports and certificates show that the platform is run under audited controls, and the model documentation and your evaluations show whether the model is fit for your use.
 
+### Model cards and system cards
+
+The vendor checklist above ends by telling you to read the provider's model card
+or system card, and the two documents answer different questions. A **model
+card** describes what a model is. Mitchell and colleagues proposed it in 2019 as
+a short record with nine sections, from model details and intended use to
+results broken down by group and a list of caveats
+{cite}`mitchell2019modelcards`. A **system card** describes how a deployed
+system that contains the model behaves. Meta introduced the idea in 2022,
+arguing that a model is usually one part of a larger system of models and other
+technology, so a model card alone cannot explain what a product does
+{cite}`meta2022systemcards`. The cybersecurity textbook's subsection on
+[model cards and system cards](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#model-cards-and-system-cards-the-model-versus-the-deployed-system)
+traces both formats and how a security reviewer reads them.
+
+```{image} ../_static/figures/bk_model_system_cards.*
+:alt: Two panels. Left, a model card documents the model itself, its training data, its evaluations broken down by group, its intended and out-of-scope uses, and its limitations and risks, and is written by the model's developer. Right, a system card documents a Bedrock application, a pipeline from user input through a guardrail input check, a knowledge base and tools, the Bedrock model, and a guardrail output check to the response, surrounded by monitoring and logs, human oversight, policies and guardrails, and deployment risks, and is written by you for your application.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+On Bedrock you will meet four kinds of card, and the name on a card does not
+tell you which kind it is.
+
+- **Bedrock model cards.** The model cards in the Bedrock User Guide are
+  reference pages. They list each model's input and output modalities,
+  supported APIs and endpoints, context window, and lifecycle details such as
+  the Legacy period and EOL date {cite}`aws2026modelcards`. Use them to plan an
+  integration or a migration, not to judge safety.
+- **Provider system cards.** Developers of frontier models publish safety
+  documentation. OpenAI's GPT-4 System Card of March 2023 analyzed the system
+  around the model, including usage policies and monitoring
+  {cite}`openai2023gpt4systemcard`, and Anthropic describes its system cards as
+  documenting the capabilities, safety evaluations, and deployment decisions
+  for Claude models {cite}`anthropic2026systemcards`. Read these for the risks
+  the developer tested.
+- **AWS AI Service Cards.** For Amazon's own services and models, AWS publishes
+  AI Service Cards in four sections: basic concepts, intended use cases and
+  limitations, responsible AI design considerations, and deployment and
+  performance optimization best practices {cite}`aws2022servicecards`. AWS
+  added cards for Amazon Nova models in December 2024.
+- **Hugging Face model cards.** An open-weight model usually comes with a
+  README.md file on the Hugging Face Hub, whose YAML metadata records the
+  license, the training datasets, the base model, and evaluation results
+  {cite}`hf2026modelcards`.
+
+None of these cards describes your application. A provider's card stops at the
+provider's boundary, and your prompts, knowledge base, agent tools, guardrails,
+reviewers, and logs are yours. Write a short system card for each application
+you build: what it is for and not for, which model and version it calls, which
+guardrails and tools it uses, who reviews its output, what you measured, such as
+the guardrail block rate, the jailbreak success rate on your red-team set, and
+the groundedness scores of {doc}`01-evaluating-llms`, and how you handle
+incidents. Keep it next to the code and update it whenever the model or a
+safeguard changes. Regulation is moving the same way. Under the EU AI Act,
+providers of general-purpose AI models keep technical documentation, part of
+which goes to the downstream providers that build on the model, and the
+General-Purpose AI Code of Practice of July 2025 offers a Model Documentation
+Form for it {cite}`eu2025gpaicode`.
+
+#### Check your understanding: cards
+
+Try this question before you open the answer. You build a customer-service
+assistant on a Bedrock model and add a knowledge base, agent tools, and Bedrock
+Guardrails. Which document best describes how the assistant behaves in use?
+
+- **A.** The provider's model card
+- **B.** A system card for the assistant that covers the model, the knowledge
+  base, the tools, the guardrails, monitoring, and oversight
+- **C.** The datasheet for the model's training data
+- **D.** The AWS SOC 2 report
+
+```{admonition} Answer
+:class: dropdown
+**B.** The assistant's behavior depends on everything around the model: what the
+knowledge base returns, what the tools can do, what the guardrails block, and who
+reviews the output. Only a system card for the assistant covers all of that, and
+you are the one who can write it. The provider's model card describes the model
+alone, a datasheet describes a dataset, and the SOC 2 report, as the vendor
+section above explains, attests to AWS's controls rather than to how your
+application behaves.
+```
+
 ### Concentration risk: many processes, one model
 
 The same Bedrock model can summarize documents, answer support chats, triage
@@ -692,7 +776,7 @@ model you host yourself, at the cost of running and securing it. Scale the
 fallback to how critical the process is: a convenience feature can wait for the
 provider to recover.
 
-#### Check your understanding
+#### Check your understanding: concentration risk
 
 Try this question before you open the answer. Several critical business
 processes all depend on one externally hosted foundation model. Which risk does
@@ -823,6 +907,10 @@ The points below summarize the attacks and defenses in this chapter.
   on your side of shared responsibility.
 - A **SOC 2 report** and ISO/IEC 42001 certification cover the vendor's
   controls and AI management, not model behavior; evaluate the model yourself.
+- A **model card** describes what a model is; a **system card** describes how a
+  deployed system behaves. Bedrock model cards are reference pages, so read the
+  provider's system card or AWS AI Service Card for risks, and write the system
+  card for your own application.
 - **Concentration risk** arises when several critical processes depend on one
   model or provider, so one outage, change, or flaw disrupts them all at once.
   Make the model a setting with the Converse API, keep a tested fallback from
