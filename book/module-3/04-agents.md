@@ -393,6 +393,56 @@ Policy and Evaluations were announced in preview on December 2, 2025 and reached
 Isolation settings deserve testing, not trust. In March 2026, researchers at BeyondTrust disclosed that the Code Interpreter's Sandbox network mode still let DNS queries out, enough to run commands and move data over DNS. AWS fixed the DNS path in April 2026 and recommends VPC mode when you need full control of traffic. The companion textbook explains this case and the output-side controls that contain an agent ([Section 17.13, The Output Channel as an Exfiltration Path](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#the-output-channel-as-an-exfiltration-path)).
 ```
 
+## Identity posture for agents: ISPM on AWS
+
+Every agent you deploy adds identities: an IAM execution role, an AgentCore workload identity, OAuth tokens for the services it calls, and API keys for its tools. Over months, some of them stop being used, lose their owners, or hold more access than the agent needs. **Identity security posture management (ISPM)** is the practice, and the product category, of watching all of these identities continuously. Gartner's Hype Cycle for Digital Identity, 2026 describes it as a discipline that continuously assesses, monitors, and manages IAM policies and configurations ([as quoted by Delinea](https://delinea.com/blog/identity-security-posture-management-in-the-agentic-era)). The figure shows the loop as it applies to a Bedrock account.
+
+```{image} ../_static/figures/bk_ispm_loop.*
+:alt: Identity security posture management for a Bedrock account as a continuous loop. Step 1 discovers IAM users and roles and agent and tool identities. Step 2 correlates trust policies, role chains, and effective access into a graph. Step 3 finds weak posture such as unused roles and keys, unused actions, and missing MFA. Step 4 ranks findings by paths to models, data, and stored OAuth tokens. Step 5 fixes findings with guardrails, automating only low-risk, reversible hygiene. Step 6 verifies that nothing broke and scans again. Step 7 compares four tools. Identity governance asks who should have access, ISPM asks whether posture is risky now, identity threat detection and response asks whether an identity attack is under way, and AI security posture management asks whether AI models and data are exposed.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+### What AWS gives you
+
+Two AWS services supply most of the raw material for this loop on a Bedrock account.
+
+- **AgentCore Identity** keeps an agent identity directory. Each agent identity gets its own ARN inside a directory hierarchy, so a policy can target one agent or a whole group of them ([AWS documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/key-features-and-benefits.html)). Its token vault stores OAuth 2.0 access and refresh tokens, API keys, and client secrets, encrypted with AWS KMS keys, including customer managed keys ([AWS Security Blog](https://aws.amazon.com/blogs/security/securing-ai-agents-with-amazon-bedrock-agentcore-identity)). An agent reaches the vault with a workload access token that carries both its own identity and the identity of the user it acts for, so the directory doubles as an inventory of which agent holds which credential for whom.
+- **IAM Access Analyzer** can run an unused access analyzer that reports IAM roles nobody assumed, access keys and passwords nobody used, and services and actions a role or user never called. You choose a tracking period from 1 to 365 days; the default is 90 ([AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-create-unused.html)). For unused permissions it proposes a replacement policy, and it charges per IAM role and user analyzed each month ([AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-findings.html)).
+
+Commercial ISPM products add what these services do not: one view across AWS, your identity provider, and SaaS applications; attack path analysis across those systems; and discovery of agents built on other platforms. Much of what vendors call AI in these products is graph analysis, peer-group statistics, or language model summaries, so ask which one a finding came from. The companion textbook separates these techniques and adds a worked posture scan ([Identity Security Posture Management](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#identity-security-posture-management-watching-every-identity-at-once)).
+
+### Why agent tokens need posture management
+
+The 2025 Salesloft Drift campaign is the case to remember. Attackers used stolen OAuth and refresh tokens belonging to Drift, an AI chat agent connected to customers' Salesforce instances, to export large volumes of data from numerous instances between August 8 and at least August 18, 2025. They then searched the stolen records for secrets such as AWS access keys ([Google Threat Intelligence Group](https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift)). No Salesforce vulnerability was involved; the access had been granted to a third party, and the attackers used it. Two lessons carry over directly. An agent's tokens are as valuable as the data behind them, and secrets pasted into tickets or records that an agent can read extend every attack path that passes through that agent. The OWASP Top 10 for Agentic Applications lists this class of failure as ASI03, Identity and Privilege Abuse.
+
+### A posture checklist for Bedrock agents
+
+These steps keep agent identities from drifting into risk.
+
+1. **One identity per agent.** Give each agent its own workload identity and execution role. Never let it run on a person's credentials or a role shared with other agents.
+2. **An owner for every identity.** Record the person accountable for each agent's purpose, permissions, and retirement, for example in a tag.
+3. **A tracking window longer than the slowest job.** Set the unused access analyzer's tracking period longer than the longest interval between legitimate runs, so a quarterly job does not look unused.
+4. **Narrow, vaulted tokens.** Request the narrowest OAuth scopes, keep tokens in the AgentCore token vault, and never place them in prompts, code, or agent memory.
+5. **Exposure first.** Fix first the identities that can reach model invocation, training data, knowledge bases, or stored tokens.
+6. **Guardrails on automation.** Automate only reversible, low-risk fixes, disable before you delete, and send anything on a path to sensitive data to its owner for approval.
+7. **Clean retirement.** When an agent is retired, revoke its tokens, delete its workload identity, and remove its execution role.
+
+#### Check your understanding: identity posture for agents
+
+Try this question before you open the answer. IAM Access Analyzer reports two findings. A Bedrock agent's execution role has never used its `s3:DeleteObject` permission on the training data bucket. A role created for an old proof of concept has not been assumed in 200 days, has no owner tag, and can only read a public sample bucket. An ISPM tool offers to delete both automatically. What is the best response?
+
+- **A.** Approve both deletions, because unused access is always safe to remove
+- **B.** Wait for an identity threat detection alert, because posture findings matter only once an attack begins
+- **C.** Ignore the agent role, because it has only one finding
+- **D.** Remove the agent's unused delete permission through a reviewed policy change, and disable the stale role now and delete it later
+
+```{admonition} Answer
+:class: dropdown
+**D.** The agent's role sits on a path to the training data, so the change goes through review even though it has a single finding, which rules out C. The stale role is dormant, unowned, and reaches nothing sensitive, which makes it low-risk hygiene that can be disabled reversibly at once. A skips the guardrails that keep an automated fix from breaking a job that runs rarely, and B confuses posture management with threat detection, which works on attacks already under way.
+```
+
 ## In the news
 
 Agents are the most active frontier in AI. **Agentic AI** has expanded into coding
@@ -431,5 +481,8 @@ The points below summarize what agents add and how to keep them safe and reliabl
   is stateless. Tool descriptions are untrusted input.
 - **AgentCore** runs and governs agents built with any framework; its Policy
   service enforces tool rules at the gateway, outside the model.
+- **Identity posture** decays: give each agent its own identity and owner, keep
+  its tokens in a vault, find unused access with IAM Access Analyzer, and fix
+  first what reaches sensitive data.
 
 Finally, we extend applications across modalities.

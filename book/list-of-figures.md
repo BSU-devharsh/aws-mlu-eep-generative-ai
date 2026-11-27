@@ -156,6 +156,9 @@ The Module 3 figures show how applications combine models with chains, memory, r
 * - {doc}`module-3/04-agents`
   - Separating an agent that proposes a payment from the service that approves
     it.
+* - {doc}`module-3/04-agents`
+  - The identity security posture management loop for a Bedrock account, and
+    where ISPM fits beside IGA, ITDR, and AI-SPM.
 * - {doc}`module-3/05-multimodal-applications`
   - A multimodal agent that looks at a photo, retrieves the manual, and walks
     the user through a fix.
