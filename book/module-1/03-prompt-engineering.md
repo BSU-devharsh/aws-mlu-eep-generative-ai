@@ -438,6 +438,18 @@ cybersecurity textbook's section on
 [true, pseudo, and cryptographically secure randomness](https://book.com.puter.tips/chapters/02_cryptography/chapter02.html#randomness-true-pseudo-and-cryptographically-secure)
 covers.
 
+Temperature changes the peak by the same rule that governs every distribution.
+The probabilities always add up to 1, so a narrower distribution must have a
+taller peak. Lowering the temperature from 1.0 to 0.7 raises *Paris* from 0.854
+to 0.954, and raising it to 2.0 lowers the peak to 0.526, as the earlier table
+shows. A next-token probability can never exceed 1. A continuous quantity, such
+as a latency or a similarity score, has a density instead, and its peak can
+rise above 1 when the values are packed into a range narrower than one unit,
+because only the area under the curve must equal 1. The cybersecurity
+textbook's section on
+[peak density](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#peak-density-how-high-a-distribution-rises)
+works through the normal, uniform, exponential, and count distributions.
+
 ### Stochastic
 
 *Stochastic* means random, specifically involving a random variable, and more
