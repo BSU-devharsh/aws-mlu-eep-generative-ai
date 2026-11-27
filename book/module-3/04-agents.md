@@ -474,6 +474,30 @@ Two AWS services supply most of the raw material for this loop on a Bedrock acco
 
 Commercial ISPM products add what these services do not: one view across AWS, your identity provider, and SaaS applications; attack path analysis across those systems; and discovery of agents built on other platforms. Much of what vendors call AI in these products is graph analysis, peer-group statistics, or language model summaries, so ask which one a finding came from. The companion textbook separates these techniques and adds a worked posture scan ([Identity Security Posture Management](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#identity-security-posture-management-watching-every-identity-at-once)).
 
+### Three postures for one Bedrock agent
+
+ISPM is one of three posture tools that look at the same agent from different sides, because an agent is an AI asset, a non-human identity, and a piece of software at once.
+
+- **AI security posture management (AI-SPM)** looks at the AI layer: which foundation model the agent calls, which knowledge bases and data sources feed its prompts, whether a guardrail is attached, and which tools it can invoke. Wiz, which sells AI-SPM, describes it as discovering managed services such as Amazon Bedrock alongside self-hosted models ([Wiz](https://www.wiz.io/academy/what-is-ai-security-posture-management-ai-spm)).
+- **ISPM** looks at the agent's execution role, workload identity, and stored tokens, as described above.
+- **Application security posture management (ASPM)** looks at the code: the Lambda functions behind action groups, the tool servers behind a gateway, and their dependencies. It gathers findings from code scanning, dependency analysis, infrastructure-as-code scanning, and the build pipeline into one ranked view ([CrowdStrike](https://www.crowdstrike.com/en-gb/cybersecurity-101/application-security/application-security-posture-management-aspm/)).
+
+Risk often appears only where two views meet. A prompt injection weakness that AI-SPM flags matters most when ISPM shows that the same agent holds a token with write access to customer records. Two corrections help when reading vendor material. ISPM does not replace identity and access management: IAM covers both authentication and authorization, while ISPM measures whether the access that already exists is safe, and watching live sessions for an attack is the job of identity threat detection and response ([Qualys](https://blog.qualys.com/product-tech/2026/09/10/what-is-ispm-vs-iam-pam-iga-idaas)). And new acronyms often come from single vendors. SailPoint's A-ISPM means Autonomous ISPM, AI automation applied to identity posture, not posture for AI. OX Security calls its platform an AI-native application protection platform (AINAPP) and announced in July 2026 that it was first in that category ([CIO Influence](https://cioinfluence.com/?p=400486)), while Wiz introduced an AI Application Protection Platform (AI-APP) in March 2026 as the evolution of cloud-native application protection ([Wiz](https://www.wiz.io/it-it/blog/introducing-wiz-ai-app)). Whatever the name, ask which assets a product discovers, which signals it correlates, and which actions it can take.
+
+#### Check your understanding: three postures
+
+Try this question before you open the answer. A Bedrock agent answers from a knowledge base with no guardrail attached, its execution role can write to the customer table, and one of its Lambda tools uses a library with a known critical vulnerability. Which tool category is built to flag each finding?
+
+- **A.** ISPM flags all three, because each finding involves the agent's identity
+- **B.** AI-SPM flags the missing guardrail, ISPM flags the write-capable role, and ASPM flags the vulnerable library
+- **C.** ASPM flags all three, because the agent is an application
+- **D.** Identity threat detection and response flags all three, because each is an attack in progress
+
+```{admonition} Answer
+:class: dropdown
+**B.** Each finding belongs to a different layer: the guardrail is AI configuration, the role is an identity permission, and the library is application code. A and C stretch one tool over layers it does not inspect, and D confuses posture with detection, since none of these findings is an attack under way. Together they also form one attack path, which is why the three views work best when correlated.
+```
+
 ### Why agent tokens need posture management
 
 The 2025 Salesloft Drift campaign is the case to remember. Attackers used stolen OAuth and refresh tokens belonging to Drift, an AI chat agent connected to customers' Salesforce instances, to export large volumes of data from numerous instances between August 8 and at least August 18, 2025. They then searched the stolen records for secrets such as AWS access keys ([Google Threat Intelligence Group](https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift)). No Salesforce vulnerability was involved; the access had been granted to a third party, and the attackers used it. Two lessons carry over directly. An agent's tokens are as valuable as the data behind them, and secrets pasted into tickets or records that an agent can read extend every attack path that passes through that agent. The OWASP Top 10 for Agentic Applications lists this class of failure as ASI03, Identity and Privilege Abuse.
