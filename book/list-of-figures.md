@@ -111,6 +111,8 @@ The Module 2 figures cover evaluation, governance, and the controls that make a 
 * - {doc}`module-2/04-improving-security-and-safety`
   - Model card versus system card for a Bedrock application.
 * - {doc}`module-2/04-improving-security-and-safety`
+  - Crypto-shredding Bedrock data with a customer managed key, and how it fails.
+* - {doc}`module-2/04-improving-security-and-safety`
   - Concentration risk: four processes on one model, and the same processes behind
     the Converse API with a tested fallback.
 * - {doc}`module-2/04-improving-security-and-safety`

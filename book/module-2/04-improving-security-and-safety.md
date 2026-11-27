@@ -911,6 +911,99 @@ aws bedrock put-account-data-retention --mode none
 
 A common pattern keeps production accounts at `none`, enforced across the organization with a service control policy, and runs any experiment that needs a retaining model in its own Bedrock project ([AWS Security Blog](https://aws.amazon.com/blogs/security/enforce-zero-data-retention-on-amazon-bedrock-with-bedrock-projects-and-service-control-policies/)). The companion textbook places provider retention among the other controls for AI data, from anonymization to deletion ([Protecting AI Data](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#protecting-ai-data-anonymization-synthetic-data-and-unlearning)).
 
+### Deleting Bedrock data for good: crypto-shredding with your own key
+
+Retention settings decide what Bedrock keeps. Your own resources, such as custom
+models, knowledge bases, agents, and the training data in Amazon S3, need a
+deletion plan too, and in the cloud you cannot shred a disk. The answer is
+**cryptographic erase**, also called **crypto-shredding**: destroy the key, not
+the data. NIST SP 800-88 Revision 2 defines it as a purge technique that
+sanitizes the keys protecting encrypted data, so that the decrypted data cannot
+be recovered {cite}`nist2025sp80088r2`. NIST's frequently asked questions for that
+guideline note that in virtual and cloud environments it is often the only
+practical purge method, and they tell cloud customers to confirm how their keys
+are managed and destroyed {cite}`nist2026sp80088faq`. The cybersecurity
+textbook's subsection on
+[cryptographic erase](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#cryptographic-erase-destroy-the-key-not-the-data)
+covers drives, standards, and failures in depth.
+
+```{image} ../_static/figures/bk_crypto_erase.*
+:alt: Four numbered steps. First, encrypt from creation with a customer managed key, covering the custom model, knowledge base, agent, and S3 data. Second, find every copy, including other keys, replicas, logs, and exports. Third, schedule key deletion, after which AWS KMS waits 7 to 30 days and then deletes the key. Fourth, verify and record that the resources no longer decrypt, keeping the CloudTrail log. A fifth panel lists three failures, a resource created with an AWS owned key you cannot delete, a copy encrypted under a different key that survives, and data keys a service already holds in memory.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+Crypto-shredding only works for data you encrypted under a key you control from
+the start, and Bedrock's defaults do not do that. Bedrock encrypts custom models
+with AWS owned keys unless you choose a customer managed key when you create the
+customization job {cite}`aws2026bedrockcustomencryption`, and you can also choose
+your own key for agents, knowledge bases, and the S3 buckets that hold training
+data and knowledge base sources {cite}`aws2026bedrockdataencryption`. An AWS owned
+key is not yours to delete, so a model created under one cannot be crypto-shredded
+later. Make the choice at creation, the cloud version of NIST's rule that the data
+must be encrypted from the first write.
+
+Deleting the key is deliberately slow. AWS KMS makes you schedule the deletion
+with a waiting period of 7 to 30 days, 30 by default. During that period the key
+cannot be used and you can still cancel; afterward AWS KMS deletes the key and its
+key material, and the data encrypted under it becomes unrecoverable. You can delete
+only customer managed keys, not AWS managed or AWS owned keys
+{cite}`aws2026kmsdelete`. Three gaps can leave data readable afterward.
+
+- **Copies under other keys.** An export, a log, a downloaded file, or a second
+  bucket encrypted under a different key survives. Inventory copies first.
+- **Replicas.** For a multi-Region key with replicas, the waiting period starts
+  only when the last replica is deleted, because each replica can still decrypt.
+- **Data keys in use.** Scheduling deletion might not immediately affect data keys
+  that a service already holds, so delete the resources first, then the key.
+
+Use one key per dataset, project, or tenant, so that you can shred one without
+touching the others. AWS KMS records both the scheduling and the actual deletion
+in AWS CloudTrail, and a CloudWatch alarm can warn you if anything tries to use the
+key during the waiting period, which is your last chance to find a forgotten
+dependency {cite}`aws2026kmsdelete`.
+
+```python
+import boto3
+
+kms = boto3.client("kms")
+
+# 1. At creation: one customer managed key per project, used for everything the project stores.
+key_arn = kms.create_key(Description="Project X: training data and custom model")["KeyMetadata"]["Arn"]
+# Pass key_arn as customModelKmsKeyId when you create the model customization job,
+# and use it for SSE-KMS on the S3 bucket that holds the training data.
+
+# 2. At end of life, after deleting the resources and confirming no copies remain
+#    under other keys: schedule deletion. The key is unusable at once and is
+#    destroyed, irreversibly, when the waiting period ends.
+kms.schedule_key_deletion(KeyId=key_arn, PendingWindowInDays=30)
+```
+
+#### Check your understanding: cryptographic erase
+
+Try this question before you open the answer. When is cryptographic erase a
+valid purge method?
+
+- **A.** Only when the drive has first been overwritten three times with random
+  data
+- **B.** Only for magnetic hard drives that have also been degaussed beforehand
+- **C.** When all data was encrypted from the first write and every key copy is
+  verifiably destroyed
+- **D.** Whenever a drive supports encryption, even if encryption was switched on
+  after data had been written
+
+```{admonition} Answer
+:class: dropdown
+**C.** Cryptographic erase relies on there being no plaintext on the media and no
+surviving copy of the key. Overwriting and degaussing are separate sanitization
+techniques, not preconditions, and degaussing works only on magnetic media. A
+drive or service that supports encryption does not qualify on that basis alone:
+data written before encryption was turned on stays readable. On Bedrock the same
+rule means choosing your own key when you create a resource, and deleting every
+copy before you schedule the key's deletion.
+```
+
 ### Bounding AI inside security systems
 
 When AI becomes part of a security system, its own account of what it did is
@@ -969,6 +1062,9 @@ The points below summarize the attacks and defenses in this chapter.
   on your side of shared responsibility.
 - A **SOC 2 report** and ISO/IEC 42001 certification cover the vendor's
   controls and AI management, not model behavior; evaluate the model yourself.
+- **Crypto-shredding** deletes data by destroying its key. On Bedrock it works only
+  for resources you encrypted with your own customer managed key from creation,
+  after every copy is gone; AWS KMS deletes a key after a 7 to 30 day wait.
 - **NIST SP 800-218A** is an AI-specific profile of the Secure Software
   Development Framework: protect training data and model weights, check and trace
   data before use, and add adversarial samples. Runtime controls are out of its
