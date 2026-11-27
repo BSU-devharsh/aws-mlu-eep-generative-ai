@@ -96,6 +96,9 @@ The Module 2 figures cover evaluation, governance, and the controls that make a 
 * - {doc}`module-2/02-foundations-of-responsible-ai`
   - EU AI Act Article 50 transparency duties versus Article 15 requirements for
     high-risk systems.
+* - {doc}`module-2/02-foundations-of-responsible-ai`
+  - The EU AI Act Article 5(1)(c\) test for prohibited social scoring, and what
+    stays legal but regulated.
 * - {doc}`module-2/03-dimensions-of-responsible-ai`
   - The eight dimensions of responsible AI.
 * - {doc}`module-2/04-improving-security-and-safety`

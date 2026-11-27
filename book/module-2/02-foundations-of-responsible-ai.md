@@ -292,6 +292,60 @@ Article 15 binds the provider, which shows compliance in a conformity assessment
 
 Both articles can apply to one application. A hiring assistant built on Bedrock is high-risk under Annex III, so Article 15 governs its accuracy and security, and its chat interface must still tell applicants that they are talking to AI under Article 50(1). A marketing image generator is not high-risk, so it has no Article 15 duties, but its provider must mark its images under Article 50(2). The companion textbook covers both articles in more depth ([Article 50 and Article 15](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#article-50-and-article-15-transparency-versus-accuracy-robustness-and-cybersecurity)).
 
+## Social scoring: the Article 5 line for Bedrock apps
+
+Article 50 and Article 15 regulate systems that may be built. Article 5 lists practices that may not be built at all, and social scoring is the one a generative AI team is most likely to drift into by accident. A foundation model can read support chats, reviews, or social media posts and return a rating, so a score built from data that was collected for a different purpose takes only a prompt. This section explains where the EU AI Act draws the line and how to stay on the right side of it. The figure below walks through the test.
+
+```{image} ../_static/figures/bk_social_scoring.*
+:alt: A decision flow for Article 5(1)(c) of the EU AI Act. Step 1, the system scores people over time from social behavior or personal or personality traits. Step 2, the score leads to worse treatment. Step 3, either test is enough, an unrelated context where data from one setting is used against the person in another, or treatment out of proportion to the behavior or its gravity. Step 4, if so, the practice has been prohibited since February 2, 2025 for public and private actors. Step 5, if neither test is met, the score is not banned but still regulated, since credit scoring is high-risk under Annex III with duties from December 2, 2027 and GDPR Article 22 limits decisions based solely on an automated score. Step 6 compares a banned score, the tone of a customer's support chats used to deny them a loan, with a regulated one, a loan assistant that scores creditworthiness from financial data.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+### The test in Article 5(1)(c\)
+
+Article 5(1)(c\) bans placing on the market, putting into service, or using an AI system that evaluates or classifies people over a certain period, based on their social behavior or on known, inferred, or predicted personal or personality characteristics, when the resulting score leads to detrimental or unfavorable treatment in either of two ways {cite}`eu2024aiact`.
+
+1. **Unrelated context.** The treatment happens in a social context unrelated to the one where the data was generated or collected.
+2. **Out of proportion.** The treatment is unjustified or disproportionate to the behavior or its gravity.
+
+One of the two is enough. The ban has applied since February 2, 2025, and breaking it can cost up to 35 million euros or 7 percent of worldwide annual turnover, the Act's highest tier of fines. The Commission's guidelines on prohibited practices, published on February 4, 2025, confirm that the ban applies whether a public body or a private company provides or uses the system {cite}`ec2025prohibitedguidelines,fpf2026socialscoring`.
+
+Many summaries still say the ban covers only public authorities. That was the Commission's 2021 proposal, which banned social scoring by or on behalf of public authorities that judged people's trustworthiness {cite}`ec2021aiactproposal`. The Council extended the ban to private actors in its compromise text of November 2021, and the enacted Act keeps that reach: its Recital 31 warns that social scoring by public or private actors may lead to discriminatory outcomes and the exclusion of certain groups.
+
+### What stays legal, and what still applies
+
+Scoring itself is not banned. A lender's credit score built from relevant financial data falls outside Article 5(1)(c\) as long as the treatment it leads to is justified and proportionate {cite}`fpf2026socialscoring`. Such a system is high-risk instead: AI that evaluates creditworthiness or sets a credit score is listed in Annex III, so Article 15 and the other high-risk duties apply to it from December 2, 2027 {cite}`eu2026omnibus`. Data protection law applies on top. In SCHUFA, the Court of Justice of the European Union (CJEU) held in 2023 that a credit agency's automated score counts as a decision under Article 22 of the General Data Protection Regulation (GDPR) when the lender draws strongly on it to grant or refuse credit {cite}`cjeu2023schufa`. In Dun & Bradstreet Austria in 2025, the same court held that a person refused a contract on the strength of an automated credit assessment may require an explanation of the procedure and principles actually applied, under GDPR Article 15(1)(h); handing over the algorithm alone is not enough {cite}`cjeu2025dnb`.
+
+The difference between the two cases in the figure is the source and use of the data. A loan assistant that rates creditworthiness from income, debts, and repayment history is high-risk and must meet those duties. The same assistant, asked to downgrade applicants whose support chats sound rude, uses data from one context to treat people worse in another, which is exactly what Article 5(1)(c\) prohibits.
+
+### Designing a Bedrock application that scores people
+
+When a Bedrock application rates, ranks, or classifies people, a few design rules keep it reviewable.
+
+1. **Inventory the scores.** List every model output that rates or classifies a person or a group, including risk flags, tiers, and segments, not only numeric scores.
+2. **Limit inputs by purpose.** Pass the model only the fields that belong to the decision, and record where each one was collected. Retrieval that pulls a customer's whole history into the prompt can bring in data from unrelated contexts without anyone deciding to.
+3. **Match the consequence to the behavior.** Write down what each score triggers and check that the response fits the behavior it measures.
+4. **Watch for proxies.** Postcodes, names, language, and nationality can stand in for protected characteristics. The Dutch childcare benefits scandal, in which the tax authority used dual nationality as a fraud risk indicator, ended in a 2.75 million euro fine in December 2021 {cite}`iapp2021dutchdpa`.
+5. **Keep it explainable and contestable.** Log the inputs and the prompt version behind each score so that you can explain the procedure and principles applied, and put a person with real authority in the loop where GDPR Article 22 requires it.
+
+The companion textbook traces the Chinese Social Credit System, the Dutch SyRI ruling, and the case law in more depth ([Social Scoring: Where the EU AI Act Draws the Line](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#social-scoring-where-the-eu-ai-act-draws-the-line)).
+
+#### Check your understanding: social scoring
+
+Try this question before you open the answer. A rental platform in the EU uses an AI model to score applicants from their restaurant reviews and social media activity, and rejects those with low scores. Under the EU AI Act, how is this best classified?
+
+- **A.** Allowed, because the ban on social scoring covers only public authorities
+- **B.** Prohibited social scoring, because data from unrelated social contexts leads to detrimental treatment
+- **C.** High-risk credit scoring that needs only a conformity assessment
+- **D.** Outside the Act, because the platform is a private company
+
+```{admonition} Answer
+:class: dropdown
+**B.** Restaurant reviews and social media posts were created in contexts that have nothing to do with renting a home, and a rejection is detrimental treatment, so the unrelated-context test in Article 5(1)(c\) is met. A is the 2021 draft, not the enacted Act, which covers public and private actors alike, so D is wrong for the same reason. C does not fit because this is not a creditworthiness assessment built from financial data, and no conformity assessment can make a prohibited practice lawful.
+```
+
 ## In the news
 
 Responsible AI has moved from voluntary principle to emerging regulation, with
@@ -316,5 +370,8 @@ The points below summarize the foundations that the next two chapters build on.
 - In the EU AI Act, **Article 50** requires disclosure and machine-readable marking of AI
   output at any risk level, while **Article 15** requires accuracy, robustness, and
   cybersecurity from high-risk systems.
+- **Social scoring** is banned under Article 5(1)(c\) for public and private actors
+  when a score leads to worse treatment in an unrelated context or out of proportion
+  to the behavior; credit scoring from relevant financial data is high-risk instead.
 
 Next, we examine each responsible-AI dimension in detail.

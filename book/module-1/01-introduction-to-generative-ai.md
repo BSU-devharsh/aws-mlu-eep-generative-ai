@@ -112,7 +112,7 @@ and creating synthetic data for testing.
 ```{admonition} Worked example: from task to pattern
 :class: note
 Suppose a retailer wants to (a) answer customer questions, (b) summarize product
-reviews, and (c) write product descriptions. Rather than building three separate
+reviews, and (c\) write product descriptions. Rather than building three separate
 ML systems, all three map onto one LLM through different prompts: a *chatbot*
 prompt, a *summarization* prompt, and a *text-generation* prompt. Recognizing
 which pattern a business problem fits is the first design skill in generative AI.
