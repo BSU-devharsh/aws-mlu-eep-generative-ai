@@ -579,6 +579,148 @@ Using Bedrock makes AWS, and the provider of the model you choose, your AI vendo
 
 Together these answer different questions: the reports and certificates show that the platform is run under audited controls, and the model documentation and your evaluations show whether the model is fit for your use.
 
+### Concentration risk: many processes, one model
+
+The same Bedrock model can summarize documents, answer support chats, triage
+claims, and help write code, so several critical business processes can end up
+depending on one externally hosted foundation model. That creates
+**concentration risk**: one outage, change, or flaw in that model or its
+provider can disrupt every process at once. Financial regulators treat it as a
+question of dependence. The EU's Digital Operational Resilience Act (DORA)
+defines information and communication technology (ICT) concentration risk as
+dependence on critical third-party providers so great that their
+unavailability, failure, or other shortfall could put a firm's critical or
+important functions at risk {cite}`eu2022dora`. The Financial Stability Board's
+November 2024 report on AI listed third-party dependencies and service provider
+concentration first among the AI vulnerabilities that could raise systemic risk
+{cite}`fsb2024ai`. The cybersecurity textbook's subsection on
+[concentration risk](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#concentration-risk-many-processes-one-model)
+simulates why the danger lies in correlation rather than in poor uptime. This
+section applies the idea to Bedrock.
+
+```{image} ../_static/figures/bk_concentration_risk.*
+:alt: Two panels. On the left, a support chatbot, document summaries, claims triage, and a code assistant all call one model from one provider in one Region, so an outage, a change, or a flaw makes all four fail at the same time. On the right, the same four processes call the Converse API, where the model ID is a setting, which routes to a primary model on a cross-Region profile and, on failure, to a tested fallback from another provider, with lifecycle notices watched and an exit plan kept.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+A shared model fails all of its processes together in three ways.
+
+- **Outage or throttling.** Between 3:16 PM and 7:38 PM Pacific Standard Time
+  on December 11, 2024, all OpenAI services were badly degraded or unavailable
+  after a new telemetry service overwhelmed the Kubernetes control plane in most
+  of the company's large clusters {cite}`openai2024incident`. On Bedrock the
+  more common case is throttling. A `ThrottlingException` means a request
+  exceeded your account quotas {cite}`aws2026bedrockerrors`, so processes that
+  call one model from one account and Region draw on the same quota, and a burst
+  from one process can throttle the others.
+- **Change or retirement.** Every Bedrock model is Active, Legacy, or
+  end-of-life (EOL). For models launched on or after September 7, 2026, the
+  model card shows the earliest possible EOL date and the Legacy notice period,
+  which is 6 months for most models and 45 days for some
+  {cite}`aws2026modellifecycle`. When a model reaches EOL, every process that
+  uses it must move by the same date, as the note on Nova Canvas and Nova Reel in
+  {doc}`../primer/ai-concepts-assistants-effort` shows.
+- **Flaw.** Bommasani and colleagues warned that homogenization, many systems
+  built on the same few foundation models, means that every model adapted from
+  a foundation model inherits its defects {cite}`bommasani2021opportunities`. A
+  jailbreak that works against the shared model works against every process
+  that uses it.
+
+#### Reducing concentration risk on Bedrock
+
+Bedrock gives you several of the tools, and each one reduces a different part of
+the risk.
+
+1. **Make the model a setting.** The Converse API gives a consistent interface
+   across the models that support messages, so the same code can call another
+   model by changing its model ID {cite}`aws2026converseapi`. Pin a versioned
+   model ID rather than following the latest one, and remember that each model
+   still needs its own prompt tuning and evaluation.
+2. **Spread capacity across Regions.** A cross-Region inference profile routes
+   requests to other Regions in a geography, or to supported Regions worldwide
+   with a global profile, for higher throughput and resilience at peak demand
+   {cite}`aws2026crossregion`. It is still the same model from the same
+   provider, so it reduces capacity concentration, not model concentration, and
+   a global profile can process your data outside your geography.
+3. **Keep a tested fallback from another provider.** Evaluate it on your own
+   tasks and attacks with the methods of {doc}`01-evaluating-llms`, run the same
+   guardrails on it, and decide in advance which processes switch automatically
+   and which degrade gracefully by queuing work or routing it to people.
+4. **Watch the lifecycle.** Check each model's lifecycle status in your
+   deployment pipeline instead of relying only on the notices.
+
+The first snippet sends a request to the primary model and moves to the fallback
+only for errors that mean the model is unavailable. It runs after the SDK's own
+retries, set up as in {doc}`../module-1/03-prompt-engineering`, have given up.
+The second lists the models in your Region that have entered the Legacy state.
+
+```python
+import boto3
+from botocore.exceptions import ClientError
+
+runtime = boto3.client("bedrock-runtime")
+MODELS = ["<primary model or inference profile ID>", "<fallback model ID from another provider>"]
+UNAVAILABLE = {"ThrottlingException", "ServiceUnavailableException",
+               "ModelNotReadyException", "ModelTimeoutException", "InternalServerException"}
+
+def ask(messages):
+    for model_id in MODELS:
+        try:
+            return model_id, runtime.converse(modelId=model_id, messages=messages)
+        except ClientError as err:
+            if err.response["Error"]["Code"] not in UNAVAILABLE:
+                raise                     # a bad request fails on every model; do not hide it
+    raise RuntimeError("no model available: queue the work or route it to a person")
+```
+
+```python
+import boto3
+
+bedrock = boto3.client("bedrock")          # the control-plane client, not bedrock-runtime
+for model in bedrock.list_foundation_models()["modelSummaries"]:
+    lifecycle = model.get("modelLifecycle", {})
+    if lifecycle.get("status") == "LEGACY":
+        print(model["modelId"], lifecycle.get("endOfLifeTime"))
+```
+
+Some concentration remains even then. A primary and a fallback that both run
+through one Bedrock account and Region still share that platform and its quotas.
+For the few processes that cannot stop, the fallback can be a second Region or a
+model you host yourself, at the cost of running and securing it. Scale the
+fallback to how critical the process is: a convenience feature can wait for the
+provider to recover.
+
+#### Check your understanding
+
+Try this question before you open the answer. Several critical business
+processes all depend on one externally hosted foundation model. Which risk does
+this most directly create?
+
+- **A.** Data drift, because each business process sends the shared model very
+  different kinds of data
+- **B.** Concentration risk: one provider outage, change, or flaw could disrupt
+  them all at once
+- **C.** Model collapse, as the shared model is retrained on its own outputs
+- **D.** Aleatoric uncertainty, because the provider's model is
+  non-deterministic
+
+```{admonition} Answer
+:class: dropdown
+**B.** Heavy dependence on one model or provider creates a single point of
+failure and correlated risk: one outage, change, or flaw reaches every process at
+the same time. A tested fallback, provider diversity, and contract protections
+such as notice of changes and an exit plan reduce it. The other options name real
+risks that the sharing does not create. Data drift is a change over time in the
+inputs one model sees, as {doc}`01-evaluating-llms` explains; processes that send
+different kinds of data at the same time are not drifting. Model collapse comes
+from training models on the output of earlier models, and calling a hosted model
+does not retrain it. Aleatoric uncertainty is variation built into the question
+or the data, as {doc}`../module-1/03-prompt-engineering` explains; a model's
+varying output does not make every process fail together.
+```
+
 ### Privacy-preserving machine learning
 
 When models must learn from sensitive data, privacy-preserving techniques keep the
@@ -681,6 +823,10 @@ The points below summarize the attacks and defenses in this chapter.
   on your side of shared responsibility.
 - A **SOC 2 report** and ISO/IEC 42001 certification cover the vendor's
   controls and AI management, not model behavior; evaluate the model yourself.
+- **Concentration risk** arises when several critical processes depend on one
+  model or provider, so one outage, change, or flaw disrupts them all at once.
+  Make the model a setting with the Converse API, keep a tested fallback from
+  another provider, and watch each model's lifecycle.
 - **Content Credentials** (C2PA) attach a signed origin and edit history to
   media; test that every pipeline step keeps them.
 - Return **labels, not scores, logits, explanations, or embeddings**, to outside
