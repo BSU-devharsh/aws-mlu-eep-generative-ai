@@ -157,6 +157,9 @@ The Module 3 figures show how applications combine models with chains, memory, r
   - Separating an agent that proposes a payment from the service that approves
     it.
 * - {doc}`module-3/04-agents`
+  - How a seccomp profile filters the system calls of a model or tool server,
+    and who sets the filter on AWS.
+* - {doc}`module-3/04-agents`
   - The identity security posture management loop for a Bedrock account, and
     where ISPM fits beside IGA, ITDR, and AI-SPM.
 * - {doc}`module-3/05-multimodal-applications`

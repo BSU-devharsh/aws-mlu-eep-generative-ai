@@ -393,6 +393,67 @@ Policy and Evaluations were announced in preview on December 2, 2025 and reached
 Isolation settings deserve testing, not trust. In March 2026, researchers at BeyondTrust disclosed that the Code Interpreter's Sandbox network mode still let DNS queries out, enough to run commands and move data over DNS. AWS fixed the DNS path in April 2026 and recommends VPC mode when you need full control of traffic. The companion textbook explains this case and the output-side controls that contain an agent ([Section 17.13, The Output Channel as an Exfiltration Path](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#the-output-channel-as-an-exfiltration-path)).
 ```
 
+## Sandboxing tool code: seccomp profiles
+
+An agent that runs code, or a tool server that parses files users upload, is a process that may one day run an attacker's instructions. Whatever that code then tries, it has to ask the kernel through system calls. **Seccomp**, short for secure computing mode, lets a process install a filter that decides which system calls it may make, and a **seccomp profile** is the set of rules a container runtime turns into that filter. A typical model server or tool server needs a few dozen of the hundreds of calls Linux offers, so a profile removes most of the kernel an attacker could reach. The figure shows where the filter sits and who sets it on AWS.
+
+```{image} ../_static/figures/bk_seccomp_filter.*
+:alt: How seccomp filters system calls for model servers and agent tools on AWS. Step 1, a model server or tool sandbox makes normal calls such as read, futex, and sendto, while injected attacker code tries unshare and mount. Step 2, the seccomp filter, a small BPF program, checks each call's number and raw argument values but cannot follow pointers, so it never sees a file path. Step 3, allowed calls run in the kernel. Step 4, denied calls return an EPERM error or the process is killed. Step 5, a profile is built by recording a test run in log mode and allowing only the recorded calls. Step 6 lists the Kubernetes profile types, RuntimeDefault, Localhost, and Unconfined, which is the default unless the kubelet's seccomp-default setting is on. Step 7 shows who sets the filter on AWS. AgentCore runs each session in its own microVM, Firecracker filters its own virtual machine monitor, on EKS with EC2 nodes you set the profile, and on ECS with Fargate AWS runs the container runtime.
+:width: 95%
+:align: center
+:class: anim-fig
+```
+
+### What the filter can and cannot do
+
+The filter is a small Berkeley Packet Filter (BPF) program that the kernel runs before each system call. It sees the call's number and its raw argument values and can allow the call, fail it with an error, or kill the process. It cannot follow pointers, so it can block `unshare` or `mount` but cannot tell which file an allowed `openat` call opens; the kernel documentation says plainly that system call filtering is not a sandbox, only a way to shrink the kernel surface a process can reach ([Linux kernel documentation](https://docs.kernel.org/userspace-api/seccomp_filter.html)). Defaults also differ by platform. Docker applies a default profile to every container that disables around 44 of more than 300 system calls ([Docker](https://docs.docker.com/engine/security/seccomp/)), but a Kubernetes Pod that sets no profile runs Unconfined, with no filter, unless the kubelet's seccomp-default setting, stable since Kubernetes 1.27, is turned on ([Kubernetes](https://kubernetes.io/docs/tutorials/security/seccomp/)). That gap mattered in 2022, when Docker's default profile blocked the `unshare` route to the CVE-2022-0185 kernel exploit while Pods running Unconfined stayed exposed ([CrowdStrike](https://www.crowdstrike.com/en-us/blog/cve-2022-0185-kubernetes-container-escape-using-linux-kernel-exploit/)).
+
+### Who sets the filter on AWS
+
+The answer depends on where the code runs.
+
+- **AgentCore Runtime and Code Interpreter.** Each session runs in its own microVM with isolated CPU, memory, and file system, and the microVM is terminated and its memory sanitized when the session ends ([AWS documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-sessions.html)). AWS describes these as hardware-isolated Firecracker microVMs ([AWS Machine Learning Blog](https://aws.amazon.com/blogs/machine-learning/run-agents-securely-and-efficiently-with-the-next-generation-agentcore-runtime/)), and Firecracker installs its own seccomp filters on its virtual machine monitor by default ([Firecracker design](https://raw.githubusercontent.com/firecracker-microvm/firecracker/main/docs/design.md)). You do not write a profile here; the microVM is the boundary, and the DNS case above shows why its settings still deserve testing.
+- **Amazon EKS on EC2 nodes.** You set the profile. The EKS best practices guide recommends `RuntimeDefault` in each Pod's `securityContext`, or the kubelet's `--seccomp-default` flag for every Pod on a node, and points to tools such as the Security Profiles Operator for recording custom profiles ([Amazon EKS Best Practices Guide](https://docs.aws.amazon.com/eks/latest/best-practices/runtime-security.html)).
+- **Amazon ECS on Fargate.** AWS runs the container runtime, and the `dockerSecurityOptions` parameter that would pass Docker security options is not valid for Fargate tasks ([AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-tasks-services.html)).
+
+For a tool server you host yourself on EKS, such as an MCP server that converts uploaded documents, a Pod like the one below meets the Kubernetes Restricted Pod Security Standard for seccomp, privilege escalation, and capabilities ([Kubernetes](https://kubernetes.io/docs/concepts/security/pod-security-standards/)). Setting `allowPrivilegeEscalation: false` also sets the `no_new_privs` flag that the kernel requires before an unprivileged process can install a seccomp filter.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: doc-converter-tool
+spec:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault          # or Localhost with a profile recorded from your test suite
+  containers:
+    - name: converter
+      image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/doc-converter@sha256:<digest>
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+```
+
+Seccomp is one layer. Pair it with network policy, because an allowed `connect` call can still send data out, and run code you do not trust, such as code an agent wrote, inside a microVM such as an AgentCore session rather than in a shared container. The companion textbook explains the mechanism in depth and simulates a recorded profile against an attacker's calls ([Seccomp Profiles: Filtering System Calls](https://book.com.puter.tips/chapters/17_emerging/chapter17.html#seccomp-profiles-filtering-system-calls)).
+
+#### Check your understanding: seccomp
+
+Try this question before you open the answer. Your team hosts an MCP tool server on Amazon EKS with EC2 nodes. It converts PDFs that users upload, and its Pod spec sets no `securityContext`. A reviewer argues that running in a container already sandboxes it. What is the best response?
+
+- **A.** Agree, because Kubernetes blocks dangerous system calls in every container by default
+- **B.** Raise the Pod's CPU limit and timeout so a malicious PDF cannot crash the server
+- **C.** Set a `RuntimeDefault` or recorded `Localhost` seccomp profile, drop all capabilities, and disallow privilege escalation, because Kubernetes runs such a Pod Unconfined
+- **D.** Turn on verbose logging, which blocks the system calls the server does not need
+
+```{admonition} Answer
+:class: dropdown
+**C.** A Pod with no seccomp setting runs Unconfined unless the kubelet's seccomp-default setting is on, so A is wrong for Kubernetes even though Docker on its own applies a default profile. CPU limits and timeouts in B change how much the process consumes, not which system calls it can make, and logging in D records activity without removing a single call.
+```
+
 ## Identity posture for agents: ISPM on AWS
 
 Every agent you deploy adds identities: an IAM execution role, an AgentCore workload identity, OAuth tokens for the services it calls, and API keys for its tools. Over months, some of them stop being used, lose their owners, or hold more access than the agent needs. **Identity security posture management (ISPM)** is the practice, and the product category, of watching all of these identities continuously. Gartner's Hype Cycle for Digital Identity, 2026 describes it as a discipline that continuously assesses, monitors, and manages IAM policies and configurations ([as quoted by Delinea](https://delinea.com/blog/identity-security-posture-management-in-the-agentic-era)). The figure shows the loop as it applies to a Bedrock account.
@@ -481,6 +542,9 @@ The points below summarize what agents add and how to keep them safe and reliabl
   is stateless. Tool descriptions are untrusted input.
 - **AgentCore** runs and governs agents built with any framework; its Policy
   service enforces tool rules at the gateway, outside the model.
+- **Seccomp** profiles limit the system calls a model or tool server can make;
+  Kubernetes runs Pods Unconfined unless you set `RuntimeDefault` or enable
+  seccomp-default, while AgentCore sessions run in their own microVMs.
 - **Identity posture** decays: give each agent its own identity and owner, keep
   its tokens in a vault, find unused access with IAM Access Analyzer, and fix
   first what reaches sensitive data.
